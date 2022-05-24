@@ -18,7 +18,7 @@ export class VistaCategorias {
     static mostrarCategorias() {
         let panel = document.getElementById('panelCategorias')
         panel.style.display = 'flex'
-        localStorage.setItem('vista', VistaCategorias.mostrarCategorias())
+        localStorage.setItem('vista', 'vistaCategorias')
     }
 
     static ocultarVistaCategorias() {

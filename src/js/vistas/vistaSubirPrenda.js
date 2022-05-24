@@ -16,7 +16,7 @@ export class VistaSubirPrenda {
     static mostrarSubirPrenda() {
         let panel = document.getElementById('panelSubirPrenda')
         panel.style.display = 'flex'
-        localStorage.setItem('vista', )
+        localStorage.setItem('vista', 'vistaSubirPrenda')
     }
 
     static ocultarSubirPrenda() {

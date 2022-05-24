@@ -62,63 +62,115 @@ export class VistaPrincipal {
 
         this.panelGestionarPrendas = new VistaGestionarPrendas(this.controlador, this.panelGestionarPrendas)
 
-        if (location.reload) {
-            localStorage.setItem('vista', 'vistaLogin')
+        if (location.reload && localStorage.getItem('vista') != null) {
+            VistaPrincipal.actualizarVista()
+        } else {
+            VistaLogin.mostrarLogin()
         }
     }
 
     static actualizarVista(vista = localStorage.getItem('vista')) {
-        localStorage.setItem('ocultar', VistaMenuPrincipal.ocultarPaneles())
-        localStorage.getItem('ocultar')
-        localStorage.setItem('ocultar', 'false')
 
         switch (vista) {
+            case 'vistaLogin':
+                localStorage.setItem('ocultar', VistaMenuPrincipal.ocultarPaneles())
+                localStorage.getItem('ocultar')
+                localStorage.setItem('ocultar', 'false')
+                localStorage.setItem('menu', VistaMenuPrincipal.ocultarMenu())
+                localStorage.getItem('menu')
+                localStorage.setItem('menu', 'false')
+                localStorage.setItem('vista', VistaLogin.mostrarLogin())
+                localStorage.getItem('vista')
+                localStorage.setItem('vista', 'vistaLogin')
+                break;
             case 'vistaArmario':
+                localStorage.setItem('ocultar', VistaMenuPrincipal.ocultarPaneles())
+                localStorage.getItem('ocultar')
+                localStorage.setItem('ocultar', 'false')
+                localStorage.setItem('menu', VistaMenuPrincipal.mostrarMenu())
+                localStorage.getItem('menu')
+                localStorage.setItem('menu', 'false')
                 localStorage.setItem('vista', VistaArmario.mostrarArmario())
                 localStorage.getItem('vista')
                 localStorage.setItem('vista', 'vistaArmario')
                 break;
             case 'vistaMisPrendas':
+                localStorage.setItem('ocultar', VistaMenuPrincipal.ocultarPaneles())
+                localStorage.getItem('ocultar')
+                localStorage.setItem('ocultar', 'false')
+                localStorage.setItem('menu', VistaMenuPrincipal.mostrarMenu())
+                localStorage.getItem('menu')
+                localStorage.setItem('menu', 'false')
                 localStorage.setItem('vista', VistaMisPrendas.mostrarMisPrendas())
                 localStorage.getItem('vista')
                 localStorage.setItem('vista', 'vistaMisPrendas')
-                VistaMenuPrincipal.mostrarMenu()
-                VistaMisPrendas.mostrarMisPrendas()
+                /* VistaMenuPrincipal.mostrarMenu()
+                VistaMisPrendas.mostrarMisPrendas() */
                 break;
             case 'vistaPrendas':
+                localStorage.setItem('ocultar', VistaMenuPrincipal.ocultarPaneles())
+                localStorage.getItem('ocultar')
+                localStorage.setItem('ocultar', 'false')
+                localStorage.setItem('menu', VistaMenuPrincipal.mostrarMenu())
+                localStorage.getItem('menu')
+                localStorage.setItem('menu', 'false')
                 localStorage.setItem('vista', VistaPrendas.mostrarPrendas())
                 localStorage.getItem('vista')
                 localStorage.setItem('vista', 'vistaPrendas')
-                VistaMenuPrincipal.mostrarMenu()
-                VistaPrendas.mostrarPrendas()
+                /* VistaMenuPrincipal.mostrarMenu()
+                VistaPrendas.mostrarPrendas() */
                 break;
             case 'vistaSubirPrenda':
+                localStorage.setItem('ocultar', VistaMenuPrincipal.ocultarPaneles())
+                localStorage.getItem('ocultar')
+                localStorage.setItem('ocultar', 'false')
+                localStorage.setItem('menu', VistaMenuPrincipal.mostrarMenu())
+                localStorage.getItem('menu')
+                localStorage.setItem('menu', 'false')
                 localStorage.setItem('vista', VistaSubirPrenda.mostrarSubirPrenda())
                 localStorage.getItem('vista')
                 localStorage.setItem('vista', 'vistaSubirPrenda')
-                VistaMenuPrincipal.mostrarMenu()
-                VistaSubirPrenda.mostrarSubirPrenda()
+                /* VistaMenuPrincipal.mostrarMenu()
+                VistaSubirPrenda.mostrarSubirPrenda() */
                 break;
             case 'vistaGestionarPrendas':
+                localStorage.setItem('ocultar', VistaMenuPrincipal.ocultarPaneles())
+                localStorage.getItem('ocultar')
+                localStorage.setItem('ocultar', 'false')
+                localStorage.setItem('menu', VistaMenuPrincipal.mostrarMenu())
+                localStorage.getItem('menu')
+                localStorage.setItem('menu', 'false')
                 localStorage.setItem('vista', VistaGestionarPrendas.mostrarGestionarPrendas())
                 localStorage.getItem('vista')
                 localStorage.setItem('vista', 'vistaGestionarPrendas')
-                VistaMenuPrincipal.mostrarMenu()
-                VistaGestionarPrendas.mostrarGestionarPrendas()
+                /* VistaMenuPrincipal.mostrarMenu()
+                VistaGestionarPrendas.mostrarGestionarPrendas() */
                 break;
             case 'vistaCategorias':
+                localStorage.setItem('ocultar', VistaMenuPrincipal.ocultarPaneles())
+                localStorage.getItem('ocultar')
+                localStorage.setItem('ocultar', 'false')
+                localStorage.setItem('menu', VistaMenuPrincipal.mostrarMenu())
+                localStorage.getItem('menu')
+                localStorage.setItem('menu', 'false')
                 localStorage.setItem('vista', VistaCategorias.mostrarCategorias())
                 localStorage.getItem('vista')
                 localStorage.setItem('vista', 'vistaCategorias')
-                VistaMenuPrincipal.mostrarMenu()
-                VistaCategorias.mostrarCategorias()
+                /* VistaMenuPrincipal.mostrarMenu()
+                VistaCategorias.mostrarCategorias() */
                 break;
             case 'vistaPerfilUsuario':
+                localStorage.setItem('ocultar', VistaMenuPrincipal.ocultarPaneles())
+                localStorage.getItem('ocultar')
+                localStorage.setItem('ocultar', 'false')
+                localStorage.setItem('menu', VistaMenuPrincipal.mostrarMenu())
+                localStorage.getItem('menu')
+                localStorage.setItem('menu', 'false')
                 localStorage.setItem('vista', VistaPerfilUsuario.mostrarPerfilUsuario())
                 localStorage.getItem('vista')
                 localStorage.setItem('vista', 'vistaPerfilUsuario')
-                VistaMenuPrincipal.mostrarMenu()
-                VistaPerfilUsuario.mostrarPerfilUsuario()
+                /* VistaMenuPrincipal.mostrarMenu()
+                VistaPerfilUsuario.mostrarPerfilUsuario() */
                 break;
         }
     }

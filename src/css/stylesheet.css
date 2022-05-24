@@ -17,6 +17,7 @@ body {
     background-position: 0px 45%;
     background-repeat: no-repeat;
     background-attachment: fixed;
+    display: none;
 }
 
 #panelLogin img {
@@ -54,6 +55,10 @@ body {
 
 /* Estilos del menu */
 
+#divMenuPrincipal{
+    display: none;
+}
+
 #divMenuPrincipal nav {
     /* background-color: #90CAF9; */
     /* background-color: #64FFDA; */
@@ -80,7 +85,7 @@ body {
     background-position: 30% 0%;
     background-repeat: no-repeat;
     background-attachment: fixed;
-
+    display: none;
 }
 
 #panelRegistro img {
@@ -133,6 +138,10 @@ body {
 } */
 
 /* ESTILOS DEL USUARIO */
+
+#panelPerfilUsuario{
+    display: none;
+}
 
 #panelPerfilUsuario h3 {
     font-family: "Comfortaa";
@@ -213,6 +222,7 @@ body {
     position: absolute;
     height: 100%;
     width: 100%;
+    display: none;
 }
 
 #panelArmario h3 {
@@ -271,14 +281,14 @@ body {
     height: 39%;
 } */
 
-.descripcionArmario {
+#panelArmario .descripcionArmario {
     color: white;
     font-family: 'Roboto';
     letter-spacing: 1px;
     padding-left: 10px;
 }
 
-.nombreSeccion {
+#panelArmario .nombreSeccion {
     font-size: 30px;
     letter-spacing: 3px;
     font-family: 'Varela Round';
@@ -287,11 +297,15 @@ body {
     margin-top: 10px;
 }
 
-.seccionArmarioMovil h5 {
+#panelArmario .seccionArmarioMovil h5 {
     color: white;
 }
 
 /* Estilos de misPrendas */
+
+#panelMisPrendas{
+    display: none;
+}
 
 #panelMisPrendas .listaCategoriasMisPrendas {
     height: 100vh;
@@ -377,6 +391,10 @@ body {
 
 /* Estilos Categorias */
 
+#panelCategorias{
+    display: none;
+}
+
 #panelCategorias h4 {
     font-family: 'Comfortaa';
     margin: 40px 0px;
@@ -388,6 +406,10 @@ body {
 }
 
 /* Estilos de prendas */
+
+#panelPrendas{
+    display: none;
+}
 
 #panelPrendas h3 {
     font-family: 'Comfortaa';
@@ -413,6 +435,10 @@ body {
 }
 
 /* Estilos de subir prendas */
+
+#panelSubirPrenda{
+    display: none;
+}
 
 #panelSubirPrenda #imagenPrenda {
     display: none;
@@ -449,6 +475,10 @@ body {
 }
 
 /* Estilos gestion prendas */
+
+#panelGestionPrendas{
+    display: none;
+}
 
 #panelGestionPrendas .selectorGestionPrendas {
     margin-top: 40px;

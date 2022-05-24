@@ -35,7 +35,7 @@ export class VistaPerfilUsuario {
         perfilUsuario.style.display = 'flex'
         VistaPerfilUsuario.bloquearInputCorreo()
         await VistaPerfilUsuario.mostrarDatosUsuario()
-        //localStorage.setItem('vista', VistaPerfilUsuario.mostrarPerfilUsuario())
+        localStorage.setItem('vista', 'vistaPerfilUsuario')
     }
 
 
