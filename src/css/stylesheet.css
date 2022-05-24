@@ -1,0 +1,1189 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&family=Varela+Round&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa&family=Roboto:wght@300&family=Varela+Round&display=swap');
+
+body {
+    margin: 0;
+    height: 100vh;
+}
+
+/* Estilos del login */
+
+#panelLogin {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-image: url(../img/my_closet_principal.jpg);
+    background-size: 100%;
+    background-position: 0px 45%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+#panelLogin img {
+    width: 30%;
+}
+
+#cajaBlanca {
+    /*     width: 30%; */
+    background-color: rgba(255, 255, 255, 0.8);
+    height: fit-content;
+    padding: 40px 0px;
+    border-radius: 20px;
+}
+
+#panelLogin label {
+    font-family: 'Varela Round';
+    font-size: 23px;
+    line-height: 28px;
+    color: rgba(64, 52, 52, 0.61);
+    text-shadow: 1px 2px 4px rgba(185, 179, 179, 0.75);
+}
+
+#panelLogin .mensajeLabel{
+    color: red;
+}
+
+#panelLogin strong {
+    transition: font-size .3s;
+}
+
+
+#panelLogin strong:hover {
+    font-size: 17px;
+}
+
+/* Estilos del menu */
+
+#divMenuPrincipal nav {
+    /* background-color: #90CAF9; */
+    /* background-color: #64FFDA; */
+    /* background-color: #29B6F6; */
+}
+
+.sidenav li {
+    /* background-color: #90CAF9; */
+    /* background-color: #64FFDA; */
+    /* background-color: #29B6F6; */
+    background-color: #ec4d538a;
+    border-bottom: 0.1px solid rgba(255, 255, 255, 0.445);
+    box-shadow: 0px 0.1px 7px 1px rgb(255, 255, 255);
+}
+
+/* Estilos del registro */
+
+#panelRegistro {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-image: url(../img/chica_horizonte.jpg);
+    background-size: 100%;
+    background-position: 30% 0%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+
+}
+
+#panelRegistro img {
+    width: 35%;
+}
+
+#panelRegistro .mensajeLabel{
+    color: red;
+}
+
+#cajaBlanca2 {
+    /*     width: 30%; */
+    background-color: rgba(255, 255, 255, 0.8);
+    height: fit-content;
+    padding: 40px 0px;
+    border-radius: 20px;
+}
+
+#panelRegistro label {
+    font-family: 'Varela Round';
+    font-size: 23px;
+    text-align: left;
+    line-height: 28px;
+    color: rgba(64, 52, 52, 0.61);
+    text-shadow: 1px 2px 4px rgba(185, 179, 179, 0.75);
+}
+
+#panelRegistro .section span {
+    font-size: 18px;
+    font-family: 'Varela Round';
+    transition: color 0.3s;
+}
+
+#panelRegistro .section span:hover {
+    color: rgb(8, 161, 141);
+}
+
+#panelRegistro span strong:hover {
+    text-decoration: underline;
+}
+
+
+#panelRegistro input {
+    height: 2rem;
+}
+
+/* #panelRegistro button {
+    height: 40px;
+    width: 28%;
+} */
+
+/* ESTILOS DEL USUARIO */
+
+#panelPerfilUsuario h3 {
+    font-family: "Comfortaa";
+}
+
+#panelPerfilUsuario h4 {
+    font-family: "Varela Round";
+}
+
+#panelPerfilUsuario h5 {
+    font-family: "Varela Round";
+    margin: 2.093rem 0px;
+}
+
+#panelPerfilUsuario h6 {
+    font-family: "Roboto";
+}
+
+#panelPerfilUsuario span {
+    font-size: 20px;
+    font-family: 'Roboto';
+    font-weight: 600;
+}
+
+#panelPerfilUsuario span:hover {
+    font-size: 25px;
+    color: rgb(8, 161, 141);
+}
+
+#panelPerfilUsuario span {
+    transition: color 0.3s, font-size 0.3s;
+    cursor: pointer;
+}
+
+#panelPerfilUsuario button {
+    font-size: 15px;
+}
+
+#panelPerfilUsuario .cabecera {
+    text-align: left;
+}
+
+#panelPerfilUsuario .section {
+    display: inline-block;
+    width: 65%;
+}
+
+#panelPerfilUsuario .section label {
+    font-family: 'Roboto';
+}
+
+#panelPerfilUsuario #eliminarCuenta {
+    border-top: 1px solid rgb(184, 181, 181);
+    margin-top: 18px;
+}
+
+#panelPerfilUsuario #eliminarCuenta p {
+    margin-bottom: 45px;
+}
+
+#panelPerfilUsuario #cuadroDialogoPerfilUsuario{
+    position: fixed;
+    left: 37.5%;
+    display: none;
+}
+
+#panelPerfilUsuario #cuadroDialogoPerfilUsuario .cambio{
+    padding: 20px 0px;
+    display: none;
+}
+
+#panelPerfilUsuario #cuadroDialogoPerfilUsuario .conjuntoBorrado{
+    display: none;
+}
+
+/* Estilos de mi armario */
+#panelArmario {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+
+#panelArmario h3 {
+    margin-top: 5%;
+}
+
+#panelArmario .bloqueImagenesArmario {
+    margin-top: 3%;
+}
+
+#panelArmario .bloqueImagenesArmario div {
+    padding: 12px 0px;
+}
+
+#panelArmario .cajaArmario {
+    transition: background-color 0.4s, font-size 0.4s, transform 0.4s;
+    cursor: pointer;
+}
+
+#panelArmario .cajaArmario:hover {
+    background-color: rgba(206, 138, 11, 0.918) !important;
+    transform: scale(1.01);
+}
+
+/* #panelArmario .cajaArmario div p{
+    transition:  font-size 0.4s;
+} */
+
+/* #panelArmario .cajaArmario:hover > div p{
+    font-size: 16px;
+} */
+
+#panelArmario .cajaArmario div h5 {
+    transition: font-size 0.4s;
+    font-family: 'Comfortaa';
+}
+
+#panelArmario .cajaArmario:hover>div h5 {
+    font-size: 35px;
+}
+
+/* #panelArmario .cajaArmario img{
+    transition: width 0.4s;
+}
+
+#panelArmario .cajaArmario:hover > img{
+    width: calc(33.3333% + 1%);
+} */
+
+/* #cartaArmario{
+    width: 20%;
+    padding-top: 5%;
+} */
+
+/* #cartaArmario div{
+    height: 39%;
+} */
+
+.descripcionArmario {
+    color: white;
+    font-family: 'Roboto';
+    letter-spacing: 1px;
+    padding-left: 10px;
+}
+
+.nombreSeccion {
+    font-size: 30px;
+    letter-spacing: 3px;
+    font-family: 'Varela Round';
+    font-weight: 600;
+    color: white;
+    margin-top: 10px;
+}
+
+.seccionArmarioMovil h5 {
+    color: white;
+}
+
+/* Estilos de misPrendas */
+
+#panelMisPrendas .listaCategoriasMisPrendas {
+    height: 100vh;
+}
+
+#panelMisPrendas p {
+    font-family: 'Roboto';
+}
+
+#panelMisPrendas h6 {
+    font-family: 'Varela Round';
+}
+
+#panelMisPrendas .listaCategoriasMisPrendas p {
+    display: inline-block;
+    overflow-wrap: break-word;
+}
+
+#panelMisPrendas .listaCategoriasMisPrendas p span {
+    display: inline-block;
+    cursor: pointer;
+}
+
+#panelMisPrendas .iconosMisPrendas i {
+    cursor: pointer;
+}
+
+#panelMisPrendas .imgMisPrendas {
+    width: 236px;
+    margin-left: 20px;
+    margin-right: -32px;
+}
+
+#panelMisPrendas .imgMisPrendas img {
+    cursor: pointer;
+    width: 70%;
+}
+
+#panelMisPrendas .datosMisPrendas div {
+    padding: 0px;
+}
+
+#panelMisPrendas .datosMisPrendas h6 {
+    font-weight: 600;
+}
+
+#panelMisPrendas .datosMisPrendas p {
+    overflow-wrap: break-word
+}
+
+#panelMisPrendas .tallaMisPrendas {
+    min-width: 61px;
+}
+
+#panelMisPrendas .categoriaMisPrendas {
+    max-width: 730px;
+    display: flow-root;
+    /* hace que todas las lineas comiencen en el mismo punto (elemento padre) aunque tengan mas espacio */
+}
+
+#panelMisPrendas .descripcionMisPrendas {
+    max-width: 730px;
+    overflow-wrap: break-word;
+}
+
+#panelMisPrendas .filtroMisPrendas {
+    margin-top: 40px;
+    position: fixed;
+    bottom: 90px;
+    z-index: 0;
+    right: px;
+}
+
+#panelMisPrendas .tituloMisPrendas {
+    margin-top: 40px;
+    font-family: 'Comfortaa';
+}
+
+#panelMisPrendas .itemMisPrendas {
+    border-radius: 20px;
+    max-width: 900px;
+}
+
+/* Estilos Categorias */
+
+#panelCategorias h4 {
+    font-family: 'Comfortaa';
+    margin: 40px 0px;
+}
+
+#panelCategorias h5 {
+
+    font-family: 'Comfortaa';
+}
+
+/* Estilos de prendas */
+
+#panelPrendas h3 {
+    font-family: 'Comfortaa';
+}
+
+#panelPrendas h5 {
+    font-family: 'Comfortaa';
+}
+
+#panelPrendas p {
+    font-family: 'Roboto';
+    font-size: 20px;
+}
+
+#panelPrendas .cajaPrendas {
+    transition: background-color 0.4s, font-size 0.4s, transform 0.4s;
+    cursor: pointer;
+}
+
+#panelPrendas .cajaPrendas:hover {
+    background-color: rgba(206, 138, 11, 0.918) !important;
+    transform: scale(1.01);
+}
+
+/* Estilos de subir prendas */
+
+#panelSubirPrenda #imagenPrenda {
+    display: none;
+}
+
+#panelSubirPrenda .iconoSubirPrenda {
+    margin-top: 10px;
+}
+
+
+#panelSubirPrenda #base64SubirPrenda {
+    display: none;
+}
+
+#panelSubirPrenda video {
+    position: revert;
+    width: 50%;
+    height: 50%;
+    left: 25%;
+    top: 25%;
+}
+
+#panelSubirPrenda #cajaVideoSubirPrenda {
+    display: none;
+    background-color: #00000082;
+    border-radius: 20px;
+    padding: 10px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+#panelSubirPrenda #canvasSubirPrenda {
+    display: none;
+}
+
+/* Estilos gestion prendas */
+
+#panelGestionPrendas .selectorGestionPrendas {
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+#panelGestionPrendas #imagenGestionPrenda {
+    display: none;
+}
+
+#panelGestionPrendas .iconoGestionPrenda {
+    margin-top: 10px;
+}
+
+
+#panelGestionPrendas #base64GestionPrenda {
+    display: none;
+}
+
+#panelGestionPrendas video {
+    position: revert;
+    width: 50%;
+    height: 50%;
+    left: 25%;
+    top: 25%;
+}
+
+#panelGestionPrendas #cajaVideoGestionPrenda {
+    display: none;
+    background-color: #00000082;
+    border-radius: 20px;
+    padding: 10px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+#panelGestionPrendas #canvasGestionPrenda {
+    display: none;
+}
+
+#panelGestionPrendas #eliminarPrenda {
+    border-top: 1px solid rgb(184, 181, 181);
+    margin-top: 18px;
+    margin-bottom: 40px;
+}
+
+#panelGestionPrendas #eliminarPrenda p {
+    margin-bottom: 45px;
+}
+
+#panelGestionPrendas #eliminarPrenda h4 {
+    font-family: "Varela Round";
+    margin: 2.093rem 0px;
+}
+
+#panelGestionPrendas span {
+    transition: color 0.3s, font-size 0.3s;
+    cursor: pointer;
+    font-size: 20px;
+    font-family: 'Roboto';
+    font-weight: 600;
+}
+
+#panelGestionPrendas span:hover {
+    font-size: 25px;
+    color: rgb(8, 161, 141);
+}
+
+#panelGestionPrendas h6 {
+    font-family: "Roboto";
+}
+
+/* Media querys */
+
+/* Medias querys generales */
+@media(max-width:600px) {
+
+    /* Estilos de login */
+    #panelLogin {
+        background-image: url(../img/armario_vertical.jpg);
+        background-size: 120%;
+        background-position: 0px 45%;
+    }
+
+    #panelLogin .mensajeLabel{
+        color: white;
+        background-color: rgba(0, 0, 0, 0.664);
+        border-radius: 20px;
+    }
+
+    #cajaBlanca {
+        width: 100%;
+        margin: auto;
+        background-color: rgba(255, 255, 255, 0);
+        height: fit-content;
+        padding: 10px 0px;
+        border-radius: 10px;
+        box-shadow: none;
+    }
+
+    #panelLogin img {
+        width: 50%;
+    }
+
+    #panelLogin input {
+        color: white;
+    }
+
+    #panelLogin span {
+        font-family: "Varela Round";
+        color: black;
+        font-size: 12px;
+        background-color: rgba(255, 255, 255, 0.8);
+        padding: 10px 8px;
+        border-radius: 20px;
+    }
+
+    #panelLogin label {
+        -webkit-text-stroke: 1px white;
+    }
+
+    #panelLogin strong {
+        font-family: "Varela Round";
+        color: black;
+        font-size: 12px;
+        background-color: rgba(255, 255, 255, 0.8);
+        padding: 8px 8px;
+        border-radius: 20px;
+    }
+
+    #panelLogin strong:hover {
+        font-size: 12px;
+    }
+
+    /* Estilos del registro */
+
+    #panelRegistro {
+        background-image: url(../img/hermosa\ con\ sombrero.jpg);
+        background-size: 170%;
+        background-position: 27% 60%;
+    }
+
+    #panelRegistro .mensajeLabel{
+        color: white;
+        background-color: rgba(0, 0, 0, 0.705);
+        border-radius: 10px;
+    }
+
+    #cajaBlanca2 {
+        width: 100%;
+        margin: auto;
+        background-color: rgba(255, 255, 255, 0);
+        height: fit-content;
+        padding: 10px 0px;
+        border-radius: 20px;
+        box-shadow: none;
+    }
+
+    #panelRegistro img {
+        width: 30%;
+    }
+
+    #panelRegistro .section {
+        padding-bottom: 0px;
+    }
+
+    /*  #panelRegistro button {
+        width: auto;
+        height: auto;
+    } */
+
+    #panelRegistro input {
+        color: white;
+    }
+
+    #panelRegistro label {
+        -webkit-text-stroke: 1px white;
+        font-size: 15px;
+    }
+
+    #panelRegistro label {
+        -webkit-text-stroke: 1px white;
+        font-size: 15px;
+    }
+
+    #panelRegistro strong {
+        font-family: "Varela Round";
+        color: rgb(19, 141, 125) !important;
+        -webkit-text-stroke: 0px;
+        font-weight: 500;
+    }
+
+    #panelRegistro .section span {
+        background-color: rgba(255, 255, 255, 0.7);
+        border-radius: 20px;
+        padding: 3px 8px;
+    }
+
+    #aceptacionTerminos {
+        background-color: rgba(255, 255, 255, 0.7);
+        border-radius: 20px;
+        padding: 3px 8px;
+    }
+
+    #aceptacionTerminos span {
+        color: black;
+        -webkit-text-stroke: 0px;
+    }
+
+    /* Estilos perfil usuario */
+    #panelPerfilUsuario h3 {
+        font-size: 25px;
+    }
+
+    #panelPerfilUsuario .cabecera h4 {
+        font-size: 18px;
+        text-align: center;
+        margin: 0.5rem 0 0.9rem 0;
+    }
+
+    #eliminarCuenta h5 {
+        font-size: 21px;
+    }
+
+    /* Estilos de mi armario */
+    #panelArmario .cajaArmario:hover>div h5 {
+        font-size: 1.8rem;
+    }
+
+    #panelArmario h3 {
+        margin-bottom: 0px;
+    }
+
+    /* Estilos categorias */
+
+    #panelCategorias h5 {
+        font-size: 19px;
+    }
+
+    #panelCategorias h6 {
+        font-size: 12px;
+    }
+
+}
+
+@media(min-width:359px) and (max-width:365px) {
+
+    #aceptacionTerminos {
+
+        padding: 5px 8px;
+    }
+
+    #aceptacionTerminos span {
+
+        padding: 0px 0px 0px 20px;
+    }
+}
+
+/* Estilos armario */
+
+#panelArmario h3 {
+    font-family: 'Comfortaa';
+}
+
+
+
+@media(min-width:600px) and (max-width:669px) {
+
+    /* Pantalla registro */
+    #panelRegistro {
+        background-size: 300%;
+        background-position: 40% 0%;
+    }
+
+    #cajaBlanca2 {
+        width: 70%;
+        margin: 0% 15%;
+    }
+
+    #panelRegistro img {
+        width: 40%;
+    }
+
+    #panelRegistro label {
+        font-size: 18px;
+    }
+}
+
+/* Medias querys escritorio */
+@media(min-width:1200px) and (max-width:1825px) {
+    #panelRegistro {
+        background-size: 165%;
+    }
+
+}
+
+
+@media(min-height:670px) and (max-height:940px) {
+
+    /* Esta media quey se usa para mantener el aspecto deseado de imágenes para la resolución */
+    /* Estilos del login */
+    #panelLogin {
+        background-size: 160%;
+        background-position: 30% 0px;
+    }
+
+}
+
+@media(min-width:670px) and (max-width:910px) {
+
+    /* Estilos del registro */
+
+    #panelRegistro label {
+        font-size: 17px;
+    }
+
+    #panelRegistro label span {
+        font-size: 15px;
+    }
+
+    #panelRegistro {
+        background-size: 270%;
+        background-position: 55% 0%;
+    }
+}
+
+/* Surface Pro */
+@media(min-width:911px) and (max-width:1199px) {
+
+    /* Estilos del login */
+    #panelLogin label {
+        font-size: 30px;
+    }
+
+    #panelLogin div span {
+        font-size: 22px !important;
+    }
+
+    #panelLogin div strong {
+        font-size: 22px !important;
+    }
+
+    /* Estilos del registro */
+
+    #panelRegistro {
+        background-size: 220%;
+        background-position: 55% 0%;
+    }
+
+    #panelRegistro label {
+        font-size: 20px;
+    }
+
+    #panelRegistro div img {
+        width: 40%;
+    }
+
+    #panelRegistro input {
+        font-size: 20px;
+    }
+
+    #panelRegistro label span {
+        font-size: 18px;
+    }
+
+}
+
+/* media query tabletas rango materialize */
+@media (min-width:601px) and (max-width:1000px) {
+
+    /* Estilos de mi armario */
+    #panelArmario .seccionArmarioMovil h5 {
+        font-size: 30px;
+    }
+
+    /* Estilos de misPrendas */
+
+    #panelMisPrendas .categoriaMisPrendas p {
+        max-width: 200px;
+    }
+
+    #panelMisPrendas .descripcionMisPrendas p {
+        max-width: 250px;
+    }
+
+    /* estilos perfil usuario */
+
+    #panelPerfilUsuario #cuadroDialogoPerfilUsuario{
+        left: 17.2%;
+    }
+
+}
+
+/* Medias querys especiales panelMisPrendas */
+@media (min-width:800px) and (max-width:1000px) {
+
+    #panelMisPrendas .categoriaMisPrendas p {
+        max-width: 300px;
+    }
+
+    #panelMisPrendas .descripcionMisPrendas p {
+        max-width: 350px;
+    }
+
+    #panelMisPrendas .tituloMisPrendas {
+        margin-top: 10px;
+    }
+
+}
+
+@media (min-width:310px) and (max-width:599px) {
+
+    /* Estilos de misPrendas */
+
+    #panelMisPrendas h4 {
+        font-family: 'Varela Round';
+        font-size: 22px;
+        z-index: 2;
+    }
+
+    #panelMisPrendas .itemMisPrendas {
+        padding-bottom: 10px;
+    }
+
+    #panelMisPrendas .descripcionMisPrendas p {
+        max-width: none;
+    }
+
+    #panelMisPrendas .tituloMisPrendas {
+        font-size: 28px;
+        margin-top: 20px;
+    }
+
+
+    #panelMisPrendas .iconosMisPrendas {
+        padding: 0px;
+        text-align: center;
+        position: relative;
+    }
+
+    #panelMisPrendas .filtroPequenioMisPrendas {
+        margin-top: 25px;
+        position: fixed;
+        bottom: 42px;
+        z-index: 0;
+    }
+
+    #panelMisPrendas .imgMisPrendas {}
+
+    #panelMisPrendas .imgMisPrendasMovil img {
+        min-width: 100px !important;
+        position: relative;
+        max-width: 50%;
+        left: 25%;
+    }
+
+    #panelMisPrendas #divisorMisPrendas {
+        margin: 5px;
+    }
+
+    #panelMisPrendas .datosMisPrendas p {
+        padding: 0px;
+        margin: 0px;
+    }
+
+    #panelMisPrendas .iconosMisPrendas {}
+
+    #icono1 {
+        margin-right: 30px;
+    }
+
+    /* estilos perfil usuario */
+
+    #panelPerfilUsuario #cuadroDialogoPerfilUsuario{
+        left: 8.33%;
+    }
+
+    /* Media query tableta y movil para panelPrendas */
+    @media (max-width:999px) {
+
+        #panelPrendas p {
+            font-size: 14px;
+        }
+
+    }
+}
+
+
+
+/* Estilos para el cropper */
+
+.group {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    padding: 0;
+    outline: 1px solid var(--secundary-color);
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.group .crop-image {
+    width: 100%;
+}
+
+.group #input-file {
+    display: none;
+}
+
+.group .label-file {
+    position: absolute;
+    text-align: center;
+    width: 100%;
+    margin: auto;
+    background-color: rgba(157, 167, 180, 0.74);
+    padding: 30px 70px;
+    font-size: 18px;
+    bottom: -101%;
+    left: 0;
+    cursor: pointer;
+    transition: all 150ms ease-in-out;
+    color: var(--primary-color);
+}
+
+.group:hover .label-file {
+    bottom: 0;
+}
+
+/* ==== Modal estilos ==== */
+
+:root {
+    --primary-color: rgb(58, 79, 105);
+    --secundary-color: rgb(157, 167, 180);
+    --thir-color: rgb(233, 95, 133);
+    --primary-color-hover: rgb(30, 50, 75);
+    --secundary-color-hover: rgb(110, 116, 124);
+}
+
+.modal {
+    background-color: rgba(0, 0, 0, 0.247);
+    backdrop-filter: blur(0px);
+    position: fixed;
+    z-index: 2;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 150ms ease-in-out;
+    overflow: auto;
+    padding: 20px;
+}
+
+.modal-header p {
+    margin: 0px;
+    font-family: 'Varela round';
+    font-weight: 600;
+}
+
+.modal-content {
+    width: 1200px;
+    margin: auto;
+    background-color: rgb(250, 250, 250);
+    border-radius: 10px;
+    overflow: hidden;
+    transform: scale(0.9);
+    opacity: 0;
+    transition: 400ms 300ms all ease;
+}
+
+.modal .modal-content {
+    padding: 0px;
+}
+
+.modal-content .modal-header {
+    width: 100%;
+    padding: 20px 10px;
+    text-align: center;
+    background-color: rgb(249, 249, 249);
+    box-shadow: 0px -2px 7px 1px rgba(0, 0, 0, 0.281);
+    font-size: 18px;
+}
+
+.modal-content .modal-body {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 18px 10px;
+}
+
+.modal-body .content-imagen-cropper {
+    width: 80%;
+    height: 400px;
+    padding: 5px;
+    outline: 1px solid var(--thir-color);
+}
+
+.content-imagen-cropper .img-cropper {
+    width: 100%;
+}
+
+.modal-body .content-imagen-sample {
+    height: 200px;
+    width: 200px;
+    outline: 1px solid var(--thir-color);
+    border-radius: 100%;
+    overflow: hidden;
+}
+
+.modal-body .content-imagen-sample .img-sample {
+    height: 100%;
+    width: 100%;
+}
+
+.modal-content .modal-footer {
+    width: 100%;
+    padding: 10px 10px;
+    text-align: center;
+    background-color: rgb(249, 249, 249);
+    box-shadow: 0px 2px 7px 1px rgba(0, 0, 0, 0.281);
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 15px;
+    height: auto;
+}
+
+.modal-footer .btn {
+    border: none;
+    padding: 12px 70px;
+    border-radius: 5px;
+    font-size: 15px;
+    cursor: pointer;
+    color: #fff;
+    transition: background-color 300ms ease;
+    height: auto;
+    line-height: normal;
+    font-family: 'Roboto';
+}
+
+.modal-footer .primary {
+    background-color: var(--primary-color);
+}
+
+.modal-footer .secundary {
+    background-color: var(--secundary-color);
+}
+
+.modal-footer .primary:hover {
+    background-color: var(--primary-color-hover);
+}
+
+.modal-footer .secundary:hover {
+    background-color: var(--secundary-color-hover);
+}
+
+/* ==== Modal estilos active ==== */
+
+.modal.active {
+    opacity: 1;
+    backdrop-filter: blur(3px);
+    visibility: visible;
+}
+
+.modal-content.active {
+    transform: scale(1);
+    opacity: 1;
+}
+
+.modal.remove {
+    opacity: 0;
+    backdrop-filter: blur(0px);
+    visibility: hidden;
+    transition: 150ms 150ms all ease-in-out;
+}
+
+.modal-content.remove {
+    transform: scale(0.9);
+    opacity: 0;
+    transition: 150ms all ease;
+}
+
+@media screen and (max-width: 1200px) {
+    .modal-content {
+        width: 100%;
+    }
+
+    .container {
+        width: 90%;
+    }
+
+    .group {
+        width: 400px;
+        height: 400px;
+        margin: auto;
+    }
+
+    .group .label-file {
+        padding: 10px 10px 30px 10px;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .content-imagen-sample {
+        display: none;
+    }
+
+    .modal-body .content-imagen-cropper {
+        width: 100%;
+    }
+
+    .modal-content .modal-footer {
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .modal-footer .btn {
+        width: 100%;
+    }
+
+    .container {
+        width: 90%;
+    }
+
+    .group {
+        width: 200px;
+        height: 200px;
+        margin: auto;
+    }
+}

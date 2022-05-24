@@ -1,0 +1,75 @@
+CREACIÓN DE TABLA "usuario"
+
+CREATE TABLE my_closet.usuario ( 
+idUsuario SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT , 
+nombre VARCHAR(255) NOT NULL , 
+clave VARCHAR(255) NOT NULL , 
+correo VARCHAR(255) NOT NULL , 
+PRIMARY KEY (`idUsuario`), 
+UNIQUE `correo_usuario` (`correo`))
+
+CREACIÓN TABLA "outfit"
+
+CREATE TABLE my_closet.outfit ( 
+    idOutfit INT NOT NULL AUTO_INCREMENT , 
+    idUsuario SMALLINT UNSIGNED NOT NULL , 
+    nombreOutfit VARCHAR(255) NOT NULL , 
+    fechaCreacion DATE NOT NULL , 
+    PRIMARY KEY (`idOutfit`))
+
+Adición de claves ajenas para la tabla "outfit"
+ALTER TABLE outfit ADD CONSTRAINT `fk_idUsuario` FOREIGN KEY (idUsuario) REFERENCES usuario (idUsuario);
+
+
+CREACION DE TABLA "categoria"
+
+CREATE TABLE my_closet.categoria ( 
+    idCategoria TINYINT UNSIGNED NOT NULL AUTO_INCREMENT , 
+    nombreCategoria VARCHAR(255) NOT NULL , 
+    PRIMARY KEY (`idCategoria`), 
+    UNIQUE `nombreCategoria` (`nombreCategoria`))
+
+CREACION DE TABLA "subCategoria"
+
+CREATE TABLE my_closet.subcategoria ( 
+    idSubcategoria INT UNSIGNED NOT NULL AUTO_INCREMENT , 
+    nombreSubcategoria VARCHAR(255) NOT NULL , 
+    idCategoria TINYINT UNSIGNED NOT NULL , 
+    PRIMARY KEY (`idSubcategoria`))
+
+Adición de claves ajenas para la tabla "subcategoria"
+ALTER TABLE subcategoria ADD CONSTRAINT `fk_idCategoria` FOREIGN KEY (idCategoria) REFERENCES categoria (idCategoria)
+
+CREACIÓN DE TABLA "prenda"
+
+CREATE TABLE my_closet.prenda ( 
+idPrenda INT NOT NULL AUTO_INCREMENT , 
+idUsuario SMALLINT UNSIGNED NOT NULL , 
+descripcion INT NULL , `talla` CHAR(3) NOT NULL , 
+idSubcategoria INT NOT NULL , PRIMARY KEY (`idPrenda`))
+
+Adición de claves ajenas para la tabla "prenda"
+ALTER TABLE prenda ADD CONSTRAINT `fk_idUsuarioDePrenda` FOREIGN KEY (idUsuario) REFERENCES usuario (idUsuario)
+ALTER TABLE prenda ADD CONSTRAINT `fk_idSubcategorias` FOREIGN KEY (idSubcategoria) REFERENCES subcategoria (idSubcategoria)
+
+CREACION DE TABLA "relusuariosubcategoria"
+
+CREATE TABLE my_closet.relusuariosubcategoria ( 
+idSubcategoria INT NOT NULL , 
+idUsuario SMALLINT UNSIGNED NOT NULL )
+
+Adición de claves ajenas para la tabla "relusuariosubcategoria"
+ALTER TABLE relusuariosubcategoria ADD CONSTRAINT `fk_idRelUsuarioDePrenda` FOREIGN KEY (idUsuario) REFERENCES usuario (idUsuario)
+ALTER TABLE relusuariosubcategoria ADD CONSTRAINT `fk_Relsubcategoria` FOREIGN KEY (idSubcategoria) REFERENCES subcategoria (idSubcategoria)
+
+CREACION DE TABLA "relprendaoutfit"
+
+CREATE TABLE `my_closet`.`relprendaoutfit` ( 
+idOutfit INT NOT NULL , 
+idPrenda INT NOT NULL )
+
+Adición de claves ajenas para la tabla "relprendaoutfit"
+ALTER TABLE relprendaoutfit ADD CONSTRAINT `fk_relIdOutfit` FOREIGN KEY (idOutfit) REFERENCES outfit (idOutfit)
+ALTER TABLE relprendaoutfit ADD CONSTRAINT `fk_relIdPrenda` FOREIGN KEY (idPrenda) REFERENCES prenda (idPrenda)
+
+

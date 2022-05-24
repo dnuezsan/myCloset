@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Enlaces para implementacion de materialize -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="src/cropper/cropper.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="src/cropper/cropper.css">
+    <link rel="stylesheet" href="src/css/stylesheet.css">
+    <title>My-closet</title>
+</head>
+
+<body>
+
+    <!-- Panel de login -->
+    <div id="panelLogin" class="valign-wrapper" style="display: flex">
+        <div class="row center">
+            <div id="cajaBlanca" class="col s8 col offset-s2 card-panel">
+                <div class="col s12 m12">
+                    <img class=" responsive-img" src="src/img/logo.png" alt="logo">
+                </div>
+                <div id="formularioLogin" class="col s12 m12">
+                    <div class="col s6 m6 offset-m3 offset-s3">
+                        <div class="mensaje">
+                            <p class="mensajeLabel"></p>
+                        </div>
+                        <div class="section">
+                            <label for="correo" class="left black-text flow-text">Correo</label>
+                            <input type="text" id="correo" name="correo">
+                        </div>
+                        <div class="section">
+                            <label for="clave" class="left black-text flow-text">Contraseña</label>
+                            <input type="password" id="clave" name="clave">
+                        </div>
+                    </div>
+                    <div class="col s12 m12">
+                        <div class="section">
+                            <button class="btn-small waves-effect waves-light" name="submit">
+                                Entra
+                                <i class="material-icons right">send</i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col s12 m12">
+                    <div class="section">
+                        <span>¿Aun no tienes cuenta con nosotros? <strong class="teal-text text-accent-4">Crear
+                                cuenta</strong></span>
+                    </div>
+                    <div class="col s12 offset-s1"><strong class="teal-text text-accent-4 col s10">Cookies y política de
+                            privacidad</strong></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Panel de  registro -->
+    <div id="panelRegistro" class="valign-wrapper" style="display: none;">
+        <div class="row center">
+            <div id="cajaBlanca2" class="col s6 col offset-s3 card-panel">
+                <div class="col s12 m12">
+                    <img class="responsive-img" src="src/img/logo.png" alt="logo">
+                </div>
+                <div id="formularioLogin2" class="col s12 m12">
+                    <div class="col s6 m6 offset-m3 offset-s3">
+                        <div class="mensaje">
+                            <p class="mensajeLabel"></p>
+                        </div>
+                        <div class="section">
+                            <label class="left black-text flow-text">Nombre</label>
+                            <input id="nombre" type="text" name="nombre">
+                        </div>
+                        <div class="section">
+                            <label class="left black-text flow-text">Correo electrónico</label>
+                            <input id="correoRegistro" type="text" name="correo">
+                        </div>
+                        <div class="section">
+                            <label class="left black-text flow-text">Contraseña</label>
+                            <input id="password" type="password" name="password">
+                        </div>
+                        <div class="section">
+                            <label class="left black-text flow-text">Repite tu contraseña</label>
+                            <input id="rpassword" type="password" name="rpassword">
+                        </div>
+                    </div>
+                    <div class="col s12 m12">
+                        <label for="aceptarPoliticaPrivacidad" id="aceptacionTerminos">
+                            <input type="checkbox" name="rgrt" id="aceptarPoliticaPrivacidad">
+                            <span>Acepto la política de <strong class="teal-text text-accent-4">cookies y
+                                    privacidad</strong></span>
+                        </label>
+                        <div class="section"><span>Si tienes cuenta accede desde aquí</span></div>
+                        <div class="section">
+                            <button class="btn-small waves-effect waves-light valign-wrapper" name="submit">
+                                Enviar
+                                <i class="material-icons right">send</i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id='divMenuPrincipal' style="display: none">
+        <nav class="nav-wrapper">
+            <div class="container">
+
+                <a href="#" class="brand-logo">MY CLOSET</a>
+
+                <a href="#" data-target="menu" class="sidenav-trigger">
+                    <i class="material-icons">menu</i>
+                </a>
+
+                <ul class=" hide-on-med-and-down right">
+                    <li class="miArmario"><a href="#">Mi armario</a></li>
+                    <li><a href="#">Outfits</a></li>
+                    <li class="perfilUsuario"><a href="#">Ajustes de cuenta</a></li>
+                    <li class="cerrarSesion"><a href="#">Cerrar sesión</a></li>
+                </ul>
+
+                <!-- Menu movil -->
+                <ul class="sidenav" id="menu">
+                    <li class="miArmario"><a href="#">Mi armario</a></li>
+                    <li><a href="#">Outfits</a></li>
+                    <li><a href="#" class="perfilUsuario">Ajustes de cuenta</a></li>
+                    <li class="cerrarSesion"><a href="#">Cerrar sesión</a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+
+    <div id="panelPerfilUsuario" style="display:none">
+        <div class="row center container">
+            <h3>ACTUALIZA TUS DATOS</h3>
+            <div class="col s12 m12">
+                <div class="cabecera section">
+                    <h4>Modificar datos personales</h4>
+                </div>
+                <div class="section">
+                    <label for="nombrePerfil" class="left black-text flow-text">Nombre de usuario</label>
+                    <input type="text" id="nombrePerfil" name="nombrePerfil">
+                </div>
+                <div class="section">
+                    <label for="correo" class="left black-text flow-text">Correo electrónico</label>
+                    <input type="text" id="correoPerfil" name="correoPerfil" readonly>
+                </div>
+                <div class="cabecera section">
+                    <h4>Modificar contraseña</h4>
+                </div>
+                <div class="section">
+                    <label for="contraseniaPerfil" class="left black-text flow-text">Contraseña antigua</label>
+                    <input type="password" id="contraseniaPerfil" name="contraseniaPerfil">
+                </div>
+                <div class="section">
+                    <label for="contraseniaNuevaPerfil" class="left black-text flow-text">Nueva contraseña</label>
+                    <input type="password" id="contraseniaNuevaPerfil" name="contraseniaNuevaPerfil">
+                </div>
+                <div class="section">
+                    <label for="contraseniaRepetidaPerfil" class="left black-text flow-text">Repite la nueva
+                        contraseña</label>
+                    <input type="password" id="contraseniaRepetidaPerfil" name="clave">
+                </div>
+            </div>
+            <div class="col s12">
+                <div class="section">
+                    <button class="btn-small waves-effect waves-light valign-wrapper" name="submit">
+                        Modificar
+                        <i class="material-icons right">send</i>
+                    </button>
+                </div>
+            </div>
+            <div class="col s12" id="eliminarCuenta">
+                <h5>¿O prefieres borrar tu cuenta?</h5>
+                <h6>¡CUIDADO!</h6>
+                <h6>Recuerda que toda tu información sera borrada de forma permanente</h6>
+                <p><span id="borrarUsuario">Borrar cuenta</span></p>
+            </div>
+            <!-- cuadro de dialogo para mensajes -->
+            <div id="cuadroDialogoPerfilUsuario" class="col s10 m8 l3 card flow-text">
+                <p class="cambio flow-text">Su perfil ha sido actualizado</p>
+                <div class="conjuntoBorrado row">
+                    <p class="col s12 flow-text">
+                        ¿Está seguro de que desea borrar su cuenta?
+                    </p>
+                    <div class="borrado">
+                        <button id="botonBorrarUsuario"
+                            class="btn-small waves-effect waves-light valign-wrapper col s4 m3 l3 offset-s1 offset-m2 offset-l2"
+                            name="submit">
+                            Sí
+                            <i class="material-icons right">check</i>
+                        </button>
+                        <button id="botonCancelarBorrarUsuario"
+                            class="btn-small waves-effect waves-light valign-wrapper col s4 m3 l3 offset-s2 offset-m2 offset-l2"
+                            name="submit">
+                            No
+                            <i class="material-icons right">close</i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="panelArmario" style="display: none;">
+        <div class="row center container">
+            <h3> Mi armario</h3>
+            <div class="bloqueImagenesArmario col s12">
+                <div class="cajaArmario bg blue col s12 m12 l8 offset-l2 card valign-wrapper">
+                    <img src="src/img/mi-armario-mis prendas/prendas-prueba.jpg"
+                        class="miArmarioImg circle responsive-img col s6 6 l4 offset-l1" alt="">
+                    <div class="col s12 l6 hide-on-med-and-down">
+                        <h5 class="nombreSeccion">Mis prendas</h5>
+                        <p class="descripcionArmario col s12">Comprueba todas tus prendas guardas, borra las que no
+                            tengas o actualiza aquellas que requieran un retoque</p>
+                    </div>
+                    <!-- <p class="hide-on-med-and-up col s12">Mis prendas</p> -->
+                    <div class="seccionArmarioMovil hide-on-large-only  col s6">
+                        <h5>Mis prendas</h5>
+                    </div>
+                </div>
+                <div class="row hide-on-small-only hide-on-large-only"></div>
+                <div class="cajaArmario bg blue col s12 m12 l8 offset-l2 card valign-wrapper">
+                    <img src="src/img/mi-armario-subir-prenda/subir-prenda-prueba.jpg" alt=""
+                        class="miArmarioImg circle responsive-img col s6 m6 l4 offset-l1">
+                    <div class="col s12 l6 hide-on-med-and-down">
+                        <h5 class="nombreSeccion">Prendas</h5>
+                        <p class="descripcionArmario col s12">Sube nuevas prendas y gestiónalas en tu organizador de
+                            armario
+                            de forma sencilla</p>
+                    </div>
+                    <!-- <p class="hide-on-med-and-up col s12">Subir prendas</p> -->
+                    <div class="seccionArmarioMovil hide-on-large-only  col s6">
+                        <h5>Gestionar prendas</h5>
+                    </div>
+                </div>
+                <div class="row hide-on-small-only hide-on-large-only"></div>
+                <div class="cajaArmario bg blue col s12 m12 l8 offset-l2 card valign-wrapper">
+                    <img src="src/img/mi-armario-categorias/candidato-categorias2-prueba.jpg" alt=""
+                        class="miArmarioImg circle responsive-img col s6 m6 l4 offset-l1">
+                    <div class="col s12 l6 hide-on-med-and-down">
+                        <h5 class="nombreSeccion">Categorias</h5>
+                        <p class="descripcionArmario col s12">Crea categorías para organizar mejor tus prendas
+                            encontrarlas más rápido y crear tus mejores Outfits.</p>
+                    </div>
+                    <!-- <p class="hide-on-med-and-up col s12">Categorías</p> -->
+                    <div class="seccionArmarioMovil hide-on-large-only col s6">
+                        <h5>Categorias</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Panel mis prendas -->
+    <div id="panelMisPrendas" style="display: none;">
+        <div class="row center">
+            <!-- Menu izquierda -->
+            <div class="listaCategoriasMisPrendas col s2 l2 bg red hide-on-med-and-down">
+                <p class="col s12 white-text"><span>Categoria</span></p>
+                <p class="col s12 white-text"><span>Categoria</span></p>
+                <p class="col s12 white-text"><span>Categoria</span></p>
+                <p class="col s12 white-text"><span>Categoria</span></p>
+            </div>
+            <div class="listaCategoriasMisPrendas col s6 m bg red hide-on-large-only sidenav"
+                id="menuCategoriaMisPrendas">
+                <p class="col s12 white-text"><span>Categoria</span></p>
+                <p class="col s12 white-text"><span>Categoria</span></p>
+                <p class="col s12 white-text"><span>Categoria</span></p>
+                <p class="col s12 white-text"><span>Categoria</span></p>
+            </div>
+            <div class="col s12 m12 l10">
+                <h3 class="tituloMisPrendas">Colección de prendas</h3>
+                <!-- Item1 -->
+                <div class="col s12 m10 offset-m1 left-align offset-m1">
+                    <h4>Nombre de prenda</h4>
+                    <!-- Item general1 -->
+                    <div class="itemMisPrendas col m12 valign-wrapper hide-on-small-only">
+                        <div class="iconosMisPrendas col m1 offset-m0">
+                            <i class="small material-icons col l6 offset-l6">system_update_alt</i>
+                            <p class="col m12 l12"></p>
+                            <i class="small material-icons col l6 offset-l6">delete</i>
+                        </div>
+                        <div class="imgMisPrendas circle">
+                            <img src="src/img/mi-armario-mis prendas/prendas-prueba.jpg"
+                                class="responsive-img circle materialboxed" alt="prenda">
+                        </div>
+                        <div class="datosMisPrendas col s12 m12 l10">
+                            <div class="tallaMisPrendas col l1">
+                                <h6>Talla</h6>
+                                <p>XXL</p>
+                            </div>
+                            <div class="categoriaMisPrendas">
+                                <h6>Categoría</h6>
+                                <p>nmnbljmbnjlkmbnlkj,nkjñ,nmknk,nmñkl,nmlñknlñkn,m</p>
+                            </div>
+                            <div class="descripcionMisPrendas col m12 l12">
+                                <h6>Descripción</h6>
+                                <p>descripcionljhblkjhnkjñ,jnmñkjnmñkljmnñjlknmñjlkjnmkjñ.,nñjk.,mnkj,n</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- item para movil -->
+                    <div class="itemMisPrendas col s12 m10 hide-on-med-and-up">
+                        <div class="imgMisPrendasMovil col s12 circle">
+                            <img src="src/img/mi-armario-mis prendas/prendas-prueba.jpg"
+                                class="responsive-img circle col s12 offset-s0 materialboxed" alt="prenda">
+                        </div>
+                        <p id="divisorMisPrendas" class="col s12"></p>
+                        <div class="iconosMisPrendas col s12">
+                            <i id="icono1" class="small material-icons" style="text-align: right;">system_update_alt</i>
+                            <i id="icono2" class="small material-icons">delete</i>
+                        </div>
+                        <div class="datosMisPrendas col s12">
+                            <div class="tallaMisPrendas col s4 offset-s1">
+                                <h6>Talla</h6>
+                                <p>XXL</p>
+                            </div>
+                            <div class="categoriaMisPrendas col s7">
+                                <h6>Categoría</h6>
+                                <p class="col s12">nmnbljmbnjlkmbnlkj,nkjñ,nmknk,nmñkl,nmlñknlñkn,m</p>
+                            </div>
+                            <div class="descripcionMisPrendas col s10 offset-s1">
+                                <h6>Descripción</h6>
+                                <p class="col s12">descripcionljhblkjhnkjñ,jnmñkjnmñkljmnñjlknmñjlkjnmkjñ.,nñjk.,mnkj,n
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Fin item 1 -->
+                <!-- Items2 -->
+                <div class="col s12 m10 left-align offset-m1">
+                    <h4>Nombre de prenda</h4>
+                    <!-- Item general -->
+                    <div class="itemMisPrendas col m12 valign-wrapper hide-on-small-only">
+                        <div class="iconosMisPrendas col m1 offset-m0">
+                            <i class="small material-icons col l6 offset-l6">system_update_alt</i>
+                            <p class="col m12 l12"></p>
+                            <i class="small material-icons col l6 offset-l6">delete</i>
+                        </div>
+                        <div class="imgMisPrendas circle">
+                            <img src="src/img/mi-armario-mis prendas/prendas-prueba.jpg"
+                                class="responsive-img circle materialboxed" alt="prenda">
+                        </div>
+                        <div class="datosMisPrendas col s12 m12 l10">
+                            <div class="tallaMisPrendas col l1">
+                                <h6>Talla</h6>
+                                <p>XXL</p>
+                            </div>
+                            <div class="categoriaMisPrendas">
+                                <h6>Categoría</h6>
+                                <p>nmnbljmbnjlkmbnlkj,nkjñ,nmknk,nmñkl,nmlñknlñkn,m</p>
+                            </div>
+                            <div class="descripcionMisPrendas col m12 l12">
+                                <h6>Descripción</h6>
+                                <p>descripcionljhblkjhnkjñ,jnmñkjnmñkljmnñjlknmñjlkjnmkjñ.,nñjk.,mnkj,n</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- item para movil -->
+                    <div class="itemMisPrendas col s12 m10 hide-on-med-and-up">
+                        <div class="imgMisPrendasMovil col s12 circle">
+                            <img src="src/img/mi-armario-mis prendas/prendas-prueba.jpg"
+                                class="responsive-img circle col s12 offset-s0 materialboxed" alt="prenda">
+                        </div>
+                        <p id="divisorMisPrendas" class="col s12"></p>
+                        <div class="iconosMisPrendas col s12">
+                            <i id="icono1" class="small material-icons" style="text-align: right;">system_update_alt</i>
+                            <i id="icono2" class="small material-icons">delete</i>
+                        </div>
+                        <div class="datosMisPrendas col s12">
+                            <div class="tallaMisPrendas col s4 offset-s1">
+                                <h6>Talla</h6>
+                                <p>XXL</p>
+                            </div>
+                            <div class="categoriaMisPrendas col s7">
+                                <h6>Categoría</h6>
+                                <p class="col s12">nmnbljmbnjlkmbnlkj,nkjñ,nmknk,nmñkl,nmlñknlñkn,m</p>
+                            </div>
+                            <div class="descripcionMisPrendas col s10 offset-s1">
+                                <h6>Descripción</h6>
+                                <p class="col s12">descripcionljhblkjhnkjñ,jnmñkjnmñkljmnñjlknmñjlkjnmkjñ.,nñjk.,mnkj,n
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- desplegables de categorias -->
+                <!-- menu desplegable -->
+                <div class="filtroMisPrendas col m12 offset-m10 hide-on-small-only hide-on-large-only valign-wrapper">
+                    <a class="btn-floating btn-large waves-effect waves-light red sidenav-trigger"
+                        data-target="menuCategoriaMisPrendas"><i class="material-icons">add</i></a>
+                </div>
+                <!-- menu desplegable -->
+                <div class="filtroPequenioMisPrendas col s12 offset-l2 hide-on-med-and-up valign-wrapper">
+                    <a class="btn-floating btn-medium waves-effect waves-light red sidenav-trigger"
+                        data-target="menuCategoriaMisPrendas"><i class="material-icons">add</i></a>
+                </div>
+                <!-- fin de menu desplegable -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Panel categorias -->
+    <div id="panelCategorias" style="display: none">
+        <div class="row center container">
+            <h4>Categorías</h4>
+            <div class="card col m8 l8 offset-m2 offset-l2">
+                <div>
+                    <h5>Crea una categoría</h5>
+                    <h6 class="col s10 m10 offset-s1 offset-m1">Crea categorías a las que asociar tus prendas para
+                        organizarlas mejor</h6>
+                    <div class="row">
+                        <div class="input-field col s8 l6 offset-s2 offset-l3">
+                            <input placeholder="Escribe aquí" id="nombreCategoria" type="text">
+                            <label for="nombreCategoria">Nombre de la categoría</label>
+                        </div>
+                        <div class="input-field col s8 l6 offset-s2 offset-l3">
+                            <select>
+                                <option value="">Pulsa aquí</option>
+                                <option value="1">Cabeza</option>
+                                <option value="2">Torso</option>
+                                <option value="3">Piernas</option>
+                                <option value="4">Pies</option>
+                            </select>
+                            <label>selecciona la zona a la que asocias tu categoría</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h5>Modifica categorías</h5>
+                    <h6 class="col s10 m10 offset-s1 offset-m1">Cambia el nombre de la categoría que desees para que se
+                        ajuste a tus necesidades</h6>
+                    <div class="row">
+                        <div class="input-field col s8 l6 offset-s2 offset-l3">
+                            <input placeholder="Escribe aquí" id="nuevoNombreCategoria" type="text">
+                            <label for="nuevoNombreCategoria">Nuevo nombre de categoría</label>
+                        </div>
+                        <div class="input-field col s8 l6 offset-s2 offset-l3">
+                            <select>
+                                <option value="">Pulsa aquí</option>
+                                <option value="1">Opcion 1</option>
+                                <option value="2">Opcion 2</option>
+                                <option value="3">Opcion 3</option>
+                            </select>
+                            <label>Seleciona la categoría</label>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h5>Borra categorías</h5>
+                    <h6 class="col s10 m10 offset-s1 offset-m1">Borra categorías que no necesites preservando las
+                        prendas</h6>
+                    <div class="row">
+                        <div class="input-field col s8 l6 offset-s2 offset-l3">
+                            <select>
+                                <option value="">Pulsa aquí</option>
+                                <option value="1">Opcion 1</option>
+                                <option value="2">Opcion 2</option>
+                                <option value="3">Opcion 3</option>
+                            </select>
+                            <label>Seleciona la categoría que desees borrar</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <button class="btn-small waves-effect waves-light valign-wrapper" name="submit">
+                        Enviar
+                        <i class="material-icons right">send</i>
+                    </button>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <div id="panelPrendas" style="display: none;">
+        <div class="row center container">
+            <h3>Prendas</h3>
+            <div class="cajaPrendas card col s10 l8 offset-s1 offset-l2 bg blue">
+                <h5>Sube una prenda</h5>
+                <div>
+                    <img src="src/img/mi-armario-mis prendas/prendas-prueba.jpg"
+                        class="circle responsive-img col s4 l4 offset-s4 offset-l4" alt="Sube una prenda">
+                </div>
+                <p class="col s12">
+                    En esta sección puedes guardar las prendas que quieras incluir en tu armario
+                </p>
+                <!-- <p class="col s12">
+                    También puedes incluir una imagen de tu prenda que debes recortar en relacion 1:1 para que se vea
+                    genial
+                </p> -->
+            </div>
+            <div class="row"></div>
+            <div class="cajaPrendas bg blue card col s10 l8 offset-s1 offset-l2">
+                <h5>Gestiona tus prendas</h5>
+                <div>
+                    <img src="src/img/mi-armario-mis prendas/prendas-prueba.jpg"
+                        class="circle responsive-img col s4 l4 offset-s4 offset-l4" alt="Sube una prenda">
+                </div>
+                <p class="col s12">
+                    Busca aquellas prendas que quieras modificar o bórralas
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div id="panelSubirPrenda" style="display: none;">
+        <div class="row container center">
+            <h3>Sube tu prenda</h3>
+            <div class="col s4">
+
+            </div>
+            <div class="col s6 l4 offset-s3 valign-wrapper">
+                <img src="src/img/mi-armario-subir-prenda/subir-prenda-prueba.jpg" alt="img de la prenda"
+                    class="crop-image col s12 responsive-img" id="crop-image">
+                <input type="file" name="imagenPrenda" id="imagenPrenda" accept=".png,.jpg,.jpeg">
+                <input id="base64SubirPrenda" type="text">
+            </div>
+            <!-- Iconos coger archivo -->
+            <div class="iconoSubirPrenda col s6 right-align hide-on-small-only">
+                <label for="imagenPrenda"><a class="btn-floating btn-large waves-effect waves-light red"><i
+                            class="material-icons">photo_library</i></a></label>
+            </div>
+            <div class="iconoSubirPrenda col s6 right-align hide-on-med-and-up">
+                <label for="imagenPrenda"><a class="btn-floating btn-small waves-effect waves-light red"><i
+                            class="material-icons">photo_library</i></a></label>
+            </div>
+            <!-- Iconos para coger captura -->
+            <div class="iconoSubirPrenda col s6 left-align hide-on-small-only">
+                <label><a class="snapshotSubirFotos btn-floating btn-large waves-effect waves-light red"><i
+                            class="material-icons">add_a_photo</i></a></label>
+            </div>
+            <div class="iconoSubirPrenda col s6 left-align hide-on-med-and-up">
+                <label><a class="snapshotSubirFotos btn-floating btn-small waves-effect waves-light red"><i
+                            class="material-icons">add_a_photo</i></a></label>
+            </div>
+            <!-- PARTE DEL VIDEO Y CANVAS -->
+            <div>
+                <div id="cajaVideoSubirPrenda" class="col l10 offset-l1">
+                    <video id="elementoVideoSubirPrendas" autoplay="true"></video>
+                    <div class="col s12 l12">
+                        <button id="capturaSubirPrenda" class="btn-small waves-effect waves-light valign-wrapper"
+                            name="submit">
+                            Capturar
+                            <i class="material-icons right">send</i>
+                        </button>
+                        <button id="cerrarVideoSubirPrenda" class="btn-small waves-effect waves-light valign-wrapper"
+                            name="submit">
+                            Cancelar
+                            <i class="material-icons right">send</i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="col s12">
+                    <canvas id="canvasSubirPrenda" width="500" height="500"></canvas>
+                </div>
+            </div>
+            <!-- FIN DEL VIDEO -->
+            <!-- modal -->
+            <div class="modal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <p>Recorta tu foto</p>
+                    </div>
+                    <div class="modal-body">
+                        <div class="content-imagen-cropper">
+                            <img src="" alt="" class="img-cropper" id="img-cropper">
+                        </div>
+                        <div class="content-imagen-sample">
+                            <div class="img-sample" id="img-croppered"></div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn primary" id="cut">
+                            recortar
+                        </button>
+                        <button class="btn secundary" id="close">
+                            Cancelar
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="row">
+                    <div class="input-field col s8 l6 offset-s2 offset-l3">
+                        <input placeholder="Escribe aquí" id="tallaSubirPrenda" type="text">
+                        <label for="tallaSubirPrenda">Talla</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s8 l6 offset-s2 offset-l3">
+                        <input placeholder="Escribe aquí" id="descripcionSubirPrenda" type="text">
+                        <label for="descripcionSubirPrenda">Descripción</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s8 l6 offset-s2 offset-l3">
+                        <select>
+                            <option value="">Pulsa aquí</option>
+                            <option value="">Ninguna</option>
+                            <option value="1">Opcion 1</option>
+                            <option value="2">Opcion 2</option>
+                            <option value="3">Opcion 3</option>
+                        </select>
+                        <label>Categoría</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s8 l6 offset-s2 offset-l3">
+                        <select>
+                            <option value="">Pulsa aquí</option>
+                            <option value="1">Cabeza</option>
+                            <option value="2">Torso</option>
+                            <option value="3">Piernas</option>
+                            <option value="4">Pies</option>
+                        </select>
+                        <label>Tipo de prenda</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <button class="btn-small waves-effect waves-light valign-wrapper" name="submit">
+                        Subir
+                        <i class="material-icons right">send</i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="panelGestionPrendas" style="display: none;">
+        <div class="row container center">
+            <h3>Gestión de prendas</h3>
+            <div class="col s12">
+                <div class="selectorGestionPrendas input-field col s8 l6 offset-s2 offset-l3">
+                    <select>
+                        <option value="">Pulsa aquí</option>
+                        <option value="1">Cabeza</option>
+                        <option value="2">Torso</option>
+                        <option value="3">Piernas</option>
+                        <option value="4">Calzado</option>
+                        <option value="5">Manos</option>
+                    </select>
+                    <label>Elige tu prenda</label>
+                </div>
+            </div>
+            <div class="col s4"></div>
+            <div class="col s6 l4 offset-s3 valign-wrapper">
+                <img src="src/img/mi-armario-subir-prenda/subir-prenda-prueba.jpg" alt="img de la prenda"
+                    class="crop-image col s12 responsive-img" id="crop-imageGestion">
+                <input type="file" name="imagenGestionPrenda" id="imagenGestionPrenda" accept=".png,.jpg,.jpeg">
+                <input id="base64GestionPrenda" type="text">
+            </div>
+            <!-- Iconos coger archivo -->
+            <div class="iconoGestionPrenda col s6 right-align hide-on-small-only">
+                <label for="imagenGestionPrenda"><a class="btn-floating btn-large waves-effect waves-light red"><i
+                            class="material-icons">photo_library</i></a></label>
+            </div>
+            <div class="iconoGestionPrenda col s6 right-align hide-on-med-and-up">
+                <label for="imagenGestionPrenda"><a class="btn-floating btn-small waves-effect waves-light red"><i
+                            class="material-icons">photo_library</i></a></label>
+            </div>
+            <!-- Iconos para coger captura -->
+            <div class="iconoGestionPrenda col s6 left-align hide-on-small-only">
+                <label><a class="snapshotGestionFotos btn-floating btn-large waves-effect waves-light red"><i
+                            class="material-icons">add_a_photo</i></a></label>
+            </div>
+            <div class="iconoGestionPrenda col s6 left-align hide-on-med-and-up">
+                <label><a class="snapshotGestionFotos btn-floating btn-small waves-effect waves-light red"><i
+                            class="material-icons">add_a_photo</i></a></label>
+            </div>
+            <!-- PARTE DEL VIDEO Y CANVAS -->
+            <div>
+                <div id="cajaVideoGestionPrenda" class="col l10 offset-l1">
+                    <video id="elementoVideoGestionPrendas" autoplay="true"></video>
+                    <div class="col s12 l12">
+                        <button id="capturaGestionPrenda" class="btn-small waves-effect waves-light valign-wrapper"
+                            name="submit">
+                            Capturar
+                            <i class="material-icons right">send</i>
+                        </button>
+                        <button id="cerrarVideoGestionPrenda" class="btn-small waves-effect waves-light valign-wrapper"
+                            name="submit">
+                            Cancelar
+                            <i class="material-icons right">send</i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="col s12">
+                    <canvas id="canvasGestionPrenda" width="500" height="500"></canvas>
+                </div>
+            </div>
+            <!-- FIN DEL VIDEO -->
+            <!-- modal -->
+            <div class="modal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <p>Recorta tu foto</p>
+                    </div>
+                    <div class="modal-body">
+                        <div class="content-imagen-cropper">
+                            <img src="" alt="" class="img-cropper" id="img-cropperGestion">
+                        </div>
+                        <div class="content-imagen-sample">
+                            <div class="img-sample" id="img-cropperedGestion"></div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn primary" id="cutGestion">
+                            recortar
+                        </button>
+                        <button class="btn secundary" id="closeGestion">
+                            Cancelar
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="row">
+                    <div class="input-field col s8 l6 offset-s2 offset-l3">
+                        <input placeholder="Escribe aquí" id="tallaGestionPrenda" type="text">
+                        <label for="tallaGestionPrenda">Talla</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s8 l6 offset-s2 offset-l3">
+                        <input placeholder="Escribe aquí" id="descripcionGestionPrenda" type="text">
+                        <label for="descripcionGestionPrenda">Descripción</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s8 l6 offset-s2 offset-l3">
+                        <select>
+                            <option value="">Pulsa aquí</option>
+                            <option value="">Ninguna</option>
+                            <option value="1">Opcion 1</option>
+                            <option value="2">Opcion 2</option>
+                            <option value="3">Opcion 3</option>
+                        </select>
+                        <label>Categoría</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s8 l6 offset-s2 offset-l3">
+                        <select>
+                            <option value="">Pulsa aquí</option>
+                            <option value="1">Cabeza</option>
+                            <option value="2">Torso</option>
+                            <option value="3">Piernas</option>
+                            <option value="4">Calzado</option>
+                            <option value="5">Manos</option>
+                        </select>
+                        <label>Tipo de prenda</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <button class="btn-small waves-effect waves-light valign-wrapper" name="submit">
+                        Subir
+                        <i class="material-icons right">send</i>
+                    </button>
+                </div>
+            </div>
+            <div class="col s12" id="eliminarPrenda">
+                <h4>Borrar prenda seleccionada</h4>
+                <h6>La prenda seleccionada será borrada de forma permanente</h6>
+                <p><span id="borrarUsuario">Borrar prenda</span></p>
+            </div>
+        </div>
+    </div>
+
+    <div id='divGestionOutfit'>
+        <!-- ... -->
+    </div>
+
+    <div id='gestionOutfit'>
+
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="src/js/app.js" type="module"></script>
+    <script>
+        'use strict'
+        document.addEventListener('DOMContentLoaded', (event) => {
+            M.AutoInit();
+        })
+
+        document.addEventListener('DOMContentLoaded', function () {
+            let elems = document.querySelectorAll('.materialboxed');
+            let instances = M.Materialbox.init(elems);
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,3 @@
+
+Inserción en la tabla usuarios
+INSERT INTO usuario (idUsuario, nombre, clave, correo) VALUES (NULL, 'Marcos', 'foo', 'marcos@hotmail.com'), (NULL, 'Marta', 'foo', 'foo@gmail.com');

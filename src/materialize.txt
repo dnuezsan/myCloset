@@ -1,0 +1,45 @@
+-centrar horizontalmente 
+.center
+Para centrar contenido de un div, este debe ser un row.Para centrar vertical y horizontalmente, se debe usar un div para center
+y otro con valign-wrapper
+
+-centrar verticalmente
+.valign-wrapper
+Alinea verticalmente el contenido. Para centrar vertical y horizontalmente, se debe usar un div para center
+y otro con valign-wrapper
+
+-offset-xx
+Indica la columna tras la que se situara un bloque. Ejemplo:
+offset-m8, haría que el contenido se situara en la 9ª columna.
+*nota. offset-m12 enviará el contenido tras la 12ª columna
+
+-Uso de iconos
+.material-icons (left, right)
+La etiqueta que contiene el icono debe ser <i>.
+La etiqueta debe contener el nombre del icono que se quiere usar
+
+CHECKBOX
+Las checkboxes tienen que ser definidas siguiendo una estructura o no aparecerán:
+
+<label for="a">
+    <input type="checkbox" name="rgrt" id="a">
+    <span>Texto del input</span>
+</label>
+
+Si el atributo for del label e id del input no coinciden, la caja no podra podra hacer check.
+En span ira el texto que acompañe a la caja.
+
+MENU
+-.sidenav
+Oculta el menu cuando la pantalla es grande.
+OJO. No puede mezclarse con la clase .hide-on-med-and-down
+
+
+
+
+
+TRUCOS Y ANOTACIONES PARA DISEÑO
+Con valign-wrapper sobre el div principal
+
+Cuando se hace el menu de hamburguesa, este no tiene que ir dentro del nav.
+Puede ir fuera, pero en ambos casos debe tener un id que coincida con el data-target del nav

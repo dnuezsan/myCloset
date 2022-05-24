@@ -1,0 +1,2 @@
+Creación de la BD
+CREATE DATABASE my_closet
