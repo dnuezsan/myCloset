@@ -57,7 +57,7 @@ export class VistaPerfilUsuario {
      */
     static modificarUsuario() {
         let botonModificarUsuario = document.querySelector("#panelPerfilUsuario .section button")
-        let panelLogin = document.getElementById('panelPerfilUsuario')
+        let panelPerfilUsuario = document.getElementById('panelPerfilUsuario')
 
         let nombre = document.getElementById("nombrePerfil").value;
         let correo = document.getElementById("correoPerfil").value;
@@ -68,15 +68,16 @@ export class VistaPerfilUsuario {
         botonModificarUsuario.onclick = async (evento) => {
             let respuesta = await Controlador.modificacionUsuario(nombre, correo, password, newpassword, rnewpassword)
 
-            if (respuesta.success == true) {
+            if (respuesta.success == false) {
                 VistaPerfilUsuario.actualizacionCuadroConfirmacion(respuesta.mensaje)
-                panelLogin.onclick = (evento) => {
+                panelPerfilUsuario.onclick = (evento) => {
                     VistaPerfilUsuario.ocultarCuadroConfirmacion()
                 }
-
-            } else {
-                //caso modificación no resuelta
+            }  if (respuesta.success == false) {
                 VistaPerfilUsuario.actualizacionCuadroConfirmacion(respuesta.mensaje)
+                panelPerfilUsuario.onclick = (evento) => {
+                    VistaPerfilUsuario.ocultarCuadroConfirmacion()
+                }
             }
         }
 

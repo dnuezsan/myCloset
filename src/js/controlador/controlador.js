@@ -66,7 +66,9 @@ export class Controlador {
      */
     static async modificacionUsuario(nombre, correo, password, newpassword, rnewpassword) {
         console.log('entro control')
-        return await Usuarios.modificacionUsuario(nombre, correo, password, newpassword, rnewpassword)
+        let datos = await Usuarios.modificacionUsuario(nombre, correo, password, newpassword, rnewpassword)
+        console.log(datos);
+        return datos
     }
 
 

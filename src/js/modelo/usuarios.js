@@ -121,7 +121,7 @@ export class Usuarios {
 
         let datosUsuario = await $.ajax(
             {
-                url:  "https://05.2daw.esvirgua.com/myCloset/src/php/controlador/controladorBackend.php",
+                url: "https://05.2daw.esvirgua.com/myCloset/src/php/controlador/controladorBackend.php",
                 //url: "/DWEC/myCloset/src/php/controlador/controladorBackend.php",
                 //url: "https://myclosetss.000webhostapp.com/php/controlador/controladorBackend.php",
                 //url: "/myCloset/src/php/controlador/controladorBackend.php",
@@ -248,7 +248,7 @@ export class Usuarios {
 
         let respuestaRegistro = await $.ajax(
             {
-                url:  "https://05.2daw.esvirgua.com/myCloset/src/php/controlador/controladorBackend.php",
+                url: "https://05.2daw.esvirgua.com/myCloset/src/php/controlador/controladorBackend.php",
                 //url: "/DWEC/myCloset/src/php/controlador/controladorBackend.php",
                 //url: "https://myclosetss.000webhostapp.com/php/controlador/controladorBackend.php",
                 //url: "/myCloset/src/php/controlador/controladorBackend.php",
@@ -309,15 +309,34 @@ export class Usuarios {
     } */
 
     static async modificacionUsuario(nombre, correo, password, newpassword, rnewpassword) {
+        console.log(nombre, correo, password, newpassword, rnewpassword);
+        let error
+        if (nombre == '') {
+           nombre = 'null'
+        }
         if (password == "" && newpassword == "" && rnewpassword == "") {
             password = 'null';
             newpassword = 'null';
             rnewpassword = 'null';
         }
+        if (newpassword!=rnewpassword && newpassword!='') {
+            error={
+                success:false,
+                mensaje: 'Las contraseñas no coinciden'
+            }
+            return error
+        }
+        if (password=='' && newpassword !='') {
+            error={
+                success:false,
+                mensaje: 'Introduce tu contraseña'
+            }
+            return error
+        }
         let modificarUsuario = 'modificarUsuario';
         let datosUsuario = await $.ajax(
             {
-                url:  "https://05.2daw.esvirgua.com/myCloset/src/php/controlador/controladorBackend.php",
+                url: "https://05.2daw.esvirgua.com/myCloset/src/php/controlador/controladorBackend.php",
                 //url: "/DWEC/myCloset/src/php/controlador/controladorBackend.php",
                 //url: "https://myclosetss.000webhostapp.com/php/controlador/controladorBackend.php",
                 //url: "/myCloset/src/php/controlador/controladorBackend.php",
@@ -332,11 +351,11 @@ export class Usuarios {
                     rnewpassword: rnewpassword
 
                 }
-                
+
             })
 
-            let respuesta = JSON.parse(datosUsuario)
-            return respuesta
+        let respuesta = JSON.parse(datosUsuario)
+        return respuesta
     }
 
 
@@ -351,7 +370,7 @@ export class Usuarios {
         let cargarDatosUsuario = 'cargarDatosUsuario'
         let datos = await $.ajax(
             {
-                url:  "https://05.2daw.esvirgua.com/myCloset/src/php/controlador/controladorBackend.php",
+                url: "https://05.2daw.esvirgua.com/myCloset/src/php/controlador/controladorBackend.php",
                 //url: "/DWEC/myCloset/src/php/controlador/controladorBackend.php",
                 //url: "https://myclosetss.000webhostapp.com/php/controlador/controladorBackend.php",
                 //url: "/myCloset/src/php/controlador/controladorBackend.php",
@@ -359,10 +378,10 @@ export class Usuarios {
                 data:
                 {
                     propiedad: cargarDatosUsuario,
-                    correo:  sessionStorage.sesion
+                    correo: sessionStorage.sesion
                 },
             })
-            console.log(datos);
+        console.log(datos);
         let datosJson = JSON.parse(datos)
         console.log(datosJson);
 
@@ -417,7 +436,7 @@ export class Usuarios {
         console.log(sessionStorage.getItem('sesion'));
         let datos = await $.ajax(
             {
-                url:  "https://05.2daw.esvirgua.com/myCloset/src/php/controlador/controladorBackend.php",
+                url: "https://05.2daw.esvirgua.com/myCloset/src/php/controlador/controladorBackend.php",
                 //url: "/DWEC/myCloset/src/php/controlador/controladorBackend.php",
                 //url: "https://myclosetss.000webhostapp.com/php/controlador/controladorBackend.php",
                 //url: "/myCloset/src/php/controlador/controladorBackend.php",
