@@ -84,6 +84,17 @@ export class VistaPrincipal {
                 localStorage.getItem('vista')
                 localStorage.setItem('vista', 'vistaLogin')
                 break;
+            case 'vistaRegistro':
+                localStorage.setItem('ocultar', VistaMenuPrincipal.ocultarPaneles())
+                localStorage.getItem('ocultar')
+                localStorage.setItem('ocultar', 'false')
+                localStorage.setItem('menu', VistaMenuPrincipal.ocultarMenu())
+                localStorage.getItem('menu')
+                localStorage.setItem('menu', 'false')
+                localStorage.setItem('vista', VistaRegistroUsuario.mostrarRegistro())
+                localStorage.getItem('vista')
+                localStorage.setItem('vista', 'vistaRegistro')
+                break;
             case 'vistaArmario':
                 localStorage.setItem('ocultar', VistaMenuPrincipal.ocultarPaneles())
                 localStorage.getItem('ocultar')

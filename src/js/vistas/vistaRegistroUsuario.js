@@ -53,6 +53,21 @@ export class VistaRegistroUsuario {
         let panelLogin = document.getElementById('panelLogin')
         panelLogin.style.display = 'flex'
         VistaRegistroUsuario.esconderRegistro()
+        localStorage.setItem('vista', 'vistaLogin')
+    }
+
+
+    /**
+     *Muestra el panel de registro
+     *
+     * @static
+     * @memberof VistaRegistroUsuario
+     */
+    static mostrarRegistro() {
+        let panelRegistro = document.getElementById('panelRegistro')
+        panelRegistro.style.display = 'flex'
+        localStorage.setItem('vista', 'vistaRegistro')
+
     }
 
 
