@@ -62,6 +62,7 @@ export class VistaPrincipal {
 
         this.panelGestionarPrendas = new VistaGestionarPrendas(this.controlador, this.panelGestionarPrendas)
 
+        /* Fragmento de código paracontrolar vistas al actualizar */
         if (location.reload && localStorage.getItem('vista') != null) {
             VistaPrincipal.actualizarVista()
         } else {
