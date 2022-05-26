@@ -312,31 +312,38 @@ export class Usuarios {
         console.log(nombre, correo, password, newpassword, rnewpassword);
         let error
         if (nombre == '') {
-           nombre = 'null'
+            nombre = 'null'
         }
         if (password == "" && newpassword == "" && rnewpassword == "") {
             password = 'null';
             newpassword = 'null';
             rnewpassword = 'null';
         }
-        if (newpassword!=rnewpassword && newpassword!='') {
-            error={
-                success:false,
+        if (newpassword != rnewpassword && newpassword != '') {
+            error = {
+                success: false,
                 mensaje: 'Las contraseñas no coinciden'
             }
             return error
         }
-        if (password=='' && newpassword !='') {
-            error={
-                success:false,
+        if (password == '' && newpassword != '') {
+            error = {
+                success: false,
                 mensaje: 'Introduce tu contraseña'
             }
             return error
         }
-        if (password!='' && newpassword=='') {
-            error={
-                success:false,
+        if (password != '' && newpassword == '') {
+            error = {
+                success: false,
                 mensaje: 'Introduce tu nueva contraseña'
+            }
+            return error
+        }
+        if (rnewpassword!='' && newpassword!=rnewpassword) {
+            error = {
+                success: false,
+                mensaje: 'Las contraseñas no coinciden'
             }
             return error
         }
