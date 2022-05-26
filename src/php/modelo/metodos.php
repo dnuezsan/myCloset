@@ -119,7 +119,7 @@ class Metodos
                 }
                 $password_encry = password_hash($newpassword, PASSWORD_BCRYPT);
                 //Pasamos los parametros y el tipo de dato
-                if (!$sentencia->bind_param("sss", $nombreUsuario,$password_encry  , $correo)) {
+                if (!$sentencia->bind_param("sss", $nombreUsuario, $password_encry, $correo)) {
                     //echo "Fallo en la vinculacion de parametros";
                     return false;
 
@@ -156,11 +156,6 @@ class Metodos
                 return true;
             }
         }
-
-
-
-
-
     }
     //Cargamos los datos del usuario para poder modificarlos.
     public function cagarDatosUsuario($correo){

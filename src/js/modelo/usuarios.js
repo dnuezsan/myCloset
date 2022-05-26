@@ -333,6 +333,13 @@ export class Usuarios {
             }
             return error
         }
+        if (password!='' && newpassword=='') {
+            error={
+                success:false,
+                mensaje: 'Introduce tu nueva contraseña'
+            }
+            return error
+        }
         let modificarUsuario = 'modificarUsuario';
         let datosUsuario = await $.ajax(
             {
