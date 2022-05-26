@@ -1,5 +1,5 @@
 'use strict'
-
+import { Controlador } from "../controlador/controlador.js";
 export class VistaSubirPrenda {
 
     constructor(controlador, base) {
@@ -11,6 +11,9 @@ export class VistaSubirPrenda {
     iniciar() {
         this.cargarFoto()
         this.activarVideo()
+        VistaSubirPrenda.subidaDePrenda();
+        /*let botonSubirPrenda = document.querySelector('#botonSubirPrenda  .section button')
+        botonSubirPrenda.addEventListener('click', VistaSubirPrenda.subidaDePrenda)*/
     }
 
     static mostrarSubirPrenda() {
@@ -231,4 +234,26 @@ export class VistaSubirPrenda {
             modalContent.className = 'modal-content remove'
         }
     }
+
+    static subidaDePrenda(){
+        let tallaSubirPrenda = document.getElementById("tallaSubirPrenda").value;
+        let descripcionSubirPrenda = document.getElementById("descripcionSubirPrenda").value
+        let base64SubirPrenda = document.getElementById("base64SubirPrenda").value
+        let categoria = document.getElementById("categoria").value
+        let subCategoria = document.getElementById("subCategoria").value
+        console.log(tallaSubirPrenda,descripcionSubirPrenda,categoria)
+        console.log('holaa', document.getElementById("tallaSubirPrenda").value)
+        let botonSubirPrenda = document.getElementById('botonSubirPrenda')
+
+            /*botonSubirPrenda.addEventListener= async (evento) => {
+                let repuesta = await Controlador.subidaDePrenda(tallaSubirPrenda, descripcionSubirPrenda, categoria, subCategoria, base64SubirPrenda)
+            }*/
+
+
+
+        botonSubirPrenda.addEventListener('click', Controlador.subidaDePrenda(tallaSubirPrenda, descripcionSubirPrenda, categoria, subCategoria, base64SubirPrenda), true)
+    }
+
+
+
 }

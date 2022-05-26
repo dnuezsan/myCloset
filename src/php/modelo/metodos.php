@@ -223,6 +223,30 @@ class Metodos
         
     }
 
+    //Aqui cogemos los datos de la Prenda para guardarlos en la base de datos
+    function insertarPrendas($subCategoria, $descripcion, $talla, $correo){
+        echo $subCategoria, $descripcion, $talla;
+        $consultaInsertar = "INSERT INTO `prenda`(`idUsuario`, `descripcion`, `talla`, `idSubcategoria`) VALUES ((SELECT idUsuario FROM usuario WHERE correo = ?), ?,?,(SELECT idSubcategoria from subcategoria WHERE nombreSubcategoria = ?)";
+        //Preparamos con preparae
+        if (!$sentencia = $this->conexion->mysqli->prepare($consultaInsertar)) {
+            //echo "La consulta fallo en su preparacion";
+            return false;
+        }
+        //Pasamos los parametros y el tipo de dato
+        if (!$sentencia->bind_param("ssss", $correo,$descripcion,$talla,$subCategoria)) {
+            //echo "Fallo en la vinculacion de parametros";
+            return false;
+        }
+        //Ejecutamos con execute
+        if (!$sentencia->execute()) {
+            //echo "Algo fallo en la ejecucion";
+            return false;
+        }else{
+            return true;
+        }
+
+    }
+
 
 
 //Subimos las imagenes y pasamos el parametro Carpeta Destino que es donde se guardadn las imagenes del pedido,

@@ -38,6 +38,15 @@ switch ($_POST['propiedad']){
         $correo = $_POST['correo'];
         borrarUsuario($correo);
         break;
+    case "subidaDePrenda":
+        $correo= $_POST['correo'];
+        $talla =$_POST['talla'];
+        $descripcion= $_POST['descripcion'];
+        $categoria= $_POST['categoria'];
+        $subcategoria= $_POST['subcategoria'];
+        $imagen =$_POST['imagen'];
+        subidaDePrenda($subcategoria, $descripcion, $talla, $correo);
+        break;
 }
 
 
@@ -143,6 +152,22 @@ function borrarUsuario($correo){
         $response['success']=false;
         $response['mensaje']= "Error al borrar el usuario";
         $response['correo']=$correo;
+    }
+    echo json_encode($response);
+}
+function subidaDePrenda($subCategoria, $descripcion, $talla, $correo){
+    $metodo = new Metodos();
+    $response = array('success'=> false, 'mensaje'=>"", 'correo'=>"");
+
+    if($metodo->insertarPrendas($subCategoria, $descripcion, $talla, $correo)){
+        $response['success']=true;
+        $response['mensaje']='Se borro correctamente el usuario';
+        $response['correo']='';
+
+    }else{
+        $response['success']=false;
+        $response['mensaje']= "Error al borrar el usuario";
+        $response['correo']='';
     }
     echo json_encode($response);
 }

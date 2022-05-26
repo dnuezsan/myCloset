@@ -21,8 +21,29 @@ export class Prendas {
         this.titulo = titulo
         this.descripcion = descripcion
     }
-    crear() {
-        return Rest.post('pelicula', this)
-    }
 
+    static async subidaDePrenda(talla, descripcion, categoria, subcategoria, imagen){
+        let subidaDePrenda = 'subidaDePrenda'
+        let datos = await $.ajax(
+            {
+                //url:  "https://05.2daw.esvirgua.com/myCloset/src/php/controlador/controladorBackend.php",
+                url: "/DWEC/myCloset/src/php/controlador/controladorBackend.php",
+                //url: "https://myclosetss.000webhostapp.com/php/controlador/controladorBackend.php",
+                //url: "/myCloset/src/php/controlador/controladorBackend.php",
+                type: "POST",
+                data:
+                    {
+                        propiedad: subidaDePrenda,
+                        correo:  sessionStorage.sesion,
+                        talla: talla,
+                        descripcion: descripcion,
+                        categoria: categoria,
+                        subcategoria: subcategoria,
+                        imagen: imagen
+                    },
+            })
+        let datosJson = JSON.parse(datos)
+
+        return datosJson
+    }
 }

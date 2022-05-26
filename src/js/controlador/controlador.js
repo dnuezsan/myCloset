@@ -1,6 +1,6 @@
 'use strict'
 import { Usuarios } from "../modelo/usuarios.js"
-
+import {Prendas} from "../modelo/prendas.js";
 /**
  *
  *Comunica el modelo con la vista
@@ -95,6 +95,10 @@ export class Controlador {
      */
     static async borrarUsuario() {
         return await Usuarios.borrarUsuario()
+    }
+
+    static async subidaDePrenda(talla, descripcion, categoria, subcategoria, imagen){
+        return await Prendas.subidaDePrenda(talla, descripcion, categoria, subcategoria, imagen)
     }
 
 }
