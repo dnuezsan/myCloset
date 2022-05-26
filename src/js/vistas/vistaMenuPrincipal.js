@@ -41,7 +41,7 @@ export class VistaMenuPrincipal {
 
 
     /**
-     *Oculta los paneles del interior de la web
+     *Oculta los paneles
      *
      * @static
      * @memberof VistaMenuPrincipal
@@ -59,7 +59,7 @@ export class VistaMenuPrincipal {
     }
 
     /**
-     *Cierra la sesion del usuario y redirige a la vista del login
+     *Cierra la sesion del usuario, redirige a la vista del login y settea la variable "vista" del localStore en "vistaLogin"
      *
      * @static
      * @memberof VistaMenuPrincipal
@@ -103,11 +103,23 @@ export class VistaMenuPrincipal {
         menu.style.display = "none"
     }
 
+    /**
+     *Muestra el menú
+     *
+     * @static
+     * @memberof VistaMenuPrincipal
+     */
     static mostrarMenu() {
         let menu = document.getElementById('divMenuPrincipal')
         menu.style.display = "flex"
     }
 
+    /**
+     *Muestra el panel "panelPerfilUsuario"
+     *
+     * @static
+     * @memberof VistaMenuPrincipal
+     */
     static mostrarPerfilUsuario() {
         let boton = document.querySelectorAll('.perfilUsuario')
 

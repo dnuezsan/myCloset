@@ -19,77 +19,12 @@ export class Usuarios {
 
     }
 
-    /* static loginUsuario(u, p) {
-
-        let inicioSesion = 'inicioSesion';
-
-        if (u !== "" && p != "") {
-            $.ajax(
-                {
-                    //url:  "http://05.2daw.esvirgua.com/myCloset/src/php/controlador/controladorBackend.php",
-                    //url: "/DWEC/myCloset/src/php/controlador/controladorBackend.php",
-                    //url: "https://myclosetss.000webhostapp.com/php/controlador/controladorBackend.php",
-                    url: "/myCloset/src/php/controlador/controladorBackend.php",
-                    type: "POST",
-                    data:
-                    {
-                        propiedad: inicioSesion,
-                        user: u,
-                        password: p
-                    },
-                    success: function (responsePHP) {
-                        //alert(response.success);
-                        //console.log(reponse);
-                        let response = JSON.parse(responsePHP);
-                        if (response.success == true) {
-
-                            //let response = JSON.parse(responsePHP)
-
-                            if (response.success == true) {
-
-                                localStorage.setItem('sesion', u);// SE GUARDA DE SESION DEL USUARIO
-                                localStorage.setItem('us_nombre', response.us_nombre);// SE GUARDA DE SESION NOMBRE DE
-
-                                localStorage.setItem('us_id', response.us_id);
-                                //$(location).attr('href', "inicio.html");
-                                //mensaje("nsj_1login", "texto_login", "BIENVENIDO" + response.mensaje, "success")
-                                console.log(response.mensaje)
-                                let mensaje = document.getElementsByClassName('mensaje')[0]
-                                let p = document.createElement("p");
-                                p.innerHTML = response.mensaje;
-                                mensaje.appendChild(p);
-                                let panelLogin = document.getElementById('panelLogin')
-                                panelLogin.style.display = 'none'
-                                let armario = document.getElementById('panelPrendas')
-                                armario.style.display = 'flex'
-                                return true
-
-                            } else {
-                                console.log(response.mensaje)
-                                let mensaje = document.getElementById('mensaje')
-                                let p = document.createElement("p");
-                                p.innerHTML = response.mensaje;
-                                mensaje.appendChild(p);
-
-
-                                //let mensajito = document.getElementById('mensajeLabel');
-                                //mensajito.innerHTML = response.mensaje;
-
-
-                            }
-
-                        }
-                    }
-                })
-        }
-    }*/
-
-    /**
-         *Procesa los datos del login y devuelve una respuesta
+        /**
+         *Valida los datos introducidos por el usuario en el login, los envía al servidor y procesa y retorna la respuesta de este
          *
          * @static
-         * @param {String} u
-         * @param {String} p
+         * @param {String} u Correo del usuario
+         * @param {String} p Contraseña del usuario
          * @memberof Usuarios
          */
     static async loginUsuario(u, p) {
@@ -141,78 +76,8 @@ export class Usuarios {
     }
 
 
-
-
     /**
-     *Procesa los datos del registro y devuelve una respuesta
-     *
-     * @static
-     * @param {String} nombre
-     * @param {String} correo
-     * @param {String} password
-     * @param {String} rpassword
-     * @memberof Usuarios
-     */
-    /* static registroUsuario(nombre, correo, password, rpassword) {
-        let registrarse = 'registrarse';
-
-
-        if (nombre !== "" && correo != "" && password != "" && rpassword != "") {
-            $.ajax(
-                {
-                    //url:  "http://05.2daw.esvirgua.com/myCloset/src/php/controlador/controladorBackend.php",
-                    //url: "/DWEC/myCloset/src/php/controlador/controladorBackend.php",
-                    //url: "https://myclosetss.000webhostapp.com/php/controlador/controladorBackend.php",
-                    url: "/myCloset/src/php/controlador/controladorBackend.php",
-                    type: "POST",
-                    data:
-                    {
-                        propiedad: registrarse,
-                        nombre: nombre,
-                        correo: correo,
-                        password: password,
-                        rpassword: rpassword
-                    },
-                    success: function (responsePHP) {
-                        //alert(response.success);
-                        //console.log(reponse);
-                        let response = JSON.parse(responsePHP);
-                        console.log(response.mensaje);
-                        if (response.success == true) {
-                            console.log("mensaje")
-
-
-                            console.log(response.mensaje)
-                            let mensaje = document.getElementById('mensaje')
-                            let p = document.getElementsByClassName("mensajeLabel");
-                            p.innerHTML = response.mensaje;
-                            mensaje.appendChild(p);
-                            let panelLogin = document.getElementById('panelLogin')
-                            panelLogin.style.display = 'none';
-                            let panelRegistro = document.getElementById('panelP')
-                            panelRegistro.style.display = 'flex';
-
-                        } if (response.success == false) {
-                            console.log(response.mensaje)
-                            let mensaje = document.getElementById('mensaje')
-                            let p = document.createElement("p");
-                            p.innerHTML = response.mensaje;
-                            mensaje.appendChild(p);
-
-
-
-
-                        }
-
-                    }
-                })
-        }
-
-    } */
-
-
-    /**
-     *Envía los datos al servidor para registrar al usuario en caso de que todo sea correcto y entrega la respuesta del servidor
+     *Valida los datos introducidos por el usuario en el registro, los envía al servidor; y procesa y retorna la respuesta
      *
      * @static
      * @param {String} nombre
@@ -270,44 +135,19 @@ export class Usuarios {
     }
 
 
-    /* static modificacionUsuario(nombre, correo, password, newpassword, rnewpassword) {
-        if (password == "" && newpassword == "" && rnewpassword == "") {
-            password = 'null';
-            newpassword = 'null';
-            rnewpassword = 'null';
-        }
-        let modificarUsuario = 'modificarUsuario';
-        $.ajax(
-            {
-                url:  "https://05.2daw.esvirgua.com/myCloset/src/php/controlador/controladorBackend.php",
-                //url: "/DWEC/myCloset/src/php/controlador/controladorBackend.php",
-                //url: "https://myclosetss.000webhostapp.com/php/controlador/controladorBackend.php",
-                //url: "/myCloset/src/php/controlador/controladorBackend.php",
-                type: "POST",
-                data:
-                {
-                    propiedad: modificarUsuario,
-                    nombre: nombre,
-                    correo: correo,
-                    password: password,
-                    newpassword: newpassword,
-                    rnewpassword: rnewpassword
 
-                },
-                success: function (responsePHP) {
-
-                    let response = JSON.parse(responsePHP);
-                    console.log(response.mensaje);
-                    if (response.success == true) {
-                        console.log("modificacion realizada")
-                    } else {
-                        console.log("Algo fallo al modificar sus datos")
-                    }
-                }
-            })
-
-    } */
-
+    /**
+     *Valida los datos introducidos por el usuario para modificar sus datos, los envía al servidor, y procesa y retorna la respuesta
+     *
+     * @static
+     * @param {string} nombre
+     * @param {string} correo
+     * @param {string} password
+     * @param {string} newpassword
+     * @param {string} rnewpassword
+     * @return {JSON} 
+     * @memberof Usuarios
+     */
     static async modificacionUsuario(nombre, correo, password, newpassword, rnewpassword) {
         console.log(nombre, correo, password, newpassword, rnewpassword);
         let error
@@ -340,7 +180,7 @@ export class Usuarios {
             }
             return error
         }
-        if (rnewpassword!='' && newpassword!=rnewpassword) {
+        if (rnewpassword != '' && newpassword != rnewpassword) {
             error = {
                 success: false,
                 mensaje: 'Las contraseñas no coinciden'
@@ -403,44 +243,8 @@ export class Usuarios {
         return datosJson
     }
 
-    /* static async cargaDatosUsuario() {
-        let cargarDatosUsuario = 'cargarDatosUsuario'
-        let datos = await $.ajax(
-            {
-                //url:  "http://05.2daw.esvirgua.com/myCloset/src/php/controlador/controladorBackend.php",
-                //url: "/DWEC/myCloset/src/php/controlador/controladorBackend.php",
-                //url: "https://myclosetss.000webhostapp.com/php/controlador/controladorBackend.php",
-                url: "/myCloset/src/php/controlador/controladorBackend.php",
-                type: "POST",
-                data:
-                {
-                    propiedad: cargarDatosUsuario,
-                    correo: localStorage.getItem('sesion')
-
-                },
-                success: function (responsePHP) {
-                    console.log(responsePHP)
-                    let response = JSON.parse(responsePHP);
-                    console.log(response.mensaje);
-                    if (response.success == true) {
-                        let nombreUsuario = response.nombreUsuario
-                        console.log(nombreUsuario)
-                        document.getElementsByName('nombrePerfil').values(nombreUsuario)
-                        console.log(response)
-                    } else {
-                        console.log("dio falso")
-                    }
-                }
-            })
-
-            let datosJson = JSON.parse(datos)
-
-            return datosJson
-    } */
-
-
     /**
-     *Indica al servidor que ha de eliminar al usuario de la sesión iniciada y devuelve la resupuesta
+     *Indica al servidor que ha de eliminar al usuario de la sesión iniciada y devuelve la respuesta
      *
      * @static
      * @return {JSON} 

@@ -160,6 +160,12 @@ export class VistaLogin {
 
     }
 
+    /**
+     *Vacía en mensaje
+     *
+     * @static
+     * @memberof VistaLogin
+     */
     static limpiarAviso(){
         let mensaje = document.querySelectorAll('#panelLogin .mensajeLabel')[0]
         mensaje.innerHTML = ''
@@ -175,4 +181,7 @@ export class VistaLogin {
         })  
     }
 
+    saludo(){
+        console.log('hola mundo');
+    }
 }

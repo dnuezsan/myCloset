@@ -2,11 +2,19 @@
 import { Controlador } from "../controlador/controlador.js";
 export class VistaSubirPrenda {
 
+
+    /**
+     * Crea una instancia de VistaSubirPrenda.
+     * @param {*} controlador
+     * @param {*} base
+     * @memberof VistaSubirPrenda
+     */
     constructor(controlador, base) {
         this.controlador = controlador
         this.base = base
         this.iniciar()
     }
+
 
     iniciar() {
         this.cargarFoto()

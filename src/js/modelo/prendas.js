@@ -22,6 +22,19 @@ export class Prendas {
         this.descripcion = descripcion
     }
 
+
+    /**
+     *Metodo que envia datos al servidor para la inserción de una prenda, procesa la respuesta y la devuelve
+     *
+     * @static
+     * @param {string} talla
+     * @param {string} descripcion
+     * @param {string} categoria
+     * @param {string} subcategoria
+     * @param {string} imagen
+     * @return {JSON} 
+     * @memberof Prendas
+     */
     static async subidaDePrenda(talla, descripcion, categoria, subcategoria, imagen){
         let subidaDePrenda = 'subidaDePrenda'
         console.log(talla, descripcion, categoria, subcategoria, imagen);

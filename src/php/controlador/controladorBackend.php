@@ -102,6 +102,15 @@ function registrar($nombre, $correo, $password, $rpassword){
 
 }
 
+/**
+ * @param String $nombreUsuario
+ * @param String $correo
+ * @param String $password
+ * @param String $newpassword
+ * @param String $rnewpassword
+ * Pasa los datos al método del modelo que produce la modificación y procesa y retorna la respuesta
+ * @return json_encode
+ */
 function modificarUsuario($nombreUsuario,$correo,$password,$newpassword, $rnewpassword){
     $metodo = new Metodos();
     $response = array('success'=> false, 'mensaje'=>"", 'correo'=>"");
@@ -119,6 +128,11 @@ function modificarUsuario($nombreUsuario,$correo,$password,$newpassword, $rnewpa
     echo json_encode($response);
 }
 
+/**
+ * @param String $correo
+ * Envía el correo del usuario para obtener su nombre y recibe, procesa y retorna la respuesta
+ * @return json_encode
+ */
 function cargaDatosUsuario($correo){
     $metodo = new Metodos();
     $response = array('success'=> false, 'mensaje'=>"", 'correo'=>"");
@@ -139,6 +153,11 @@ function cargaDatosUsuario($correo){
     echo json_encode($response);
 }
 
+/**
+ * @param String $correo
+ * Envía el correo del usuario para borrarlo de la base de datos y recibe, procesa y retorna la respuesta
+ * @return json_encode
+ */
 function borrarUsuario($correo){
     $metodo = new Metodos();
     $response = array('success'=> false, 'mensaje'=>"", 'correo'=>"");
@@ -155,6 +174,15 @@ function borrarUsuario($correo){
     }
     echo json_encode($response);
 }
+/**
+ * @param String $subCategoria
+ * @param String $descripcion
+ * @param String $talla
+ * @param String $correo
+ * @param String $imagen
+ * Envía datos necesarios al modelo para insertar una prenda y recibe, procesa y retorna la respuesta
+ * @return json_encode
+ */
 function subidaDePrenda($subCategoria, $descripcion, $talla, $correo, $imagen){
     $metodo = new Metodos();
     $response = array('success'=> false, 'mensaje'=>"", 'correo'=>"");

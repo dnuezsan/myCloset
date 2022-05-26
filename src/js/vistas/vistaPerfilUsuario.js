@@ -7,7 +7,7 @@ export class VistaPerfilUsuario {
 
 
     /**
-     * Creates an instance of VistaPerfilUsuario.
+     * Crea una instancia de VistaPerfilUsuario.
      * @param {string} controlador
      * @param {string} base
      * @memberof VistaPerfilUsuario
@@ -20,7 +20,7 @@ export class VistaPerfilUsuario {
 
 
     /**
-     *Inicia variables y eventos al crear una instanacia de la clase
+     *Inicia variables y eventos al crear una instancia de la clase
      *
      * @memberof VistaPerfilUsuario
      */
@@ -51,7 +51,7 @@ export class VistaPerfilUsuario {
 
 
     /**
-     *Muestra el panel de perfil de usuario y asigna la a variable local de vista "vistaPerfilUsuario"
+     *Muestra el panel de perfil de usuario y asigna a la variable local de "vista" el value "vistaPerfilUsuario"
      *
      * @static
      * @memberof VistaPerfilUsuario
@@ -65,6 +65,12 @@ export class VistaPerfilUsuario {
     }
 
 
+    /**
+     *Configura el input de correo para que adopte el atributo "readonly" al clickar en él
+     *
+     * @static
+     * @memberof VistaPerfilUsuario
+     */
     static bloquearInputCorreo() {
         let inputCorreo = document.getElementById('correoPerfil')
 
@@ -122,6 +128,13 @@ D
         }
     } */
 
+
+    /**
+     *Muestra en pantalla los datos "nombre" y "correo" del usuario
+     *
+     * @static
+     * @memberof VistaPerfilUsuario
+     */
     static async mostrarDatosUsuario() {
         let datos = await Controlador.cargarDatosUsuario()
         let inputNombre = document.getElementById('nombrePerfil')
@@ -151,6 +164,13 @@ D
         )
     } */
 
+
+    /**
+     *Borra un usuario gestiona las acciones y eventos subsecuentes al borrado
+     *
+     * @static
+     * @memberof VistaPerfilUsuario
+     */
     static borrarUsuario() {
         let botonBorrarUsuario = document.getElementById('botonBorrarUsuario')
         let botonCancelar = document.getElementById('botonCancelarBorrarUsuario')
@@ -200,6 +220,14 @@ D
     }
 
 
+
+    /**
+     *Configura el cuadro de confirmación para que sea visible y muestre un mensaje
+     *
+     * @static
+     * @param {string} mensaje
+     * @memberof VistaPerfilUsuario
+     */
     static actualizacionCuadroConfirmacion(mensaje) {
         let mensajeActualizacion = document.querySelectorAll('#panelPerfilUsuario .cambio')[0]
         mensajeActualizacion.innerHTML = mensaje
@@ -207,6 +235,13 @@ D
         VistaPerfilUsuario.mostrarCuadroConfirmacion()
     }
 
+
+    /**
+     *Muestra el cuadro de confirmación del borrado
+     *
+     * @static
+     * @memberof VistaPerfilUsuario
+     */
     static borradoConfirmacion() {
         let mensajeBorrado = document.querySelectorAll('#panelPerfilUsuario .conjuntoBorrado')[0]
         let botonBorrado = document.querySelectorAll('#panelPerfilUsuario #borrarUsuario')[0]

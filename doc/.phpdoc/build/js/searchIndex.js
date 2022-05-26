@@ -1,6 +1,36 @@
 Search.appendIndex(
     [
                 {
+            "fqsen": "\\sesion\u0028\u0029",
+            "name": "sesion",
+            "summary": "",
+            "url": "namespaces/default.html#function_sesion"
+        },                {
+            "fqsen": "\\registrar\u0028\u0029",
+            "name": "registrar",
+            "summary": "",
+            "url": "namespaces/default.html#function_registrar"
+        },                {
+            "fqsen": "\\modificarUsuario\u0028\u0029",
+            "name": "modificarUsuario",
+            "summary": "",
+            "url": "namespaces/default.html#function_modificarUsuario"
+        },                {
+            "fqsen": "\\cargaDatosUsuario\u0028\u0029",
+            "name": "cargaDatosUsuario",
+            "summary": "",
+            "url": "namespaces/default.html#function_cargaDatosUsuario"
+        },                {
+            "fqsen": "\\borrarUsuario\u0028\u0029",
+            "name": "borrarUsuario",
+            "summary": "",
+            "url": "namespaces/default.html#function_borrarUsuario"
+        },                {
+            "fqsen": "\\subidaDePrenda\u0028\u0029",
+            "name": "subidaDePrenda",
+            "summary": "",
+            "url": "namespaces/default.html#function_subidaDePrenda"
+        },                {
             "fqsen": "\\Conexion",
             "name": "Conexion",
             "summary": "Clase\u0020que\u0020establece\u0020conexion\u0020y\u0020ejecuta\u0020consultas\u0020sobre\u0020la\u0020BD",
@@ -8,7 +38,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Conexion\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
-            "summary": "",
+            "summary": "Genera\u0020una\u0020instancia\u0020de\u0020la\u0020clase\u0020Conexion",
             "url": "classes/Conexion.html#method___construct"
         },                {
             "fqsen": "\\Conexion\u003A\u003Aconsultas\u0028\u0029",
@@ -78,18 +108,48 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Metodos\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
-            "summary": "",
+            "summary": "Construye\u0020una\u0020instancia\u0020de\u0020la\u0020clase\u0020Metodos",
             "url": "classes/Metodos.html#method___construct"
         },                {
             "fqsen": "\\Metodos\u003A\u003AaltaUsuario\u0028\u0029",
             "name": "altaUsuario",
-            "summary": "hola",
+            "summary": "Inserta\u0020un\u0020usuario\u0020un\u0020usuario\u0020en\u0020la\u0020BD\u0020despues\u0020de\u0020validar\u0020las\u0020contrase\u00F1a\u0020y\u0020encriptarla",
             "url": "classes/Metodos.html#method_altaUsuario"
         },                {
             "fqsen": "\\Metodos\u003A\u003AiniciarSesion\u0028\u0029",
             "name": "iniciarSesion",
             "summary": "",
             "url": "classes/Metodos.html#method_iniciarSesion"
+        },                {
+            "fqsen": "\\Metodos\u003A\u003AmodicarUsuario\u0028\u0029",
+            "name": "modicarUsuario",
+            "summary": "",
+            "url": "classes/Metodos.html#method_modicarUsuario"
+        },                {
+            "fqsen": "\\Metodos\u003A\u003AcagarDatosUsuario\u0028\u0029",
+            "name": "cagarDatosUsuario",
+            "summary": "",
+            "url": "classes/Metodos.html#method_cagarDatosUsuario"
+        },                {
+            "fqsen": "\\Metodos\u003A\u003AborrarUsuario\u0028\u0029",
+            "name": "borrarUsuario",
+            "summary": "",
+            "url": "classes/Metodos.html#method_borrarUsuario"
+        },                {
+            "fqsen": "\\Metodos\u003A\u003AcargarMisPrendas\u0028\u0029",
+            "name": "cargarMisPrendas",
+            "summary": "",
+            "url": "classes/Metodos.html#method_cargarMisPrendas"
+        },                {
+            "fqsen": "\\Metodos\u003A\u003AinsertarPrendas\u0028\u0029",
+            "name": "insertarPrendas",
+            "summary": "",
+            "url": "classes/Metodos.html#method_insertarPrendas"
+        },                {
+            "fqsen": "\\Metodos\u003A\u003AdecofificacionImagenes\u0028\u0029",
+            "name": "decofificacionImagenes",
+            "summary": "",
+            "url": "classes/Metodos.html#method_decofificacionImagenes"
         },                {
             "fqsen": "\\Metodos\u003A\u003AsubidaControladaImagenes\u0028\u0029",
             "name": "subidaControladaImagenes",
