@@ -109,7 +109,7 @@ class Metodos
     public function modicarUsuario($nombreUsuario,$correo,$password, $newpassword, $rnewpassword){
         $consultaNombre = "UPDATE usuario SET nombre=? WHERE correo = ?";
         $consultaPassword ="UPDATE usuario SET nombre=?, clave=? WHERE correo = ?";
-        if ($password !=""&& $newpassword !="" && $newpassword != $rnewpassword){
+        if ($password !=""&& $newpassword !="" && $newpassword == $rnewpassword){
             if($this->iniciarSesion($correo, $password)){
                 //Preparamos con preparaep
                 if (!$sentencia = $this->conexion->mysqli->prepare($consultaPassword)) {
@@ -121,7 +121,7 @@ class Metodos
                 //Pasamos los parametros y el tipo de dato
                 if (!$sentencia->bind_param("sss", $nombreUsuario, $password_encry, $correo)) {
                     //echo "Fallo en la vinculacion de parametros";
-                    return false;
+                    //return false;
 
                 }
                 //Ejecutamos con execute
@@ -134,7 +134,7 @@ class Metodos
                 }
             }
 
-        }else{
+        }/* else{
             //Preparamos con preparae
             if (!$sentencia = $this->conexion->mysqli->prepare($consultaNombre)) {
                 //echo "La consulta fallo en su preparacion";
@@ -155,7 +155,7 @@ class Metodos
             }else{
                 return true;
             }
-        }
+        } */
     }
     //Cargamos los datos del usuario para poder modificarlos.
     public function cagarDatosUsuario($correo){

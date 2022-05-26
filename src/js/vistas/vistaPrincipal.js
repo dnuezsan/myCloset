@@ -21,8 +21,8 @@ export class VistaPrincipal {
     /**
      * @constructor
      * Crea una instancia de VistaPrincipal y ejecuta el método iniciar()
-     * @param {String} controlador
-     * @param {String} base
+     * @param {String} controlador controlador de la vista principal
+     * @param {String} base base del DOM para la vista principal
      * @memberof VistaPrincipal
      */
     constructor(controlador, base) {
@@ -61,8 +61,11 @@ export class VistaPrincipal {
         this.panelSubirPrendas = new VistaSubirPrenda(this.controlador, this.panelSubirPrendas)
 
         this.panelGestionarPrendas = new VistaGestionarPrendas(this.controlador, this.panelGestionarPrendas)
-
         /* Fragmento de código paracontrolar vistas al actualizar */
+        if (sessionStorage.getItem('sesion')==null) {
+            VistaLogin.mostrarLogin()
+        }
+
         if (location.reload && localStorage.getItem('vista') != null) {
             VistaPrincipal.actualizarVista()
         } else {
@@ -70,6 +73,21 @@ export class VistaPrincipal {
         }
     }
 
+    /* static limpiarLocalStorage() {
+        window.addEventListener('beforeunload', function (e) {
+            console.log('hola');
+            this.localStorage.setItem('vista', 'null')
+            //e.returnValue=null //Con esto se retorna un mensaje de carga al cerrar pestaña o navegador
+        });
+    } */
+
+    /**
+     *Permite mantener abierta el mismo panel al actualizar la página
+     *
+     * @static
+     * @param {string} [vista=localStorage.getItem('vista')] Variable almacenada en localStorage y que permite saber en que vista se encuentra el usuario
+     * @memberof VistaPrincipal
+     */
     static actualizarVista(vista = localStorage.getItem('vista')) {
 
         switch (vista) {

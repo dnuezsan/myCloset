@@ -5,12 +5,25 @@ import { VistaMenuPrincipal } from "./vistaMenuPrincipal.js";
 
 export class VistaPerfilUsuario {
 
+
+    /**
+     * Creates an instance of VistaPerfilUsuario.
+     * @param {string} controlador
+     * @param {string} base
+     * @memberof VistaPerfilUsuario
+     */
     constructor(controlador, base) {
         this.controlador = controlador
         this.base = base
         this.iniciar()
     }
 
+
+    /**
+     *Inicia variables y eventos al crear una instanacia de la clase
+     *
+     * @memberof VistaPerfilUsuario
+     */
     iniciar() {
         console.log('iniciar')
         //VistaPerfilUsuario.modificarUsuario()
@@ -24,12 +37,25 @@ export class VistaPerfilUsuario {
     }
 
 
+    /**
+     *Oculta el panel de perfil de usuario
+     *
+     * @static
+     * @memberof VistaPerfilUsuario
+     */
     static ocultarPerfilUsuario() {
         let perfilUsuario = document.getElementById('panelPerfilUsuario')
         perfilUsuario.style.display = 'none'
         VistaPerfilUsuario.ocultarCuadroConfirmacion()
     }
 
+
+    /**
+     *Muestra el panel de perfil de usuario y asigna la a variable local de vista "vistaPerfilUsuario"
+     *
+     * @static
+     * @memberof VistaPerfilUsuario
+     */
     static async mostrarPerfilUsuario() {
         let perfilUsuario = document.getElementById('panelPerfilUsuario')
         perfilUsuario.style.display = 'flex'
@@ -50,7 +76,7 @@ export class VistaPerfilUsuario {
 
 
     /**
-     *Modifica los datos del usuario
+     *Modifica los datos del usuario y gestina los mensajes de aviso
      *
      * @static
      * @memberof VistaPerfilUsuario
