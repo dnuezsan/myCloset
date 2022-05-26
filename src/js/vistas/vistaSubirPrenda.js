@@ -236,20 +236,19 @@ export class VistaSubirPrenda {
     }
 
     static subidaDePrenda() {
-        let tallaSubirPrenda = document.getElementById("tallaSubirPrenda").value;
-        let descripcionSubirPrenda = document.getElementById("descripcionSubirPrenda").value
-        let base64SubirPrenda = document.getElementById("base64SubirPrenda").value
-        let categoria = document.getElementById("categoria").value
-        let subCategoria = document.getElementById("subCategoria").value
-        console.log(tallaSubirPrenda, descripcionSubirPrenda, categoria)
-        console.log('holaa', document.getElementById("tallaSubirPrenda").value)
         let botonSubirPrenda = document.getElementById('botonSubirPrenda')
 
         /*botonSubirPrenda.addEventListener= async (evento) => {
             let repuesta = await Controlador.subidaDePrenda(tallaSubirPrenda, descripcionSubirPrenda, categoria, subCategoria, base64SubirPrenda)
         }*/
 
-        botonSubirPrenda.addEventListener('click', async ()=>{
+        botonSubirPrenda.addEventListener('click', async function () {
+            let tallaSubirPrenda = document.getElementById("tallaSubirPrenda").value;
+            let descripcionSubirPrenda = document.getElementById("descripcionSubirPrenda").value
+            let base64SubirPrenda = document.getElementById("base64SubirPrenda").value
+            let categoria = document.getElementById("categoria").value
+            let subCategoria = document.getElementById("subCategoria").value
+            console.log(tallaSubirPrenda, descripcionSubirPrenda, categoria, subCategoria, base64SubirPrenda);
             let datos = await Controlador.subidaDePrenda(tallaSubirPrenda, descripcionSubirPrenda, categoria, subCategoria, base64SubirPrenda)
             console.log(datos);
             return datos

@@ -161,12 +161,12 @@ function subidaDePrenda($subCategoria, $descripcion, $talla, $correo){
 
     if($metodo->insertarPrendas($subCategoria, $descripcion, $talla, $correo)){
         $response['success']=true;
-        $response['mensaje']='Se borro correctamente el usuario';
+        $response['mensaje']='Se ha guardado su prenda correctamente';
         $response['correo']='';
 
     }else{
         $response['success']=false;
-        $response['mensaje']= "Error al borrar el usuario";
+        $response['mensaje']= "No se ha guardado su prenda correctamente";
         $response['correo']='';
     }
     echo json_encode($response);

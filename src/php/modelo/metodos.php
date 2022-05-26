@@ -226,7 +226,7 @@ class Metodos
     //Aqui cogemos los datos de la Prenda para guardarlos en la base de datos
     function insertarPrendas($subCategoria, $descripcion, $talla, $correo){
         echo $subCategoria, $descripcion, $talla;
-        $consultaInsertar = "INSERT INTO `prenda`(`idUsuario`, `descripcion`, `talla`, `idSubcategoria`) VALUES ((SELECT idUsuario FROM usuario WHERE correo = ?), ?,?,(SELECT idSubcategoria from subcategoria WHERE nombreSubcategoria = ?)";
+        $consultaInsertar = "INSERT INTO `prenda`(`idUsuario`, `descripcion`, `talla`, `idSubcategoria`) VALUES ((SELECT idUsuario FROM usuario WHERE correo = ?), ?,?,(SELECT idSubcategoria from subcategoria WHERE nombreSubcategoria = ?))";
         //Preparamos con preparae
         if (!$sentencia = $this->conexion->mysqli->prepare($consultaInsertar)) {
             //echo "La consulta fallo en su preparacion";

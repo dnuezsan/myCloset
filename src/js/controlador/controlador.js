@@ -98,7 +98,10 @@ export class Controlador {
     }
 
     static async subidaDePrenda(talla, descripcion, categoria, subcategoria, imagen){
+
+        console.log(talla, descripcion, categoria, subcategoria, imagen)
         return await Prendas.subidaDePrenda(talla, descripcion, categoria, subcategoria, imagen)
+
     }
 
 }
