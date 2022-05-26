@@ -24,12 +24,13 @@ export class Prendas {
 
     static async subidaDePrenda(talla, descripcion, categoria, subcategoria, imagen){
         let subidaDePrenda = 'subidaDePrenda'
+        console.log(talla, descripcion, categoria, subcategoria, imagen);
         let datos = await $.ajax(
             {
                 //url:  "https://05.2daw.esvirgua.com/myCloset/src/php/controlador/controladorBackend.php",
-                url: "/DWEC/myCloset/src/php/controlador/controladorBackend.php",
+                //url: "/DWEC/myCloset/src/php/controlador/controladorBackend.php",
                 //url: "https://myclosetss.000webhostapp.com/php/controlador/controladorBackend.php",
-                //url: "/myCloset/src/php/controlador/controladorBackend.php",
+                url: "/myCloset/src/php/controlador/controladorBackend.php",
                 type: "POST",
                 data:
                     {
@@ -42,8 +43,9 @@ export class Prendas {
                         imagen: imagen
                     },
             })
+            console.log(datos);
         let datosJson = JSON.parse(datos)
-
+            console.log(datosJson);
         return datosJson
     }
 }
