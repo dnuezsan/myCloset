@@ -220,7 +220,7 @@ class Metodos
 
 
     function cargarMisPrendas(){
-        
+        $consulta = "SELECT idPrenda, idUsuario, descripcion, talla, idSubcategoria FROM `prenda` WHERE 1";
     }
 
     //Aqui cogemos los datos de la Prenda para guardarlos en la base de datos
