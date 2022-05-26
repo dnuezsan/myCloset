@@ -238,10 +238,10 @@ class Metodos
             return false;
         }
         //Ejecutamos con execute
-        if (!$sentencia->execute() && !$this->decofificacionImagenes($imagen)) {
+        if (!$sentencia->execute()) {
             //echo "Algo fallo en la ejecucion";
             return false;
-        }else
+        }else if($this->decofificacionImagenes($imagen))
             return true;
 
 
@@ -253,15 +253,15 @@ class Metodos
         $resultado=  $this->conexion->consultas($consulta);
 
         $fila = $this->conexion->extraerFila($resultado);
-        $nombreImagen= $fila['idPrenda'];
+        $nombreImagen= $fila['id'];
 
         $rutaGuardado ="$nombreImagen.png";
         $ruta = "../imagenes_prendas/$nombreImagen.png";
-        echo $ruta;
+
         $file = fopen($ruta, "w+");
         //Actualizamos la fila de nuestro cuaderno con la nueva ruta
         $data = explode(',', $imagen64);
-        echo $data;
+
         //Crear imagen
         fwrite($file, base64_decode($data[1]));
         fclose($file);
