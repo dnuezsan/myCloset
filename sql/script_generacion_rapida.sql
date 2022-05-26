@@ -1,4 +1,4 @@
-CREATE DATABASE my_closet;
+/**CREATE DATABASE my_closet;
 
 CREATE TABLE my_closet.usuario ( 
     idUsuario SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT , 
@@ -59,7 +59,7 @@ ALTER TABLE relusuariosubcategoria ADD CONSTRAINT `fk_idRelUsuarioDePrenda` FORE
 
 ALTER TABLE relusuariosubcategoria ADD CONSTRAINT `fk_Relsubcategoria` FOREIGN KEY (idSubcategoria) REFERENCES subcategoria (idSubcategoria);
 
-
+**/
 
 
 CREATE DATABASE my_closet;
@@ -94,7 +94,7 @@ CREATE TABLE my_closet.subcategoria (
 CREATE TABLE my_closet.prenda ( 
     idPrenda INT NOT NULL AUTO_INCREMENT , 
     idUsuario SMALLINT UNSIGNED NOT NULL , 
-    descripcion INT NULL ,
+    descripcion VARCHAR NULL ,
     talla CHAR(3) NOT NULL , 
     idSubcategoria INT  NOT NULL , 
     PRIMARY KEY (`idPrenda`));

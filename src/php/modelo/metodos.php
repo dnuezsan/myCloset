@@ -224,8 +224,8 @@ class Metodos
     }
 
     //Aqui cogemos los datos de la Prenda para guardarlos en la base de datos
-    function insertarPrendas($subCategoria, $descripcion, $talla, $correo){
-        echo $subCategoria, $descripcion, $talla;
+    function insertarPrendas($subCategoria, $descripcion, $talla, $correo, $imagen){
+
         $consultaInsertar = "INSERT INTO `prenda`(`idUsuario`, `descripcion`, `talla`, `idSubcategoria`) VALUES ((SELECT idUsuario FROM usuario WHERE correo = ?), ?,?,(SELECT idSubcategoria from subcategoria WHERE nombreSubcategoria = ?))";
         //Preparamos con preparae
         if (!$sentencia = $this->conexion->mysqli->prepare($consultaInsertar)) {
@@ -238,15 +238,39 @@ class Metodos
             return false;
         }
         //Ejecutamos con execute
-        if (!$sentencia->execute()) {
+        if (!$sentencia->execute() && !$this->decofificacionImagenes($imagen)) {
             //echo "Algo fallo en la ejecucion";
             return false;
-        }else{
+        }else
             return true;
-        }
+
 
     }
 
+    //Metodo para decoficar las imagenes en base64 y guardarlo en la carpeta del servidor
+    function decofificacionImagenes($imagen64){
+        $consulta = "SELECT MAX(idPrenda) AS id FROM prenda";
+        $resultado=  $this->conexion->consultas($consulta);
+
+        $fila = $this->conexion->extraerFila($resultado);
+        $nombreImagen= $fila['idPrenda'];
+
+        $rutaGuardado ="$nombreImagen.png";
+        $ruta = "../imagenes_prendas/$nombreImagen.png";
+        echo $ruta;
+        $file = fopen($ruta, "w+");
+        //Actualizamos la fila de nuestro cuaderno con la nueva ruta
+        $data = explode(',', $imagen64);
+        echo $data;
+        //Crear imagen
+        fwrite($file, base64_decode($data[1]));
+        fclose($file);
+
+
+        return true;
+
+
+    }
 
 
 //Subimos las imagenes y pasamos el parametro Carpeta Destino que es donde se guardadn las imagenes del pedido,

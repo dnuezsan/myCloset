@@ -45,7 +45,7 @@ switch ($_POST['propiedad']){
         $categoria= $_POST['categoria'];
         $subcategoria= $_POST['subcategoria'];
         $imagen =$_POST['imagen'];
-        subidaDePrenda($subcategoria, $descripcion, $talla, $correo);
+        subidaDePrenda($subcategoria, $descripcion, $talla, $correo, $imagen);
         break;
 }
 
@@ -155,11 +155,11 @@ function borrarUsuario($correo){
     }
     echo json_encode($response);
 }
-function subidaDePrenda($subCategoria, $descripcion, $talla, $correo){
+function subidaDePrenda($subCategoria, $descripcion, $talla, $correo, $imagen){
     $metodo = new Metodos();
     $response = array('success'=> false, 'mensaje'=>"", 'correo'=>"");
 
-    if($metodo->insertarPrendas($subCategoria, $descripcion, $talla, $correo)){
+    if($metodo->insertarPrendas($subCategoria, $descripcion, $talla, $correo, $imagen)){
         $response['success']=true;
         $response['mensaje']='Se ha guardado su prenda correctamente';
         $response['correo']='';
