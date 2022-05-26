@@ -7,33 +7,62 @@ import { VistaSubirPrenda } from "./vistaSubirPrenda.js"
 
 export class VistaArmario {
 
+    /**
+     * Crea una instancia de VistaArmario
+     * @param {string} controlador
+     * @param {string} base
+     * @memberof VistaArmario
+     */
     constructor(controlador, base) {
         this.base = base
         this.controlador = controlador
         this.iniciar()
     }
 
+
+    /**
+     *Ejecuta metodos al instanciar la clase
+     *
+     * @memberof VistaArmario
+     */
     iniciar() {
-        /* VistaArmario.generarParrafo()
-        VistaArmario.destruirParrafo()
-        VistaArmario.generarDescripcion()
-        VistaArmario.destruirDescripcion() */
         VistaArmario.mostrarMisPrendas()
         VistaArmario.mostrarCategorias()
         VistaArmario.mostrarPrendas()
     }
 
+
+    /**
+     *Muestra panelArmario y asigna a la variable de localStorage vista el valor vistaArmario
+     *
+     * @static
+     * @memberof VistaArmario
+     */
     static mostrarArmario() {
         let armario = document.getElementById('panelArmario')
         armario.style.display = 'flex'
         localStorage.setItem('vista', 'vistaArmario')
     }
 
+
+    /**
+     *Oculta la vista panelArmario
+     *
+     * @static
+     * @memberof VistaArmario
+     */
     static ocultarArmario() {
         let armario = document.getElementById('panelArmario')
         armario.style.display = 'none'
     }
 
+
+    /**
+     *Oculta los paneles presentes y muestra el panel de vistaMisPrendas
+     *
+     * @static
+     * @memberof VistaArmario
+     */
     static mostrarMisPrendas() {
         let panelMisPrendas = document.querySelectorAll(".cajaArmario")
 
@@ -44,6 +73,12 @@ export class VistaArmario {
 
     }
 
+    /**
+     *Oculta los paneles presentes y muestra el panel de vistaPrendas
+     *
+     * @static
+     * @memberof VistaArmario
+     */
     static mostrarPrendas(){
         let panelMisPrendas = document.querySelectorAll(".cajaArmario")
 
@@ -53,6 +88,12 @@ export class VistaArmario {
         }
     }
 
+    /**
+     *Oculta los paneles presentes y muestra el panel de vistaCategorias
+     *
+     * @static
+     * @memberof VistaArmario
+     */
     static mostrarCategorias() {
         let panelMisPrendas = document.querySelectorAll(".cajaArmario")
 

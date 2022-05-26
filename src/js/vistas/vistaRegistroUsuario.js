@@ -131,11 +131,24 @@ export class VistaRegistroUsuario {
 
     }
 
+
+    /**
+     *Elimina el contenido de los mensajes del registro
+     *
+     * @static
+     * @memberof VistaRegistroUsuario
+     */
     static limpiarMensaje(){
         let mensaje = document.querySelectorAll('#panelRegistro .mensajeLabel')[0]
             mensaje.innerHTML = ''
     }
 
+    /**
+     *Elimina el contenido de los inputs del registro
+     *
+     * @static
+     * @memberof VistaRegistroUsuario
+     */
     static limpiarInputs(){
         let inputs = document.querySelectorAll('#panelRegistro input')
         inputs.forEach(input => {

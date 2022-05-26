@@ -26,7 +26,7 @@ export class VistaPrincipal {
      * @memberof VistaPrincipal
      */
     constructor(controlador, base) {
-        this.controlador = controlador
+        this.controlador = new VistaLogin()
         this.base = base
         this.iniciar()
     }
@@ -38,7 +38,6 @@ export class VistaPrincipal {
      * @memberof VistaPrincipal
      */
     iniciar() {
-
         this.panelLogin = document.getElementById('panelLogin')
         this.panelRegistro = document.getElementById('panelRegistro')
         this.panelMenu = document.getElementById('divMenuPrincipal')

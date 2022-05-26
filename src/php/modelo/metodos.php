@@ -14,7 +14,7 @@ class Metodos
     }
    
     /**
-     * Funcion para dar de alta al usuario
+     * Inserta un usuario un usuario en la BD despues de validar las contraseña y encriptarla
      * @param String $nombre
      * @param String $correo
      * @param String $password
@@ -106,6 +106,15 @@ class Metodos
 
     //Modificamos los datos del usuario ya registrado
 
+    /**
+     * @param String $nombreUsuario
+     * @param String $correo
+     * @param String $password
+     * @param String $newpassword
+     * @param String $rnewpassword
+     * Valida los parámetros y actualiza los datos de un usuario en la tabla "usuario"
+     * @return boolean
+     */
     public function modicarUsuario($nombreUsuario,$correo,$password, $newpassword, $rnewpassword){
         $consultaNombre = "UPDATE usuario SET nombre=? WHERE correo = ?";
         $consultaPassword ="UPDATE usuario SET nombre=?, clave=? WHERE correo = ?";
@@ -158,6 +167,11 @@ class Metodos
         } */
     }
     //Cargamos los datos del usuario para poder modificarlos.
+    /**
+     * @param String $correo
+     * Busca los datos del usuario y devuelve un array con estos
+     * @return mixed
+     */
     public function cagarDatosUsuario($correo){
         //Creamos al consulta
         $consulta = "SELECT * FROM usuario WHERE correo = ?";
@@ -195,6 +209,11 @@ class Metodos
     }
 
 
+    /**
+     * @param mixed $correo
+     * Borra la cuenta de un usuario
+     * @return mixed
+     */
     function borrarUsuario($correo){
         $consulta ="DELETE FROM usuario WHERE correo= ?";
 
@@ -224,6 +243,15 @@ class Metodos
     }
 
     //Aqui cogemos los datos de la Prenda para guardarlos en la base de datos
+    /**
+     * @param String $subCategoria
+     * @param String $descripcion
+     * @param String $talla
+     * @param String $correo
+     * @param String $imagen
+     * Inserta una prenda en la base de datos
+     * @return boolean
+     */
     function insertarPrendas($subCategoria, $descripcion, $talla, $correo, $imagen){
 
         $consultaInsertar = "INSERT INTO `prenda`(`idUsuario`, `descripcion`, `talla`, `idSubcategoria`) VALUES ((SELECT idUsuario FROM usuario WHERE correo = ?), ?,?,(SELECT idSubcategoria from subcategoria WHERE nombreSubcategoria = ?))";
@@ -248,6 +276,11 @@ class Metodos
     }
 
     //Metodo para decoficar las imagenes en base64 y guardarlo en la carpeta del servidor
+    /**
+     * @param mixed $imagen64
+     * Guarda en la carpeta una imagen decodificada de base64 con el nombre de su id
+     * @return boolean
+     */
     function decofificacionImagenes($imagen64){
         $consulta = "SELECT MAX(idPrenda) AS id FROM prenda";
         $resultado=  $this->conexion->consultas($consulta);
@@ -274,7 +307,7 @@ class Metodos
 
 
 //Subimos las imagenes y pasamos el parametro Carpeta Destino que es donde se guardadn las imagenes del pedido,
-    /**
+    /*
      * @param mixed $carpetaDestino
      * Procesa y guarda un conjunto de imágenes
      * @return mixed
@@ -321,7 +354,7 @@ class Metodos
         }
     }
     // Con este metodo generamos la carpeta del pedido
-    /**
+    /*
      * Genera una carpeta para usuario
      * @return mixed
      */
@@ -340,7 +373,7 @@ class Metodos
     }
     //Aqui devolvemos el ultimo pedido realizado
 
-    /**
+    /*
      * Encuentra el último registro
      * @return int
      */
@@ -364,7 +397,7 @@ class Metodos
 
     }
     //Generamos el pedido con esta funcion
-    /**
+    /*
      * @return mixed
      */
     function crearPedido(){

@@ -13,17 +13,34 @@ export class VistaGestionarPrendas {
         this.activarVideo()
     }
 
+    /**
+     *Muestra panelGestionPrendas y asigna a la variable de localStorage vista el valor panelGestionPrendas
+     *
+     * @static
+     * @memberof VistaGestionarPrendas
+     */
     static mostrarGestionarPrendas() {
         let panel = document.getElementById('panelGestionPrendas')
         panel.style.display = 'flex'
         localStorage.setItem('vista', 'vistaGestionarPrendas')
     }
 
+    /**
+     *Oculta la vista panelGestionPrendas
+     *
+     * @static
+     * @memberof VistaGestionarPrendas
+     */
     static ocultarGestionarPrendas() {
         let panel = document.getElementById('panelGestionPrendas')
         panel.style.display = 'none'
     }
 
+    /**
+     *Llama al método que activa la cámara y muestra el panel de video
+     *
+     * @memberof VistaGestionarPrendas
+     */
     activarVideo() {
         /* let snapshot = document.getElementById('snapshotGestionFotos') */
         let snapshot = document.querySelectorAll('.snapshotGestionFotos')
@@ -43,6 +60,12 @@ export class VistaGestionarPrendas {
         } */
     }
 
+
+    /**
+     *Habilita un flujo para grabar, lo asocia a la etiqueta video, e implementa los metodos para capturar una imagen o cerrar el video y el flujo
+     *
+     * @memberof VistaGestionarPrendas
+     */
     realizarVideo() {
         let video = document.getElementById('elementoVideoGestionPrendas')
 
@@ -66,6 +89,7 @@ export class VistaGestionarPrendas {
 
                     /* detiene el video */
                     this.cerrarVideo(video, mediaStream)
+
                 }
             ).catch((error) => {
                 console.log(error);
@@ -73,6 +97,14 @@ export class VistaGestionarPrendas {
 
     }
 
+
+    /**
+     *
+     *
+     * @param {*} video
+     * @param {*} mediaStream
+     * @memberof VistaGestionarPrendas
+     */
     tomarInstantanea(video, mediaStream) {
         let boton = document.getElementById('capturaGestionPrenda')
         let img = document.getElementById('crop-imageGestion')
@@ -103,6 +135,14 @@ export class VistaGestionarPrendas {
         }
     }
 
+
+    /**
+     *
+     *
+     * @param {*} video
+     * @param {*} mediaStream
+     * @memberof VistaGestionarPrendas
+     */
     cerrarVideo(video, mediaStream) {
         let boton = document.getElementById('cerrarVideoGestionPrenda')
         boton.onclick = (evento) => {
@@ -112,6 +152,13 @@ export class VistaGestionarPrendas {
         }
     }
 
+    /**
+     *
+     *
+     * @param {*} video
+     * @param {*} mediaStream
+     * @memberof VistaGestionarPrendas
+     */
     cerrarVideoApagarCamara(video, mediaStream) {
         let videoCaja = document.getElementById('cajaVideoGestionPrenda')
         let tracks = mediaStream.getTracks()
@@ -126,6 +173,12 @@ export class VistaGestionarPrendas {
 
 
     /* Recortar imagen de galeria */
+
+    /**
+     *Configura y prepara la caja de recorte para recibir una imagen y manipularla
+     *
+     * @memberof VistaGestionarPrendas
+     */
     cargarFoto() {
         let cropper = null
         let inputFoto = document.getElementById('imagenGestionPrenda')
@@ -171,6 +224,12 @@ export class VistaGestionarPrendas {
         }
     }
 
+    /**
+     *Vacía la caja de recorte
+     *
+     * @param {Object} cropper
+     * @memberof VistaGestionarPrendas
+     */
     cerrarModal(cropper) {
         let modal = document.getElementsByClassName('modal')[1]
         let modalContent = document.getElementsByClassName('modal-content')[0]
@@ -189,6 +248,12 @@ export class VistaGestionarPrendas {
         }
     }
 
+    /**
+     *Recorta una imagen del canvas, la muestra, pasa al input correspondiente, y vacia la caja de recorte de imagen
+     *
+     * @param {Object} cropper
+     * @memberof VistaGestionarPrendas
+     */
     recortarFoto(cropper) {
 
         let modal = document.getElementsByClassName('modal')[1]
