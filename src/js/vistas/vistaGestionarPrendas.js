@@ -5,6 +5,7 @@ export class VistaGestionarPrendas {
     constructor(controlador, base) {
         this.controlador = controlador
         this.base = base
+        this.cropper = null
         this.iniciar()
     }
 
@@ -32,8 +33,17 @@ export class VistaGestionarPrendas {
      * @memberof VistaGestionarPrendas
      */
     static ocultarGestionarPrendas() {
+        let video = document.getElementById('elementoVideoGestionPrendas')
         let panel = document.getElementById('panelGestionPrendas')
+        let imagen = document.getElementById('img-cropperGestion')
         panel.style.display = 'none'
+        if (video.srcObject != null) {
+            VistaGestionarPrendas.cambioDePanelApagar()
+        }
+        if (imagen.src != null) {
+            VistaGestionarPrendas.cambioDePanelCerrarModal()   
+        }
+
     }
 
     /**
@@ -50,6 +60,7 @@ export class VistaGestionarPrendas {
         snapshot.forEach(icono => {
             icono.onclick = (evento) => {
                 video.style.display = 'inline-block'
+                this.desaparecerIcono()
                 this.realizarVideo()
             }
         })
@@ -163,6 +174,7 @@ export class VistaGestionarPrendas {
         let tracks = mediaStream.getTracks()
         tracks.forEach(track => {
             track.stop()
+            this.aparecerIcono()
         })
 
         video.srcObject = null
@@ -170,6 +182,32 @@ export class VistaGestionarPrendas {
         videoCaja.style.display = 'none'
     }
 
+    static cambioDePanelApagar() {
+        let video = document.getElementById('elementoVideoGestionPrendas')
+        let videoCaja = document.getElementById('cajaVideoGestionPrenda')
+        //se corta el flujo
+
+        let tracks = video.srcObject.getTracks()
+        tracks.forEach(track => {
+            track.stop()
+            VistaGestionarPrendas.aparecerIcono()
+            videoCaja.style.display = 'none'
+            video.srcObject = null
+        })
+
+    }
+
+    static cambioDePanelCerrarModal() {
+        let modal = document.getElementsByClassName('modal')[1]
+        let modalContent = document.getElementsByClassName('modal-content')[1]
+        let inputFoto = document.getElementById('imagenGestionPrenda')
+        let imagen = document.getElementById('img-cropperGestion')
+        imagen.src = ''
+        inputFoto.value = ''
+
+        modal.className = 'modal remove'
+        modalContent.className = 'modal-content remove'
+    }
 
     /* Recortar imagen de galeria */
 
@@ -179,7 +217,6 @@ export class VistaGestionarPrendas {
      * @memberof VistaGestionarPrendas
      */
     cargarFoto() {
-        let cropper = null
         let inputFoto = document.getElementById('imagenGestionPrenda')
         let modal = document.getElementsByClassName('modal')[1]
         let modalContent = document.getElementsByClassName('modal-content')[1]
@@ -200,7 +237,7 @@ export class VistaGestionarPrendas {
                 console.log(imagenUrl);
                 imagen.src = imagenUrl /*  = 'src/img/armario_vertical.jpg' */
 
-                cropper = new Cropper(imagen, {
+                this.cropper = new Cropper(imagen, {
                     aspectRatio: 1, //es como queremos que recorte
                     preview: '.img-sample', //contenedor donde se va a ir viendo en tiempo real la imagen cortada
                     zoomable: false, //Para que no haga zoom
@@ -224,6 +261,8 @@ export class VistaGestionarPrendas {
     }
 
     cargarFotoVideo(canvas) {
+        let panel = document.getElementById('panelGestionPrendas')
+        let panelDisplay = panel.getAttribute('style')
         let cropper = null
         //let inputFoto = document.getElementById('imagenPrenda')
         let modal = document.getElementsByClassName('modal')[1]
@@ -243,7 +282,8 @@ export class VistaGestionarPrendas {
             ready() { //cropper-container es un clase nativ de cropper.js
                 document.querySelector('.cropper-container').style.width = '100%'
                 document.querySelector('.cropper-container').style.height = '100%'
-            }})
+            }
+        })
 
         modal.className = 'modal active'
         modalContent.className = 'modal-content active'
@@ -323,4 +363,38 @@ export class VistaGestionarPrendas {
         }
     }
 
+    desaparecerIcono() {
+        let iconos = document.getElementsByClassName("iconoGestionPrenda")
+
+        iconos[2].style.display = 'none'
+        iconos[3].style.display = 'none'
+    }
+
+    aparecerIcono() {
+        let iconos = document.getElementsByClassName("iconoGestionPrenda")
+
+        iconos[2].style.display = 'block'
+        iconos[3].style.display = 'block'
+    }
+
+    static desaparecerIcono() {
+        let iconos = document.getElementsByClassName("iconoGestionPrenda")
+
+        iconos[2].style.display = 'none'
+        iconos[3].style.display = 'none'
+    }
+
+    static aparecerIcono() {
+        let iconos = document.getElementsByClassName("iconoGestionPrenda")
+
+        iconos[2].style.display = 'block'
+        iconos[3].style.display = 'block'
+    }
+
+    /* apagarCamaraCambioPanel(){
+        let vista = localStorage.getItem('vista')
+        if () {
+            
+        }
+    } */
 }

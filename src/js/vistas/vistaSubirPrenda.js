@@ -31,8 +31,16 @@ export class VistaSubirPrenda {
     }
 
     static ocultarSubirPrenda() {
+        let video = document.getElementById('elementoVideoSubirPrendas')
         let panel = document.getElementById('panelSubirPrenda')
+        let imagen = document.getElementById('img-cropperGestion')
         panel.style.display = 'none'
+        if (video.srcObject != null) {
+            VistaSubirPrenda.cambioDePanelApagar()
+        }
+        if (imagen.src != null) {
+            VistaSubirPrenda.cambioDePanelCerrarModal()   
+        }
     }
 
 
@@ -45,6 +53,7 @@ export class VistaSubirPrenda {
         snapshot.forEach(icono => {
             icono.onclick = (evento) => {
                 video.style.display = 'inline-block'
+                this.desaparecerIcono()
                 this.realizarVideo()
             }
         })
@@ -101,7 +110,7 @@ export class VistaSubirPrenda {
             y la imagen se vea con buena relacion de aspecto. problema la imagen no puede formar un circulo perfecto*/
             canvas.width = video.videoWidth
             canvas.height = video.videoHeight
-            
+
             contexto.drawImage(video, 0, 0, canvas.width, canvas.height)
             //let imagen = canvas.toDataURL("imagen/jpg")
             /* Se carga la imagen en la etiqueta imagen*/
@@ -127,6 +136,7 @@ export class VistaSubirPrenda {
         let tracks = mediaStream.getTracks()
         tracks.forEach(track => {
             track.stop()
+            this.aparecerIcono()
         })
 
         video.srcObject = null
@@ -134,6 +144,34 @@ export class VistaSubirPrenda {
         videoCaja.style.display = 'none'
     }
 
+    static cambioDePanelApagar() {
+        let video = document.getElementById('elementoVideoSubirPrendas')
+        let videoCaja = document.getElementById('cajaVideoSubirPrenda')
+        //se corta el flujo
+
+        let tracks = video.srcObject.getTracks()
+        tracks.forEach(track => {
+            track.stop()
+            VistaSubirPrenda.aparecerIcono()
+            videoCaja.style.display = 'none'
+            video.srcObject = null
+
+            //se quita el modal
+
+        })
+    }
+
+    static cambioDePanelCerrarModal() {
+        let modal = document.getElementsByClassName('modal')[0]
+        let modalContent = document.getElementsByClassName('modal-content')[0]
+        let inputFoto = document.getElementById('imagenPrenda')
+        let imagen = document.getElementById('img-cropper')
+        imagen.src = ''
+        inputFoto.value = ''
+
+        modal.className = 'modal remove'
+        modalContent.className = 'modal-content remove'
+    }
 
     /* Recortar imagen de galeria */
     cargarFoto() {
@@ -201,7 +239,8 @@ export class VistaSubirPrenda {
             ready() { //cropper-container es un clase nativ de cropper.js
                 document.querySelector('.cropper-container').style.width = '100%'
                 document.querySelector('.cropper-container').style.height = '100%'
-            }})
+            }
+        })
 
         modal.className = 'modal active'
         modalContent.className = 'modal-content active'
@@ -266,6 +305,7 @@ export class VistaSubirPrenda {
 
             modal.className = 'modal remove'
             modalContent.className = 'modal-content remove'
+            this.aparecerIcono()
         }
     }
 
@@ -289,6 +329,32 @@ export class VistaSubirPrenda {
         }, true)
     }
 
+    desaparecerIcono() {
+        let iconos = document.getElementsByClassName("iconoSubirPrenda")
 
+        iconos[2].style.display = 'none'
+        iconos[3].style.display = 'none'
+    }
+
+    aparecerIcono() {
+        let iconos = document.getElementsByClassName("iconoSubirPrenda")
+
+        iconos[2].style.display = 'block'
+        iconos[3].style.display = 'block'
+    }
+
+    static desaparecerIcono() {
+        let iconos = document.getElementsByClassName("iconoSubirPrenda")
+
+        iconos[2].style.display = 'none'
+        iconos[3].style.display = 'none'
+    }
+
+    static aparecerIcono() {
+        let iconos = document.getElementsByClassName("iconoSubirPrenda")
+
+        iconos[2].style.display = 'block'
+        iconos[3].style.display = 'block'
+    }
 
 }
