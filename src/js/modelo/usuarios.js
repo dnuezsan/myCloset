@@ -190,10 +190,10 @@ export class Usuarios {
         let modificarUsuario = 'modificarUsuario';
         let datosUsuario = await $.ajax(
             {
-                //url: "https://05.2daw.esvirgua.com/myCloset/src/php/controlador/controladorBackend.php",
+                url: "https://05.2daw.esvirgua.com/myCloset/src/php/controlador/controladorBackend.php",
                 //url: "/DWEC/myCloset/src/php/controlador/controladorBackend.php",
                 //url: "https://myclosetss.000webhostapp.com/php/controlador/controladorBackend.php",
-                url: "/myCloset/src/php/controlador/controladorBackend.php",
+                //url: "/myCloset/src/php/controlador/controladorBackend.php",
                 type: "POST",
                 data:
                 {

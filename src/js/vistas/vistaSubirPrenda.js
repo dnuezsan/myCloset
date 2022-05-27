@@ -57,7 +57,6 @@ export class VistaSubirPrenda {
 
     realizarVideo() {
         let video = document.getElementById('elementoVideoSubirPrendas')
-
         navigator.mediaDevices.getUserMedia({
             video: {
                 facingMode: 'environment'
@@ -87,10 +86,9 @@ export class VistaSubirPrenda {
 
     tomarInstantanea(video, mediaStream) {
         let boton = document.getElementById('capturaSubirPrenda')
-        let img = document.getElementById('crop-image')
+        /* let img = document.getElementById('crop-image')
         let input = document.getElementById('base64SubirPrenda')
-        let canvas = document.getElementById('canvasSubirPrenda')
-
+        let canvas = document.getElementById('canvasSubirPrenda') */
         boton.onclick = () => {
             let canvas = document.getElementById('canvasSubirPrenda')
             let contexto = canvas.getContext('2d')
@@ -101,18 +99,17 @@ export class VistaSubirPrenda {
 
             /* Las siguientes lineas son para que la resolucion del canvas se ajuste a la de la camara
             y la imagen se vea con buena relacion de aspecto. problema la imagen no puede formar un circulo perfecto*/
-            /* canvas.width = video.videoWidth
-            canvas.height = video.videoHeight */
-
+            canvas.width = video.videoWidth
+            canvas.height = video.videoHeight
+            
             contexto.drawImage(video, 0, 0, canvas.width, canvas.height)
-            let imagen = canvas.toDataURL("imagen/jpg")
+            //let imagen = canvas.toDataURL("imagen/jpg")
             /* Se carga la imagen en la etiqueta imagen*/
-            img.src = imagen
+            //img.src = imagen
             /* Se carga el valor en base64 en el input */
-            input.value = imagen
-            console.log(input.value);
-
+            //input.value = imagen
             this.cerrarVideoApagarCamara(video, mediaStream)
+            this.cargarFotoVideo(canvas)
         }
     }
 
@@ -182,6 +179,35 @@ export class VistaSubirPrenda {
 
             }
         }
+    }
+
+    cargarFotoVideo(canvas) {
+        let cropper = null
+        //let inputFoto = document.getElementById('imagenPrenda')
+        let modal = document.getElementsByClassName('modal')[0]
+        let modalContent = document.getElementsByClassName('modal-content')[0]
+        let imagen = document.getElementById('img-cropper')
+
+
+        imagen.src = canvas.toDataURL('imagen/png')
+
+        cropper = new Cropper(imagen, {
+            aspectRatio: 1, //es como queremos que recorte
+            preview: '.img-sample', //contenedor donde se va a ir viendo en tiempo real la imagen cortada
+            zoomable: false, //Para que no haga zoom
+            viewMode: 1, //Para que no estire la imagen del contenedor
+            responsive: false, //Para que no reacomode con zoom la imagen al contenedor
+            dragMode: 'none', // Para que al arrastrar no haga nada
+            ready() { //cropper-container es un clase nativ de cropper.js
+                document.querySelector('.cropper-container').style.width = '100%'
+                document.querySelector('.cropper-container').style.height = '100%'
+            }})
+
+        modal.className = 'modal active'
+        modalContent.className = 'modal-content active'
+        console.log(cropper)
+        this.cerrarModal(cropper)
+        this.recortarFoto(cropper)
     }
 
     cerrarModal(cropper) {

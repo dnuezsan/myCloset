@@ -2,7 +2,7 @@
 import { VistaMisPrendas } from "./vistaMisPrendas.js"
 import { VistaMenuPrincipal } from "./vistaMenuPrincipal.js"
 import { VistaCategorias } from "./vistaCategorias.js"
-import { VistaPrendas } from "./vistaPrendas.Js"
+import { VistaPrendas } from "./vistaPrendas.js"
 import { VistaSubirPrenda } from "./vistaSubirPrenda.js"
 
 export class VistaArmario {
