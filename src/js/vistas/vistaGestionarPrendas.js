@@ -228,7 +228,7 @@ export class VistaGestionarPrendas {
         //let inputFoto = document.getElementById('imagenPrenda')
         let modal = document.getElementsByClassName('modal')[1]
         let modalContent = document.getElementsByClassName('modal-content')[1]
-        let imagen = document.getElementById('img-cropper')
+        let imagen = document.getElementById('img-cropperGestion')
 
 
         imagen.src = canvas.toDataURL('imagen/png')
@@ -260,7 +260,7 @@ export class VistaGestionarPrendas {
      */
     cerrarModal(cropper) {
         let modal = document.getElementsByClassName('modal')[1]
-        let modalContent = document.getElementsByClassName('modal-content')[0]
+        let modalContent = document.getElementsByClassName('modal-content')[1]
         let boton = document.getElementById('closeGestion')
         let inputFoto = document.getElementById('imagenGestionPrenda')
 
