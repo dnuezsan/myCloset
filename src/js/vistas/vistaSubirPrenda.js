@@ -24,26 +24,44 @@ export class VistaSubirPrenda {
         botonSubirPrenda.addEventListener('click', VistaSubirPrenda.subidaDePrenda)*/
     }
 
+
+    /**
+     *Muestra el panel para subir prendas y settea la variable "vista"="vistaSubirPrenda"
+     *
+     * @static
+     * @memberof VistaSubirPrenda
+     */
     static mostrarSubirPrenda() {
         let panel = document.getElementById('panelSubirPrenda')
         panel.style.display = 'flex'
         localStorage.setItem('vista', 'vistaSubirPrenda')
     }
 
+    /**
+     *Oculta la vista "panelSubirPrendas" y cierra la cámara y el modal en caso de cambiar de vista
+     *
+     * @static
+     * @memberof VistaSubirPrenda
+     */
     static ocultarSubirPrenda() {
         let video = document.getElementById('elementoVideoSubirPrendas')
         let panel = document.getElementById('panelSubirPrenda')
-        let imagen = document.getElementById('img-cropperGestion')
+        let imagen = document.getElementById('img-cropper')
         panel.style.display = 'none'
         if (video.srcObject != null) {
             VistaSubirPrenda.cambioDePanelApagar()
         }
         if (imagen.src != null) {
-            VistaSubirPrenda.cambioDePanelCerrarModal()   
+            VistaSubirPrenda.cambioDePanelCerrarModal()
         }
     }
 
 
+    /**
+     *Llama al método que activa la cámara y muestra el panel de video
+     *
+     * @memberof VistaSubirPrenda
+     */
     activarVideo() {
         /* let snapshot = document.getElementById('snapshotSubirFotos') */
         let snapshot = document.querySelectorAll('.snapshotSubirFotos')
@@ -64,6 +82,12 @@ export class VistaSubirPrenda {
         } */
     }
 
+
+    /**
+     *Habilita un flujo para grabar, lo asocia a la etiqueta video, e implementa los metodos para capturar una imagen o cerrar el video y el flujo
+     *
+     * @memberof VistaSubirPrenda
+     */
     realizarVideo() {
         let video = document.getElementById('elementoVideoSubirPrendas')
         navigator.mediaDevices.getUserMedia({
@@ -93,6 +117,13 @@ export class VistaSubirPrenda {
 
     }
 
+    /**
+     *Configura el canvas, dibuja una instantánea del vídeo en este y transmite el resultado al recortador tras apagar la cámara
+     *
+     * @param {DOM element} video
+     * @param {stream} mediaStream
+     * @memberof VistaSubirPrenda
+     */
     tomarInstantanea(video, mediaStream) {
         let boton = document.getElementById('capturaSubirPrenda')
         /* let img = document.getElementById('crop-image')
@@ -122,6 +153,13 @@ export class VistaSubirPrenda {
         }
     }
 
+    /**
+     *Oculta la etiqueta de video y llama al método que detiene el flujo de la cámara y de la etiqueta video
+     *
+     * @param {DOM element} video
+     * @param {stream} mediaStream
+     * @memberof VistaSubirPrenda
+     */
     cerrarVideo(video, mediaStream) {
         let boton = document.getElementById('cerrarVideoSubirPrenda')
         boton.onclick = (evento) => {
@@ -131,6 +169,13 @@ export class VistaSubirPrenda {
         }
     }
 
+    /**
+     *Detiene el flujo de la etiqueta video y oculta la caja que contiene la etiqueta de video y sus botones
+     *
+     * @param {DOM element} video
+     * @param {stream} mediaStream
+     * @memberof VistaSubirPrenda
+     */
     cerrarVideoApagarCamara(video, mediaStream) {
         let videoCaja = document.getElementById('cajaVideoSubirPrenda')
         let tracks = mediaStream.getTracks()
@@ -144,6 +189,12 @@ export class VistaSubirPrenda {
         videoCaja.style.display = 'none'
     }
 
+    /**
+     *Detiene el flujo de la cámara
+     *
+     * @static
+     * @memberof VistaSubirPrenda
+     */
     static cambioDePanelApagar() {
         let video = document.getElementById('elementoVideoSubirPrendas')
         let videoCaja = document.getElementById('cajaVideoSubirPrenda')
@@ -161,6 +212,12 @@ export class VistaSubirPrenda {
         })
     }
 
+    /**
+     *oculta el panel de recorte y limpia su contenido
+     *
+     * @static
+     * @memberof VistaSubirPrenda
+     */
     static cambioDePanelCerrarModal() {
         let modal = document.getElementsByClassName('modal')[0]
         let modalContent = document.getElementsByClassName('modal-content')[0]
@@ -174,6 +231,12 @@ export class VistaSubirPrenda {
     }
 
     /* Recortar imagen de galeria */
+
+    /**
+     *Configura y prepara la caja de recorte para recibir una imagen y manipularla
+     *
+     * @memberof VistaSubirPrenda
+     */
     cargarFoto() {
         let cropper = null
         let inputFoto = document.getElementById('imagenPrenda')
@@ -219,6 +282,12 @@ export class VistaSubirPrenda {
         }
     }
 
+    /**
+     *Carga la imagen del video en el panel de recorte
+     *
+     * @param {canvas} canvas
+     * @memberof VistaSubirPrenda
+     */
     cargarFotoVideo(canvas) {
         let cropper = null
         //let inputFoto = document.getElementById('imagenPrenda')
@@ -249,6 +318,12 @@ export class VistaSubirPrenda {
         this.recortarFoto(cropper)
     }
 
+    /**
+     *Vacía la caja de recorte
+     *
+     * @param {Object} cropper
+     * @memberof VistaSubirPrenda
+     */
     cerrarModal(cropper) {
         let modal = document.getElementsByClassName('modal')[0]
         let modalContent = document.getElementsByClassName('modal-content')[0]
@@ -267,6 +342,13 @@ export class VistaSubirPrenda {
         }
     }
 
+
+    /**
+     *Recorta una imagen del canvas, la muestra, pasa al input correspondiente, y vacia la caja de recorte de imagen
+     *
+     * @param {Object} cropper
+     * @memberof VistaSubirPrenda
+     */
     recortarFoto(cropper) {
 
         let modal = document.getElementsByClassName('modal')[0]
@@ -309,6 +391,13 @@ export class VistaSubirPrenda {
         }
     }
 
+
+    /**
+     *Envía datos para subir una rprenda y ecoge y presenta la respuesta
+     *
+     * @static
+     * @memberof VistaSubirPrenda
+     */
     static subidaDePrenda() {
         let botonSubirPrenda = document.getElementById('botonSubirPrenda')
 
@@ -329,6 +418,12 @@ export class VistaSubirPrenda {
         }, true)
     }
 
+
+    /**
+     *Hace desaparecer los iconos para activar el video
+     *
+     * @memberof VistaSubirPrenda
+     */
     desaparecerIcono() {
         let iconos = document.getElementsByClassName("iconoSubirPrenda")
 
@@ -336,6 +431,11 @@ export class VistaSubirPrenda {
         iconos[3].style.display = 'none'
     }
 
+    /**
+     *Hace aparecer los iconos para activar el video
+     *
+     * @memberof VistaSubirPrenda
+     */
     aparecerIcono() {
         let iconos = document.getElementsByClassName("iconoSubirPrenda")
 
@@ -343,6 +443,12 @@ export class VistaSubirPrenda {
         iconos[3].style.display = 'block'
     }
 
+    /**
+     *Hace desaparecer los iconos para activar el video
+     *
+     * @static
+     * @memberof VistaSubirPrenda
+     */
     static desaparecerIcono() {
         let iconos = document.getElementsByClassName("iconoSubirPrenda")
 
@@ -350,6 +456,12 @@ export class VistaSubirPrenda {
         iconos[3].style.display = 'none'
     }
 
+    /**
+     *Hace aparecer los iconos para activar el video
+     *
+     * @static
+     * @memberof VistaSubirPrenda
+     */
     static aparecerIcono() {
         let iconos = document.getElementsByClassName("iconoSubirPrenda")
 

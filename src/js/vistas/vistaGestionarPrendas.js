@@ -15,7 +15,7 @@ export class VistaGestionarPrendas {
     }
 
     /**
-     *Muestra panelGestionPrendas y asigna a la variable de localStorage vista el valor panelGestionPrendas
+     *Muestra panelGestionPrendas y asigna a la variable de localStorage "vista" el valor "vistaGestionPrendas"
      *
      * @static
      * @memberof VistaGestionarPrendas
@@ -27,7 +27,7 @@ export class VistaGestionarPrendas {
     }
 
     /**
-     *Oculta la vista panelGestionPrendas
+     *Oculta la vista "panelGestionPrendas" y cierra la cámara y el modal en caso de cambiar de vista
      *
      * @static
      * @memberof VistaGestionarPrendas
@@ -110,10 +110,10 @@ export class VistaGestionarPrendas {
 
 
     /**
+     *Configura el canvas, dibuja una instantánea del vídeo en este y transmite el resultado al recortador tras apagar la cámara
      *
-     *
-     * @param {*} video
-     * @param {*} mediaStream
+     * @param {DOM element} video
+     * @param {stream} mediaStream
      * @memberof VistaGestionarPrendas
      */
     tomarInstantanea(video, mediaStream) {
@@ -147,10 +147,10 @@ export class VistaGestionarPrendas {
 
 
     /**
+     *Oculta la etiqueta de video y llama al método que detiene el flujo de la cámara y de la etiqueta video
      *
-     *
-     * @param {*} video
-     * @param {*} mediaStream
+     * @param {DOM element} video
+     * @param {stream} mediaStream
      * @memberof VistaGestionarPrendas
      */
     cerrarVideo(video, mediaStream) {
@@ -163,10 +163,10 @@ export class VistaGestionarPrendas {
     }
 
     /**
+     *Detiene el flujo de la etiqueta video y oculta la caja que contiene la etiqueta de video y sus botones
      *
-     *
-     * @param {*} video
-     * @param {*} mediaStream
+     * @param {DOM element} video
+     * @param {stream} mediaStream
      * @memberof VistaGestionarPrendas
      */
     cerrarVideoApagarCamara(video, mediaStream) {
@@ -182,6 +182,12 @@ export class VistaGestionarPrendas {
         videoCaja.style.display = 'none'
     }
 
+    /**
+     *Detiene el flujo de la cámara
+     *
+     * @static
+     * @memberof VistaGestionarPrendas
+     */
     static cambioDePanelApagar() {
         let video = document.getElementById('elementoVideoGestionPrendas')
         let videoCaja = document.getElementById('cajaVideoGestionPrenda')
@@ -197,6 +203,12 @@ export class VistaGestionarPrendas {
 
     }
 
+    /**
+     *oculta el panel de recorte y limpia su contenido
+     *
+     * @static
+     * @memberof VistaGestionarPrendas
+     */
     static cambioDePanelCerrarModal() {
         let modal = document.getElementsByClassName('modal')[1]
         let modalContent = document.getElementsByClassName('modal-content')[1]
@@ -260,6 +272,12 @@ export class VistaGestionarPrendas {
         }
     }
 
+    /**
+     *Carga la imagen del video en el panel de recorte
+     *
+     * @param {canvas} canvas
+     * @memberof VistaGestionarPrendas
+     */
     cargarFotoVideo(canvas) {
         let panel = document.getElementById('panelGestionPrendas')
         let panelDisplay = panel.getAttribute('style')
@@ -363,6 +381,11 @@ export class VistaGestionarPrendas {
         }
     }
 
+    /**
+     *Hace desaparecer los iconos para activar el video
+     *
+     * @memberof VistaGestionarPrendas
+     */
     desaparecerIcono() {
         let iconos = document.getElementsByClassName("iconoGestionPrenda")
 
@@ -370,6 +393,11 @@ export class VistaGestionarPrendas {
         iconos[3].style.display = 'none'
     }
 
+    /**
+     *Hace aparecer los iconos para activar el video
+     *
+     * @memberof VistaGestionarPrendas
+     */
     aparecerIcono() {
         let iconos = document.getElementsByClassName("iconoGestionPrenda")
 
@@ -377,6 +405,12 @@ export class VistaGestionarPrendas {
         iconos[3].style.display = 'block'
     }
 
+    /**
+     *Hace desaparecer los iconos para activar el video
+     *
+     * @static
+     * @memberof VistaGestionarPrendas
+     */
     static desaparecerIcono() {
         let iconos = document.getElementsByClassName("iconoGestionPrenda")
 
@@ -384,6 +418,12 @@ export class VistaGestionarPrendas {
         iconos[3].style.display = 'none'
     }
 
+    /**
+     *Hace aparecer los iconos para activar el video
+     *
+     * @static
+     * @memberof VistaGestionarPrendas
+     */
     static aparecerIcono() {
         let iconos = document.getElementsByClassName("iconoGestionPrenda")
 
@@ -391,10 +431,4 @@ export class VistaGestionarPrendas {
         iconos[3].style.display = 'block'
     }
 
-    /* apagarCamaraCambioPanel(){
-        let vista = localStorage.getItem('vista')
-        if () {
-            
-        }
-    } */
 }
