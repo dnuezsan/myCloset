@@ -400,10 +400,7 @@ export class VistaSubirPrenda {
      */
     static subidaDePrenda() {
         let botonSubirPrenda = document.getElementById('botonSubirPrenda')
-
-        /*botonSubirPrenda.addEventListener= async (evento) => {
-            let repuesta = await Controlador.subidaDePrenda(tallaSubirPrenda, descripcionSubirPrenda, categoria, subCategoria, base64SubirPrenda)
-        }*/
+        let panel = document.getElementById('panelSubirPrenda')
 
         botonSubirPrenda.addEventListener('click', async function () {
             let tallaSubirPrenda = document.getElementById("tallaSubirPrenda").value;
@@ -413,8 +410,13 @@ export class VistaSubirPrenda {
             let subCategoria = document.getElementById("subCategoria").value
             console.log(tallaSubirPrenda, descripcionSubirPrenda, categoria, subCategoria, base64SubirPrenda);
             let datos = await Controlador.subidaDePrenda(tallaSubirPrenda, descripcionSubirPrenda, categoria, subCategoria, base64SubirPrenda)
-            console.log(datos);
-            return datos
+            if (datos.success == true) {
+                VistaSubirPrenda.generarMensaje(datos.mensaje)
+                panel.addEventListener('click', VistaSubirPrenda.ocultarMensaje, true)
+            } else if (datos.success == false) {
+                VistaSubirPrenda.generarMensaje(datos.mensaje)
+                panel.addEventListener('click', VistaSubirPrenda.ocultarMensaje, true)
+            }
         }, true)
     }
 
@@ -467,6 +469,21 @@ export class VistaSubirPrenda {
 
         iconos[2].style.display = 'block'
         iconos[3].style.display = 'block'
+    }
+
+
+    static generarMensaje(mensaje){
+        let cuadroDialogo = document.querySelector('#cuadroDialogoSubirPrenda')
+        let cuadroDialogoMensaje = document.querySelector('#cuadroDialogoSubirPrenda p')
+        cuadroDialogo.style.display = 'block'
+        cuadroDialogoMensaje.innerHTML = mensaje
+    }
+
+    static ocultarMensaje(){
+        let cuadroDialogo = document.querySelector('#cuadroDialogoSubirPrenda')
+        let cuadroDialogoMensaje = document.querySelector('#cuadroDialogoSubirPrenda p')
+        cuadroDialogo.style.display = 'none'
+        cuadroDialogoMensaje.innerHTML = ''
     }
 
 }

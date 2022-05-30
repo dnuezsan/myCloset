@@ -474,6 +474,14 @@ body {
     display: none;
 }
 
+#panelSubirPrenda #cuadroDialogoSubirPrenda{
+    position: fixed;
+    left: 37.5%;
+    display: none;
+    top: 30%;
+    z-index: 1;
+}
+
 /* Estilos gestion prendas */
 
 #panelGestionPrendas{

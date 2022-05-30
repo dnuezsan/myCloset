@@ -37,6 +37,33 @@ export class Prendas {
      */
     static async subidaDePrenda(talla, descripcion, categoria, subcategoria, imagen){
         let subidaDePrenda = 'subidaDePrenda'
+        let error
+        debugger
+        if (talla == '') {
+            error = {
+                success: false,
+                mensaje: 'Por favor introduce la talla'
+            }
+            return error
+        } else if(categoria == '' || categoria == null){
+            error = {
+                success: false,
+                mensaje: 'Por favor selecciona el tipo de prenda'
+            }
+            return error
+        } else if (subcategoria == '' || subcategoria ==null) {
+            error = {
+                success: false,
+                mensaje: 'Por favor selecciona una categoría'
+            }
+            return error
+        } else if (imagen == '') {
+            error = {
+                success: false,
+                mensaje: 'Por favor selecciona una imagen'
+            }
+            return error
+        }
         console.log(talla, descripcion, categoria, subcategoria, imagen);
         let datos = await $.ajax(
             {
