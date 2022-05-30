@@ -56,8 +56,8 @@ export class Usuarios {
 
         let datosUsuario = await $.ajax(
             {
-                url: "https://05.2daw.esvirgua.com/myCloset/src/php/controlador/controladorBackend.php",
-                //url: "/DWEC/myCloset/src/php/controlador/controladorBackend.php",
+                //url: "https://05.2daw.esvirgua.com/myCloset/src/php/controlador/controladorBackend.php",
+                url: "/DWEC/myCloset/src/php/controlador/controladorBackend.php",
                 //url: "https://myclosetss.000webhostapp.com/php/controlador/controladorBackend.php",
                 //url: "/myCloset/src/php/controlador/controladorBackend.php",
                 type: "POST",
@@ -130,7 +130,7 @@ export class Usuarios {
 
         console.log(respuestaRegistro);
         let respuestaJson = JSON.parse(respuestaRegistro)
-        console.log(respuestaJson);
+        //console.log(respuestaJson);
         return respuestaJson
     }
 
@@ -149,7 +149,7 @@ export class Usuarios {
      * @memberof Usuarios
      */
     static async modificacionUsuario(nombre, correo, password, newpassword, rnewpassword) {
-        console.log(nombre, correo, password, newpassword, rnewpassword);
+        //console.log(nombre, correo, password, newpassword, rnewpassword);
         let error
         if (nombre == '') {
             nombre = 'null'
@@ -209,7 +209,7 @@ export class Usuarios {
             })
 
         let respuesta = JSON.parse(datosUsuario)
-        console.log(respuesta);
+        //console.log(respuesta);
         return respuesta
     }
 
@@ -236,9 +236,9 @@ export class Usuarios {
                     correo: sessionStorage.sesion
                 },
             })
-        console.log(datos);
+        //console.log(datos);
         let datosJson = JSON.parse(datos)
-        console.log(datosJson);
+        //console.log(datosJson);
 
         return datosJson
     }

@@ -1,4 +1,5 @@
 <?php
+session_start();
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Headers: Origin, X-Requested-with, Content-Type, Accept');
 header('Access-Control-Allow-Methods:GET, POST, PUT, DELETE');
@@ -39,6 +40,7 @@ switch ($_POST['propiedad']){
         borrarUsuario($correo);
         break;
     case "subidaDePrenda":
+
         $correo= $_POST['correo'];
         $talla =$_POST['talla'];
         $descripcion= $_POST['descripcion'];
@@ -184,6 +186,7 @@ function borrarUsuario($correo){
  * @return json_encode
  */
 function subidaDePrenda($subCategoria, $descripcion, $talla, $correo, $imagen){
+
     $metodo = new Metodos();
     $response = array('success'=> false, 'mensaje'=>"", 'correo'=>"");
 

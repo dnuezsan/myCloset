@@ -86,7 +86,7 @@ class Metodos
                 //Si es correcto la contraseña Inicia la sesion y manda a la pagina home o incio.
                 //echo $contrasena;
                 if (password_verify($password, $fila['clave'])) {
-                    session_start();
+
                     $_SESSION['usuario'] = $fila['correo'];
                     return true;
                 } else {
@@ -240,6 +240,13 @@ class Metodos
 
     function cargarMisPrendas(){
         $consulta = "SELECT idPrenda, idUsuario, descripcion, talla, idSubcategoria FROM `prenda` WHERE 1";
+
+        $resultado = $this->conexion->consultas($consulta);
+        $resultados = array();
+        while ($fila = $this->conexion->extraerFila($resultado)){
+            array_push();
+        }
+
     }
 
     //Aqui cogemos los datos de la Prenda para guardarlos en la base de datos
@@ -266,6 +273,7 @@ class Metodos
             return false;
         }
         //Ejecutamos con execute
+
         if (!$sentencia->execute()) {
             //echo "Algo fallo en la ejecucion";
             return false;
@@ -292,11 +300,12 @@ class Metodos
         $ruta = "../imagenes_prendas/$nombreImagen.png";
 
         $file = fopen($ruta, "w+");
+
         //Actualizamos la fila de nuestro cuaderno con la nueva ruta
         $data = explode(',', $imagen64);
 
         //Crear imagen
-        fwrite($file, base64_decode($data[1]));
+        echo fwrite($file, base64_decode($data[1]));
         fclose($file);
 
 
