@@ -389,6 +389,11 @@ body {
     max-width: 900px;
 }
 
+#panelMisPrendas .itemMisPrendasMovil {
+    border-radius: 20px;
+    max-width: 900px;
+}
+
 /* Estilos Categorias */
 
 #panelCategorias{
@@ -908,6 +913,10 @@ body {
     }
 
     #panelMisPrendas .itemMisPrendas {
+        padding-bottom: 10px;
+    }
+
+    #panelMisPrendas .itemMisPrendasMovil {
         padding-bottom: 10px;
     }
 
