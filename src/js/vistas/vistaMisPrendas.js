@@ -1,6 +1,6 @@
 'use strict'
 
-import { Controlador } from "../controlador/controlador"
+import { Controlador } from "../controlador/controlador.js"
 
 
 export class VistaMisPrendas {
@@ -49,22 +49,33 @@ export class VistaMisPrendas {
 
         window.onload= async ()=>{
             let datos = await Controlador.cargaDePrendas()
+            let categorias = document.getElementsByClassName('listaCategoriasMisPrendas')
+            let contenedor = document.getElementById('contenedorMisPrendas')
 
             for (let i = 0; i < datos.length; i++) {
-                
-                const element = array[i];
-                
+                /* Creación de contenedor de prenda en version móvil y escritorio y adición de clases*/
+                let contenedorItemMisPrendas = document.createElement('div')
+                contenedorItemMisPrendas.classList.add('contenedorItemMisPrendas', 'col s12 m10', 'offset-m1', 'left-align', 'offset-m1')
+                /* adición de categorías a los contenedores de categorías */
+                categorias[0].appendChild(VistaMisPrendas.generarCategoria())
+                categorias[1].appendChild(VistaMisPrendas.generarCategoria())
+                /* adición al contenedor de la prenda, de la prenda en escritorio y móvil */
+                contenedorItemMisPrendas[i].appendChild(VistaMisPrendas.generarPrenda())
+                contenedorItemMisPrendas[i].appendChild(VistaMisPrendas.generarPrendaMovil())
+                /* adición al contenedor principal de las prendas de la caja con sus respectivas prendas */
+                contenedor.appendChild(contenedorItemMisPrendas[i])
+
             }
         }
     }
 
-    static generarContenedorItem(){
+    /* static generarContenedorItem(){
         let contenedorItem = document.createElement('div')
         contenedorItem.classList.add('contenedorItemMisPrendas', 'col s12 m10', 'offset-m1', 'left-align', 'offset-m1')
         
-    }
+    } */
 
-    static generarPrenda(rutaImagen, talla, subcategoria, descripcion, iteracion) {
+    static generarPrenda(rutaImagen, tallaPrenda, subcategoriaPrenda, descripcionPrenda) {
         /* Caja que contiene los elementos de la prenda */
         let cajaPrenda = document.createElement('div')
         cajaPrenda.classList.add('itemMisPrendas', 'col m12', 'valign-wrapper', 'hide-on-small-only')
@@ -107,7 +118,7 @@ export class VistaMisPrendas {
         enunciadoTalla.textContent = 'Talla'
         /* contenido */
         let talla = document.createElement('p')
-        talla.textContent = talla
+        talla.textContent = tallaPrenda
 
         cajaDatos.appendChild(cajaTalla)
         cajaTalla.appendChild(enunciadoTalla)
@@ -121,7 +132,7 @@ export class VistaMisPrendas {
         enunciadoSubcategoria.textContent = 'Categoría'
         /* contenido */
         let subcategoria = document.createElement('p')
-        subcategoria.textContent = subcategoria
+        subcategoria.textContent = subcategoriaPrenda
 
         cajaDatos.appendChild(cajaCategoria)
         cajaCategoria.appendChild(enunciadoSubcategoria)
@@ -136,23 +147,24 @@ export class VistaMisPrendas {
         tituloDescripcion.textContent = 'Descripción'
         /* Párrafo descripción */
         let descripcion = document.createElement('p')
-        descripcion.textContent = descripcion
+        descripcion.textContent = descripcionPrenda
 
         cajaDatos.appendChild(cajaDescripcion)
         cajaDescripcion.appendChild(tituloDescripcion)
         cajaDescripcion.appendChild(descripcion)
 
         /* Appends total*/
-        let contenedor = document.getElementsByClassName('contenedorItemMisPrendas')[iteracion]
+        //let contenedor = document.getElementsByClassName('contenedorItemMisPrendas')[iteracion]
         
         cajaPrenda.appendChild(cajaIconos)
         cajaPrenda.appendChild(imagenDiv)
         cajaPrenda.appendChild(cajaDatos)
 
-        contenedor.appendChild(cajaPrenda)
+        return cajaPrenda
+        //contenedor.appendChild(cajaPrenda)
     }
 
-    static generarPrendaMovil(rutaImagen, talla, subcategoria, descripcion, iteracion){
+    static generarPrendaMovil(rutaImagen, tallaPrenda, subcategoriaPrenda, descripcionPrenda){
         /* Caja que contiene los elementos de la prenda */
         let cajaPrenda = document.createElement('div')
         cajaPrenda.classList.add('itemMisPrendasMovil', 'col s12 m10', 'hide-on-med-and-up')
@@ -200,7 +212,7 @@ export class VistaMisPrendas {
         enunciadoTalla.textContent = 'Talla'
         /* contenido */
         let talla = document.createElement('p')
-        talla.textContent = talla
+        talla.textContent = tallaPrenda
 
         cajaDatos.appendChild(cajaTalla)
         cajaTalla.appendChild(enunciadoTalla)
@@ -215,7 +227,7 @@ export class VistaMisPrendas {
         /* contenido */
         let subcategoria = document.createElement('p')
         subcategoria.classList.add('col s12')
-        subcategoria.textContent = subcategoria
+        subcategoria.textContent = subcategoriaPrenda
 
         cajaDatos.appendChild(cajaCategoria)
         cajaCategoria.appendChild(enunciadoSubcategoria)
@@ -231,27 +243,28 @@ export class VistaMisPrendas {
         /* Párrafo descripción */
         let descripcion = document.createElement('p')
         descripcion.classList.add('col s12')
-        descripcion.textContent = descripcion
+        descripcion.textContent = descripcionPrenda
 
         cajaDatos.appendChild(cajaDescripcion)
         cajaDescripcion.appendChild(tituloDescripcion)
         cajaDescripcion.appendChild(descripcion)
 
         /* Appends total*/
-        let contenedor = document.getElementsByClassName('contenedorItemMisPrendas')[iteracion]
         
         cajaPrenda.appendChild(imagenDiv)
         cajaPrenda.appendChild(separadorIconos)
         cajaPrenda.appendChild(cajaIconos)
         cajaPrenda.appendChild(cajaDatos)
 
-        contenedor.appendChild(cajaPrenda)
+        return cajaPrenda
+
     }
 
     static generarCategoria(nombreCategoria){
         let categoria = document.createElement('p')
         categoria.classList.add('col s12', 'white-text')
         categoria.textContent = nombreCategoria
+        return categoria
     }
 
 }
