@@ -98,7 +98,7 @@ export class VistaPerfilUsuario {
 
         botonModificarUsuario.onclick = async (evento) => {
             let respuesta = await Controlador.modificacionUsuario(nombre, correo, password, newpassword, rnewpassword)
-D
+
             if (respuesta.success == true) {
                 VistaPerfilUsuario.actualizacionCuadroConfirmacion(respuesta.mensaje)
                 panelPerfilUsuario.onclick = (evento) => {
