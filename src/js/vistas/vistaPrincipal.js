@@ -10,6 +10,7 @@ import { VistaCategorias } from "./vistaCategorias.js";
 import { VistaPrendas } from "./vistaPrendas.js"
 import { VistaSubirPrenda } from "./vistaSubirPrenda.js";
 import { VistaGestionarPrendas } from "./vistaGestionarPrendas.js";
+import { VistaOutfits } from "./vistaOutfits.js";
 /**
  *Vista principal de la aplicación
  *Muestra los componentes de la aplicación
@@ -48,20 +49,22 @@ export class VistaPrincipal {
         this.panelPrendas = document.getElementById('panelPrendas')
         this.panelSubirPrendas = document.getElementById('panelSubirPrenda')
         this.panelGestionarPrendas = document.getElementById('panelGestionarPrendas')
+        this.panelOutfits = document.getElementById('panelOutfit')
 
         this.login = new VistaLogin(this.controlador, this.panelLogin)
         this.registro = new VistaRegistroUsuario(this.controlador, this.panelRegistro)
-        this.panelMenu = new VistaMenuPrincipal(this.controlador, this.panelMenu)
+        this.menu = new VistaMenuPrincipal(this.controlador, this.panelMenu)
         this.amario = new VistaArmario(this.controlador, this.panelArmario)
         this.misPrendas = new VistaMisPrendas(this.controlador, this.panelMisPrendas)
         this.perfilUsuario = new VistaPerfilUsuario(this.controlador, this.panelPerfilUsuario)
-        this.panelCategorias = new VistaCategorias(this.controlador, this.panelCategorias)
-        this.panelPrendas = new VistaPrendas(this.controlador, this.base)
-        this.panelSubirPrendas = new VistaSubirPrenda(this.controlador, this.panelSubirPrendas)
+        this.categorias = new VistaCategorias(this.controlador, this.panelCategorias)
+        this.prendas = new VistaPrendas(this.controlador, this.base)
+        this.subirPrendas = new VistaSubirPrenda(this.controlador, this.panelSubirPrendas)
+        this.outfits = new VistaOutfits(this.controlador, this.panelOutfits)
 
         this.panelGestionarPrendas = new VistaGestionarPrendas(this.controlador, this.panelGestionarPrendas)
         /* Fragmento de código paracontrolar vistas al actualizar */
-        if (sessionStorage.getItem('sesion')==null) {
+        if (sessionStorage.getItem('sesion') == null) {
             VistaLogin.mostrarLogin()
         }
 
@@ -201,6 +204,16 @@ export class VistaPrincipal {
                 /* VistaMenuPrincipal.mostrarMenu()
                 VistaPerfilUsuario.mostrarPerfilUsuario() */
                 break;
+            case 'vistaOutfits':
+                localStorage.setItem('ocultar', VistaMenuPrincipal.ocultarPaneles())
+                localStorage.getItem('ocultar')
+                localStorage.setItem('ocultar', 'false')
+                localStorage.setItem('menu', VistaMenuPrincipal.mostrarMenu())
+                localStorage.getItem('menu')
+                localStorage.setItem('menu', 'false')
+                localStorage.setItem('vista', VistaOutfits.mostrarOutfits())
+                localStorage.getItem('vista')
+                localStorage.setItem('vista', 'vistaOutfits')
         }
     }
 

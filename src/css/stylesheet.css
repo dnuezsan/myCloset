@@ -564,6 +564,57 @@ body {
     font-family: "Roboto";
 }
 
+/* Estilos outfits */
+
+#panelOutfit .panelLateralOutfit{
+    padding: 40px 0px;
+}
+
+#panelOutfit .panelLateralOutfit div a{
+    width: 70%;
+}
+
+#panelOutfit .inputOutfit{
+    margin-left: 15%;
+}
+
+#panelOutfit .inputOutfit div{
+    margin-top: 5px;
+}
+
+#panelOutfit .inputOutfit label{
+    font-size: 20px;
+}
+
+#panelOutfit #cajaMonigote{
+    text-align: center;
+    width: unset;
+    position: relative;
+}
+
+#panelOutfit #cajaMonigote img{
+    margin-left: 31.333333%;
+    width: 222px;
+    margin-top: 95px;
+}
+
+#panelOutfit #cajaPiernasOutfit{
+    margin-top: 100px;
+}
+
+#panelOutfit #cajaPiesOutfit{
+    margin-top: 100px;
+}
+
+#panelOutfit #contenedorCentralOutfit{
+    position: relative;
+    bottom: 95px;
+}
+
+#panelOutfit #piesOutfit{
+    margin-top: 40px !important;
+}
+
 /* Media querys */
 
 /* Medias querys generales */
@@ -1232,5 +1283,59 @@ body {
         width: 200px;
         height: 200px;
         margin: auto;
+    }
+}
+
+/* Medias querys para outfits */
+
+@media (min-width: 1200px){
+    #panelOutfit #cajaMonigote{
+        background-position: 18%;
+    }
+}
+
+@media (min-width: 781px) and (max-width: 999px){
+    #panelOutfit #cajaMonigote{
+        left: 0%;
+        background-position: 36%;
+    }
+}
+
+@media (min-width: 600px) and (max-width: 780px){
+    #panelOutfit #cajaMonigote{
+        width: 574px;
+        left: -51%;
+    }
+
+    #panelOutfit #cajaMonigote img{
+        margin-left: 47.3%;
+    }
+
+}
+
+@media (min-width: 600px) and (max-width: 660px){
+    #panelOutfit #cajaMonigote{
+        width: 574px;
+        left: -73%;
+    }
+
+}
+
+@media (max-width: 600px){
+    #panelOutfit #cajaMonigote{
+        width: unset;
+        background-position: 47%;
+        left: 0;
+    }
+
+    #panelOutfit #cajaMonigote img{
+        margin-left: 0px;
+        float: none;
+    }
+
+    #panelOutfit .menuOutfits{
+        left: 10%;
+        position: relative;
+        bottom: 59px;
     }
 }
