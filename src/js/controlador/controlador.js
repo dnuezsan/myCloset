@@ -104,4 +104,9 @@ export class Controlador {
 
     }
 
+    static async cargaDePrendas(){
+        let datos = await Prendas.cargaPrendas()
+        return datos
+    }
+
 }

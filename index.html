@@ -105,7 +105,7 @@
             </div>
         </div>
     </div>
-<!-- Munu Principal -->
+    <!-- Munu Principal -->
     <div id='divMenuPrincipal'>
         <nav class="nav-wrapper">
             <div class="container">
@@ -118,7 +118,7 @@
 
                 <ul class=" hide-on-med-and-down right">
                     <li class="miArmario"><a href="#">Mi armario</a></li>
-                    <li><a href="#">Outfits</a></li>
+                    <li class="outfits"><a href="#">Outfits</a></li>
                     <li class="perfilUsuario"><a href="#">Ajustes de cuenta</a></li>
                     <li class="cerrarSesion"><a href="#">Cerrar sesión</a></li>
                 </ul>
@@ -126,14 +126,14 @@
                 <!-- Menu movil -->
                 <ul class="sidenav" id="menu">
                     <li class="miArmario"><a href="#">Mi armario</a></li>
-                    <li><a href="#">Outfits</a></li>
+                    <li class="outfits"><a href="#">Outfits</a></li>
                     <li><a href="#" class="perfilUsuario">Ajustes de cuenta</a></li>
                     <li class="cerrarSesion"><a href="#">Cerrar sesión</a></li>
                 </ul>
             </div>
         </nav>
     </div>
-<!-- Perfil Usuario -->
+    <!-- Perfil Usuario -->
     <div id="panelPerfilUsuario">
         <div class="row center container">
             <h3>ACTUALIZA TUS DATOS</h3>
@@ -205,7 +205,7 @@
             </div>
         </div>
     </div>
-<!-- Panel Armario -->
+    <!-- Panel Armario -->
     <div id="panelArmario">
         <div class="row center container">
             <h3> Mi armario</h3>
@@ -273,10 +273,10 @@
                 <p class="col s12 white-text"><span>Categoria</span></p>
                 <p class="col s12 white-text"><span>Categoria</span></p>
             </div>
-            <div class="col s12 m12 l10">
+            <div id="contenedorMisPrendas" class="col s12 m12 l10">
                 <h3 class="tituloMisPrendas">Colección de prendas</h3>
                 <!-- Item1 -->
-                <div class="col s12 m10 offset-m1 left-align offset-m1">
+                <div class="contenedorItemMisPrendas col s12 m10 offset-m1 left-align offset-m1">
                     <h4>Nombre de prenda</h4>
                     <!-- Item general1 -->
                     <div class="itemMisPrendas col m12 valign-wrapper hide-on-small-only">
@@ -334,7 +334,7 @@
                 </div>
                 <!-- Fin item 1 -->
                 <!-- Items2 -->
-                <div class="col s12 m10 left-align offset-m1">
+                <div class="contenedorItemMisPrendas col s12 m10 left-align offset-m1">
                     <h4>Nombre de prenda</h4>
                     <!-- Item general -->
                     <div class="itemMisPrendas col m12 valign-wrapper hide-on-small-only">
@@ -481,7 +481,7 @@
 
         </div>
     </div>
-<!-- Panel prendas -->
+    <!-- Panel prendas -->
     <div id="panelPrendas">
         <div class="row center container">
             <h3>Prendas</h3>
@@ -512,7 +512,7 @@
             </div>
         </div>
     </div>
-<!-- Panel Subir Prendas-->
+    <!-- Panel Subir Prendas-->
     <div id="panelSubirPrenda">
         <div class="row container center">
             <h3>Sube tu prenda</h3>
@@ -628,7 +628,8 @@
                     </div>
                 </div>
                 <div class="row">
-                    <button id="botonSubirPrenda" class="btn-small waves-effect waves-light valign-wrapper" name="submit">
+                    <button id="botonSubirPrenda" class="btn-small waves-effect waves-light valign-wrapper"
+                        name="submit">
                         Subir
                         <i class="material-icons right">send</i>
                     </button>
@@ -781,8 +782,169 @@
         </div>
     </div>
 
-    <div id='divGestionOutfit'>
-        <!-- ... -->
+    <div id='panelOutfit'>
+        <div class="row">
+            <h3 class="center">Outfits</h3>
+            <!-- menu lateral -->
+            <div class="menuOutfits col s8 offset-l2 hide-on-med-and-up valign-wrapper">
+                <a class="btn-floating btn-medium waves-effect waves-light red sidenav-trigger"
+                    data-target="desplegableOutfit"><i class="material-icons">add</i></a>
+            </div>
+            <div class="panelLateralOutfit col m4 l3 card hide-on-small-only">
+                <div class="inputOutfit input-field col s12 m8 l8">
+                    <select>
+                        <option value="" disabled selected></option>
+                        <option value="1">Option 1</option>
+                        <option value="2">Option 2</option>
+                        <option value="3">Option 3</option>
+                    </select>
+                    <label>Colección de outfits</label>
+                </div>
+                <div class="inputOutfit input-field col s12 m8 l8">
+                    <input placeholder="" id="nombreOutfit" type="text">
+                    <label for="nombreOutfit">Nombre Outfit</label>
+                </div>
+                <div class="inputOutfit input-field col s12 m8 l8">
+                    <select id="prendaCabeza">
+                        <option value="" disabled selected></option>
+                        <option value="1">Option 1</option>
+                        <option value="2">Option 2</option>
+                        <option value="3">Option 3</option>
+                    </select>
+                    <label>Cabeza</label>
+                </div>
+                <div class="inputOutfit input-field col s12 m8 l8">
+                    <select id="prendaTorso">
+                        <option value="" disabled selected></option>
+                        <option value="1">Option 1</option>
+                        <option value="2">Option 2</option>
+                        <option value="3">Option 3</option>
+                    </select>
+                    <label>Torso</label>
+                </div>
+                <div class="inputOutfit input-field col s12 m8 l8">
+                    <select id="prendaPiernas">
+                        <option value="" disabled selected></option>
+                        <option value="1">Option 1</option>
+                        <option value="2">Option 2</option>
+                        <option value="3">Option 3</option>
+                    </select>
+                    <label>Piernas</label>
+                </div>
+                <div class="inputOutfit input-field col s12 m8 l8">
+                    <select id="prendaPies">
+                        <option value="" disabled selected></option>
+                        <option value="1">Option 1</option>
+                        <option value="2">Option 2</option>
+                        <option value="3">Option 3</option>
+                    </select>
+                    <label>Pies</label>
+                </div>
+                <div class="col s12">
+                    <div class="row center"><a class="waves-effect waves-light btn-small">Nuevo Outfit</a></div>
+                    <div class="row center"><a class="waves-effect waves-light btn-small">Borrar Outfit</a></div>
+                </div>
+            </div>
+            <!-- SIDENAV -->
+            <div id="desplegableOutfit" class="panelLateralOutfit col s7 sidenav">
+                <h4 class="center-align">Menu</h4>
+                <div class="inputOutfit input-field col s8">
+                    <select>
+                        <option value="" disabled selected></option>
+                        <option value="1">Option 1</option>
+                        <option value="2">Option 2</option>
+                        <option value="3">Option 3</option>
+                    </select>
+                    <label>Colección de outfits</label>
+                </div>
+                <div class="inputOutfit input-field col s8">
+                    <input placeholder="" id="nombreOutfit" type="text">
+                    <label for="nombreOutfit">Nombre Outfit</label>
+                </div>
+                <div class="inputOutfit input-field col s8">
+                    <select id="prendaCabeza">
+                        <option value="" disabled selected></option>
+                        <option value="1">Option 1</option>
+                        <option value="2">Option 2</option>
+                        <option value="3">Option 3</option>
+                    </select>
+                    <label>Cabeza</label>
+                </div>
+                <div class="inputOutfit input-field col s8">
+                    <select id="prendaTorso">
+                        <option value="" disabled selected></option>
+                        <option value="1">Option 1</option>
+                        <option value="2">Option 2</option>
+                        <option value="3">Option 3</option>
+                    </select>
+                    <label>Torso</label>
+                </div>
+                <div class="inputOutfit input-field col s8">
+                    <select id="prendaPiernas">
+                        <option value="" disabled selected></option>
+                        <option value="1">Option 1</option>
+                        <option value="2">Option 2</option>
+                        <option value="3">Option 3</option>
+                    </select>
+                    <label>Piernas</label>
+                </div>
+                <div class="inputOutfit input-field col s8">
+                    <select id="prendaPies">
+                        <option value="" disabled selected></option>
+                        <option value="1">Option 1</option>
+                        <option value="2">Option 2</option>
+                        <option value="3">Option 3</option>
+                    </select>
+                    <label>Pies</label>
+                </div>
+                <div class="col s12">
+                    <div class="row center"><a class="waves-effect waves-light btn-small">Nuevo Outfit</a></div>
+                    <div class="row center"><a class="waves-effect waves-light btn-small">Borrar Outfit</a></div>
+                </div>
+            </div>
+            <!-- <div class="col l9">
+                <div class="col l2 offset-l1">
+                    <div>
+                        <h4>Cabeza</h4>
+                        <img id="cabezaOutfit" class="responsive-img"
+                            src="./src/img/mi-armario-mis prendas/prendas-prueba.jpg" alt="" srcset="">
+                    </div>
+                    <div id="cajaPiernasOutfit">
+                        <h4>Piernas</h4>
+                        <img id="piernasOutfit" class="responsive-img"
+                            src="./src/img/mi-armario-mis prendas/prendas-prueba.jpg" alt="" srcset="">
+                    </div>
+                </div>
+                <div id="cajaMonigote" class="col l6">
+                    <img class="responsive-img" src="src/img/monigote.png" alt="" srcset="">
+                </div>
+                <div class="col l2">
+                    <div>
+                        <h4>Torso</h4>
+                        <img id="torsoOutfit" class="responsive-img"
+                            src="./src/img/mi-armario-mis prendas/prendas-prueba.jpg" alt="" srcset="">
+                    </div>
+                    <div id="cajaPiesOutfit">
+                        <h4>Pies</h4>
+                        <img id="piesOutfit" class="responsive-img"
+                            src="./src/img/mi-armario-mis prendas/prendas-prueba.jpg" alt="" srcset="">
+                    </div>
+                </div> -->
+            <div id="contenedorCentralOutfit" class="col s12 m6 l9">
+                <div id="cajaMonigote" class="col s12 l12" style="background-image: url(src/img/monigote.png);">
+                    <div class="col s12 l12">
+                        <img id="cabezaOutfit" class="responsive-img col l4 offset-l4"
+                            src="./src/img/mi-armario-mis prendas/prendas-prueba.jpg" alt="" srcset="">
+                        <img id="torsoOutfit" class="responsive-img col l4 offset-l4"
+                            src="./src/img/mi-armario-mis prendas/prendas-prueba.jpg" alt="" srcset="">
+                        <img id="piernasOutfit" class="responsive-img col l4 offset-l4"
+                            src="./src/img/mi-armario-mis prendas/prendas-prueba.jpg" alt="" srcset="">
+                        <img id="piesOutfit" class="responsive-img col l4 offset-l4"
+                            src="./src/img/mi-armario-mis prendas/prendas-prueba.jpg" alt="" srcset="">
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <div id='gestionOutfit'>

@@ -10,6 +10,7 @@ import { VistaCategorias } from "./vistaCategorias.js"
 import { VistaPrendas } from "./vistaPrendas.js"
 import { VistaSubirPrenda } from "./vistaSubirPrenda.js"
 import { VistaGestionarPrendas } from "./vistaGestionarPrendas.js"
+import { VistaOutfits } from "./vistaOutfits.js"
 
 export class VistaMenuPrincipal {
 
@@ -37,6 +38,7 @@ export class VistaMenuPrincipal {
         VistaMenuPrincipal.cerrarSesion()
         VistaMenuPrincipal.mostrarArmario()
         VistaMenuPrincipal.mostrarPerfilUsuario()
+        VistaMenuPrincipal.mostrarOutfits()
     }
 
 
@@ -56,6 +58,7 @@ export class VistaMenuPrincipal {
         VistaGestionarPrendas.ocultarGestionarPrendas()
         VistaLogin.esconderLogin()
         VistaRegistroUsuario.esconderRegistro()
+        VistaOutfits.ocultarOutfits()
     }
 
     /**
@@ -144,6 +147,18 @@ export class VistaMenuPrincipal {
             boton[i].onclick = (evento) => {
                 VistaMenuPrincipal.ocultarPaneles()
                 VistaArmario.mostrarArmario()
+            }
+        }
+
+    }
+
+    static mostrarOutfits() {
+        let boton = document.querySelectorAll('.outfits')
+
+        for (let i = 0; i < boton.length; i++) {
+            boton[i].onclick = (evento) => {
+                VistaMenuPrincipal.ocultarPaneles()
+                VistaOutfits.mostrarOutfits()
             }
         }
 
