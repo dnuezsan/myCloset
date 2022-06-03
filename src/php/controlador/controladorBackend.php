@@ -25,29 +25,37 @@ switch ($_POST['propiedad']){
         break;
     case "modificarUsuario":
         $nombre = $_POST['nombre'];
-        $correo = $_POST['correo'];
+        $correo = $_SESSION['usuario'];
         $password= $_POST['password'];
         $newpassword = $_POST['newpassword'];
         $rnewpassword = $_POST['rnewpassword'];
         modificarUsuario($nombre, $correo, $password,$newpassword,$rnewpassword);
         break;
     case "cargarDatosUsuario" :
-        $correo = $_POST['correo'];
+        $correo = $_SESSION['usuario'];
         cargaDatosUsuario($correo);
         break;
     case "borrarUsuario":
-        $correo = $_POST['correo'];
+        $correo = $_SESSION['usuario'];
         borrarUsuario($correo);
         break;
     case "subidaDePrenda":
 
-        $correo= $_POST['correo'];
+        $correo= $_SESSION['usuario'];
         $talla =$_POST['talla'];
         $descripcion= $_POST['descripcion'];
         $categoria= $_POST['categoria'];
         $subcategoria= $_POST['subcategoria'];
         $imagen =$_POST['imagen'];
+
         subidaDePrenda($subcategoria, $descripcion, $talla, $correo, $imagen);
+        break;
+    case "cargarCategoria":
+        cargaDatosUsuario();
+        break;
+    case "cargarSubCategoria":
+        $categoria="";
+        cargarSubCategoria($categoria, $_SESSION['usuario']);
         break;
 }
 
@@ -194,6 +202,7 @@ function subidaDePrenda($subCategoria, $descripcion, $talla, $correo, $imagen){
         $response['success']=true;
         $response['mensaje']='Se ha guardado su prenda correctamente';
         $response['correo']='';
+        echo $imagen;
 
     }else{
         $response['success']=false;
@@ -201,4 +210,20 @@ function subidaDePrenda($subCategoria, $descripcion, $talla, $correo, $imagen){
         $response['correo']='';
     }
     echo json_encode($response);
+}
+
+
+function cargarCategoria(){
+    $metodo = new Metodos();
+    $response = array('success'=> false, 'mensaje'=>"", 'correo'=>"");
+
+    echo json_encode($metodo->cargarCategorias());
+}
+
+function cargarSubCategoria($categoria, $usuario){
+    $metodo = new Metodos();
+    $response = array('success'=> false, 'mensaje'=>"", 'correo'=>"");
+    //$metodo->cargarSubcategorias($categoria, $usuario);
+
+    echo json_encode($metodo->cargarSubcategorias($categoria, $usuario));
 }

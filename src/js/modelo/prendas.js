@@ -38,7 +38,7 @@ export class Prendas {
     static async subidaDePrenda(talla, descripcion, categoria, subcategoria, imagen){
         let subidaDePrenda = 'subidaDePrenda'
         let error
-        debugger
+
         if (talla == '') {
             error = {
                 success: false,
@@ -67,8 +67,8 @@ export class Prendas {
         console.log(talla, descripcion, categoria, subcategoria, imagen);
         let datos = await $.ajax(
             {
-                url:  "https://05.2daw.esvirgua.com/myCloset/src/php/controlador/controladorBackend.php",
-                //url: "/DWEC/myCloset/src/php/controlador/controladorBackend.php",
+                //url:  "https://05.2daw.esvirgua.com/myCloset/src/php/controlador/controladorBackend.php",
+                url: "/DWEC/myCloset/src/php/controlador/controladorBackend.php",
                 //url: "https://myclosetss.000webhostapp.com/php/controlador/controladorBackend.php",
                 //url: "/myCloset/src/php/controlador/controladorBackend.php",
                 type: "POST",
@@ -88,4 +88,59 @@ export class Prendas {
             //console.log(datosJson);
         return datosJson
     }
+
+
+    static async cargarCategoria(){
+
+        let cargarCategoria = 'cargarCategoria'
+        let datos = await $.ajax(
+            {
+                //url:  "https://05.2daw.esvirgua.com/myCloset/src/php/controlador/controladorBackend.php",
+                url: "/DWEC/myCloset/src/php/controlador/controladorBackend.php",
+                //url: "https://myclosetss.000webhostapp.com/php/controlador/controladorBackend.php",
+                //url: "/myCloset/src/php/controlador/controladorBackend.php",
+                type: "POST",
+                data:
+                    {
+                        propiedad: cargarCategoria,
+                        correo:  sessionStorage.sesion,
+
+                    },
+            })
+        //console.log(datos);
+        let datosJson = JSON.parse(datos)
+        //console.log(datosJson);
+        return datosJson
+    }
+
+
+
+    static async cargarSubCategoria(categoria,usuario){
+        let cargarSubCategoria = 'cargarSubCategoria'
+        let datos = await $.ajax(
+            {
+                //url:  "https://05.2daw.esvirgua.com/myCloset/src/php/controlador/controladorBackend.php",
+                url: "/DWEC/myCloset/src/php/controlador/controladorBackend.php",
+                //url: "https://myclosetss.000webhostapp.com/php/controlador/controladorBackend.php",
+                //url: "/myCloset/src/php/controlador/controladorBackend.php",
+                type: "POST",
+                data:
+                    {
+                        propiedad: cargarSubCategoria,
+                        correo:  sessionStorage.sesion,
+                        categoria: categoria,
+
+                    },
+            })
+        //console.log(datos);
+        let datosJson = JSON.parse(datos)
+        //console.log(datosJson);
+        return datosJson
+    }
+
+
+
+
+
+
 }

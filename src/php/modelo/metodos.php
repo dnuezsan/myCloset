@@ -235,7 +235,41 @@ class Metodos
         }
     }
 
+    function cargarCategorias(){
+        $consulta = "SELECT idCategoria, nombreCategoria FROM `categoria` WHERE 1";
+        $resultado = $this->conexion->consultas($consulta);
 
+        while ($fila =  $this->conexion->extraerFila($resultado)){
+            //$fila['idCategoria'];
+            //$fila['nombreCategoria'];
+            $arrayAsociativo = array(
+                $fila['idCategoria'] =>$fila['nombreCategoria']
+            );
+        }
+        return $arrayAsociativo;
+    }
+    function cargarSubcategorias($categoria,$usuario){
+        $consultaUsurio = "SELECT idUsuario FROM usuario WHERE correo = '$usuario'";
+        $resultadoUsuario = $this->conexion->consultas($consultaUsurio);
+        $idUsuario = $this->conexion->extraerFila($resultadoUsuario);
+
+
+        $consulta = "SELECT subcategoria.idSubcategoria, subcategoria.nombreSubcategoria FROM `subcategoria` 
+        LEFT JOIN relusuariosubcategoria ON subcategoria.idSubcategoria = relusuariosubcategoria.idSubcategoria 
+        LEFT JOIN usuario ON relusuariosubcategoria.idUsuario = usuario.idUsuario 
+        WHERE subcategoria.idCategoria = $categoria AND relusuariosubcategoria.idUsuario = $idUsuario";
+
+        $resultado = $this->conexion->consultas($consulta);
+
+        while ($fila = $this->conexion->extraerFila($consulta)){
+            $arraySubcategorias = array(
+                $fila['idSubcategoria'] => $fila['nombreSubcategoira']
+            );
+        }
+
+        return $arraySubcategorias;
+
+    }
 
 
     function cargarMisPrendas(){
