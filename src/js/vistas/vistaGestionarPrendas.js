@@ -1,5 +1,7 @@
 'use strict'
 
+import { Controlador } from "../controlador/controlador.js"
+
 export class VistaGestionarPrendas {
 
     constructor(controlador, base) {
@@ -11,6 +13,7 @@ export class VistaGestionarPrendas {
     iniciar() {
         this.cargarFoto()
         this.activarVideo()
+        VistaGestionarPrendas.cargarCategoriasYSubcategorias()
     }
 
     /**
@@ -451,4 +454,46 @@ export class VistaGestionarPrendas {
 
     }
 
+    static async cargarCategoriasYSubcategorias(){
+        let selectCategorias = document.getElementById('categoriasGestionPrendas')
+        let selectSubcategorias = document.getElementById('subCategoriaGestionPrendas')
+
+        let categorias = await Controlador.cargarCategoriasPrendas()
+        //let subcategorias = await Controlador.cargarSubcategoriasPrendas()
+
+        for (let i = 0; i < categorias.length; i++) {
+            VistaGestionarPrendas.cargaCategorias(categorias[i], i, selectCategorias)
+        }
+        
+        /* for (let i = 0; i < subcategorias.length; i++) {
+            VistaGestionarPrendas.cargaSubCategorias(subcategorias[i], i, selectSubcategorias)
+            
+        } */
+
+        $('#categoriasGestionPrendas').formSelect()
+        $('#subCategoriaGestionPrendas').formSelect()
+    }
+
+
+
+    static cargaCategorias( datos, iterador, nodoPadre){
+        let categoria = document.createElement('option')
+        let valor = iterador + 1
+
+        categoria.value = valor
+        categoria.textContent = datos[valor]
+
+        nodoPadre.appendChild(categoria)
+    }
+
+    static cargaSubCategorias( datos, iterador, nodoPadre){
+
+        let subCategoria = document.createElement('option')
+        let valor = iterador + 1
+        subCategoria.value =valor
+        subCategoria.textContent = datos[valor]
+
+        subCategoria.textContent = datos.nombreSubcategoria
+        nodoPadre.appendChild(subCategoria)
+    }
 }

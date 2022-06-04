@@ -47,31 +47,34 @@ export class VistaMisPrendas {
 
     static cargarPrendas() {
 
-        //window.onload= async ()=>{
         //let datos = await Controlador.cargaDePrendas()
         let categorias = document.getElementsByClassName('listaCategoriasMisPrendas')
+
         let contenedor = document.getElementById('contenedorMisPrendas')
+
         for (let i = 0; i < 5/*datos.length*/; i++) {
-            console.log('hola');
             /* Creación de contenedor de prenda en version móvil y escritorio y adición de clases*/
             let contenedorItemMisPrendas = document.createElement('div')
-            contenedorItemMisPrendas ==null
-            //contenedorItemMisPrendas.classList.add('contenedorItemMisPrendas', 'col s12 m10', 'offset-m1', 'left-align', 'offset-m1')
-            /* adición de categorías a los contenedores de categorías */
+            contenedorItemMisPrendas.classList.add('contenedorItemMisPrendas', 'col', 's12', 'm10', 'offset-m1', 'left-align', 'offset-m1')
+            
+            let contenedores = document.getElementsByClassName("contenedorItemMisPrendas")
+
             //CATEGORIAS
             VistaMisPrendas.generarCategoria('zapato', categorias[0])
             VistaMisPrendas.generarCategoria('zapato', categorias[1])
             //FIN CATEGORIAS
             //INICIO DE ITEMS
-            
+            /* VistaMisPrendas.generarPrenda( 'src/img/mi-armario-mis prendas/prendas-prueba.jpg', 'M', 'bgfb', 'vgngfn', contenedorItemMisPrendas)
+            VistaMisPrendas.generarPrendaMovil('src/img/mi-armario-mis prendas/prendas-prueba.jpg', 'M', 'bgfb', 'vgngfn', contenedorItemMisPrendas) */
             //FIN DE ITEMS
             /* adición al contenedor de la prenda, de la prenda en escritorio y móvil */
             //contenedorItemMisPrendas[i].appendChild(VistaMisPrendas.generarPrenda())
             //contenedorItemMisPrendas[i].appendChild(VistaMisPrendas.generarPrendaMovil())
             /* adición al contenedor principal de las prendas de la caja con sus respectivas prendas */
-            //contenedor.appendChild(contenedorItemMisPrendas[i])
-            //  }
+            //contenedor.appendChild(contenedores[i])
         }
+
+        
     }
 
     /* static generarContenedorItem(){
@@ -164,6 +167,8 @@ export class VistaMisPrendas {
         cajaPrenda.appendChild(cajaIconos)
         cajaPrenda.appendChild(imagenDiv)
         cajaPrenda.appendChild(cajaDatos)
+
+        nodoPadre.appendChild(cajaPrenda)
 
         //return cajaPrenda
         //contenedor.appendChild(cajaPrenda)
@@ -261,13 +266,14 @@ export class VistaMisPrendas {
         cajaPrenda.appendChild(cajaIconos)
         cajaPrenda.appendChild(cajaDatos)
 
+        nodoPadre.appendChild(cajaPrenda)
+        
         //return cajaPrenda
 
     }
 
     static generarCategoria(nombreCategoria, nodoPadre) {
         let categoria = document.createElement('p')
-        console.log(nodoPadre);
         nodoPadre.appendChild(categoria)
         categoria.classList.add('col', 's12', 'white-text')
         categoria.textContent = nombreCategoria

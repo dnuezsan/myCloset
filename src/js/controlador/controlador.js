@@ -109,4 +109,14 @@ export class Controlador {
         return datos
     }
 
+    static async cargarCategoriasPrendas(){
+        let datos = await Prendas.cargarCategoria()
+        return datos
+    }
+
+    static async cargarSubcategoriasPrendas(categoria){
+        let datos = await Prendas.cargarSubCategoria(categoria)
+        return datos
+    }
+
 }

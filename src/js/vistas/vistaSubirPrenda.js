@@ -20,6 +20,7 @@ export class VistaSubirPrenda {
         this.cargarFoto()
         this.activarVideo()
         VistaSubirPrenda.subidaDePrenda();
+        VistaSubirPrenda.cargarCategoriasYSubcategorias()
         /*let botonSubirPrenda = document.querySelector('#botonSubirPrenda  .section button')
         botonSubirPrenda.addEventListener('click', VistaSubirPrenda.subidaDePrenda)*/
     }
@@ -474,28 +475,28 @@ export class VistaSubirPrenda {
     }
 
 
-    static generarMensaje(mensaje){
+    static generarMensaje(mensaje) {
         let cuadroDialogo = document.querySelector('#cuadroDialogoSubirPrenda')
         let cuadroDialogoMensaje = document.querySelector('#cuadroDialogoSubirPrenda p')
         cuadroDialogo.style.display = 'block'
         cuadroDialogoMensaje.innerHTML = mensaje
     }
 
-    static ocultarMensaje(){
+    static ocultarMensaje() {
         let cuadroDialogo = document.querySelector('#cuadroDialogoSubirPrenda')
         let cuadroDialogoMensaje = document.querySelector('#cuadroDialogoSubirPrenda p')
         cuadroDialogo.style.display = 'none'
         cuadroDialogoMensaje.innerHTML = ''
     }
 
-    static limpiarFormulario(){
+    static limpiarFormulario() {
         let inputs = document.querySelectorAll('#panelSubirPrenda input')
         let selectores = document.querySelectorAll('#panelSubirPrenda select')
         let img = document.getElementById('crop-image')
 
         img.src = "src/img/mi-armario-subir-prenda/subir-prenda-prueba.jpg"
 
-        inputs.forEach(input=>{
+        inputs.forEach(input => {
             input.value = ''
         })
 
@@ -503,6 +504,72 @@ export class VistaSubirPrenda {
             selector.value = ''
         });
 
+    }
+
+    static async cargarCategoriasYSubcategorias() {
+        let selectCategorias = document.getElementById('categoriaSubirPrendas')
+        let selectSubcategorias = document.getElementById('subCategoriaSubirPrendas')
+
+        let categorias = await Controlador.cargarCategoriasPrendas()
+
+        //let subcategorias = await Controlador.cargarSubcategoriasPrendas()
+
+        for (let i = 0; i < categorias.length; i++) {
+            VistaSubirPrenda.cargaCategorias(categorias[i], i, selectCategorias)
+        }
+
+        /* $('#categoriaSubirPrendas').on('change', async function(){
+
+            let subcategorias = await Controlador.cargarSubcategoriasPrendas(4)
+
+            for (let i = 0; i < array.length; i++) {
+                VistaSubirPrenda.cargaSubCategorias(subcategorias[i], i, selectSubcategorias)
+            }
+
+            $('#subCategoriaSubirPrendas').formSelect()
+        }) */
+
+        selectCategorias.addEventListener('change', async () => {
+
+            let subcategorias = await Controlador.cargarSubcategoriasPrendas(selectCategorias.value)
+            for (let i = 0; i < array.length; i++) {
+                VistaSubirPrenda.cargaSubCategorias(subcategorias[i], i, selectSubcategorias)
+            }
+
+            $('#subCategoriaSubirPrendas').formSelect()
+
+        }, true)
+
+        /* for (let i = 0; i < subcategorias.length; i++) {
+            VistaSubirPrenda.cargaSubCategorias(subcategorias[i], i, selectSubcategorias)
+            
+        } */
+
+        $('#categoriaSubirPrendas').formSelect()
+
+    }
+
+
+
+    static cargaCategorias(datos, iterador, nodoPadre) {
+        let categoria = document.createElement('option')
+        let valor = iterador + 1
+
+        categoria.value = valor
+        categoria.textContent = datos[valor]
+
+        nodoPadre.appendChild(categoria)
+    }
+
+    static cargaSubCategorias(datos, iterador, nodoPadre) {
+
+        let subCategoria = document.createElement('option')
+        let valor = iterador + 1
+        subCategoria.value = valor
+        subCategoria.textContent = datos[valor]
+
+        subCategoria.textContent = datos.nombreSubcategoria
+        nodoPadre.appendChild(subCategoria)
     }
 
 }

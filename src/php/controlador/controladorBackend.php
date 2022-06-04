@@ -8,8 +8,6 @@ header('Access-Control-Allow-Methods:GET, POST, PUT, DELETE');
 require_once "../modelo/metodos.php";
 
 
-
-
 switch ($_POST['propiedad']){
     case "inicioSesion":
         $usuario = $_POST['user'];
@@ -51,11 +49,12 @@ switch ($_POST['propiedad']){
         subidaDePrenda($subcategoria, $descripcion, $talla, $correo, $imagen);
         break;
     case "cargarCategoria":
-        cargaDatosUsuario();
+        cargarCategoria();
         break;
     case "cargarSubCategoria":
         $categoria="";
-        cargarSubCategoria($categoria, $_SESSION['usuario']);
+        $usuario = $_POST['correo'];
+        cargarSubCategoria($categoria, $usuario);
         break;
 }
 

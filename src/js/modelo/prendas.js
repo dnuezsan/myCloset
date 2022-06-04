@@ -107,15 +107,14 @@ export class Prendas {
 
                     },
             })
-        //console.log(datos);
         let datosJson = JSON.parse(datos)
-        //console.log(datosJson);
+        console.log(datosJson);
         return datosJson
     }
 
 
 
-    static async cargarSubCategoria(categoria,usuario){
+    static async cargarSubCategoria(categoria){
         let cargarSubCategoria = 'cargarSubCategoria'
         let datos = await $.ajax(
             {
@@ -137,9 +136,6 @@ export class Prendas {
         //console.log(datosJson);
         return datosJson
     }
-
-
-
 
 
 
