@@ -278,7 +278,7 @@ class Metodos
         $resultado = $this->conexion->consultas($consulta);
         $resultados = array();
         while ($fila = $this->conexion->extraerFila($resultado)){
-            array_push();
+            array_push($fila['idPrenda']);
         }
 
     }
