@@ -51,11 +51,15 @@ switch ($_POST['propiedad']){
         subidaDePrenda($subcategoria, $descripcion, $talla, $correo, $imagen);
         break;
     case "cargarCategoria":
-        cargaDatosUsuario();
+        cargarCategoria();
         break;
     case "cargarSubCategoria":
         $categoria="";
         cargarSubCategoria($categoria, $_SESSION['usuario']);
+        break;
+    case "cargarMisPrenda":
+        $usuario = $_SESSION['usuario'];
+        cargarMisPrenda($usuario);
         break;
 }
 
@@ -226,4 +230,10 @@ function cargarSubCategoria($categoria, $usuario){
     //$metodo->cargarSubcategorias($categoria, $usuario);
 
     echo json_encode($metodo->cargarSubcategorias($categoria, $usuario));
+}
+
+function cargarMisPrenda($usuario){
+    $metodo = new Metodos();
+
+    echo json_encode($metodo->cargarMisPrendas($usuario));
 }

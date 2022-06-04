@@ -143,7 +143,7 @@ class Metodos
                 }
             }
 
-        }/* else{
+        } else{
             //Preparamos con preparae
             if (!$sentencia = $this->conexion->mysqli->prepare($consultaNombre)) {
                 //echo "La consulta fallo en su preparacion";
@@ -160,11 +160,11 @@ class Metodos
             if (!$sentencia->execute()) {
                 //echo "Algo fallo en la ejecucion";
 
-                return true;
+                return false;
             }else{
                 return true;
             }
-        } */
+        }
     }
     //Cargamos los datos del usuario para poder modificarlos.
     /**
@@ -248,10 +248,12 @@ class Metodos
         }
         return $arrayAsociativo;
     }
+    //Cogemos las subcategorias de cada Categoria
     function cargarSubcategorias($categoria,$usuario){
         $consultaUsurio = "SELECT idUsuario FROM usuario WHERE correo = '$usuario'";
         $resultadoUsuario = $this->conexion->consultas($consultaUsurio);
-        $idUsuario = $this->conexion->extraerFila($resultadoUsuario);
+        $fila= $this->conexion->extraerFila($resultadoUsuario);
+        $idUsuario = $fila['idUsuario'];
 
 
         $consulta = "SELECT subcategoria.idSubcategoria, subcategoria.nombreSubcategoria FROM `subcategoria` 
@@ -261,7 +263,7 @@ class Metodos
 
         $resultado = $this->conexion->consultas($consulta);
 
-        while ($fila = $this->conexion->extraerFila($consulta)){
+        while ($fila = $this->conexion->extraerFila($resultado)){
             $arraySubcategorias = array(
                 $fila['idSubcategoria'] => $fila['nombreSubcategoira']
             );
@@ -271,15 +273,32 @@ class Metodos
 
     }
 
+    //Cargamos las Prendas del usuaario
+    function cargarMisPrendas($usuario){
+        $consultaUsurio = "SELECT idUsuario FROM usuario WHERE correo = '$usuario'";
+        $resultadoUsuario = $this->conexion->consultas($consultaUsurio);
+        $fila= $this->conexion->extraerFila($resultadoUsuario);
+        $idUsuario = $fila['idUsuario'];
 
-    function cargarMisPrendas(){
-        $consulta = "SELECT idPrenda, idUsuario, descripcion, talla, idSubcategoria FROM `prenda` WHERE 1";
-
+        $consulta = "SELECT idPrenda, idUsuario, descripcion, talla, idSubcategoria FROM `prenda` WHERE idUsuario = $idUsuario";
         $resultado = $this->conexion->consultas($consulta);
-        $resultados = array();
+        $arrayAsociativo = array();
         while ($fila = $this->conexion->extraerFila($resultado)){
-            array_push($fila['idPrenda']);
+            $imagen = $fila['idPrenda'];
+            $files = glob("../imagenes_prendas/$imagen.png");
+            $imagenCodificada = base64_encode($files);
+            array_push($arrayAsociativo , array(
+                "id" => $fila['idPrenda'],
+                "idUsuario"=> $fila['idUsurio'],
+                "descripcion"=> $fila['descripcion'],
+                "talla"=> $fila['talla'],
+                "idSubcategoria" => $fila['idSubCategoria'],
+                "imagenCodificada"=> $imagenCodificada
+
+            ));
+
         }
+        return $arrayAsociativo;
 
     }
 
@@ -348,6 +367,41 @@ class Metodos
 
     }
 
+    function modificarPrenda($descripcion, $talla, $idSubcategoria, $usuario){
+        $consultaUsurio = "SELECT idUsuario FROM usuario WHERE correo = '$usuario'";
+        $resultadoUsuario = $this->conexion->consultas($consultaUsurio);
+        $fila= $this->conexion->extraerFila($resultadoUsuario);
+        $idUsuario = $fila['idUsuario'];
+        $consulta = "UPDATE `prenda` SET `descripcion`=?,`talla`=?,idSubcategoria=? WHERE idUsuario = ?";
+        //$resultado = $this->conexion->consultas($consulta);
+
+        //Preparamos con preparae
+        if (!$sentencia = $this->conexion->mysqli->prepare($consulta)) {
+            //echo "La consulta fallo en su preparacion";
+            //return false;
+
+        }
+        //Pasamos los parametros y el tipo de dato
+        if (!$sentencia->bind_param("ssii", $descripcion,$talla,$idSubcategoria,$idUsuariod)) {
+            //echo "Fallo en la vinculacion de parametros";
+            //return false;
+
+        }
+        //Ejecutamos con execute
+        if (!$sentencia->execute()) {
+            //echo "Algo fallo en la ejecucion";
+
+            return false;
+        }else{
+            return true;
+        }
+}
+
+    function borrarPrenda($idPrenda){
+        $consultaBorrar ="DELETE FROM `prenda` WHERE idPrenda = $idPrenda";
+    }
+
+
 
 //Subimos las imagenes y pasamos el parametro Carpeta Destino que es donde se guardadn las imagenes del pedido,
     /*
@@ -396,66 +450,7 @@ class Metodos
            echo"<a class='subir' href='home.php'>Terminar Pedido</a>";
         }
     }
-    // Con este metodo generamos la carpeta del pedido
-    /*
-     * Genera una carpeta para usuario
-     * @return mixed
-     */
-    function crearCarpetaPedido()
-    {
-        //samamos +1 al ultimo pedido para generar la nueva carpeta que es el id
-        $estructura = $this->ultimoPedido() + 1;
-        //lo hacemos con mkdir y le damos permisos
-        if (!mkdir($estructura, 0777, true)) {
-            echo "Fallo al crear la carpeta";
-        } else {
-            //creamos el pedido una vez generada la carpeta
-            $this->crearPedido();
-        }
-        return $estructura;
-    }
-    //Aqui devolvemos el ultimo pedido realizado
 
-    /*
-     * Encuentra el último registro
-     * @return int
-     */
-    function ultimoPedido()
-    {
-
-        $consulta = "SELECT MAX(idPedido) as idPedido FROM pedidos WHERE 1";
-
-        $resultado = $this->conexion->consultas($consulta);
-
-        while ($fila = $this->conexion->extraerFila($resultado)) {
-            //echo $fila['idPedido'] ;
-            if ($fila['idPedido'] != 0) {
-                return $fila['idPedido'];
-            } else {
-                return 0;
-            }
-
-        }
-
-
-    }
-    //Generamos el pedido con esta funcion
-    /*
-     * @return mixed
-     */
-    function crearPedido(){
-        //Cogemos el usuario de la sesion para crear el pedido con su idCliente
-        $cliente = $_SESSION['usuario'];
-        $buscarCliente = "SELECT idCliente FROM clientes WHERE correo LIKE '$cliente' ";
-        if ($resultado = $this->conexion->consultas($buscarCliente)) {
-            while ($fila = $this->conexion->extraerFila($resultado))
-                $idcliente = $fila['idCliente'];
-            $insertarPedido = "INSERT INTO pedidos( idCliente) VALUES ($idcliente)";
-            if (!$this->conexion->consultas($insertarPedido)) {
-                echo "Un error al crear el pedido";
-            }
-        }
-    }
 
 
 
