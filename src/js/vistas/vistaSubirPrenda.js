@@ -54,6 +54,7 @@ export class VistaSubirPrenda {
         if (imagen.src != null) {
             VistaSubirPrenda.cambioDePanelCerrarModal()
         }
+        VistaSubirPrenda.limpiarFormulario()
     }
 
 
@@ -112,6 +113,8 @@ export class VistaSubirPrenda {
                     this.cerrarVideo(video, mediaStream)
                 }
             ).catch((error) => {
+                let videoCaja = document.getElementById('cajaVideoSubirPrenda')
+                videoCaja.style.display = 'none'
                 console.log(error);
             })
 
@@ -258,7 +261,6 @@ export class VistaSubirPrenda {
                 let imagenUrl = URL.createObjectURL(archivos[0])
                 console.log(imagenUrl);
                 imagen.src = imagenUrl /*  = 'src/img/armario_vertical.jpg' */
-
                 cropper = new Cropper(imagen, {
                     aspectRatio: 1, //es como queremos que recorte
                     preview: '.img-sample', //contenedor donde se va a ir viendo en tiempo real la imagen cortada
@@ -484,6 +486,23 @@ export class VistaSubirPrenda {
         let cuadroDialogoMensaje = document.querySelector('#cuadroDialogoSubirPrenda p')
         cuadroDialogo.style.display = 'none'
         cuadroDialogoMensaje.innerHTML = ''
+    }
+
+    static limpiarFormulario(){
+        let inputs = document.querySelectorAll('#panelSubirPrenda input')
+        let selectores = document.querySelectorAll('#panelSubirPrenda select')
+        let img = document.getElementById('crop-image')
+
+        img.src = "src/img/mi-armario-subir-prenda/subir-prenda-prueba.jpg"
+
+        inputs.forEach(input=>{
+            input.value = ''
+        })
+
+        selectores.forEach(selector => {
+            selector.value = ''
+        });
+
     }
 
 }

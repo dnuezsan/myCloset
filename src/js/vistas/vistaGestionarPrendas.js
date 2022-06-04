@@ -5,7 +5,6 @@ export class VistaGestionarPrendas {
     constructor(controlador, base) {
         this.controlador = controlador
         this.base = base
-        this.cropper = null
         this.iniciar()
     }
 
@@ -41,9 +40,10 @@ export class VistaGestionarPrendas {
             VistaGestionarPrendas.cambioDePanelApagar()
         }
         if (imagen.src != null) {
-            VistaGestionarPrendas.cambioDePanelCerrarModal()   
+            VistaGestionarPrendas.cambioDePanelCerrarModal()
         }
 
+        VistaGestionarPrendas.limpiarFormulario()
     }
 
     /**
@@ -79,7 +79,6 @@ export class VistaGestionarPrendas {
      */
     realizarVideo() {
         let video = document.getElementById('elementoVideoGestionPrendas')
-
         navigator.mediaDevices.getUserMedia({
             video: {
                 facingMode: 'environment'
@@ -103,6 +102,8 @@ export class VistaGestionarPrendas {
 
                 }
             ).catch((error) => {
+                let videoCaja = document.getElementById('cajaVideoGestionPrenda')
+                videoCaja.style.display = 'none'
                 console.log(error);
             })
 
@@ -158,6 +159,7 @@ export class VistaGestionarPrendas {
         boton.onclick = (evento) => {
             let videoCaja = document.getElementById('cajaVideoGestionPrenda')
             videoCaja.style.display = 'none'
+
             this.cerrarVideoApagarCamara(video, mediaStream)
         }
     }
@@ -229,6 +231,7 @@ export class VistaGestionarPrendas {
      * @memberof VistaGestionarPrendas
      */
     cargarFoto() {
+        let cropper = null
         let inputFoto = document.getElementById('imagenGestionPrenda')
         let modal = document.getElementsByClassName('modal')[1]
         let modalContent = document.getElementsByClassName('modal-content')[1]
@@ -248,8 +251,7 @@ export class VistaGestionarPrendas {
                 let imagenUrl = URL.createObjectURL(archivos[0])
                 console.log(imagenUrl);
                 imagen.src = imagenUrl /*  = 'src/img/armario_vertical.jpg' */
-
-                this.cropper = new Cropper(imagen, {
+                    cropper = new Cropper(imagen, {
                     aspectRatio: 1, //es como queremos que recorte
                     preview: '.img-sample', //contenedor donde se va a ir viendo en tiempo real la imagen cortada
                     zoomable: false, //Para que no haga zoom
@@ -429,6 +431,24 @@ export class VistaGestionarPrendas {
 
         iconos[2].style.display = 'block'
         iconos[3].style.display = 'block'
+    }
+
+    static limpiarFormulario(){
+
+        let inputs = document.querySelectorAll('#panelGestionPrendas input')
+        let selectores = document.querySelectorAll('#panelGestionPrendas select')
+        let img = document.getElementById('crop-imageGestion')
+
+        img.src = "src/img/mi-armario-subir-prenda/subir-prenda-prueba.jpg"
+
+        inputs.forEach(input=>{
+            input.value = ''
+        })
+
+        selectores.forEach(selector => {
+            selector.value = ''
+        });
+
     }
 
 }

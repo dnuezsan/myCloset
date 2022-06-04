@@ -44,6 +44,7 @@ export class VistaCategorias {
     static ocultarVistaCategorias() {
         let panel = document.getElementById('panelCategorias')
         panel.style.display = 'none'
+        VistaCategorias.limpiarFormulario()
     }
 
     /* static enviarFormulario(){
@@ -52,5 +53,18 @@ export class VistaCategorias {
             Controlador.
         }
     } */
+
+    static limpiarFormulario(){
+        let inputsTexto = document.querySelectorAll('#panelCategorias input')
+        let selectores = document.querySelectorAll('#panelCategorias select')
+
+        inputsTexto.forEach(input => {
+            input.value = ''
+        });
+
+        selectores.forEach(selector => {
+            selector.value = ''
+        });
+    }
 
 }

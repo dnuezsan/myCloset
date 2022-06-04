@@ -49,6 +49,7 @@ export class VistaMenuPrincipal {
      * @memberof VistaMenuPrincipal
      */
     static ocultarPaneles() {
+        VistaOutfits.ocultarOutfits()
         VistaArmario.ocultarArmario()
         VistaPerfilUsuario.ocultarPerfilUsuario()
         VistaMisPrendas.ocultarMisprendas()
@@ -58,7 +59,6 @@ export class VistaMenuPrincipal {
         VistaGestionarPrendas.ocultarGestionarPrendas()
         VistaLogin.esconderLogin()
         VistaRegistroUsuario.esconderRegistro()
-        VistaOutfits.ocultarOutfits()
     }
 
     /**

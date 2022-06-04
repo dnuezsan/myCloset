@@ -1,0 +1,7 @@
+
+Seleccion de prendas en relación a usuario y con subcategoria relacionada con usuario
+
+SELECT  FROM prenda 
+LEFT JOIN usuario ON usuario.idUsuario = prenda.idUsuario
+LEFT JOIN relusuariosubcategoria AS rs ON rs.idUsuario =usuario.idUsuario
+LEFT JOIN subcategoria ON subcategoria.idSubcategoria = rs.idSubcategoria

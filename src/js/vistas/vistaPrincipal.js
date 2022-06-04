@@ -61,8 +61,8 @@ export class VistaPrincipal {
         this.prendas = new VistaPrendas(this.controlador, this.base)
         this.subirPrendas = new VistaSubirPrenda(this.controlador, this.panelSubirPrendas)
         this.outfits = new VistaOutfits(this.controlador, this.panelOutfits)
-
         this.panelGestionarPrendas = new VistaGestionarPrendas(this.controlador, this.panelGestionarPrendas)
+        
         /* Fragmento de código paracontrolar vistas al actualizar */
         if (sessionStorage.getItem('sesion') == null) {
             VistaLogin.mostrarLogin()

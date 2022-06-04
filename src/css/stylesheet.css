@@ -566,6 +566,10 @@ body {
 
 /* Estilos outfits */
 
+#panelOutfit{
+    display: none;
+}
+
 #panelOutfit .panelLateralOutfit{
     padding: 40px 0px;
 }

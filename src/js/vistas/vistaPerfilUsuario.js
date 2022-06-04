@@ -47,6 +47,8 @@ export class VistaPerfilUsuario {
         let perfilUsuario = document.getElementById('panelPerfilUsuario')
         perfilUsuario.style.display = 'none'
         VistaPerfilUsuario.ocultarCuadroConfirmacion()
+        VistaPerfilUsuario.limpiarFormulario()
+        VistaPerfilUsuario.mostrarDatosUsuario()
     }
 
 
@@ -101,8 +103,9 @@ export class VistaPerfilUsuario {
 
             if (respuesta.success == true) {
                 VistaPerfilUsuario.actualizacionCuadroConfirmacion(respuesta.mensaje)
-                panelPerfilUsuario.onclick = (evento) => {
-                    VistaPerfilUsuario.ocultarCuadroConfirmacion()
+                panelPerfilUsuario.onclick = async(evento) => {
+                    await VistaPerfilUsuario.ocultarCuadroConfirmacion()
+                    location.reload()
                 }
             }
 
@@ -250,6 +253,17 @@ export class VistaPerfilUsuario {
             console.log(mensajeBorrado);
             VistaPerfilUsuario.mostrarCuadroConfirmacion()
         }
+    }
+
+    static limpiarFormulario(){
+        let nombre = document.getElementById('nombrePerfil')
+        let contrasenia = document.getElementById('contraseniaPerfil')
+        let contraseniaNueva = document.getElementById('contraseniaNuevaPerfil')
+        let contraseniaRepetida = document.getElementById('contraseniaRepetidaPerfil')
+
+        contrasenia.value = ''
+        contraseniaNueva.value = ''
+        contraseniaRepetida = ''
     }
 
 }
