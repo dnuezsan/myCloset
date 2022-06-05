@@ -61,14 +61,14 @@ switch ($_POST['propiedad']){
         cargarMisPrenda($usuario);
         break;
     case "modificarPrenda":
-        $descripcion="";
-        $talla = "";
-        $idSubcategoria ="";
+        $descripcion=$_POST['descripcion'];
+        $talla = $_POST['talla'];
+        $idSubCategoria =$_POST['idSubCategoria'];
         $usuario = $_SESSION['usuario'];
-        modificarPrenda($descripcion, $talla, $idSubcategoria, $usuario);
+        modificarPrenda($descripcion, $talla, $idSubCategoria, $usuario);
         break;
     case "borrarPrenda":
-        $idPrenda = "";
+        $idPrenda = $_POST['idPrenda'];
         borrarPrenda($idPrenda);
 }
 

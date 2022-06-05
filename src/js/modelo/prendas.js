@@ -160,6 +160,53 @@ export class Prendas {
     }
 
 
+    static async modificarPrenda(descripcion, talla, idSubCategoria){
+        let modificarPrenda = 'modicarPrenda'
+        let datos = await $.ajax(
+            {
+                //url:  "https://05.2daw.esvirgua.com/myCloset/src/php/controlador/controladorBackend.php",
+                url: "/DWEC/myCloset/src/php/controlador/controladorBackend.php",
+                //url: "https://myclosetss.000webhostapp.com/php/controlador/controladorBackend.php",
+                //url: "/myCloset/src/php/controlador/controladorBackend.php",
+                type: "POST",
+                data:
+                    {
+                        propiedad: cargarMisPrendas,
+                        correo:  sessionStorage.sesion,
+                        descripcion: descripcion,
+                        talla : talla,
+                        idSubcategoria:idSubCategoria
 
+
+                    },
+            })
+
+        let datosJson = JSON.parse(datos)
+
+        return datosJson
+    }
+    static async borrarPrenda(idPrenda){
+        let borrarPrenda = 'borrarPrenda'
+        let datos = await $.ajax(
+            {
+                //url:  "https://05.2daw.esvirgua.com/myCloset/src/php/controlador/controladorBackend.php",
+                url: "/DWEC/myCloset/src/php/controlador/controladorBackend.php",
+                //url: "https://myclosetss.000webhostapp.com/php/controlador/controladorBackend.php",
+                //url: "/myCloset/src/php/controlador/controladorBackend.php",
+                type: "POST",
+                data:
+                    {
+                        propiedad: cargarMisPrendas,
+                        correo:  sessionStorage.sesion,
+                        idPrenda: idPrenda
+
+
+                    },
+            })
+
+        let datosJson = JSON.parse(datos)
+
+        return datosJson
+    }
 
 }
