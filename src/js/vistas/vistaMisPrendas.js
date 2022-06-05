@@ -47,31 +47,38 @@ export class VistaMisPrendas {
 
     static cargarPrendas() {
 
-        //window.onload= async ()=>{
         //let datos = await Controlador.cargaDePrendas()
         let categorias = document.getElementsByClassName('listaCategoriasMisPrendas')
+
         let contenedor = document.getElementById('contenedorMisPrendas')
-        for (let i = 0; i < 5/*datos.length*/; i++) {
-            console.log('hola');
-            /* Creación de contenedor de prenda en version móvil y escritorio y adición de clases*/
-            let contenedorItemMisPrendas = document.createElement('div')
-            contenedorItemMisPrendas ==null
-            //contenedorItemMisPrendas.classList.add('contenedorItemMisPrendas', 'col s12 m10', 'offset-m1', 'left-align', 'offset-m1')
-            /* adición de categorías a los contenedores de categorías */
-            //CATEGORIAS
+
+        for (let i = 0; i < 5; i++) {
             VistaMisPrendas.generarCategoria('zapato', categorias[0])
             VistaMisPrendas.generarCategoria('zapato', categorias[1])
+        }
+
+        for (let i = 0; i < 2/*datos.length*/; i++) {
+            /* Creación de contenedor de prenda en version móvil y escritorio y adición de clases*/
+            let contenedorItemMisPrendas = document.createElement('div')
+            contenedorItemMisPrendas.classList.add('contenedorItemMisPrendas', 'col', 's12', 'm10', 'offset-m1', 'left-align', 'offset-m1')
+
+            //CATEGORIAS
+
             //FIN CATEGORIAS
             //INICIO DE ITEMS
-            
+            VistaMisPrendas.generarPrenda('src/img/mi-armario-mis prendas/prendas-prueba.jpg', 'M', 'bgfb', 'vgngfn', contenedorItemMisPrendas)
+            VistaMisPrendas.generarPrendaMovil('src/img/mi-armario-mis prendas/prendas-prueba.jpg', 'M', 'bgfb', 'vgngfn', contenedorItemMisPrendas)
+
+            contenedor.appendChild(contenedorItemMisPrendas)
             //FIN DE ITEMS
             /* adición al contenedor de la prenda, de la prenda en escritorio y móvil */
             //contenedorItemMisPrendas[i].appendChild(VistaMisPrendas.generarPrenda())
             //contenedorItemMisPrendas[i].appendChild(VistaMisPrendas.generarPrendaMovil())
             /* adición al contenedor principal de las prendas de la caja con sus respectivas prendas */
-            //contenedor.appendChild(contenedorItemMisPrendas[i])
-            //  }
+
         }
+
+
     }
 
     /* static generarContenedorItem(){
@@ -92,9 +99,10 @@ export class VistaMisPrendas {
         iconoActualizar.classList.add('small', 'material-icons', 'col', 'l6', 'offset-l6')
         iconoActualizar.textContent = 'system_update_alt'
         let separadorIconos = document.createElement('p')
+        separadorIconos.classList.add('col', 'm12', 'l12')
         /* icono borrado */
         let iconoBorrar = document.createElement('i')
-        iconoBorrar.classList.add('small', 'material-icnos', 'col', 'l6', 'offset-l6')
+        iconoBorrar.classList.add('small', 'material-icons', 'col', 'l6', 'offset-l6')
         iconoBorrar.textContent = 'delete'
 
         cajaIconos.appendChild(iconoActualizar)
@@ -104,12 +112,15 @@ export class VistaMisPrendas {
         /* IMAGEN */
         let imagenDiv = document.createElement('div')
         imagenDiv.classList.add('imgMisPrendas', 'circle')
+        let placeHolder = document.createElement('div')
+        placeHolder.classList.add('material-placeholder')
         let imagen = document.createElement('img')
         imagen.classList.add('responsive-img', 'circle', 'materialBoxed')
         imagen.setAttribute('src', rutaImagen)
         imagen.setAttribute('alt', 'prenda')
 
-        imagenDiv.appendChild(imagen)
+        placeHolder.appendChild(imagen)
+        imagenDiv.appendChild(placeHolder)
 
         /* DATOS */
         let cajaDatos = document.createElement('div')
@@ -165,6 +176,8 @@ export class VistaMisPrendas {
         cajaPrenda.appendChild(imagenDiv)
         cajaPrenda.appendChild(cajaDatos)
 
+        nodoPadre.appendChild(cajaPrenda)
+
         //return cajaPrenda
         //contenedor.appendChild(cajaPrenda)
     }
@@ -192,17 +205,21 @@ export class VistaMisPrendas {
         cajaIconos.appendChild(iconoBorrar)
         /* SEPARADOR PRENDAS */
         let separadorIconos = document.createElement('p')
+        separadorIconos.classList.add('col', 'm12', 'l12')
         separadorIconos.setAttribute('id', 'divisorMisPrendas')
         separadorIconos.classList.add('col', 's12')
         /* IMAGEN */
         let imagenDiv = document.createElement('div')
-        imagenDiv.classList.add('imgMisPrendas', 'col', 's12', 'circle')
+        imagenDiv.classList.add('imgMisPrendasMovil', 'col', 's12', 'circle')
+        let placeHolder = document.createElement('div')
+        placeHolder.classList.add('material-placeholder')
         let imagen = document.createElement('img')
         imagen.classList.add('responsive-img', 'circle', 'col', 's12', 'offset-s0', 'materialBoxed')
         imagen.setAttribute('src', rutaImagen)
         imagen.setAttribute('alt', 'prenda')
 
-        imagenDiv.appendChild(imagen)
+        placeHolder.appendChild(imagen)
+        imagenDiv.appendChild(placeHolder)
 
         /* DATOS */
         let cajaDatos = document.createElement('div')
@@ -261,13 +278,14 @@ export class VistaMisPrendas {
         cajaPrenda.appendChild(cajaIconos)
         cajaPrenda.appendChild(cajaDatos)
 
+        nodoPadre.appendChild(cajaPrenda)
+
         //return cajaPrenda
 
     }
 
     static generarCategoria(nombreCategoria, nodoPadre) {
         let categoria = document.createElement('p')
-        console.log(nodoPadre);
         nodoPadre.appendChild(categoria)
         categoria.classList.add('col', 's12', 'white-text')
         categoria.textContent = nombreCategoria

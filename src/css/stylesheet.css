@@ -394,6 +394,11 @@ body {
     max-width: 900px;
 }
 
+#panelMisPrendas #icono1{
+    text-align: right;
+}
+
+
 /* Estilos Categorias */
 
 #panelCategorias{
@@ -998,10 +1003,7 @@ body {
         z-index: 0;
     }
 
-    #panelMisPrendas .imgMisPrendas {}
-
     #panelMisPrendas .imgMisPrendasMovil img {
-        min-width: 100px !important;
         position: relative;
         max-width: 50%;
         left: 25%;

@@ -12,7 +12,7 @@ class Metodos
         $this->conexion = new Conexion();
 
     }
-   
+
     /**
      * Inserta un usuario un usuario en la BD despues de validar las contraseña y encriptarla
      * @param String $nombre
@@ -238,13 +238,14 @@ class Metodos
     function cargarCategorias(){
         $consulta = "SELECT idCategoria, nombreCategoria FROM `categoria` WHERE 1";
         $resultado = $this->conexion->consultas($consulta);
+        $arrayAsociativo = array();
 
         while ($fila =  $this->conexion->extraerFila($resultado)){
             //$fila['idCategoria'];
             //$fila['nombreCategoria'];
-            $arrayAsociativo = array(
-                $fila['idCategoria'] =>$fila['nombreCategoria']
-            );
+            array_push($arrayAsociativo, array(
+                $fila['idCategoria'] => $fila['nombreCategoria']
+            ));
         }
         return $arrayAsociativo;
     }
@@ -261,12 +262,15 @@ class Metodos
         LEFT JOIN usuario ON relusuariosubcategoria.idUsuario = usuario.idUsuario 
         WHERE subcategoria.idCategoria = $categoria AND relusuariosubcategoria.idUsuario = $idUsuario";
 
+
         $resultado = $this->conexion->consultas($consulta);
 
-        while ($fila = $this->conexion->extraerFila($resultado)){
-            $arraySubcategorias = array(
+        $arraySubcategorias = array();
+
+        while ($fila = $this->conexion->extraerFila($resultado)) {
+            array_push($arraySubcategorias, array(
                 $fila['idSubcategoria'] => $fila['nombreSubcategoria']
-            );
+            ));
         }
 
         return $arraySubcategorias;
