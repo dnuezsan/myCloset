@@ -265,7 +265,7 @@ class Metodos
 
         while ($fila = $this->conexion->extraerFila($resultado)){
             $arraySubcategorias = array(
-                $fila['idSubcategoria'] => $fila['nombreSubcategoira']
+                $fila['idSubcategoria'] => $fila['nombreSubcategoria']
             );
         }
 
@@ -382,7 +382,7 @@ class Metodos
 
         }
         //Pasamos los parametros y el tipo de dato
-        if (!$sentencia->bind_param("ssii", $descripcion,$talla,$idSubcategoria,$idUsuariod)) {
+        if (!$sentencia->bind_param("ssii", $descripcion,$talla,$idSubcategoria,$idUsuario)) {
             //echo "Fallo en la vinculacion de parametros";
             //return false;
 
@@ -398,7 +398,28 @@ class Metodos
 }
 
     function borrarPrenda($idPrenda){
-        $consultaBorrar ="DELETE FROM `prenda` WHERE idPrenda = $idPrenda";
+        $consultaBorrar ="DELETE FROM `prenda` WHERE idPrenda = ?";
+
+        //Preparamos con preparae
+        if (!$sentencia = $this->conexion->mysqli->prepare($consultaBorrar)) {
+            //echo "La consulta fallo en su preparacion";
+            //return false;
+
+        }
+        //Pasamos los parametros y el tipo de dato
+        if (!$sentencia->bind_param("i",$idPrenda)) {
+            //echo "Fallo en la vinculacion de parametros";
+            //return false;
+
+        }
+        //Ejecutamos con execute
+        if (!$sentencia->execute()) {
+            //echo "Algo fallo en la ejecucion";
+
+            return false;
+        }else{
+            return true;
+        }
     }
 
 
