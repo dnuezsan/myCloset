@@ -60,6 +60,16 @@ switch ($_POST['propiedad']){
         $usuario = $_SESSION['usuario'];
         cargarMisPrenda($usuario);
         break;
+    case "modificarPrenda":
+        $descripcion=$_POST['descripcion'];
+        $talla = $_POST['talla'];
+        $idSubCategoria =$_POST['idSubCategoria'];
+        $usuario = $_SESSION['usuario'];
+        modificarPrenda($descripcion, $talla, $idSubCategoria, $usuario);
+        break;
+    case "borrarPrenda":
+        $idPrenda = $_POST['idPrenda'];
+        borrarPrenda($idPrenda);
 }
 
 
@@ -235,4 +245,13 @@ function cargarMisPrenda($usuario){
     $metodo = new Metodos();
 
     echo json_encode($metodo->cargarMisPrendas($usuario));
+}
+
+function modificarPrenda($descripcion, $talla, $idSubcategoria, $usuario){
+    $metodo = new Metodos();
+    echo json_encode($metodo->modificarPrenda($descripcion, $talla, $idSubcategoria, $usuario));
+}
+function borrarPrenda($idPrenda){
+    $metodo = new Metodos();
+    echo json_encode($metodo->borrarPrenda($idPrenda));
 }
