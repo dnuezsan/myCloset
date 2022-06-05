@@ -254,7 +254,7 @@ export class VistaGestionarPrendas {
                 let imagenUrl = URL.createObjectURL(archivos[0])
                 console.log(imagenUrl);
                 imagen.src = imagenUrl /*  = 'src/img/armario_vertical.jpg' */
-                    cropper = new Cropper(imagen, {
+                cropper = new Cropper(imagen, {
                     aspectRatio: 1, //es como queremos que recorte
                     preview: '.img-sample', //contenedor donde se va a ir viendo en tiempo real la imagen cortada
                     zoomable: false, //Para que no haga zoom
@@ -436,7 +436,7 @@ export class VistaGestionarPrendas {
         iconos[3].style.display = 'block'
     }
 
-    static limpiarFormulario(){
+    static limpiarFormulario() {
 
         let inputs = document.querySelectorAll('#panelGestionPrendas input')
         let selectores = document.querySelectorAll('#panelGestionPrendas select')
@@ -444,7 +444,7 @@ export class VistaGestionarPrendas {
 
         img.src = "src/img/mi-armario-subir-prenda/subir-prenda-prueba.jpg"
 
-        inputs.forEach(input=>{
+        inputs.forEach(input => {
             input.value = ''
         })
 
@@ -454,29 +454,42 @@ export class VistaGestionarPrendas {
 
     }
 
-    static async cargarCategoriasYSubcategorias(){
+    static async cargarCategoriasYSubcategorias() {
         let selectCategorias = document.getElementById('categoriasGestionPrendas')
-        let selectSubcategorias = document.getElementById('subCategoriaGestionPrendas')
-
+        let selectSubcategorias = document.getElementById('subCategoriasGestionPrendas')
+        /* Se cargan las categorias */
         let categorias = await Controlador.cargarCategoriasPrendas()
-        //let subcategorias = await Controlador.cargarSubcategoriasPrendas()
 
+        /* Se generan las categorias en su select */
         for (let i = 0; i < categorias.length; i++) {
             VistaGestionarPrendas.cargaCategorias(categorias[i], i, selectCategorias)
         }
-        
-        /* for (let i = 0; i < subcategorias.length; i++) {
-            VistaGestionarPrendas.cargaSubCategorias(subcategorias[i], i, selectSubcategorias)
-            
-        } */
+        /* Se generan las subcategorias correspondientes a la categoría elegida cada vez que esta cambia */
+        selectCategorias.addEventListener('change', async () => {
+
+            let subcategorias = await Controlador.cargarSubcategoriasPrendas(selectCategorias.value)
+            let opciones = document.querySelectorAll('#subCategoriasGestionPrendas option')
+            /* Se borran las subcategorias anteriores */
+            if (opciones.length > 1) {
+                let listaSubcategorias = document.getElementsByClassName('subcategoriaGestionPrendas')
+                
+                while (listaSubcategorias.length > 0) {
+                    selectSubcategorias.removeChild(listaSubcategorias[0])
+                }
+            }
+            /* Se cargan las nuevas subcategorias */
+            for (let i = 0; i < subcategorias.length; i++) {
+                VistaGestionarPrendas.cargaSubCategorias(subcategorias[i], selectSubcategorias)
+            }
+            $('#subCategoriasGestionPrendas').formSelect()
+        })
 
         $('#categoriasGestionPrendas').formSelect()
-        $('#subCategoriaGestionPrendas').formSelect()
     }
 
 
 
-    static cargaCategorias( datos, iterador, nodoPadre){
+    static cargaCategorias(datos, iterador, nodoPadre) {
         let categoria = document.createElement('option')
         let valor = iterador + 1
 
@@ -486,14 +499,14 @@ export class VistaGestionarPrendas {
         nodoPadre.appendChild(categoria)
     }
 
-    static cargaSubCategorias( datos, iterador, nodoPadre){
+    static cargaSubCategorias(datos, nodoPadre) {
 
         let subCategoria = document.createElement('option')
-        let valor = iterador + 1
-        subCategoria.value =valor
-        subCategoria.textContent = datos[valor]
+        subCategoria.classList.add('subcategoriaGestionPrendas')
 
+        subCategoria.value = datos.idSubcategoria
         subCategoria.textContent = datos.nombreSubcategoria
+
         nodoPadre.appendChild(subCategoria)
     }
 }

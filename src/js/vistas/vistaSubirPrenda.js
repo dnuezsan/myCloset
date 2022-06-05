@@ -509,13 +509,14 @@ export class VistaSubirPrenda {
     static async cargarCategoriasYSubcategorias() {
         let selectCategorias = document.getElementById('categoriaSubirPrendas')
         let selectSubcategorias = document.getElementById('subCategoriaSubirPrendas')
-
+        /* Se cargan las categorias */
         let categorias = await Controlador.cargarCategoriasPrendas()
-
+        
+        /* Se generan las categorias en su select */
         for (let i = 0; i < categorias.length; i++) {
             VistaSubirPrenda.cargaCategorias(categorias[i], i, selectCategorias)
         }
-
+        /* Se generan las subcategorias correspondientes a la categoría elegida cada vez que esta cambia */
         selectCategorias.addEventListener('change', async () => {
 
             let subcategorias = await Controlador.cargarSubcategoriasPrendas(selectCategorias.value)
@@ -523,7 +524,6 @@ export class VistaSubirPrenda {
             /* Se borran las subcategorias anteriores */
             if (opciones.length > 1) {
                 let listaSubcategorias = document.getElementsByClassName('subcategoria')
-                console.log(listaSubcategorias[0]);
                 while (listaSubcategorias.length > 0) {
                     selectSubcategorias.removeChild(listaSubcategorias[0])
                 }
@@ -534,12 +534,9 @@ export class VistaSubirPrenda {
             }
             $('#subCategoriaSubirPrendas').formSelect()
         })
-        
+
         $('#categoriaSubirPrendas').formSelect()
-
     }
-
-
 
     static cargaCategorias(datos, iterador, nodoPadre) {
         let categoria = document.createElement('option')

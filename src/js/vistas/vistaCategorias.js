@@ -19,7 +19,8 @@ export class VistaCategorias {
     }
 
     iniciar() {
-
+        VistaCategorias.generarCategorias()
+        VistaCategorias.generarSubcategorias()
     }
 
 
@@ -65,6 +66,58 @@ export class VistaCategorias {
         selectores.forEach(selector => {
             selector.value = ''
         });
+    }
+
+
+    static async generarCategorias(){
+        
+        let selectCategorias = document.getElementById('categoriaCrearCategoria')
+        /* Se cargan las categorias */
+        let categorias = await Controlador.cargarCategoriasPrendas()
+
+        /* Se generan las categorias en su select */
+        for (let i = 0; i < categorias.length; i++) {
+            VistaCategorias.cargaCategorias(categorias[i], i, selectCategorias)
+        }
+        $('#categoriaCrearCategoria').formSelect()
+    }
+
+    static async generarSubcategorias(){
+        let selectModificarSubcategoria = document.getElementById('modificarSubcategoria')
+        let selectBorrarSubcategoria = document.getElementById('borrarSubcategoria')
+
+        let datos = await Controlador.cargarSubcategoriasPrendas()
+
+        for (let i = 0; i < datos.length; i++) {
+            VistaCategorias.cargaSubCategorias(datos, i, selectModificarSubcategoria)
+            VistaCategorias.cargaSubCategorias(datos, i, selectBorrarSubcategoria)
+        }
+
+        $('#modificarSubcategoria').formSelect()
+        $('#borrarSubcategoria').formSelect()
+    }
+
+
+    static cargaCategorias(datos, iterador, nodoPadre) {
+        let categoria = document.createElement('option')
+        let valor = iterador + 1
+
+        categoria.value = valor
+        categoria.textContent = datos[valor]
+
+        nodoPadre.appendChild(categoria)
+    }
+
+    static cargaSubCategorias(datos, nodoPadre) {
+
+        let subCategoria = document.createElement('option')
+        //Conjunto de subcategorias con clases
+        subCategoria.classList.add('subcategoria')
+
+        subCategoria.value = datos.idSubcategoria
+        subCategoria.textContent = datos.nombreSubcategoria
+
+        nodoPadre.appendChild(subCategoria)
     }
 
 }

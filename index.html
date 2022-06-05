@@ -421,12 +421,8 @@
                             <label for="nombreCategoria">Nombre de la categoría</label>
                         </div>
                         <div class="input-field col s8 l6 offset-s2 offset-l3">
-                            <select>
+                            <select id="categoriaCrearCategoria">
                                 <option value="">Pulsa aquí</option>
-                                <option value="1">Cabeza</option>
-                                <option value="2">Torso</option>
-                                <option value="3">Piernas</option>
-                                <option value="4">Pies</option>
                             </select>
                             <label>selecciona la zona a la que asocias tu categoría</label>
                         </div>
@@ -443,11 +439,11 @@
                             <label for="nuevoNombreCategoria">Nuevo nombre de categoría</label>
                         </div>
                         <div class="input-field col s8 l6 offset-s2 offset-l3">
-                            <select>
+                            <select id="modificarCategoria">
                                 <option value="">Pulsa aquí</option>
-                                <option value="1">Opcion 1</option>
+                                <!-- <option value="1">Opcion 1</option>
                                 <option value="2">Opcion 2</option>
-                                <option value="3">Opcion 3</option>
+                                <option value="3">Opcion 3</option> -->
                             </select>
                             <label>Seleciona la categoría</label>
                         </div>
@@ -459,11 +455,11 @@
                         prendas</h6>
                     <div class="row">
                         <div class="input-field col s8 l6 offset-s2 offset-l3">
-                            <select>
+                            <select id="borrarCategoria">
                                 <option value="">Pulsa aquí</option>
-                                <option value="1">Opcion 1</option>
+                                <!-- <option value="1">Opcion 1</option>
                                 <option value="2">Opcion 2</option>
-                                <option value="3">Opcion 3</option>
+                                <option value="3">Opcion 3</option> -->
                             </select>
                             <label>Seleciona la categoría que desees borrar</label>
                         </div>
@@ -605,6 +601,14 @@
                 </div>
                 <div class="row">
                     <div class="input-field col s8 l6 offset-s2 offset-l3">
+                        <select id="categoriaSubirPrendas">
+                           <option value="">Pulsa aquí</option>
+                        </select>
+                        <label>Tipo de prenda</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s8 l6 offset-s2 offset-l3">
                         <select id="subCategoriaSubirPrendas">
                             <option value="">Pulsa aquí</option>
                             <!-- <option value="Chaqueta">Chaqueta</option>
@@ -612,14 +616,6 @@
                             <option value="3">Opcion 3</option> -->
                         </select>
                         <label>Categoría</label>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="input-field col s8 l6 offset-s2 offset-l3">
-                        <select id="categoriaSubirPrendas">
-                           <option value="">Pulsa aquí</option>
-                        </select>
-                        <label>Tipo de prenda</label>
                     </div>
                 </div>
                 <div class="row">
@@ -739,6 +735,19 @@
                 </div>
                 <div class="row">
                     <div class="input-field col s8 l6 offset-s2 offset-l3">
+                        <select id="categoriasGestionPrendas">
+                            <option value="">Pulsa aquí</option>
+                            <!-- <option value="1">Cabeza</option>
+                            <option value="2">Torso</option>
+                            <option value="3">Piernas</option>
+                            <option value="4">Calzado</option>
+                            <option value="5">Manos</option> -->
+                        </select>
+                        <label>Tipo de prenda</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s8 l6 offset-s2 offset-l3">
                         <select id="subCategoriasGestionPrendas">
                             <option value="">Pulsa aquí</option>
                             <!-- <option value="">Ninguna</option>
@@ -747,19 +756,6 @@
                             <option value="3">Opcion 3</option> -->
                         </select>
                         <label>Categoría</label>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="input-field col s8 l6 offset-s2 offset-l3">
-                        <select id="categoriasGestionPrendas">
-                            <!-- <option value="">Pulsa aquí</option>
-                            <option value="1">Cabeza</option>
-                            <option value="2">Torso</option>
-                            <option value="3">Piernas</option>
-                            <option value="4">Calzado</option>
-                            <option value="5">Manos</option> -->
-                        </select>
-                        <label>Tipo de prenda</label>
                     </div>
                 </div>
                 <div class="row">
