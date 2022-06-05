@@ -532,7 +532,8 @@ export class VistaSubirPrenda {
         selectCategorias.addEventListener('change', async () => {
 
             let subcategorias = await Controlador.cargarSubcategoriasPrendas(selectCategorias.value)
-            for (let i = 0; i < array.length; i++) {
+            for (let i = 0; i < subcategorias.length; i++) {
+                console.log(subcategorias);
                 VistaSubirPrenda.cargaSubCategorias(subcategorias[i], i, selectSubcategorias)
             }
 
@@ -565,10 +566,12 @@ export class VistaSubirPrenda {
 
         let subCategoria = document.createElement('option')
         let valor = iterador + 1
+
         subCategoria.value = valor
         subCategoria.textContent = datos[valor]
+        console.log(valor);
+        console.log(datos[valor]);
 
-        subCategoria.textContent = datos.nombreSubcategoria
         nodoPadre.appendChild(subCategoria)
     }
 

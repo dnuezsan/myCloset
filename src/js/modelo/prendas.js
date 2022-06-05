@@ -108,7 +108,6 @@ export class Prendas {
                     },
             })
         let datosJson = JSON.parse(datos)
-        console.log(datosJson);
         return datosJson
     }
 
@@ -136,6 +135,30 @@ export class Prendas {
         //console.log(datosJson);
         return datosJson
     }
+
+    static async cargarMisPrendas(){
+        let cargarMisPrendas = 'cargarMisPrendas'
+        let datos = await $.ajax(
+            {
+                //url:  "https://05.2daw.esvirgua.com/myCloset/src/php/controlador/controladorBackend.php",
+                url: "/DWEC/myCloset/src/php/controlador/controladorBackend.php",
+                //url: "https://myclosetss.000webhostapp.com/php/controlador/controladorBackend.php",
+                //url: "/myCloset/src/php/controlador/controladorBackend.php",
+                type: "POST",
+                data:
+                    {
+                        propiedad: cargarMisPrendas,
+                        correo:  sessionStorage.sesion
+
+
+                    },
+            })
+
+        let datosJson = JSON.parse(datos)
+
+        return datosJson
+    }
+
 
 
 
