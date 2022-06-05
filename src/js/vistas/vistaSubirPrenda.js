@@ -512,40 +512,29 @@ export class VistaSubirPrenda {
 
         let categorias = await Controlador.cargarCategoriasPrendas()
 
-        //let subcategorias = await Controlador.cargarSubcategoriasPrendas()
-
         for (let i = 0; i < categorias.length; i++) {
             VistaSubirPrenda.cargaCategorias(categorias[i], i, selectCategorias)
         }
 
-        /* $('#categoriaSubirPrendas').on('change', async function(){
-
-            let subcategorias = await Controlador.cargarSubcategoriasPrendas(4)
-
-            for (let i = 0; i < array.length; i++) {
-                VistaSubirPrenda.cargaSubCategorias(subcategorias[i], i, selectSubcategorias)
-            }
-
-            $('#subCategoriaSubirPrendas').formSelect()
-        }) */
-
         selectCategorias.addEventListener('change', async () => {
 
             let subcategorias = await Controlador.cargarSubcategoriasPrendas(selectCategorias.value)
-            for (let i = 0; i < subcategorias.length; i++) {
-                console.log(subcategorias);
-                VistaSubirPrenda.cargaSubCategorias(subcategorias[i], i, selectSubcategorias)
+            let opciones = document.querySelectorAll('#subCategoriaSubirPrendas option')
+            /* Se borran las subcategorias anteriores */
+            if (opciones.length > 1) {
+                let listaSubcategorias = document.getElementsByClassName('subcategoria')
+                console.log(listaSubcategorias[0]);
+                while (listaSubcategorias.length > 0) {
+                    selectSubcategorias.removeChild(listaSubcategorias[0])
+                }
             }
-
+            /* Se cargan las nuevas subcategorias */
+            for (let i = 0; i < subcategorias.length; i++) {
+                VistaSubirPrenda.cargaSubCategorias(subcategorias[i], selectSubcategorias)
+            }
             $('#subCategoriaSubirPrendas').formSelect()
-
-        }, true)
-
-        /* for (let i = 0; i < subcategorias.length; i++) {
-            VistaSubirPrenda.cargaSubCategorias(subcategorias[i], i, selectSubcategorias)
-            
-        } */
-
+        })
+        
         $('#categoriaSubirPrendas').formSelect()
 
     }
@@ -562,15 +551,14 @@ export class VistaSubirPrenda {
         nodoPadre.appendChild(categoria)
     }
 
-    static cargaSubCategorias(datos, iterador, nodoPadre) {
+    static cargaSubCategorias(datos, nodoPadre) {
 
         let subCategoria = document.createElement('option')
-        let valor = iterador + 1
+        //Conjunto de subcategorias con clases
+        subCategoria.classList.add('subcategoria')
 
-        subCategoria.value = valor
-        subCategoria.textContent = datos[valor]
-        console.log(valor);
-        console.log(datos[valor]);
+        subCategoria.value = datos.idSubcategoria
+        subCategoria.textContent = datos.nombreSubcategoria
 
         nodoPadre.appendChild(subCategoria)
     }
