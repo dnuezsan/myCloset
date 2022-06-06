@@ -54,7 +54,7 @@ export class VistaMisPrendas {
 
         let datosCategorias = await Controlador.cargarCategoriasMisPrendas()
 
-        for (let i = 0; i<datosCategorias.length; i++) {
+        for (let i = 0; i < datosCategorias.length; i++) {
             VistaMisPrendas.generarCategoria(datosCategorias[i].nombreCategoria, categorias[0])
             VistaMisPrendas.generarCategoria(datosCategorias[i].nombreCategoria, categorias[1])
         }
@@ -66,33 +66,16 @@ export class VistaMisPrendas {
             let contenedorItemMisPrendas = document.createElement('div')
             contenedorItemMisPrendas.classList.add('contenedorItemMisPrendas', 'col', 's12', 'm10', 'offset-m1', 'left-align', 'offset-m1')
             let nombrePrenda = document.createElement('h4')
-            nombrePrenda.classList.add('left-align', 'col', 'm12', 'l12', 'offset-m1', 'offset-l1', )
-            nombrePrenda.textContent = 'Prenda ' + (i + 1)
-
-            //CATEGORIAS
-
-            //FIN CATEGORIAS
-            //INICIO DE ITEMS
-            VistaMisPrendas.generarPrenda(prendas[0].imagenCodificada, prendas[i].talla, prendas[i].nombreSubcategoria, prendas[i].descripcion, contenedorItemMisPrendas, i)
-            VistaMisPrendas.generarPrendaMovil(prendas[0].imagenCodificada, prendas[i].talla, prendas[i].nombreSubcategoria, prendas[i].descripcion, contenedorItemMisPrendas, i)
-            contenedor.appendChild(nombrePrenda)
+            nombrePrenda.classList.add('left-align', 'col', 'm12', 'l12')
+            nombrePrenda.textContent = prendas[i].nombrePrenda//'Prenda ' + (i + 1)
+            contenedorItemMisPrendas.appendChild(nombrePrenda)
+            VistaMisPrendas.generarPrenda(prendas[i].imagenCodificada, prendas[i].talla, prendas[i].nombreSubcategoria, prendas[i].descripcion, contenedorItemMisPrendas)
+            VistaMisPrendas.generarPrendaMovil(prendas[i].imagenCodificada, prendas[i].talla, prendas[i].nombreSubcategoria, prendas[i].descripcion, contenedorItemMisPrendas)
             contenedor.appendChild(contenedorItemMisPrendas)
-            //FIN DE ITEMS
-            /* adición al contenedor de la prenda, de la prenda en escritorio y móvil */
-            //contenedorItemMisPrendas[i].appendChild(VistaMisPrendas.generarPrenda())
-            //contenedorItemMisPrendas[i].appendChild(VistaMisPrendas.generarPrendaMovil())
-            /* adición al contenedor principal de las prendas de la caja con sus respectivas prendas */
-
         }
 
-
+        VistaMisPrendas.filtrarPrendaPorCategoria(contenedor)
     }
-
-    /* static generarContenedorItem(){
-        let contenedorItem = document.createElement('div')
-        contenedorItem.classList.add('contenedorItemMisPrendas', 'col s12 m10', 'offset-m1', 'left-align', 'offset-m1')
-        
-    } */
 
     static generarPrenda(rutaImagen, tallaPrenda, subcategoriaPrenda, descripcionPrenda, nodoPadre) {
         /* Caja que contiene los elementos de la prenda */
@@ -299,6 +282,47 @@ export class VistaMisPrendas {
         categoria.appendChild(nombreCat)
         nodoPadre.appendChild(categoria)
         //return categoria
+    }
+
+    static async generarPrendaPorCategoria(datos, contenedorMisPrendas) {
+        /* hay que borrar */
+
+        let items = document.getElementsByClassName('contenedorItemMisPrendas')
+
+        if (items.length > 0) {
+            while (items.length > 0) {
+                contenedorMisPrendas.removeChild(items[0])
+            }
+        }
+
+        /* Donde se generan */
+        for (let i = 0; i < datos.length; i++) {
+            /* Creación de contenedor de prenda en version móvil y escritorio y adición de clases*/
+            let contenedorItemMisPrendas = document.createElement('div')
+            contenedorItemMisPrendas.classList.add('contenedorItemMisPrendas', 'col', 's12', 'm10', 'offset-m1', 'left-align', 'offset-m1')
+            let nombrePrenda = document.createElement('h4')
+            nombrePrenda.classList.add('left-align', 'col', 'm12', 'l12')
+            nombrePrenda.textContent = datos[i].nombrePrenda
+            contenedorItemMisPrendas.appendChild(nombrePrenda)
+            VistaMisPrendas.generarPrenda(datos[i].imagenCodificada, datos[i].talla, datos[i].nombreSubcategoria, datos[i].descripcion, contenedorItemMisPrendas)
+            VistaMisPrendas.generarPrendaMovil(datos[i].imagenCodificada, datos[i].talla, datos[i].nombreSubcategoria, datos[i].descripcion, contenedorItemMisPrendas)
+            contenedorMisPrendas.appendChild(contenedorItemMisPrendas)
+        }
+    }
+
+    static filtrarPrendaPorCategoria(contenedorMisPrendas) {
+        let categorias = document.querySelectorAll('#categoriasMisPrendas p span')
+        let categoriasMovil = document.querySelectorAll('#categoriaMisPrendasMovil p span')
+        for (let i = 0; i < categorias.length; i++) {
+            categorias[i].onclick = async () => {
+                let datos = await Controlador.filtrarPrendasPorCategoria(categorias[i].textContent)
+                VistaMisPrendas.generarPrendaPorCategoria(datos, contenedorMisPrendas)
+            }
+            categoriasMovil[i].onclick = async () => {
+                let datosMovil = await Controlador.filtrarPrendasPorCategoria(categoriasMovil[i].textContent)
+                VistaMisPrendas.generarPrendaPorCategoria(datosMovil, contenedorMisPrendas)
+            }
+        }
     }
 
 }

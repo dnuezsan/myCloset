@@ -124,4 +124,9 @@ export class Controlador {
         return datos
     }
 
+    static async filtrarPrendasPorCategoria(categoria){
+        let datos = await Prendas.filtrarPrendasPorCategoria(categoria)
+        return datos
+    }
+
 }

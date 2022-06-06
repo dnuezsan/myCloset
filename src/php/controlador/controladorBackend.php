@@ -74,6 +74,10 @@ switch ($_POST['propiedad']) {
     case "cargarCategoriasMisPrendas":
         cargarCategoriaMisPrendas();
         break;
+    case "filtrarPrendasPorCategoria":
+        $usuario = $_POST["correo"];
+        $categoria = $_POST["categoria"];
+        filtrarPrendasPorCategoria($usuario, $categoria);
 }
 
 
@@ -257,6 +261,12 @@ function cargarMisPrenda($usuario)
     $metodo = new Metodos();
 
     echo json_encode($metodo->cargarMisPrendas($usuario));
+}
+
+function filtrarPrendasPorCategoria($usuario, $categoria){
+    $metodo = new Metodos();
+
+    echo json_encode($metodo->filtrarPrendasPorCategoria($usuario, $categoria));
 }
 
 function modificarPrenda($descripcion, $talla, $idSubcategoria, $usuario)

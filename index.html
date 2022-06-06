@@ -260,14 +260,14 @@
     <div id="panelMisPrendas">
         <div class="row center">
             <!-- Menu izquierda -->
-            <div class="listaCategoriasMisPrendas col s2 l2 bg red hide-on-med-and-down">
+            <div id="categoriasMisPrendas" class="listaCategoriasMisPrendas col s2 l2 bg red hide-on-med-and-down">
                 <!-- <p class="col s12 white-text"><span>Categoria</span></p>
                 <p class="col s12 white-text"><span>Categoria</span></p>
                 <p class="col s12 white-text"><span>Categoria</span></p>
                 <p class="col s12 white-text"><span>Categoria</span></p> -->
             </div>
-            <div class="listaCategoriasMisPrendas col s6 m bg red hide-on-large-only sidenav"
-                id="menuCategoriaMisPrendas">
+            <div id="categoriaMisPrendasMovil" class="listaCategoriasMisPrendas col s6 m bg red hide-on-large-only sidenav"
+                >
                 <!-- <p class="col s12 white-text"><span>Categoria</span></p>
                 <p class="col s12 white-text"><span>Categoria</span></p>
                 <p class="col s12 white-text"><span>Categoria</span></p>
@@ -394,12 +394,12 @@
                 <!-- menu desplegable -->
                 <div class="filtroMisPrendas col m12 offset-m10 hide-on-small-only hide-on-large-only valign-wrapper">
                     <a class="btn-floating btn-large waves-effect waves-light red sidenav-trigger"
-                        data-target="menuCategoriaMisPrendas"><i class="material-icons">add</i></a>
+                        data-target="categoriaMisPrendasMovil"><i class="material-icons">add</i></a>
                 </div>
                 <!-- menu desplegable -->
                 <div class="filtroPequenioMisPrendas col s12 offset-l2 hide-on-med-and-up valign-wrapper">
                     <a class="btn-floating btn-medium waves-effect waves-light red sidenav-trigger"
-                        data-target="menuCategoriaMisPrendas"><i class="material-icons">add</i></a>
+                        data-target="categoriaMisPrendasMovil"><i class="material-icons">add</i></a>
                 </div>
                 <!-- fin de menu desplegable -->
             </div>
@@ -607,6 +607,12 @@
             <div>
                 <div class="row">
                     <div class="input-field col s8 l6 offset-s2 offset-l3">
+                        <input placeholder="Escribe aquí" id="nombreSubirPrenda" type="text">
+                        <label for="nombreSubirPrenda">Nombre de la prenda</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s8 l6 offset-s2 offset-l3">
                         <input placeholder="Escribe aquí" id="tallaSubirPrenda" type="text">
                         <label for="tallaSubirPrenda">Talla</label>
                     </div>
@@ -653,17 +659,42 @@
     <div id="panelGestionPrendas">
         <div class="row container center">
             <h3>Gestión de prendas</h3>
-            <div class="col s12">
-                <div class="selectorGestionPrendas input-field col s8 l6 offset-s2 offset-l3">
-                    <select>
+            <div class="row">
+                <div class="input-field col s8 l6 offset-s2 offset-l3">
+                    <select id="categoriaPrendaGestionPrendas">
                         <option value="">Pulsa aquí</option>
-                        <option value="1">Cabeza</option>
+                        <!-- <option value="1">Cabeza</option>
                         <option value="2">Torso</option>
                         <option value="3">Piernas</option>
                         <option value="4">Calzado</option>
-                        <option value="5">Manos</option>
+                        <option value="5">Manos</option> -->
                     </select>
-                    <label>Elige tu prenda</label>
+                    <label>Tipo de prenda</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s8 l6 offset-s2 offset-l3">
+                    <select id="subCategoriasPrendaGestionPrendas">
+                        <option value="">Pulsa aquí</option>
+                        <!-- <option value="">Ninguna</option>
+                        <option value="1">Opcion 1</option>
+                        <option value="2">Opcion 2</option>
+                        <option value="3">Opcion 3</option> -->
+                    </select>
+                    <label>Categoría</label>
+                </div>
+            </div>
+            <div class="col s12">
+                <div class="selectorGestionPrendas input-field col s8 l6 offset-s2 offset-l3">
+                    <select id="nombrePrendaGestionPrendas">
+                        <option value="">Pulsa aquí</option>
+                        <!-- <option value="1">Cabeza</option>
+                        <option value="2">Torso</option>
+                        <option value="3">Piernas</option>
+                        <option value="4">Calzado</option>
+                        <option value="5">Manos</option> -->
+                    </select>
+                    <label>Nombre de la prenda</label>
                 </div>
             </div>
             <div class="col s4"></div>
@@ -739,6 +770,12 @@
                 </div>
             </div>
             <div>
+                <div class="row">
+                    <div class="input-field col s8 l6 offset-s2 offset-l3">
+                        <input placeholder="Escribe aquí" id="nombreGestionPrenda" type="text">
+                        <label for="nombreGestionPrenda">Nombre de la prenda</label>
+                    </div>
+                </div>
                 <div class="row">
                     <div class="input-field col s8 l6 offset-s2 offset-l3">
                         <input placeholder="Escribe aquí" id="tallaGestionPrenda" type="text">

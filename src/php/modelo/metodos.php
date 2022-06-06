@@ -298,11 +298,47 @@ class Metodos
         $idUsuario = $fila['idUsuario'];
 
         //$consulta = "SELECT idPrenda, idUsuario, descripcion, talla, idSubcategoria FROM `prenda` WHERE idUsuario = $idUsuario";
-        $consulta = "SELECT idPrenda, prenda.idUsuario, descripcion, talla, prenda.idSubcategoria, subc.nombreSubcategoria
+        $consulta = "SELECT idPrenda, prenda.idUsuario, descripcion, talla, prenda.idSubcategoria, subc.nombreSubcategoria, nombrePrenda
         FROM `prenda`
         LEFT JOIN relusuariosubcategoria AS rus ON rus.idUsuario = prenda.idUsuario AND rus.idSubcategoria = prenda.idSubcategoria
         LEFT JOIN subcategoria AS subc ON subc.idSubcategoria = rus.idSubcategoria
-        WHERE prenda.idUsuario = 21";
+        WHERE prenda.idUsuario = $idUsuario";
+        
+        $resultado = $this->conexion->consultas($consulta);
+        $arrayAsociativo = array();
+        while ($fila = $this->conexion->extraerFila($resultado)) {
+            $imagen = $fila['idPrenda'];
+            $files = glob("../imagenes_prendas/$imagen.png");
+            $imagenCodificada = base64_encode($files[0]);
+            $imagen = substr($files[0], 2);
+            array_push($arrayAsociativo, array(
+                "id" => $fila['idPrenda'],
+                "idUsuario" => $fila['idUsuario'],
+                "descripcion" => $fila['descripcion'],
+                "talla" => $fila['talla'],
+                "idSubcategoria" => $fila['idSubcategoria'],
+                "nombreSubcategoria"=>$fila['nombreSubcategoria'],
+                "imagenCodificada" => "src/php$imagen",//$imagenCodificada
+                "nombrePrenda" => $fila["nombrePrenda"]
+
+            ));
+        }
+        return $arrayAsociativo;
+    }
+
+    function filtrarPrendasPorCategoria($usuario, $categoria){
+        $consultaUsurio = "SELECT idUsuario FROM usuario WHERE correo = '$usuario'";
+        $resultadoUsuario = $this->conexion->consultas($consultaUsurio);
+        $fila = $this->conexion->extraerFila($resultadoUsuario);
+        $idUsuario = $fila['idUsuario'];
+
+        //$consulta = "SELECT idPrenda, idUsuario, descripcion, talla, idSubcategoria FROM `prenda` WHERE idUsuario = $idUsuario";
+        $consulta = "SELECT idPrenda, prenda.idUsuario, descripcion, talla, prenda.idSubcategoria, subc.nombreSubcategoria, nombrePrenda
+        FROM `prenda`
+        LEFT JOIN relusuariosubcategoria AS rus ON rus.idUsuario = prenda.idUsuario AND rus.idSubcategoria = prenda.idSubcategoria
+        LEFT JOIN subcategoria AS subc ON subc.idSubcategoria = rus.idSubcategoria
+        LEFT JOIN categoria ON categoria.idCategoria = subc.idCategoria
+        WHERE prenda.idUsuario = $idUsuario AND categoria.nombreCategoria = '$categoria'";
 
         $resultado = $this->conexion->consultas($consulta);
         $arrayAsociativo = array();
@@ -318,7 +354,8 @@ class Metodos
                 "talla" => $fila['talla'],
                 "idSubcategoria" => $fila['idSubcategoria'],
                 "nombreSubcategoria"=>$fila['nombreSubcategoria'],
-                "imagenCodificada" => "src/php$imagen"//$imagenCodificada
+                "imagenCodificada" => "src/php$imagen",//$imagenCodificada
+                "nombrePrenda" => $fila["nombrePrenda"]
 
             ));
         }

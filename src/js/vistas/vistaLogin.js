@@ -94,7 +94,6 @@ export class VistaLogin {
      * @memberof VistaLogin
      */
     static async loginUsuario() {
-
         let u = document.getElementById("correo").value
         let p = document.getElementById("clave").value
         let mensaje = document.querySelectorAll('#panelLogin .mensajeLabel')[0]
@@ -106,6 +105,7 @@ export class VistaLogin {
             VistaArmario.mostrarArmario()
             sessionStorage.setItem('sesion', u)
             //localStorage.setItem('us_id', response.us_id);
+            location.reload()
         } else if (usuario.success == false && u != '' && p != '') {
             mensaje.innerHTML = usuario.mensaje
         } else if (usuario.success == false) {

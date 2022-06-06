@@ -229,4 +229,25 @@ export class Prendas {
 
     }
 
+    static async filtrarPrendasPorCategoria(categoria){
+        let cargarCategoria = 'filtrarPrendasPorCategoria'
+        let datos = await $.ajax(
+            {
+                //url:  "https://05.2daw.esvirgua.com/myCloset/src/php/controlador/controladorBackend.php",
+                url: "/DWEC/myCloset/src/php/controlador/controladorBackend.php",
+                //url: "https://myclosetss.000webhostapp.com/php/controlador/controladorBackend.php",
+                //url: "/myCloset/src/php/controlador/controladorBackend.php",
+                type: "POST",
+                data:
+                {
+                    propiedad: cargarCategoria,
+                    correo: sessionStorage.sesion,
+                    categoria: categoria
+
+                },
+            })
+        let datosJson = JSON.parse(datos)
+        return datosJson
+    }
+
 }
