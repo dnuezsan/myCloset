@@ -457,22 +457,24 @@ export class VistaGestionarPrendas {
     static async cargarCategoriasYSubcategorias() {
         let selectCategorias = document.getElementById('categoriasGestionPrendas')
         let selectSubcategorias = document.getElementById('subCategoriasGestionPrendas')
+        let selectCategoriaModificable = document.getElementById('categoriaPrendaGestionPrendas')
+        let selectSubcategoriaModificable = document.getElementById('subCategoriasPrendaGestionPrendas')
         /* Se cargan las categorias */
         let categorias = await Controlador.cargarCategoriasPrendas()
 
         /* Se generan las categorias en su select */
         for (let i = 0; i < categorias.length; i++) {
             VistaGestionarPrendas.cargaCategorias(categorias[i], i, selectCategorias)
+            VistaGestionarPrendas.cargaCategorias(categorias[i], i, selectCategoriaModificable)
         }
         /* Se generan las subcategorias correspondientes a la categoría elegida cada vez que esta cambia */
         selectCategorias.addEventListener('change', async () => {
-
             let subcategorias = await Controlador.cargarSubcategoriasPrendas(selectCategorias.value)
             let opciones = document.querySelectorAll('#subCategoriasGestionPrendas option')
             /* Se borran las subcategorias anteriores */
             if (opciones.length > 1) {
                 let listaSubcategorias = document.getElementsByClassName('subcategoriaGestionPrendas')
-                
+
                 while (listaSubcategorias.length > 0) {
                     selectSubcategorias.removeChild(listaSubcategorias[0])
                 }
@@ -484,7 +486,26 @@ export class VistaGestionarPrendas {
             $('#subCategoriasGestionPrendas').formSelect()
         })
 
+        selectCategoriaModificable.addEventListener('change', async () => {
+            let subcategorias = await Controlador.cargarSubcategoriasPrendas(selectCategoriaModificable.value)
+            let opciones = document.querySelectorAll('#subCategoriasPrendaGestionPrendas option')
+            /* Se borran las subcategorias anteriores */
+            if (selectCategoriaModificable.childElementCount > 1) {
+                while (selectSubcategoriaModificable.children.length > 1) {
+                    selectSubcategoriaModificable.removeChild(selectSubcategoriaModificable.children[1])
+                }
+            }
+            /* Se cargan las nuevas subcategorias */
+            for (let i = 0; i < subcategorias.length; i++) {
+                VistaGestionarPrendas.cargaSubCategorias(subcategorias[i], selectSubcategoriaModificable)
+            }
+            $('#subCategoriasPrendaGestionPrendas').formSelect()
+        })
+
+        
+
         $('#categoriasGestionPrendas').formSelect()
+        $('#categoriaPrendaGestionPrendas').formSelect()
     }
 
 
