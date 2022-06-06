@@ -10,7 +10,6 @@ class Metodos
     {
         require_once 'Conexion.php';
         $this->conexion = new Conexion();
-
     }
 
     /**
@@ -50,9 +49,8 @@ class Metodos
             //echo "La contraseña no es correcta";
             return false;
         }
-
     }
-    
+
     //Incio de sesion con consultas preprarada y contraseñas encriptadas
     /**
      * @param mixed $correo
@@ -76,7 +74,6 @@ class Metodos
         //Ejecutamos con execute
         if (!$sentencia->execute()) {
             echo "Algo fallo en la ejecucion";
-
         }
         // Vemos lo que nos devuelve con get_result
         $resultado = $sentencia->get_result();
@@ -98,7 +95,6 @@ class Metodos
             //echo "El correo introducido no es correcto";
             return false;
         }
-
     }
 
 
@@ -115,11 +111,12 @@ class Metodos
      * Valida los parámetros y actualiza los datos de un usuario en la tabla "usuario"
      * @return boolean
      */
-    public function modicarUsuario($nombreUsuario,$correo,$password, $newpassword, $rnewpassword){
+    public function modicarUsuario($nombreUsuario, $correo, $password, $newpassword, $rnewpassword)
+    {
         $consultaNombre = "UPDATE usuario SET nombre=? WHERE correo = ?";
-        $consultaPassword ="UPDATE usuario SET nombre=?, clave=? WHERE correo = ?";
-        if ($password !=""&& $newpassword !="" && $newpassword == $rnewpassword){
-            if($this->iniciarSesion($correo, $password)){
+        $consultaPassword = "UPDATE usuario SET nombre=?, clave=? WHERE correo = ?";
+        if ($password != "" && $newpassword != "" && $newpassword == $rnewpassword) {
+            if ($this->iniciarSesion($correo, $password)) {
                 //Preparamos con preparaep
                 if (!$sentencia = $this->conexion->mysqli->prepare($consultaPassword)) {
                     //echo "La consulta fallo en su preparacion";
@@ -138,12 +135,11 @@ class Metodos
                     //echo "Algo fallo en la ejecucion";
 
                     return false;
-                }else{
+                } else {
                     return true;
                 }
             }
-
-        } else{
+        } else {
             //Preparamos con preparae
             if (!$sentencia = $this->conexion->mysqli->prepare($consultaNombre)) {
                 //echo "La consulta fallo en su preparacion";
@@ -151,7 +147,7 @@ class Metodos
 
             }
             //Pasamos los parametros y el tipo de dato
-            if (!$sentencia->bind_param("ss", $nombreUsuario,$correo)) {
+            if (!$sentencia->bind_param("ss", $nombreUsuario, $correo)) {
                 //echo "Fallo en la vinculacion de parametros";
                 //return false;
 
@@ -161,7 +157,7 @@ class Metodos
                 //echo "Algo fallo en la ejecucion";
 
                 return false;
-            }else{
+            } else {
                 return true;
             }
         }
@@ -172,14 +168,14 @@ class Metodos
      * Busca los datos del usuario y devuelve un array con estos
      * @return mixed
      */
-    public function cagarDatosUsuario($correo){
+    public function cagarDatosUsuario($correo)
+    {
         //Creamos al consulta
         $consulta = "SELECT * FROM usuario WHERE correo = ?";
 
         //Preparamos con preparae
         if (!$sentencia = $this->conexion->mysqli->prepare($consulta)) {
             echo "La consulta fallo en su preparacion";
-
         }
         //Pasamos los parametros y el tipo de dato
         if (!$sentencia->bind_param("s", $correo)) {
@@ -188,24 +184,19 @@ class Metodos
         //Ejecutamos con execute
         if (!$sentencia->execute()) {
             echo "Algo fallo en la ejecucion";
-
         }
         // Vemos lo que nos devuelve con get_result
         $resultado = $sentencia->get_result();
         if ($this->conexion->numeroFilas($resultado) > 0) {
             while ($fila = $resultado->fetch_array(MYSQLI_ASSOC)) {
                 $arrayAsociativo = array(
-                    "respuesta" =>true,
+                    "respuesta" => true,
                     "respuesta2" => $fila['nombre'],
                     "respuesta3" => $correo
                 );
-
-
             }
             return $arrayAsociativo;
-
-            }
-
+        }
     }
 
 
@@ -214,13 +205,13 @@ class Metodos
      * Borra la cuenta de un usuario
      * @return mixed
      */
-    function borrarUsuario($correo){
-        $consulta ="DELETE FROM usuario WHERE correo= ?";
+    function borrarUsuario($correo)
+    {
+        $consulta = "DELETE FROM usuario WHERE correo= ?";
 
         //Preparamos con preparae
         if (!$sentencia = $this->conexion->mysqli->prepare($consulta)) {
             echo "La consulta fallo en su preparacion";
-
         }
         //Pasamos los parametros y el tipo de dato
         if (!$sentencia->bind_param("s", $correo)) {
@@ -230,17 +221,18 @@ class Metodos
         if (!$sentencia->execute()) {
             echo "Algo fallo en la ejecucion";
             return false;
-        }else{
+        } else {
             return true;
         }
     }
 
-    function cargarCategorias(){
+    function cargarCategorias()
+    {
         $consulta = "SELECT idCategoria, nombreCategoria FROM `categoria` WHERE 1";
         $resultado = $this->conexion->consultas($consulta);
         $arrayAsociativo = array();
 
-        while ($fila =  $this->conexion->extraerFila($resultado)){
+        while ($fila =  $this->conexion->extraerFila($resultado)) {
             //$fila['idCategoria'];
             //$fila['nombreCategoria'];
             array_push($arrayAsociativo, array(
@@ -249,11 +241,31 @@ class Metodos
         }
         return $arrayAsociativo;
     }
+
+    function cargarCategoriasMisPrendas()
+    {
+        $consulta = "SELECT idCategoria, nombreCategoria FROM `categoria` WHERE 1";
+        $resultado = $this->conexion->consultas($consulta);
+        $arrayAsociativo = array();
+
+        while ($fila =  $this->conexion->extraerFila($resultado)) {
+            //$fila['idCategoria'];
+            //$fila['nombreCategoria'];
+            array_push($arrayAsociativo, array(
+               'idCategoria'=>$fila['idCategoria'],
+               'nombreCategoria' => $fila['nombreCategoria']
+            ));
+        }
+        return $arrayAsociativo;
+    }
+
+
     //Cogemos las subcategorias de cada Categoria
-    function cargarSubcategorias($categoria,$usuario){
+    function cargarSubcategorias($categoria, $usuario)
+    {
         $consultaUsurio = "SELECT idUsuario FROM usuario WHERE correo = '$usuario'";
         $resultadoUsuario = $this->conexion->consultas($consultaUsurio);
-        $fila= $this->conexion->extraerFila($resultadoUsuario);
+        $fila = $this->conexion->extraerFila($resultadoUsuario);
         $idUsuario = $fila['idUsuario'];
 
 
@@ -269,42 +281,48 @@ class Metodos
 
         while ($fila = $this->conexion->extraerFila($resultado)) {
             array_push($arraySubcategorias, array(
-                'idSubcategoria'=>$fila['idSubcategoria'],
-                'nombreSubcategoria'=> $fila['nombreSubcategoria']
+                'idSubcategoria' => $fila['idSubcategoria'],
+                'nombreSubcategoria' => $fila['nombreSubcategoria']
             ));
         }
 
         return $arraySubcategorias;
-
     }
 
     //Cargamos las Prendas del usuaario
-    function cargarMisPrendas($usuario){
+    function cargarMisPrendas($usuario)
+    {
         $consultaUsurio = "SELECT idUsuario FROM usuario WHERE correo = '$usuario'";
         $resultadoUsuario = $this->conexion->consultas($consultaUsurio);
-        $fila= $this->conexion->extraerFila($resultadoUsuario);
+        $fila = $this->conexion->extraerFila($resultadoUsuario);
         $idUsuario = $fila['idUsuario'];
 
-        $consulta = "SELECT idPrenda, idUsuario, descripcion, talla, idSubcategoria FROM `prenda` WHERE idUsuario = $idUsuario";
+        //$consulta = "SELECT idPrenda, idUsuario, descripcion, talla, idSubcategoria FROM `prenda` WHERE idUsuario = $idUsuario";
+        $consulta = "SELECT idPrenda, prenda.idUsuario, descripcion, talla, prenda.idSubcategoria, subc.nombreSubcategoria
+        FROM `prenda`
+        LEFT JOIN relusuariosubcategoria AS rus ON rus.idUsuario = prenda.idUsuario AND rus.idSubcategoria = prenda.idSubcategoria
+        LEFT JOIN subcategoria AS subc ON subc.idSubcategoria = rus.idSubcategoria
+        WHERE prenda.idUsuario = 21";
+
         $resultado = $this->conexion->consultas($consulta);
         $arrayAsociativo = array();
-        while ($fila = $this->conexion->extraerFila($resultado)){
+        while ($fila = $this->conexion->extraerFila($resultado)) {
             $imagen = $fila['idPrenda'];
             $files = glob("../imagenes_prendas/$imagen.png");
-            $imagenCodificada = base64_encode($files);
-            array_push($arrayAsociativo , array(
+            $imagenCodificada = base64_encode($files[0]);
+            $imagen = substr($files[0], 2);
+            array_push($arrayAsociativo, array(
                 "id" => $fila['idPrenda'],
-                "idUsuario"=> $fila['idUsurio'],
-                "descripcion"=> $fila['descripcion'],
-                "talla"=> $fila['talla'],
-                "idSubcategoria" => $fila['idSubCategoria'],
-                "imagenCodificada"=> $imagenCodificada
+                "idUsuario" => $fila['idUsuario'],
+                "descripcion" => $fila['descripcion'],
+                "talla" => $fila['talla'],
+                "idSubcategoria" => $fila['idSubcategoria'],
+                "nombreSubcategoria"=>$fila['nombreSubcategoria'],
+                "imagenCodificada" => "src/php$imagen"//$imagenCodificada
 
             ));
-
         }
         return $arrayAsociativo;
-
     }
 
     //Aqui cogemos los datos de la Prenda para guardarlos en la base de datos
@@ -317,7 +335,8 @@ class Metodos
      * Inserta una prenda en la base de datos
      * @return boolean
      */
-    function insertarPrendas($subCategoria, $descripcion, $talla, $correo, $imagen){
+    function insertarPrendas($subCategoria, $descripcion, $talla, $correo, $imagen)
+    {
 
         $consultaInsertar = "INSERT INTO `prenda`(`idUsuario`, `descripcion`, `talla`, `idSubcategoria`) VALUES ((SELECT idUsuario FROM usuario WHERE correo = ?), ?,?,(SELECT idSubcategoria from subcategoria WHERE nombreSubcategoria = ?))";
         //Preparamos con preparae
@@ -326,7 +345,7 @@ class Metodos
             return false;
         }
         //Pasamos los parametros y el tipo de dato
-        if (!$sentencia->bind_param("ssss", $correo,$descripcion,$talla,$subCategoria)) {
+        if (!$sentencia->bind_param("ssss", $correo, $descripcion, $talla, $subCategoria)) {
             //echo "Fallo en la vinculacion de parametros";
             return false;
         }
@@ -335,10 +354,8 @@ class Metodos
         if (!$sentencia->execute()) {
             //echo "Algo fallo en la ejecucion";
             return false;
-        }else if($this->decofificacionImagenes($imagen))
+        } else if ($this->decofificacionImagenes($imagen))
             return true;
-
-
     }
 
     //Metodo para decoficar las imagenes en base64 y guardarlo en la carpeta del servidor
@@ -347,14 +364,15 @@ class Metodos
      * Guarda en la carpeta una imagen decodificada de base64 con el nombre de su id
      * @return boolean
      */
-    function decofificacionImagenes($imagen64){
+    function decofificacionImagenes($imagen64)
+    {
         $consulta = "SELECT MAX(idPrenda) AS id FROM prenda";
-        $resultado=  $this->conexion->consultas($consulta);
+        $resultado =  $this->conexion->consultas($consulta);
 
         $fila = $this->conexion->extraerFila($resultado);
-        $nombreImagen= $fila['id'];
+        $nombreImagen = $fila['id'];
 
-        $rutaGuardado ="$nombreImagen.png";
+        $rutaGuardado = "$nombreImagen.png";
         $ruta = "../imagenes_prendas/$nombreImagen.png";
 
         $file = fopen($ruta, "w+");
@@ -368,14 +386,13 @@ class Metodos
 
 
         return true;
-
-
     }
 
-    function modificarPrenda($descripcion, $talla, $idSubcategoria, $usuario){
+    function modificarPrenda($descripcion, $talla, $idSubcategoria, $usuario)
+    {
         $consultaUsurio = "SELECT idUsuario FROM usuario WHERE correo = '$usuario'";
         $resultadoUsuario = $this->conexion->consultas($consultaUsurio);
-        $fila= $this->conexion->extraerFila($resultadoUsuario);
+        $fila = $this->conexion->extraerFila($resultadoUsuario);
         $idUsuario = $fila['idUsuario'];
         $consulta = "UPDATE `prenda` SET `descripcion`=?,`talla`=?,idSubcategoria=? WHERE idUsuario = ?";
         //$resultado = $this->conexion->consultas($consulta);
@@ -387,7 +404,7 @@ class Metodos
 
         }
         //Pasamos los parametros y el tipo de dato
-        if (!$sentencia->bind_param("ssii", $descripcion,$talla,$idSubcategoria,$idUsuario)) {
+        if (!$sentencia->bind_param("ssii", $descripcion, $talla, $idSubcategoria, $idUsuario)) {
             //echo "Fallo en la vinculacion de parametros";
             //return false;
 
@@ -397,13 +414,14 @@ class Metodos
             //echo "Algo fallo en la ejecucion";
 
             return false;
-        }else{
+        } else {
             return true;
         }
-}
+    }
 
-    function borrarPrenda($idPrenda){
-        $consultaBorrar ="DELETE FROM `prenda` WHERE idPrenda = ?";
+    function borrarPrenda($idPrenda)
+    {
+        $consultaBorrar = "DELETE FROM `prenda` WHERE idPrenda = ?";
 
         //Preparamos con preparae
         if (!$sentencia = $this->conexion->mysqli->prepare($consultaBorrar)) {
@@ -412,7 +430,7 @@ class Metodos
 
         }
         //Pasamos los parametros y el tipo de dato
-        if (!$sentencia->bind_param("i",$idPrenda)) {
+        if (!$sentencia->bind_param("i", $idPrenda)) {
             //echo "Fallo en la vinculacion de parametros";
             //return false;
 
@@ -422,14 +440,14 @@ class Metodos
             //echo "Algo fallo en la ejecucion";
 
             return false;
-        }else{
+        } else {
             return true;
         }
     }
 
 
 
-//Subimos las imagenes y pasamos el parametro Carpeta Destino que es donde se guardadn las imagenes del pedido,
+    //Subimos las imagenes y pasamos el parametro Carpeta Destino que es donde se guardadn las imagenes del pedido,
     /*
      * @param mixed $carpetaDestino
      * Procesa y guarda un conjunto de imágenes
@@ -440,45 +458,40 @@ class Metodos
         if (isset($_FILES['imagenes'])) {
 
 
-           foreach ($_FILES["imagenes"]['tmp_name'] as $key => $tmp_name) {
-               //Si el archivo contiene algo y es diferente de vacio
-               if ($_FILES['imagenes']['name'][$key]) {
-                   $archivo = $_FILES['imagenes']['name'][$key];
-                   //Obtenemos algunos datos necesarios sobre el archivo
-                   $tipo = $_FILES['imagenes']['type'][$key];
-                   $tamano = $_FILES['imagenes']['size'][$key];
-                   $temp = $_FILES['imagenes']['tmp_name'][$key];
-                   //Se comprueba si el archivo a cargar es correcto observando su extensión y tamaño
-                   if (!((strpos($tipo, "gif") || strpos($tipo, "jpeg") || strpos($tipo, "jpg") || strpos($tipo, "png")) && ($tamano < 2000000))) {
-                       echo '<div><b>Error. La extensión o el tamaño de los archivos no es correcta.<br/>
+            foreach ($_FILES["imagenes"]['tmp_name'] as $key => $tmp_name) {
+                //Si el archivo contiene algo y es diferente de vacio
+                if ($_FILES['imagenes']['name'][$key]) {
+                    $archivo = $_FILES['imagenes']['name'][$key];
+                    //Obtenemos algunos datos necesarios sobre el archivo
+                    $tipo = $_FILES['imagenes']['type'][$key];
+                    $tamano = $_FILES['imagenes']['size'][$key];
+                    $temp = $_FILES['imagenes']['tmp_name'][$key];
+                    //Se comprueba si el archivo a cargar es correcto observando su extensión y tamaño
+                    if (!((strpos($tipo, "gif") || strpos($tipo, "jpeg") || strpos($tipo, "jpg") || strpos($tipo, "png")) && ($tamano < 2000000))) {
+                        echo '<div><b>Error. La extensión o el tamaño de los archivos no es correcta.<br/>
         - Se permiten archivos .gif, .jpg, .png. y de 200 kb como máximo.</b></div>';
-                   } else {
-                       //Abrimos la carpeta
-                       $dir=opendir($carpetaDestino);
-                       //Si la imagen es correcta en tamaño y tipo
-                       //Se intenta subir al servidor
-                       if (move_uploaded_file($temp, $carpetaDestino."/" .$archivo)) {
-                           //Cambiamos los permisos del archivo a 777 para poder modificarlo posteriormente
-                           //chmod('images/'.$archivo, 0777);
-                           //Mostramos el mensaje de que se ha subido co éxito
-                           echo '<p>Se ha subido correctamente la imagen.</p>';
-                           //Mostramos la imagen subida
-                            echo '<div id="imagenesSubidas" style="width: 500px;"><img src="'.$carpetaDestino.'/' . $archivo . '"></div>';
-                       } else {
-                           //Si no se ha podido subir la imagen, mostramos un mensaje de error
-                           echo '<div><b>Ocurrió algún error al subir el fichero. No pudo guardarse.</b></div>';
-                       }
-                       //cerrramos el fichero
-                       closedir($dir);
-                   }
-               }
-           }
-           echo"<a class='subir' href='home.php'>Terminar Pedido</a>";
+                    } else {
+                        //Abrimos la carpeta
+                        $dir = opendir($carpetaDestino);
+                        //Si la imagen es correcta en tamaño y tipo
+                        //Se intenta subir al servidor
+                        if (move_uploaded_file($temp, $carpetaDestino . "/" . $archivo)) {
+                            //Cambiamos los permisos del archivo a 777 para poder modificarlo posteriormente
+                            //chmod('images/'.$archivo, 0777);
+                            //Mostramos el mensaje de que se ha subido co éxito
+                            echo '<p>Se ha subido correctamente la imagen.</p>';
+                            //Mostramos la imagen subida
+                            echo '<div id="imagenesSubidas" style="width: 500px;"><img src="' . $carpetaDestino . '/' . $archivo . '"></div>';
+                        } else {
+                            //Si no se ha podido subir la imagen, mostramos un mensaje de error
+                            echo '<div><b>Ocurrió algún error al subir el fichero. No pudo guardarse.</b></div>';
+                        }
+                        //cerrramos el fichero
+                        closedir($dir);
+                    }
+                }
+            }
+            echo "<a class='subir' href='home.php'>Terminar Pedido</a>";
         }
     }
-
-
-
-
-
 }

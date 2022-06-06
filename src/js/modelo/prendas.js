@@ -35,7 +35,7 @@ export class Prendas {
      * @return {JSON} 
      * @memberof Prendas
      */
-    static async subidaDePrenda(talla, descripcion, categoria, subcategoria, imagen){
+    static async subidaDePrenda(talla, descripcion, categoria, subcategoria, imagen) {
         let subidaDePrenda = 'subidaDePrenda'
         let error
 
@@ -45,13 +45,13 @@ export class Prendas {
                 mensaje: 'Por favor introduce la talla'
             }
             return error
-        } else if(categoria == '' || categoria == null){
+        } else if (categoria == '' || categoria == null) {
             error = {
                 success: false,
                 mensaje: 'Por favor selecciona el tipo de prenda'
             }
             return error
-        } else if (subcategoria == '' || subcategoria ==null) {
+        } else if (subcategoria == '' || subcategoria == null) {
             error = {
                 success: false,
                 mensaje: 'Por favor selecciona una categoría'
@@ -67,30 +67,30 @@ export class Prendas {
         console.log(talla, descripcion, categoria, subcategoria, imagen);
         let datos = await $.ajax(
             {
-                url:  "https://05.2daw.esvirgua.com/myCloset/src/php/controlador/controladorBackend.php",
+                url: "https://05.2daw.esvirgua.com/myCloset/src/php/controlador/controladorBackend.php",
                 //url: "/DWEC/myCloset/src/php/controlador/controladorBackend.php",
                 //url: "https://myclosetss.000webhostapp.com/php/controlador/controladorBackend.php",
                 //url: "/myCloset/src/php/controlador/controladorBackend.php",
                 type: "POST",
                 data:
-                    {
-                        propiedad: subidaDePrenda,
-                        correo:  sessionStorage.sesion,
-                        talla: talla,
-                        descripcion: descripcion,
-                        categoria: categoria,
-                        subcategoria: subcategoria,
-                        imagen: imagen
-                    },
+                {
+                    propiedad: subidaDePrenda,
+                    correo: sessionStorage.sesion,
+                    talla: talla,
+                    descripcion: descripcion,
+                    categoria: categoria,
+                    subcategoria: subcategoria,
+                    imagen: imagen
+                },
             })
-            //console.log(datos);
+        //console.log(datos);
         let datosJson = JSON.parse(datos)
-            //console.log(datosJson);
+        //console.log(datosJson);
         return datosJson
     }
 
 
-    static async cargarCategoria(){
+    static async cargarCategoria() {
 
         let cargarCategoria = 'cargarCategoria'
         let datos = await $.ajax(
@@ -101,11 +101,11 @@ export class Prendas {
                 //url: "/myCloset/src/php/controlador/controladorBackend.php",
                 type: "POST",
                 data:
-                    {
-                        propiedad: cargarCategoria,
-                        correo:  sessionStorage.sesion,
+                {
+                    propiedad: cargarCategoria,
+                    correo: sessionStorage.sesion,
 
-                    },
+                },
             })
         let datosJson = JSON.parse(datos)
         return datosJson
@@ -113,7 +113,7 @@ export class Prendas {
 
 
 
-    static async cargarSubCategoria(categoria){
+    static async cargarSubCategoria(categoria) {
         let cargarSubCategoria = 'cargarSubCategoria'
         let datos = await $.ajax(
             {
@@ -123,12 +123,12 @@ export class Prendas {
                 //url: "/myCloset/src/php/controlador/controladorBackend.php",
                 type: "POST",
                 data:
-                    {
-                        propiedad: cargarSubCategoria,
-                        correo:  sessionStorage.sesion,
-                        categoria: categoria,
+                {
+                    propiedad: cargarSubCategoria,
+                    correo: sessionStorage.sesion,
+                    categoria: categoria,
 
-                    },
+                },
             })
         //console.log(datos);
         let datosJson = JSON.parse(datos)
@@ -136,7 +136,7 @@ export class Prendas {
         return datosJson
     }
 
-    static async cargarMisPrendas(){
+    static async cargarMisPrendas() {
         let cargarMisPrendas = 'cargarMisPrendas'
         let datos = await $.ajax(
             {
@@ -146,21 +146,20 @@ export class Prendas {
                 //url: "/myCloset/src/php/controlador/controladorBackend.php",
                 type: "POST",
                 data:
-                    {
-                        propiedad: cargarMisPrendas,
-                        correo:  sessionStorage.sesion
+                {
+                    propiedad: cargarMisPrendas,
+                    correo: sessionStorage.sesion
 
 
-                    },
+                },
             })
 
         let datosJson = JSON.parse(datos)
-
         return datosJson
     }
 
 
-    static async modificarPrenda(descripcion, talla, idSubCategoria){
+    static async modificarPrenda(descripcion, talla, idSubCategoria) {
         let modificarPrenda = 'modicarPrenda'
         let datos = await $.ajax(
             {
@@ -170,22 +169,22 @@ export class Prendas {
                 //url: "/myCloset/src/php/controlador/controladorBackend.php",
                 type: "POST",
                 data:
-                    {
-                        propiedad: cargarMisPrendas,
-                        correo:  sessionStorage.sesion,
-                        descripcion: descripcion,
-                        talla : talla,
-                        idSubcategoria:idSubCategoria
+                {
+                    propiedad: cargarMisPrendas,
+                    correo: sessionStorage.sesion,
+                    descripcion: descripcion,
+                    talla: talla,
+                    idSubcategoria: idSubCategoria
 
 
-                    },
+                },
             })
 
         let datosJson = JSON.parse(datos)
 
         return datosJson
     }
-    static async borrarPrenda(idPrenda){
+    static async borrarPrenda(idPrenda) {
         let borrarPrenda = 'borrarPrenda'
         let datos = await $.ajax(
             {
@@ -195,18 +194,39 @@ export class Prendas {
                 //url: "/myCloset/src/php/controlador/controladorBackend.php",
                 type: "POST",
                 data:
-                    {
-                        propiedad: cargarMisPrendas,
-                        correo:  sessionStorage.sesion,
-                        idPrenda: idPrenda
+                {
+                    propiedad: cargarMisPrendas,
+                    correo: sessionStorage.sesion,
+                    idPrenda: idPrenda
 
 
-                    },
+                },
             })
 
         let datosJson = JSON.parse(datos)
 
         return datosJson
+    }
+
+    static async cargarCategoriasMisPrendas() {
+        let cargarCategoria = 'cargarCategoriasMisPrendas'
+        let datos = await $.ajax(
+            {
+                //url:  "https://05.2daw.esvirgua.com/myCloset/src/php/controlador/controladorBackend.php",
+                url: "/DWEC/myCloset/src/php/controlador/controladorBackend.php",
+                //url: "https://myclosetss.000webhostapp.com/php/controlador/controladorBackend.php",
+                //url: "/myCloset/src/php/controlador/controladorBackend.php",
+                type: "POST",
+                data:
+                {
+                    propiedad: cargarCategoria,
+                    correo: sessionStorage.sesion,
+
+                },
+            })
+        let datosJson = JSON.parse(datos)
+        return datosJson
+
     }
 
 }

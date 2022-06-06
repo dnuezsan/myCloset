@@ -20,7 +20,7 @@ export class VistaCategorias {
 
     iniciar() {
         VistaCategorias.generarCategorias()
-        VistaCategorias.generarSubcategorias()
+        VistaCategorias.cargarCategoriasYSubcategorias()
     }
 
 
@@ -55,7 +55,7 @@ export class VistaCategorias {
         }
     } */
 
-    static limpiarFormulario(){
+    static limpiarFormulario() {
         let inputsTexto = document.querySelectorAll('#panelCategorias input')
         let selectores = document.querySelectorAll('#panelCategorias select')
 
@@ -69,8 +69,8 @@ export class VistaCategorias {
     }
 
 
-    static async generarCategorias(){
-        
+    static async generarCategorias() {
+
         let selectCategorias = document.getElementById('categoriaCrearCategoria')
         /* Se cargan las categorias */
         let categorias = await Controlador.cargarCategoriasPrendas()
@@ -82,21 +82,50 @@ export class VistaCategorias {
         $('#categoriaCrearCategoria').formSelect()
     }
 
-    static async generarSubcategorias(){
-        let selectModificarSubcategoria = document.getElementById('modificarSubcategoria')
-        let selectBorrarSubcategoria = document.getElementById('borrarSubcategoria')
 
-        let datos = await Controlador.cargarSubcategoriasPrendas()
+    static async cargarCategoriasYSubcategorias() {
+        let selectModificarCategorias = document.getElementById('modificarCategoria')
+        let selectBorrarCategorias = document.getElementById('borrarCategoria')
 
-        for (let i = 0; i < datos.length; i++) {
-            VistaCategorias.cargaSubCategorias(datos, i, selectModificarSubcategoria)
-            VistaCategorias.cargaSubCategorias(datos, i, selectBorrarSubcategoria)
+        let selectModificarSubcategorias = document.getElementById('modificarSubcategoria')
+        let selectBorrarSubcategorias = document.getElementById("borrarSubcategoria")
+        /* Se cargan las categorias */
+        let categorias = await Controlador.cargarCategoriasPrendas()
+
+        /* Se generan las categorias en su select */
+        for (let i = 0; i < categorias.length; i++) {
+            VistaCategorias.cargaCategorias(categorias[i], i, selectModificarCategorias)
+            VistaCategorias.cargaCategorias(categorias[i], i, selectBorrarCategorias)
         }
+        /* Se generan las subcategorias correspondientes a la categoría elegida cada vez que esta cambia */
+        VistaCategorias.generarSubCategorias(selectModificarCategorias, selectModificarSubcategorias, "modificarSubcategoria")
+        VistaCategorias.generarSubCategorias(selectBorrarCategorias, selectBorrarSubcategorias, "borrarSubcategoria")
 
-        $('#modificarSubcategoria').formSelect()
-        $('#borrarSubcategoria').formSelect()
+        $('#modificarCategoria').formSelect()
+        $('#borrarCategoria').formSelect()
     }
 
+
+    static generarSubCategorias(nodoSelectCategoria, nodoSelectSubCategoria, nombreNodo) {
+        nodoSelectCategoria.addEventListener('change', async () => {
+
+            let subcategorias = await Controlador.cargarSubcategoriasPrendas(nodoSelectCategoria.value)
+
+            let opciones = document.querySelectorAll(`#${nombreNodo} option`)
+            /* Se borran las subcategorias anteriores */
+            if (opciones.length > 1) {
+                let listaSubcategorias = document.getElementsByClassName('subcategoriaVistaCategorias')
+                while (listaSubcategorias.length > 0) {
+                    nodoSelectSubCategoria.removeChild(listaSubcategorias[0])
+                }
+            }
+            /* Se cargan las nuevas subcategorias */
+            for (let i = 0; i < subcategorias.length; i++) {
+                VistaCategorias.cargaSubCategorias(subcategorias[i], nodoSelectSubCategoria)
+            }
+            $(`#${nombreNodo}`).formSelect()
+        })
+    }
 
     static cargaCategorias(datos, iterador, nodoPadre) {
         let categoria = document.createElement('option')
@@ -112,11 +141,10 @@ export class VistaCategorias {
 
         let subCategoria = document.createElement('option')
         //Conjunto de subcategorias con clases
-        subCategoria.classList.add('subcategoria')
+        subCategoria.classList.add('subcategoriaVistaCategorias')
 
         subCategoria.value = datos.idSubcategoria
         subCategoria.textContent = datos.nombreSubcategoria
-
         nodoPadre.appendChild(subCategoria)
     }
 

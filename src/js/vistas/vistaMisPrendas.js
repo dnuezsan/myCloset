@@ -45,30 +45,37 @@ export class VistaMisPrendas {
         panel.style.display = 'none'
     }
 
-    static cargarPrendas() {
+    static async cargarPrendas() {
 
         //let datos = await Controlador.cargaDePrendas()
         let categorias = document.getElementsByClassName('listaCategoriasMisPrendas')
 
         let contenedor = document.getElementById('contenedorMisPrendas')
 
-        for (let i = 0; i < 5; i++) {
-            VistaMisPrendas.generarCategoria('zapato', categorias[0])
-            VistaMisPrendas.generarCategoria('zapato', categorias[1])
+        let datosCategorias = await Controlador.cargarCategoriasMisPrendas()
+
+        for (let i = 0; i<datosCategorias.length; i++) {
+            VistaMisPrendas.generarCategoria(datosCategorias[i].nombreCategoria, categorias[0])
+            VistaMisPrendas.generarCategoria(datosCategorias[i].nombreCategoria, categorias[1])
         }
 
-        for (let i = 0; i < 2/*datos.length*/; i++) {
+        let prendas = await Controlador.cargarMisPrendas()
+
+        for (let i = 0; i < prendas.length; i++) {
             /* Creación de contenedor de prenda en version móvil y escritorio y adición de clases*/
             let contenedorItemMisPrendas = document.createElement('div')
             contenedorItemMisPrendas.classList.add('contenedorItemMisPrendas', 'col', 's12', 'm10', 'offset-m1', 'left-align', 'offset-m1')
+            let nombrePrenda = document.createElement('h4')
+            nombrePrenda.classList.add('left-align', 'col', 'm12', 'l12', 'offset-m1', 'offset-l1', )
+            nombrePrenda.textContent = 'Prenda ' + (i + 1)
 
             //CATEGORIAS
 
             //FIN CATEGORIAS
             //INICIO DE ITEMS
-            VistaMisPrendas.generarPrenda('src/img/mi-armario-mis prendas/prendas-prueba.jpg', 'M', 'bgfb', 'vgngfn', contenedorItemMisPrendas)
-            VistaMisPrendas.generarPrendaMovil('src/img/mi-armario-mis prendas/prendas-prueba.jpg', 'M', 'bgfb', 'vgngfn', contenedorItemMisPrendas)
-
+            VistaMisPrendas.generarPrenda(prendas[0].imagenCodificada, prendas[i].talla, prendas[i].nombreSubcategoria, prendas[i].descripcion, contenedorItemMisPrendas, i)
+            VistaMisPrendas.generarPrendaMovil(prendas[0].imagenCodificada, prendas[i].talla, prendas[i].nombreSubcategoria, prendas[i].descripcion, contenedorItemMisPrendas, i)
+            contenedor.appendChild(nombrePrenda)
             contenedor.appendChild(contenedorItemMisPrendas)
             //FIN DE ITEMS
             /* adición al contenedor de la prenda, de la prenda en escritorio y móvil */
@@ -286,10 +293,11 @@ export class VistaMisPrendas {
 
     static generarCategoria(nombreCategoria, nodoPadre) {
         let categoria = document.createElement('p')
-        nodoPadre.appendChild(categoria)
         categoria.classList.add('col', 's12', 'white-text')
-        categoria.textContent = nombreCategoria
-
+        let nombreCat = document.createElement('span')
+        nombreCat.textContent = nombreCategoria
+        categoria.appendChild(nombreCat)
+        nodoPadre.appendChild(categoria)
         //return categoria
     }
 
