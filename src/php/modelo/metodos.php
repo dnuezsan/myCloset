@@ -111,11 +111,13 @@ class Metodos
      * Valida los parámetros y actualiza los datos de un usuario en la tabla "usuario"
      * @return boolean
      */
-    public function modicarUsuario($nombreUsuario, $correo, $password, $newpassword, $rnewpassword)
-    {
+    public function modicarUsuario($nombreUsuario, $correo, $password, $newpassword, $rnewpassword){
+
         $consultaNombre = "UPDATE usuario SET nombre=? WHERE correo = ?";
         $consultaPassword = "UPDATE usuario SET nombre=?, clave=? WHERE correo = ?";
-        if ($password != "" && $newpassword != "" && $newpassword == $rnewpassword) {
+
+        if ($password !='null' && $newpassword !='null' && $newpassword == $rnewpassword) {
+
             if ($this->iniciarSesion($correo, $password)) {
                 //Preparamos con preparaep
                 if (!$sentencia = $this->conexion->mysqli->prepare($consultaPassword)) {
@@ -140,16 +142,16 @@ class Metodos
                 }
             }
         } else {
-            //Preparamos con preparae
+
             if (!$sentencia = $this->conexion->mysqli->prepare($consultaNombre)) {
                 //echo "La consulta fallo en su preparacion";
-                //return false;
+                return false;
 
             }
             //Pasamos los parametros y el tipo de dato
             if (!$sentencia->bind_param("ss", $nombreUsuario, $correo)) {
                 //echo "Fallo en la vinculacion de parametros";
-                //return false;
+                return false;
 
             }
             //Ejecutamos con execute
