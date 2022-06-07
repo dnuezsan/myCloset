@@ -410,14 +410,14 @@ class Metodos
         $fila = $this->conexion->extraerFila($resultadoUsuario);
         $idUsuario = $fila['idUsuario'];
 
-        $consultaInsertar = "INSERT INTO `prenda`(`idUsuario`, `descripcion`, `talla`, `idSubcategoria`, `nombrePrenda`) VALUES ((SELECT idUsuario FROM usuario WHERE correo = ?), ?,?,(SELECT idSubcategoria from subcategoria WHERE idSubcategoria = ?), ?)";
+        $consultaInsertar = "INSERT INTO `prenda`(`idUsuario`, `descripcion`, `talla`, `idSubcategoria`, `nombrePrenda`) VALUES ((SELECT idUsuario FROM usuario WHERE correo = ?), ?,?,?, ?)";
         //Preparamos con preparae
         if (!$sentencia = $this->conexion->mysqli->prepare($consultaInsertar)) {
             //echo "La consulta fallo en su preparacion";
             return false;
         }
         //Pasamos los parametros y el tipo de dato
-        if (!$sentencia->bind_param("issis", $idUsuario, $descripcion, $talla, $idSubcategoria, $nombrePrenda)) {
+        if (!$sentencia->bind_param("sssis", $correo, $descripcion, $talla, $idSubcategoria, $nombrePrenda)) {
             //echo "Fallo en la vinculacion de parametros";
             return false;
         }
@@ -453,7 +453,7 @@ class Metodos
         $data = explode(',', $imagen64);
 
         //Crear imagen
-        echo fwrite($file, base64_decode($data[1]));
+         fwrite($file, base64_decode($data[1]));
         fclose($file);
 
 
