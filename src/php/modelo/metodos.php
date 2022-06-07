@@ -376,6 +376,10 @@ class Metodos
      */
     function insertarPrendas($subCategoria, $descripcion, $talla, $correo, $imagen)
     {
+        $consultaUsurio = "SELECT idUsuario FROM usuario WHERE correo = '$correo'";
+        $resultadoUsuario = $this->conexion->consultas($consultaUsurio);
+        $fila = $this->conexion->extraerFila($resultadoUsuario);
+        $idUsuario = $fila['idUsuario'];
 
         $consultaInsertar = "INSERT INTO `prenda`(`idUsuario`, `descripcion`, `talla`, `idSubcategoria`) VALUES ((SELECT idUsuario FROM usuario WHERE correo = ?), ?,?,(SELECT idSubcategoria from subcategoria WHERE nombreSubcategoria = ?))";
         //Preparamos con preparae
@@ -384,7 +388,7 @@ class Metodos
             return false;
         }
         //Pasamos los parametros y el tipo de dato
-        if (!$sentencia->bind_param("ssss", $correo, $descripcion, $talla, $subCategoria)) {
+        if (!$sentencia->bind_param("ssss", $idUsuario, $descripcion, $talla, $subCategoria)) {
             //echo "Fallo en la vinculacion de parametros";
             return false;
         }
