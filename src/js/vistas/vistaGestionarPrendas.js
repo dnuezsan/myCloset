@@ -548,14 +548,17 @@ export class VistaGestionarPrendas {
         nodoPadre.appendChild(prenda)
     }
 
-    static precargaDatos(idPrenda, nombrePrenda, tallaPrenda, descripcionPrenda, idCategoria, nombreCategoria, idSubcategoria, subcategoriaPrenda) {
-        let selectCategoriaModificable = document.getElementById('categoriaPrendaGestionPrendas')
+    static async precargaDatos(idPrenda, nombrePrenda, tallaPrenda, descripcionPrenda, idCategoria, nombreCategoria, idSubcategoria, subcategoriaPrenda) {
+        /* let selectCategoriaModificable = document.getElementById('categoriaPrendaGestionPrendas')
         let selectSubcategoriaModificable = document.getElementById('subCategoriasPrendaGestionPrendas')
-        let selectNombrePrendaModificable = document.getElementById('nombrePrendaGestionPrendas')
-
-        let option = document.createElement('option')
-        selectCategoriaModificable.value = 3
-        $("#categoriaPrendaGestionPrendas").formSelect()
+        let selectNombrePrendaModificable = document.getElementById('nombrePrendaGestionPrendas') */
+        await VistaGestionarPrendas.precargaCategoria(idCategoria)
+        await VistaGestionarPrendas.precargaSubcategoria(idSubcategoria, subcategoriaPrenda)
+        await VistaGestionarPrendas.precargaNombrePrenda(idPrenda, nombrePrenda)
+        await VistaGestionarPrendas.precargaImagen(idPrenda)
+        /*  let option = document.createElement('option')
+         selectCategoriaModificable.value = 3
+         $("#categoriaPrendaGestionPrendas").formSelect() */
         /* selectCategoriaModificable.children[1].selected
         $("#categoriaPrendaGestionPrendas").formSelect() */
 
@@ -564,14 +567,44 @@ export class VistaGestionarPrendas {
 
     static precargaCategoria(idCategoria) {
         let opcionSelectCategoriaModificable = document.getElementById('categoriaPrendaGestionPrendas').children
+        let selectCategoriaModificable = document.getElementById('categoriaPrendaGestionPrendas')
 
         for (let i = 0; i < opcionSelectCategoriaModificable.length; i++) {
-                        
-            if (opcionSelectCategoriaModificable[i].value ===idCategoria) {
-                
-            }
-            
-        }
 
+            if (opcionSelectCategoriaModificable[i].value === idCategoria) {
+
+                selectCategoriaModificable.value = idCategoria
+                $("#categoriaPrendaGestionPrendas").formSelect()
+
+            }
+        }
+    }
+
+    static precargaSubcategoria(idSubcategoria, nombreSubcategoria) {
+
+        let selectSubcategoriaModificable = document.getElementById('subCategoriasPrendaGestionPrendas')
+        let opcionSubcategoria = document.createElement("option")
+        opcionSubcategoria.value = idSubcategoria
+        opcionSubcategoria.textContent = nombreSubcategoria
+
+        selectSubcategoriaModificable.appendChild(opcionSubcategoria)
+        selectSubcategoriaModificable.value = idSubcategoria
+        $("#subCategoriasPrendaGestionPrendas").formSelect()
+    }
+
+    static precargaNombrePrenda(idPrenda, nombrePrenda) {
+        let selectNombrePrenda = document.getElementById('nombrePrendaGestionPrendas')
+        let opcionSubcategoria = document.createElement("option")
+        opcionSubcategoria.value = idPrenda
+        opcionSubcategoria.textContent = nombrePrenda
+
+        selectNombrePrenda.appendChild(opcionSubcategoria)
+        selectNombrePrenda.value = idPrenda
+        $("#nombrePrendaGestionPrendas").formSelect()
+    }
+
+    static precargaImagen(idPrenda){
+        let imagenPrenda = document.getElementById('crop-imageGestion')
+        imagenPrenda.src = `src/php/imagenes_prendas/${idPrenda}.png`
     }
 }

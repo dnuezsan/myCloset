@@ -367,10 +367,10 @@ export class VistaMisPrendas {
     }
 
     static actualizarPrenda(idPrenda, nombrePrenda, tallaPrenda, descripcionPrenda, idCategoria, nombreCategoria, idSubcategoria, subcategoriaPrenda) {
-
-        VistaGestionarPrendas.precargaDatos(idPrenda, nombrePrenda, tallaPrenda, descripcionPrenda, idCategoria, nombreCategoria, idSubcategoria, subcategoriaPrenda)
         VistaMenuPrincipal.ocultarPaneles()
         VistaGestionarPrendas.mostrarGestionarPrendas()
+        VistaGestionarPrendas.precargaDatos(idPrenda, nombrePrenda, tallaPrenda, descripcionPrenda, idCategoria, nombreCategoria, idSubcategoria, subcategoriaPrenda)
+        
         
     }
 
@@ -389,7 +389,7 @@ export class VistaMisPrendas {
         }
     }
 
-    static async cuadroDialogo(idPrenda, nombrePrenda) {
+    static cuadroDialogo(idPrenda, nombrePrenda) {
 
         let botonConfirmacion = document.getElementById('botonBorrarMisPrendas')
         let botonCancelar = document.getElementById('botonCancelarMisPrendas')
