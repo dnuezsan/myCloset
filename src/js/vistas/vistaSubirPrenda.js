@@ -418,6 +418,8 @@ export class VistaSubirPrenda {
             if (datos.success == true) {
                 VistaSubirPrenda.generarMensaje(datos.mensaje)
                 panel.addEventListener('click', VistaSubirPrenda.ocultarMensaje, true)
+                location.reload()
+
             } else if (datos.success == false) {
                 VistaSubirPrenda.generarMensaje(datos.mensaje)
                 panel.addEventListener('click', VistaSubirPrenda.ocultarMensaje, true)

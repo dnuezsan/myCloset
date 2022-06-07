@@ -230,7 +230,7 @@ function subidaDePrenda($subCategoria, $descripcion, $talla, $correo, $nombrePre
         $response['success'] = true;
         $response['mensaje'] = 'Se ha guardado su prenda correctamente';
         $response['correo'] = '';
-        echo $imagen;
+        //echo $imagen;
     } else {
         $response['success'] = false;
         $response['mensaje'] = "No se ha guardado su prenda correctamente";

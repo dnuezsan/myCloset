@@ -495,6 +495,12 @@ class Metodos
     {
         $consultaBorrar = "DELETE FROM `prenda` WHERE idPrenda = ?";
 
+        if (unlink("../imagenes_prendas/$idPrenda.png")) {
+            // file was successfully deleted
+        } else {
+            // there was a problem deleting the file
+            return false;
+        }
         //Preparamos con preparae
         if (!$sentencia = $this->conexion->mysqli->prepare($consultaBorrar)) {
             //echo "La consulta fallo en su preparacion";

@@ -64,7 +64,7 @@ export class Prendas {
             }
             return error
         }
-        console.log(talla, descripcion, categoria, subcategoria, nombrePrenda);
+        //console.log(talla, descripcion, categoria, subcategoria, nombrePrenda);
         let datos = await $.ajax(
             {
                 //url: "https://05.2daw.esvirgua.com/myCloset/src/php/controlador/controladorBackend.php",
