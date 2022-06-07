@@ -134,4 +134,9 @@ export class Controlador {
         return datos
     }
 
+    static async borrarPrenda(idPrenda){
+        let datos = await Prendas.borrarPrenda(idPrenda)
+        return datos
+    }
+
 }

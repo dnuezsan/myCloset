@@ -540,7 +540,7 @@ export class VistaGestionarPrendas {
         nodoPadre.appendChild(subCategoria)
     }
 
-    static cargaNombresPrendas(datos, nodoPadre){
+    static cargaNombresPrendas(datos, nodoPadre) {
         let prenda = document.createElement('option')
 
         prenda.value = datos.idPrenda
@@ -548,7 +548,30 @@ export class VistaGestionarPrendas {
         nodoPadre.appendChild(prenda)
     }
 
-    static precargaDatos(idPrenda, nombrePrenda, tallaPrenda, descripcionPrenda, idCategoria, nombreCategoria, idSubcategoria, subcategoriaPrenda){
+    static precargaDatos(idPrenda, nombrePrenda, tallaPrenda, descripcionPrenda, idCategoria, nombreCategoria, idSubcategoria, subcategoriaPrenda) {
+        let selectCategoriaModificable = document.getElementById('categoriaPrendaGestionPrendas')
+        let selectSubcategoriaModificable = document.getElementById('subCategoriasPrendaGestionPrendas')
+        let selectNombrePrendaModificable = document.getElementById('nombrePrendaGestionPrendas')
+
+        let option = document.createElement('option')
+        selectCategoriaModificable.value = 3
+        $("#categoriaPrendaGestionPrendas").formSelect()
+        /* selectCategoriaModificable.children[1].selected
+        $("#categoriaPrendaGestionPrendas").formSelect() */
+
+
+    }
+
+    static precargaCategoria(idCategoria) {
+        let opcionSelectCategoriaModificable = document.getElementById('categoriaPrendaGestionPrendas').children
+
+        for (let i = 0; i < opcionSelectCategoriaModificable.length; i++) {
+                        
+            if (opcionSelectCategoriaModificable[i].value ===idCategoria) {
+                
+            }
+            
+        }
 
     }
 }

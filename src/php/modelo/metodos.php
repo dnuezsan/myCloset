@@ -510,10 +510,17 @@ class Metodos
         //Ejecutamos con execute
         if (!$sentencia->execute()) {
             //echo "Algo fallo en la ejecucion";
-
-            return false;
+            $respuesta = Array(
+                "success" => false,
+                "mensaje" => "No se pudo eliminar la prenda. Inténtalo en otro momento",
+            );
+            return $respuesta;
         } else {
-            return true;
+            $respuesta = Array(
+                "success" => true,
+                "mensaje" => "La prenda fue borrada satisfactoriamente",
+            );
+            return $respuesta;
         }
     }
 

@@ -398,6 +398,13 @@ body {
     text-align: right;
 }
 
+#panelMisPrendas #cuadroDialogoMisPrendas{
+    position: fixed;
+    display: none;
+    z-index: 1;
+    bottom: 50%;
+}
+
 
 /* Estilos Categorias */
 

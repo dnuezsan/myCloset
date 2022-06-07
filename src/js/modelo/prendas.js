@@ -196,7 +196,7 @@ export class Prendas {
                 type: "POST",
                 data:
                 {
-                    propiedad: cargarMisPrendas,
+                    propiedad: borrarPrenda,
                     correo: sessionStorage.sesion,
                     idPrenda: idPrenda
 

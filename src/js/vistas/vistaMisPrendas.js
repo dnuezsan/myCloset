@@ -2,6 +2,7 @@
 
 import { Controlador } from "../controlador/controlador.js"
 import { VistaGestionarPrendas } from "./vistaGestionarPrendas.js"
+import { VistaMenuPrincipal } from "./vistaMenuPrincipal.js"
 
 
 export class VistaMisPrendas {
@@ -20,7 +21,8 @@ export class VistaMisPrendas {
      */
     async iniciar() {
         await VistaMisPrendas.cargarPrendas()
-        //VistaMisPrendas.botonBorrado()
+        VistaMisPrendas.botonActualizacion()
+        VistaMisPrendas.botonBorrado()
     }
 
 
@@ -62,18 +64,15 @@ export class VistaMisPrendas {
         }
 
         let prendas = await Controlador.cargarMisPrendas()
-
         for (let i = 0; i < prendas.length; i++) {
+
             /* Creación de contenedor de prenda en version móvil y escritorio y adición de clases*/
             let contenedorItemMisPrendas = document.createElement('div')
             contenedorItemMisPrendas.classList.add('contenedorItemMisPrendas', 'col', 's12', 'm10', 'offset-m1', 'left-align', 'offset-m1')
             let nombrePrenda = document.createElement('h4')
             nombrePrenda.classList.add('left-align', 'col', 'm12', 'l12')
             nombrePrenda.textContent = prendas[i].nombrePrenda
-            contenedorItemMisPrendas.idPrenda = prendas[i].idPrenda
-            contenedorItemMisPrendas.idCategoria = prendas[i].idCategoria
-            contenedorItemMisPrendas.nombreCategoria = prendas[i].nombreCategoria
-            contenedorItemMisPrendas.idSubcategoria = prendas[i].idSubcategoria
+            contenedorItemMisPrendas.prenda = prendas[i]
             contenedorItemMisPrendas.appendChild(nombrePrenda)
 
             VistaMisPrendas.generarPrenda(prendas[i].imagenCodificada, prendas[i].talla, prendas[i].nombreSubcategoria, prendas[i].descripcion, contenedorItemMisPrendas)
@@ -189,12 +188,10 @@ export class VistaMisPrendas {
         cajaIconos.classList.add('iconosMisPrendas', 'col', 's12')
         /* Icono actualizacion */
         let iconoActualizar = document.createElement('i')
-        iconoActualizar.setAttribute('id', 'icono1')
         iconoActualizar.classList.add('small', 'material-icons')
         iconoActualizar.textContent = 'system_update_alt'
         /* icono borrado */
         let iconoBorrar = document.createElement('i')
-        iconoBorrar.setAttribute('id', 'icono2')
         iconoBorrar.classList.add('small', 'material-icons')
         iconoBorrar.textContent = 'delete'
 
@@ -338,33 +335,99 @@ export class VistaMisPrendas {
         let nombreCategoria = null
         let tallaPrenda = null
         let idSubcategoria = null
-        let subcategoriaPrenda = null
+        let nombreSubcategoria = null
         let nombrePrenda = null
         let descripcionPrenda = null
-        let boton = document.querySelectorAll(".iconosMisPrendas")
-        
-        for (let i = 0; i < boton.length; i++) {
-            idPrenda = document.querySelectorAll('.contenedorItemMisPrendas')[i].idPrenda
-            idCategoria = document.querySelectorAll('.contenedorItemMisPrendas')[i].idCategoria
-            nombreCategoria = document.querySelectorAll('.contenedorItemMisPrendas')[i].nombreCategoria
-            idSubcategoria = document.querySelectorAll('.contenedorItemMisPrendas')[i].idSubcategoria
-            nombrePrenda = document.querySelectorAll('.contenedorItemMisPrendas')[i].children[0]
-            tallaPrenda = document.getElementsByClassName('tallaMisPrendas')[i].children[1].textContent
-            descripcionPrenda = document.getElementsByClassName('descripcionMisPrendas')[i].children[1].textContent
-            subcategoriaPrenda = document.getElementsByClassName('categoriaMisPrendas')[i].children[1].textContent
-            boton[i].children[0].onclick = ()=>{
+        let item = document.getElementsByClassName('itemMisPrendas')
+        let contenedorItem = document.getElementsByClassName('contenedorItemMisPrendas')
 
-                VistaMisPrendas.actualizarPrenda(idPrenda, nombrePrenda, tallaPrenda, descripcionPrenda, idCategoria, nombreCategoria, idSubcategoria, subcategoriaPrenda)
+        for (let i = 0; i < item.length; i++) {
+            item[i].children[0].children[0].onclick = () => {
+                idPrenda = contenedorItem[i].prenda.idPrenda
+                nombrePrenda = contenedorItem[i].prenda.nombrePrenda
+                idCategoria = contenedorItem[i].prenda.idCategoria
+                nombreCategoria = contenedorItem[i].prenda.nombreCategoria
+                idSubcategoria = contenedorItem[i].prenda.idSubcategoria
+                nombreSubcategoria = contenedorItem[i].prenda.nombreSubcategoria
+                tallaPrenda = contenedorItem[i].prenda.talla
+                descripcionPrenda = contenedorItem[i].prenda.descripcion
+                VistaMisPrendas.actualizarPrenda(
+                    idPrenda,
+                    nombrePrenda,
+                    tallaPrenda,
+                    descripcionPrenda,
+                    idCategoria,
+                    nombreCategoria,
+                    idSubcategoria,
+                    nombreSubcategoria)
             }
-            
+
         }
 
     }
 
-    static actualizarPrenda(idPrenda, nombrePrenda, tallaPrenda, descripcionPrenda, idCategoria, nombreCategoria, idSubcategoria, subcategoriaPrenda){
+    static actualizarPrenda(idPrenda, nombrePrenda, tallaPrenda, descripcionPrenda, idCategoria, nombreCategoria, idSubcategoria, subcategoriaPrenda) {
 
         VistaGestionarPrendas.precargaDatos(idPrenda, nombrePrenda, tallaPrenda, descripcionPrenda, idCategoria, nombreCategoria, idSubcategoria, subcategoriaPrenda)
+        VistaMenuPrincipal.ocultarPaneles()
+        VistaGestionarPrendas.mostrarGestionarPrendas()
+        
+    }
 
+    static botonBorrado() {
+        let idPrenda = null
+        let nombrePrenda = null
+        let item = document.getElementsByClassName('itemMisPrendas')
+        let contenedorItem = document.getElementsByClassName('contenedorItemMisPrendas')
+
+        for (let i = 0; i < item.length; i++) {
+            item[i].children[0].children[2].onclick = () => {
+                idPrenda = contenedorItem[i].prenda.idPrenda
+                nombrePrenda = contenedorItem[i].prenda.nombrePrenda
+                VistaMisPrendas.cuadroDialogo(idPrenda, nombrePrenda)
+            }
+        }
+    }
+
+    static async cuadroDialogo(idPrenda, nombrePrenda) {
+
+        let botonConfirmacion = document.getElementById('botonBorrarMisPrendas')
+        let botonCancelar = document.getElementById('botonCancelarMisPrendas')
+        let texto = document.getElementById('nombrePrendaBorrable')
+        texto.innerHTML = `¿Esta seguro de que deseas borrar ${nombrePrenda}`
+        VistaMisPrendas.mostrarCuadroConfirmacion()
+
+        botonConfirmacion.onclick = () => {
+            VistaMisPrendas.borrarPrenda(idPrenda)
+            VistaMisPrendas.ocultarCuadroConfirmacion()
+            texto.innerHTML = ''
+        }
+
+        botonCancelar.onclick = () => {
+            VistaMisPrendas.ocultarCuadroConfirmacion()
+            texto.innerHTML = ''
+        }
+
+    }
+
+    static async borrarPrenda(idPrenda) {
+        let datos = await Controlador.borrarPrenda(idPrenda)
+
+        if (!datos.success) {
+            console.log('ha ocurrido un error');
+        } else {
+            location.reload()
+        }
+    }
+
+    static ocultarCuadroConfirmacion() {
+        let cuadro = document.getElementById('cuadroDialogoMisPrendas')
+        cuadro.style.display = 'none'
+    }
+
+    static mostrarCuadroConfirmacion() {
+        let cuadro = document.getElementById('cuadroDialogoMisPrendas')
+        cuadro.style.display = 'block'
     }
 
 }
