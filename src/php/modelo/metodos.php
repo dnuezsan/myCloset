@@ -291,6 +291,34 @@ class Metodos
         return $arraySubcategorias;
     }
 
+    function cargarNombrePrendas($usuario, $subcategoria){
+        $consultaUsurio = "SELECT idUsuario FROM usuario WHERE correo = '$usuario'";
+        $resultadoUsuario = $this->conexion->consultas($consultaUsurio);
+        $fila = $this->conexion->extraerFila($resultadoUsuario);
+        $idUsuario = $fila['idUsuario'];
+
+
+        $consulta = "SELECT idPrenda, prenda.idUsuario, descripcion, talla, prenda.idSubcategoria, subc.nombreSubcategoria, nombrePrenda
+        FROM `prenda`
+        LEFT JOIN relusuariosubcategoria AS rus ON rus.idUsuario = prenda.idUsuario AND rus.idSubcategoria = prenda.idSubcategoria
+        LEFT JOIN subcategoria AS subc ON subc.idSubcategoria = rus.idSubcategoria
+        LEFT JOIN categoria ON categoria.idCategoria = subc.idCategoria
+        WHERE prenda.idUsuario = $idUsuario AND subc.idSubcategoria = '$subcategoria'";
+
+        $resultado = $this->conexion->consultas($consulta);
+
+        $arraySubcategorias = array();
+
+        while ($fila = $this->conexion->extraerFila($resultado)) {
+            array_push($arraySubcategorias, array(
+                'idPrenda' => $fila['idPrenda'],
+                'nombrePrenda' => $fila['nombrePrenda']
+            ));
+        }
+
+        return $arraySubcategorias;
+    }
+
     //Cargamos las Prendas del usuaario
     function cargarMisPrendas($usuario)
     {
@@ -374,17 +402,17 @@ class Metodos
      * Inserta una prenda en la base de datos
      * @return boolean
      */
-    function insertarPrendas($subCategoria, $descripcion, $talla, $correo, $imagen)
+    function insertarPrendas($subCategoria, $descripcion, $talla, $correo, $nombrePrenda, $imagen)
     {
 
-        $consultaInsertar = "INSERT INTO `prenda`(`idUsuario`, `descripcion`, `talla`, `idSubcategoria`) VALUES ((SELECT idUsuario FROM usuario WHERE correo = ?), ?,?,(SELECT idSubcategoria from subcategoria WHERE nombreSubcategoria = ?))";
+        $consultaInsertar = "INSERT INTO `prenda`(`idUsuario`, `descripcion`, `talla`, `idSubcategoria`, `nombrePrenda`) VALUES ((SELECT idUsuario FROM usuario WHERE correo = ?), ?,?,(SELECT idSubcategoria from subcategoria WHERE nombreSubcategoria = ?), ?)";
         //Preparamos con preparae
         if (!$sentencia = $this->conexion->mysqli->prepare($consultaInsertar)) {
             //echo "La consulta fallo en su preparacion";
             return false;
         }
         //Pasamos los parametros y el tipo de dato
-        if (!$sentencia->bind_param("ssss", $correo, $descripcion, $talla, $subCategoria)) {
+        if (!$sentencia->bind_param("sssss", $correo, $descripcion, $talla, $subCategoria, $nombrePrenda)) {
             //echo "Fallo en la vinculacion de parametros";
             return false;
         }

@@ -376,10 +376,10 @@ export class VistaSubirPrenda {
             }) */
             /* Insercion de la imagen en el div y el input */
             let imagenCanvas = canvas.toDataURL('imagen/png')
-            console.log(imagenCanvas)
+            //console.log(imagenCanvas)
             cropImagen.src = imagenCanvas
             inputText.value = imagenCanvas
-            console.log(inputText.value);
+            //console.log(inputText.value);
 
             let imagen = document.getElementById('img-cropper')
 
@@ -409,10 +409,12 @@ export class VistaSubirPrenda {
             let tallaSubirPrenda = document.getElementById("tallaSubirPrenda").value;
             let descripcionSubirPrenda = document.getElementById("descripcionSubirPrenda").value
             let base64SubirPrenda = document.getElementById("base64SubirPrenda").value
-            let categoria = document.getElementById("categoria").value
-            let subCategoria = document.getElementById("subCategoria").value
-            console.log(tallaSubirPrenda, descripcionSubirPrenda, categoria, subCategoria, base64SubirPrenda);
-            let datos = await Controlador.subidaDePrenda(tallaSubirPrenda, descripcionSubirPrenda, categoria, subCategoria, base64SubirPrenda)
+            let categoria = document.getElementById("categoriaSubirPrendas").value
+            let subCategoria = document.getElementById("subCategoriaSubirPrendas").value
+            let nombrePrenda = document.getElementById("nombreSubirPrenda").value
+
+            //console.log(tallaSubirPrenda, descripcionSubirPrenda, categoria, subCategoria, nombrePrenda, base64SubirPrenda);
+            let datos = await Controlador.subidaDePrenda(tallaSubirPrenda, descripcionSubirPrenda, categoria, subCategoria, nombrePrenda, base64SubirPrenda)
             if (datos.success == true) {
                 VistaSubirPrenda.generarMensaje(datos.mensaje)
                 panel.addEventListener('click', VistaSubirPrenda.ocultarMensaje, true)

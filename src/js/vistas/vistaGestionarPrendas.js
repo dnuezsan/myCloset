@@ -459,6 +459,7 @@ export class VistaGestionarPrendas {
         let selectSubcategorias = document.getElementById('subCategoriasGestionPrendas')
         let selectCategoriaModificable = document.getElementById('categoriaPrendaGestionPrendas')
         let selectSubcategoriaModificable = document.getElementById('subCategoriasPrendaGestionPrendas')
+        let selectNombrePrendaModificable = document.getElementById('nombrePrendaGestionPrendas')
         /* Se cargan las categorias */
         let categorias = await Controlador.cargarCategoriasPrendas()
 
@@ -485,24 +486,32 @@ export class VistaGestionarPrendas {
             }
             $('#subCategoriasGestionPrendas').formSelect()
         })
-
+        /* Método optimizado en relación al resto de carga dinámica de categorias */
         selectCategoriaModificable.addEventListener('change', async () => {
             let subcategorias = await Controlador.cargarSubcategoriasPrendas(selectCategoriaModificable.value)
-            let opciones = document.querySelectorAll('#subCategoriasPrendaGestionPrendas option')
-            /* Se borran las subcategorias anteriores */
-            if (selectCategoriaModificable.childElementCount > 1) {
+            if (selectSubcategoriaModificable.childElementCount > 1) {
                 while (selectSubcategoriaModificable.children.length > 1) {
                     selectSubcategoriaModificable.removeChild(selectSubcategoriaModificable.children[1])
                 }
             }
-            /* Se cargan las nuevas subcategorias */
             for (let i = 0; i < subcategorias.length; i++) {
                 VistaGestionarPrendas.cargaSubCategorias(subcategorias[i], selectSubcategoriaModificable)
             }
             $('#subCategoriasPrendaGestionPrendas').formSelect()
         })
 
-        
+        selectSubcategoriaModificable.addEventListener('change', async () => {
+            let subcategorias = await Controlador.cargarNombresPrendas(selectSubcategoriaModificable.value)
+            if (selectNombrePrendaModificable.childElementCount > 1) {
+                while (selectNombrePrendaModificable.children.length > 1) {
+                    selectNombrePrendaModificable.removeChild(selectNombrePrendaModificable.children[1])
+                }
+            }
+            for (let i = 0; i < subcategorias.length; i++) {
+                VistaGestionarPrendas.cargaNombresPrendas(subcategorias[i], selectNombrePrendaModificable)
+            }
+            $('#nombrePrendaGestionPrendas').formSelect()
+        })
 
         $('#categoriasGestionPrendas').formSelect()
         $('#categoriaPrendaGestionPrendas').formSelect()
@@ -529,5 +538,13 @@ export class VistaGestionarPrendas {
         subCategoria.textContent = datos.nombreSubcategoria
 
         nodoPadre.appendChild(subCategoria)
+    }
+
+    static cargaNombresPrendas(datos, nodoPadre){
+        let prenda = document.createElement('option')
+
+        prenda.value = datos.idPrenda
+        prenda.textContent = datos.nombrePrenda
+        nodoPadre.appendChild(prenda)
     }
 }

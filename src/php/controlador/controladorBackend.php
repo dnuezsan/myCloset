@@ -44,9 +44,10 @@ switch ($_POST['propiedad']) {
         $descripcion = $_POST['descripcion'];
         $categoria = $_POST['categoria'];
         $subcategoria = $_POST['subcategoria'];
+        $nombrePrenda = $_POST['nombrePrenda'];
         $imagen = $_POST['imagen'];
 
-        subidaDePrenda($subcategoria, $descripcion, $talla, $correo, $imagen);
+        subidaDePrenda($subcategoria, $descripcion, $talla, $correo, $nombrePrenda, $imagen);
         break;
     case "cargarCategoria":
         cargarCategoria();
@@ -78,6 +79,10 @@ switch ($_POST['propiedad']) {
         $usuario = $_POST["correo"];
         $categoria = $_POST["categoria"];
         filtrarPrendasPorCategoria($usuario, $categoria);
+    case "cargarNombresPrendas":
+        $usuario = $_POST["correo"];
+        $subcategoria = $_POST["subcategoria"];
+        cargarNombresPrendas($usuario, $subcategoria);
 }
 
 
@@ -213,13 +218,13 @@ function borrarUsuario($correo)
  * Envía datos necesarios al modelo para insertar una prenda y recibe, procesa y retorna la respuesta
  * @return json_encode
  */
-function subidaDePrenda($subCategoria, $descripcion, $talla, $correo, $imagen)
+function subidaDePrenda($subCategoria, $descripcion, $talla, $correo, $nombrePrenda, $imagen)
 {
 
     $metodo = new Metodos();
     $response = array('success' => false, 'mensaje' => "", 'correo' => "");
 
-    if ($metodo->insertarPrendas($subCategoria, $descripcion, $talla, $correo, $imagen)) {
+    if ($metodo->insertarPrendas($subCategoria, $descripcion, $talla, $correo, $nombrePrenda, $imagen)) {
         $response['success'] = true;
         $response['mensaje'] = 'Se ha guardado su prenda correctamente';
         $response['correo'] = '';
@@ -241,7 +246,8 @@ function cargarCategoria()
     echo json_encode($metodo->cargarCategorias());
 }
 
-function cargarCategoriaMisPrendas(){
+function cargarCategoriaMisPrendas()
+{
     $metodo = new Metodos();
 
     echo json_encode($metodo->cargarCategoriasMisPrendas());
@@ -255,6 +261,12 @@ function cargarSubCategoria($categoria, $usuario)
 
     echo json_encode($metodo->cargarSubcategorias($categoria, $usuario));
 }
+function cargarNombresPrendas($usuario, $subcategoria){
+
+    $metodo = new Metodos();
+
+    echo json_encode($metodo->cargarNombrePrendas($usuario, $subcategoria));
+}
 
 function cargarMisPrenda($usuario)
 {
@@ -263,7 +275,8 @@ function cargarMisPrenda($usuario)
     echo json_encode($metodo->cargarMisPrendas($usuario));
 }
 
-function filtrarPrendasPorCategoria($usuario, $categoria){
+function filtrarPrendasPorCategoria($usuario, $categoria)
+{
     $metodo = new Metodos();
 
     echo json_encode($metodo->filtrarPrendasPorCategoria($usuario, $categoria));

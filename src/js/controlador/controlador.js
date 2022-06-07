@@ -97,10 +97,10 @@ export class Controlador {
         return await Usuarios.borrarUsuario()
     }
 
-    static async subidaDePrenda(talla, descripcion, categoria, subcategoria, imagen){
+    static async subidaDePrenda(talla, descripcion, categoria, subcategoria, nombrePrenda, imagen){
 
-        console.log(talla, descripcion, categoria, subcategoria, imagen)
-        return await Prendas.subidaDePrenda(talla, descripcion, categoria, subcategoria, imagen)
+        //console.log(talla, descripcion, categoria, subcategoria, nombrePrenda, imagen)
+        return await Prendas.subidaDePrenda(talla, descripcion, categoria, subcategoria, nombrePrenda, imagen)
 
     }
 
@@ -116,6 +116,11 @@ export class Controlador {
 
     static async cargarSubcategoriasPrendas(categoria){
         let datos = await Prendas.cargarSubCategoria(categoria)
+        return datos
+    }
+
+    static async cargarNombresPrendas(subcategoria){
+        let datos = Prendas.cargarNombresPrendas(subcategoria)
         return datos
     }
 

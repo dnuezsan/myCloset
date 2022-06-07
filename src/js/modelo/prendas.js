@@ -35,7 +35,7 @@ export class Prendas {
      * @return {JSON} 
      * @memberof Prendas
      */
-    static async subidaDePrenda(talla, descripcion, categoria, subcategoria, imagen) {
+    static async subidaDePrenda(talla, descripcion, categoria, subcategoria, nombrePrenda, imagen) {
         let subidaDePrenda = 'subidaDePrenda'
         let error
 
@@ -64,11 +64,11 @@ export class Prendas {
             }
             return error
         }
-        console.log(talla, descripcion, categoria, subcategoria, imagen);
+        console.log(talla, descripcion, categoria, subcategoria, nombrePrenda);
         let datos = await $.ajax(
             {
-                url: "https://05.2daw.esvirgua.com/myCloset/src/php/controlador/controladorBackend.php",
-                //url: "/DWEC/myCloset/src/php/controlador/controladorBackend.php",
+                //url: "https://05.2daw.esvirgua.com/myCloset/src/php/controlador/controladorBackend.php",
+                url: "/DWEC/myCloset/src/php/controlador/controladorBackend.php",
                 //url: "https://myclosetss.000webhostapp.com/php/controlador/controladorBackend.php",
                 //url: "/myCloset/src/php/controlador/controladorBackend.php",
                 type: "POST",
@@ -80,6 +80,7 @@ export class Prendas {
                     descripcion: descripcion,
                     categoria: categoria,
                     subcategoria: subcategoria,
+                    nombrePrenda: nombrePrenda,
                     imagen: imagen
                 },
             })
@@ -229,7 +230,7 @@ export class Prendas {
 
     }
 
-    static async filtrarPrendasPorCategoria(categoria){
+    static async filtrarPrendasPorCategoria(categoria) {
         let cargarCategoria = 'filtrarPrendasPorCategoria'
         let datos = await $.ajax(
             {
@@ -243,6 +244,27 @@ export class Prendas {
                     propiedad: cargarCategoria,
                     correo: sessionStorage.sesion,
                     categoria: categoria
+
+                },
+            })
+        let datosJson = JSON.parse(datos)
+        return datosJson
+    }
+
+    static async cargarNombresPrendas(subcategoria) {
+        let cargarCategoria = 'cargarNombresPrendas'
+        let datos = await $.ajax(
+            {
+                //url:  "https://05.2daw.esvirgua.com/myCloset/src/php/controlador/controladorBackend.php",
+                url: "/DWEC/myCloset/src/php/controlador/controladorBackend.php",
+                //url: "https://myclosetss.000webhostapp.com/php/controlador/controladorBackend.php",
+                //url: "/myCloset/src/php/controlador/controladorBackend.php",
+                type: "POST",
+                data:
+                {
+                    propiedad: cargarCategoria,
+                    correo: sessionStorage.sesion,
+                    subcategoria: subcategoria
 
                 },
             })
