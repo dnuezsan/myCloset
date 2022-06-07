@@ -328,12 +328,12 @@ class Metodos
         $idUsuario = $fila['idUsuario'];
 
         //$consulta = "SELECT idPrenda, idUsuario, descripcion, talla, idSubcategoria FROM `prenda` WHERE idUsuario = $idUsuario";
-        $consulta = "SELECT idPrenda, prenda.idUsuario, descripcion, talla, prenda.idSubcategoria, subc.nombreSubcategoria, nombrePrenda
+        $consulta = "SELECT idPrenda, prenda.idUsuario, descripcion, talla, prenda.idSubcategoria, subc.nombreSubcategoria, nombrePrenda, ca.nombreCategoria, ca.idCategoria 
         FROM `prenda`
         LEFT JOIN relusuariosubcategoria AS rus ON rus.idUsuario = prenda.idUsuario AND rus.idSubcategoria = prenda.idSubcategoria
         LEFT JOIN subcategoria AS subc ON subc.idSubcategoria = rus.idSubcategoria
+        LEFT JOIN categoria AS ca ON ca.idCategoria = subc.idCategoria
         WHERE prenda.idUsuario = $idUsuario";
-        
         $resultado = $this->conexion->consultas($consulta);
         $arrayAsociativo = array();
         while ($fila = $this->conexion->extraerFila($resultado)) {
@@ -342,15 +342,16 @@ class Metodos
             $imagenCodificada = base64_encode($files[0]);
             $imagen = substr($files[0], 2);
             array_push($arrayAsociativo, array(
-                "id" => $fila['idPrenda'],
+                "idPrenda" => $fila['idPrenda'],
                 "idUsuario" => $fila['idUsuario'],
                 "descripcion" => $fila['descripcion'],
                 "talla" => $fila['talla'],
+                "idCategoria" => $fila['idCategoria'],
+                "nombreCategoria" => $fila["nombreCategoria"],
                 "idSubcategoria" => $fila['idSubcategoria'],
                 "nombreSubcategoria"=>$fila['nombreSubcategoria'],
                 "imagenCodificada" => "src/php$imagen",//$imagenCodificada
                 "nombrePrenda" => $fila["nombrePrenda"]
-
             ));
         }
         return $arrayAsociativo;
@@ -402,17 +403,21 @@ class Metodos
      * Inserta una prenda en la base de datos
      * @return boolean
      */
-    function insertarPrendas($subCategoria, $descripcion, $talla, $correo, $nombrePrenda, $imagen)
+    function insertarPrendas($idSubcategoria, $descripcion, $talla, $correo, $nombrePrenda, $imagen)
     {
+        $consultaUsuario = "SELECT idUsuario FROM usuario WHERE correo = '$correo'";
+        $resultadoUsuario = $this->conexion->consultas($consultaUsuario);
+        $fila = $this->conexion->extraerFila($resultadoUsuario);
+        $idUsuario = $fila['idUsuario'];
 
-        $consultaInsertar = "INSERT INTO `prenda`(`idUsuario`, `descripcion`, `talla`, `idSubcategoria`, `nombrePrenda`) VALUES ((SELECT idUsuario FROM usuario WHERE correo = ?), ?,?,(SELECT idSubcategoria from subcategoria WHERE nombreSubcategoria = ?), ?)";
+        $consultaInsertar = "INSERT INTO `prenda`(`idUsuario`, `descripcion`, `talla`, `idSubcategoria`, `nombrePrenda`) VALUES ((SELECT idUsuario FROM usuario WHERE correo = ?), ?,?,(SELECT idSubcategoria from subcategoria WHERE idSubcategoria = ?), ?)";
         //Preparamos con preparae
         if (!$sentencia = $this->conexion->mysqli->prepare($consultaInsertar)) {
             //echo "La consulta fallo en su preparacion";
             return false;
         }
         //Pasamos los parametros y el tipo de dato
-        if (!$sentencia->bind_param("sssss", $correo, $descripcion, $talla, $subCategoria, $nombrePrenda)) {
+        if (!$sentencia->bind_param("issis", $idUsuario, $descripcion, $talla, $idSubcategoria, $nombrePrenda)) {
             //echo "Fallo en la vinculacion de parametros";
             return false;
         }

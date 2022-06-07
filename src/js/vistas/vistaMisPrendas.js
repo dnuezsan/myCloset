@@ -1,6 +1,7 @@
 'use strict'
 
 import { Controlador } from "../controlador/controlador.js"
+import { VistaGestionarPrendas } from "./vistaGestionarPrendas.js"
 
 
 export class VistaMisPrendas {
@@ -17,8 +18,9 @@ export class VistaMisPrendas {
      *
      * @memberof VistaMisPrendas
      */
-    iniciar() {
-        VistaMisPrendas.cargarPrendas()
+    async iniciar() {
+        await VistaMisPrendas.cargarPrendas()
+        //VistaMisPrendas.botonBorrado()
     }
 
 
@@ -67,8 +69,13 @@ export class VistaMisPrendas {
             contenedorItemMisPrendas.classList.add('contenedorItemMisPrendas', 'col', 's12', 'm10', 'offset-m1', 'left-align', 'offset-m1')
             let nombrePrenda = document.createElement('h4')
             nombrePrenda.classList.add('left-align', 'col', 'm12', 'l12')
-            nombrePrenda.textContent = prendas[i].nombrePrenda//'Prenda ' + (i + 1)
+            nombrePrenda.textContent = prendas[i].nombrePrenda
+            contenedorItemMisPrendas.idPrenda = prendas[i].idPrenda
+            contenedorItemMisPrendas.idCategoria = prendas[i].idCategoria
+            contenedorItemMisPrendas.nombreCategoria = prendas[i].nombreCategoria
+            contenedorItemMisPrendas.idSubcategoria = prendas[i].idSubcategoria
             contenedorItemMisPrendas.appendChild(nombrePrenda)
+
             VistaMisPrendas.generarPrenda(prendas[i].imagenCodificada, prendas[i].talla, prendas[i].nombreSubcategoria, prendas[i].descripcion, contenedorItemMisPrendas)
             VistaMisPrendas.generarPrendaMovil(prendas[i].imagenCodificada, prendas[i].talla, prendas[i].nombreSubcategoria, prendas[i].descripcion, contenedorItemMisPrendas)
             contenedor.appendChild(contenedorItemMisPrendas)
@@ -323,6 +330,41 @@ export class VistaMisPrendas {
                 VistaMisPrendas.generarPrendaPorCategoria(datosMovil, contenedorMisPrendas)
             }
         }
+    }
+
+    static botonActualizacion() {
+        let idPrenda = null
+        let idCategoria = null
+        let nombreCategoria = null
+        let tallaPrenda = null
+        let idSubcategoria = null
+        let subcategoriaPrenda = null
+        let nombrePrenda = null
+        let descripcionPrenda = null
+        let boton = document.querySelectorAll(".iconosMisPrendas")
+        
+        for (let i = 0; i < boton.length; i++) {
+            idPrenda = document.querySelectorAll('.contenedorItemMisPrendas')[i].idPrenda
+            idCategoria = document.querySelectorAll('.contenedorItemMisPrendas')[i].idCategoria
+            nombreCategoria = document.querySelectorAll('.contenedorItemMisPrendas')[i].nombreCategoria
+            idSubcategoria = document.querySelectorAll('.contenedorItemMisPrendas')[i].idSubcategoria
+            nombrePrenda = document.querySelectorAll('.contenedorItemMisPrendas')[i].children[0]
+            tallaPrenda = document.getElementsByClassName('tallaMisPrendas')[i].children[1].textContent
+            descripcionPrenda = document.getElementsByClassName('descripcionMisPrendas')[i].children[1].textContent
+            subcategoriaPrenda = document.getElementsByClassName('categoriaMisPrendas')[i].children[1].textContent
+            boton[i].children[0].onclick = ()=>{
+
+                VistaMisPrendas.actualizarPrenda(idPrenda, nombrePrenda, tallaPrenda, descripcionPrenda, idCategoria, nombreCategoria, idSubcategoria, subcategoriaPrenda)
+            }
+            
+        }
+
+    }
+
+    static actualizarPrenda(idPrenda, nombrePrenda, tallaPrenda, descripcionPrenda, idCategoria, nombreCategoria, idSubcategoria, subcategoriaPrenda){
+
+        VistaGestionarPrendas.precargaDatos(idPrenda, nombrePrenda, tallaPrenda, descripcionPrenda, idCategoria, nombreCategoria, idSubcategoria, subcategoriaPrenda)
+
     }
 
 }

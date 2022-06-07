@@ -79,10 +79,12 @@ switch ($_POST['propiedad']) {
         $usuario = $_POST["correo"];
         $categoria = $_POST["categoria"];
         filtrarPrendasPorCategoria($usuario, $categoria);
+        break;
     case "cargarNombresPrendas":
         $usuario = $_POST["correo"];
         $subcategoria = $_POST["subcategoria"];
         cargarNombresPrendas($usuario, $subcategoria);
+        break;
 }
 
 

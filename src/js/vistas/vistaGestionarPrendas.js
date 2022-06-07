@@ -547,4 +547,8 @@ export class VistaGestionarPrendas {
         prenda.textContent = datos.nombrePrenda
         nodoPadre.appendChild(prenda)
     }
+
+    static precargaDatos(idPrenda, nombrePrenda, tallaPrenda, descripcionPrenda, idCategoria, nombreCategoria, idSubcategoria, subcategoriaPrenda){
+
+    }
 }
