@@ -99,7 +99,7 @@ CREATE TABLE my_closet.prenda (
     descripcion VARCHAR (255) NULL , 
     talla CHAR(3) NOT NULL , 
     idSubcategoria INT NOT NULL ,
-    nombrePrenda VARCHAR (25) NOT NULL,
+    nombrePrenda VARCHAR (255) NOT NULL,
     PRIMARY KEY (`idPrenda`));
 
 CREATE TABLE my_closet.relusuariosubcategoria ( 
