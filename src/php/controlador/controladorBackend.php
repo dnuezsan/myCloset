@@ -87,8 +87,8 @@ switch ($_POST['propiedad']) {
         break;
     case "insertarSubCategoria":
         $usuario = $_POST["correo"];
-        $idSubCategoria=$_POST['idSubCategoria'];
-        $nombreSubCategoria=$_POST['nombreSubCategoria'];
+        $idSubCategoria=$_POST['idCategoria'];
+        $nombreSubCategoria=$_POST['nombreSubcategoria'];
         insertarSubcategoria($nombreSubCategoria, $idSubCategoria, $usuario);
         break;
     case "modificarSubCategoria":

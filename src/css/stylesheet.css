@@ -422,6 +422,30 @@ body {
     font-family: 'Comfortaa';
 }
 
+#panelCategorias #cuadroDialogoCategorias{
+    position: fixed;
+    display: none;
+    z-index: 1;
+    bottom: 50%;
+    left: 0%;
+}
+
+#panelCategorias #mensajeInsertarSubcategoria{
+    display: none;
+}
+
+#panelCategorias #mensajeModificarSubcategoria{
+    display: none;
+}
+
+#panelCategorias #mensajeBorrarSubcategoria{
+    display: none;
+}
+
+#panelCategorias #conjuntoBorradoSubcategoria{
+    display: none;
+}
+
 /* Estilos de prendas */
 
 #panelPrendas{

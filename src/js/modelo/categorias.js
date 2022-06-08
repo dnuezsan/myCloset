@@ -80,8 +80,8 @@ export class Categorias {
                 {
                     propiedad: insertarSubCategoria,
                     correo: sessionStorage.sesion,
-                    nombresubcategoria: nombreSubCategoria,
-                    idCategorias: idCategoria
+                    nombreSubcategoria: nombreSubCategoria,
+                    idCategoria: idCategoria
 
 
                 },

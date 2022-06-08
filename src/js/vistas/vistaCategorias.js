@@ -21,6 +21,7 @@ export class VistaCategorias {
     iniciar() {
         VistaCategorias.generarCategorias()
         VistaCategorias.cargarCategoriasYSubcategorias()
+        VistaCategorias.detectarCambios()
     }
 
 
@@ -147,22 +148,41 @@ export class VistaCategorias {
         nodoPadre.appendChild(subCategoria)
     }
 
-    //ACABAR
-    static async insertarSubcategoria() {
+    static detectarCambios() {
+        //Insertar
+        let nombreSubcategoria = document.getElementById('nombreCategoria')
+        let categoria = document.getElementById('categoriaCrearCategoria')
+        //Modificar
+
+        nombreSubcategoria.onchange = () => {
+            VistaCategorias.insertarSubcategoria()
+        }
+        categoria.onchange = () => {
+            VistaCategorias.insertarSubcategoria()
+        }
+
+    }
+
+    static insertarSubcategoria() {
         let nombreSubcategoria = document.getElementById('nombreCategoria')
         let categoria = document.getElementById('categoriaCrearCategoria')
         let panel = document.getElementById('panelCategorias')
-        if (nombreSubcategoria.textContent != '' && categoria.value != '') {
-            let respuesta = await Controlador.insertarSubcategoria(nombreSubcategoria.value, categoria.value)
+        let boton = document.getElementById('envioDatosCategoria')
 
-            if (!respuesta.success) {
-                VistaCategorias.mostrarMensajeInserción(respuesta.mensaje)
-                VistaCategorias.mostrarCuadroDialogo()
-                panel.onclick = () => {
-                    VistaCategorias.ocultarCuadroDialogo()
+        boton.onclick = async () => {
+
+            if (nombreSubcategoria.value != '' && categoria.value != '') {
+                let respuesta = await Controlador.insertarSubcategoria(nombreSubcategoria.value, categoria.value)
+    
+                if (!respuesta.success) {
+                    VistaCategorias.mostrarMensajeInserción(respuesta.mensaje)
+                    VistaCategorias.mostrarCuadroDialogo()
+                    panel.onclick = () => {
+                        VistaCategorias.ocultarCuadroDialogo()
+                    }
+                } else {
+                    location.reload()
                 }
-            } else {
-                location.reload()
             }
         }
     }
