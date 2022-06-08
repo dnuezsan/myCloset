@@ -19,7 +19,6 @@ export class VistaCategorias {
     }
 
     iniciar() {
-        VistaCategorias.generarCategorias()
         VistaCategorias.cargarCategoriasYSubcategorias()
         VistaCategorias.detectarCambios()
     }
@@ -49,12 +48,6 @@ export class VistaCategorias {
         VistaCategorias.limpiarFormulario()
     }
 
-    /* static enviarFormulario(){
-        let boton = document.querySelector('#panelCategoria button')
-        boton.onclick = (evento)=>{
-            Controlador.
-        }
-    } */
 
     static limpiarFormulario() {
         let inputsTexto = document.querySelectorAll('#panelCategorias input')
@@ -70,23 +63,11 @@ export class VistaCategorias {
     }
 
 
-    static async generarCategorias() {
-
-        let selectCategorias = document.getElementById('categoriaCrearCategoria')
-        /* Se cargan las categorias */
-        let categorias = await Controlador.cargarCategoriasPrendas()
-
-        /* Se generan las categorias en su select */
-        for (let i = 0; i < categorias.length; i++) {
-            VistaCategorias.cargaCategorias(categorias[i], selectCategorias)
-        }
-        $('#categoriaCrearCategoria').formSelect()
-    }
-
-
     static async cargarCategoriasYSubcategorias() {
+        let insertarCategoria = document.getElementById('categoriaCrearCategoria')
         let selectModificarCategorias = document.getElementById('modificarCategoria')
         let selectBorrarCategorias = document.getElementById('borrarCategoria')
+        let nuevaCategoria = document.getElementById('modificarCategoriaNuevaCategoria')
 
         let selectModificarSubcategorias = document.getElementById('modificarSubcategoria')
         let selectBorrarSubcategorias = document.getElementById("borrarSubcategoria")
@@ -97,6 +78,9 @@ export class VistaCategorias {
         for (let i = 0; i < categorias.length; i++) {
             VistaCategorias.cargaCategorias(categorias[i], selectModificarCategorias)
             VistaCategorias.cargaCategorias(categorias[i], selectBorrarCategorias)
+            VistaCategorias.cargaCategorias(categorias[i], nuevaCategoria)
+            VistaCategorias.cargaCategorias(categorias[i], insertarCategoria)
+
         }
         /* Se generan las subcategorias correspondientes a la categoría elegida cada vez que esta cambia */
         VistaCategorias.generarSubCategorias(selectModificarCategorias, selectModificarSubcategorias, "modificarSubcategoria")
@@ -104,6 +88,8 @@ export class VistaCategorias {
 
         $('#modificarCategoria').formSelect()
         $('#borrarCategoria').formSelect()
+        $('#modificarCategoriaNuevaCategoria').formSelect()
+        $('#categoriaCrearCategoria').formSelect()
     }
 
 
@@ -153,13 +139,44 @@ export class VistaCategorias {
         let nombreSubcategoria = document.getElementById('nombreCategoria')
         let categoria = document.getElementById('categoriaCrearCategoria')
         //Modificar
+        let categoriaInicial = document.getElementById('modificarCategoria')
+        let nombreSubcategoriaModificable = document.getElementById('nuevoNombreCategoria')
+        let idSubcategoria = document.getElementById('modificarSubcategoria')
+        let idNuevacategoria = document.getElementById('modificarCategoriaNuevaCategoria')
+        //Borrado
 
+        //Insercion
         nombreSubcategoria.onchange = () => {
             VistaCategorias.insertarSubcategoria()
         }
         categoria.onchange = () => {
             VistaCategorias.insertarSubcategoria()
         }
+
+        //Modificación
+        categoriaInicial.onchange = ()=>{
+            VistaCategorias.modificarSubcategoria()
+        }
+        nombreSubcategoriaModificable.onchange = ()=>{
+            VistaCategorias.modificarSubcategoria()
+        }
+        idSubcategoria.onchange = ()=>{
+            VistaCategorias.modificarSubcategoria()
+        }
+        idNuevacategoria.onchange = ()=>{
+            VistaCategorias.modificarSubcategoria()
+        }
+
+    }
+
+    static modificarCategoria(){
+        let nuevoNombreCategoria = document.getElementById('nuevoNombreCategoria')
+        let categoria = document.getElementById('modificarCategoria')
+        let subcategoria = document.getElementById('modificarSubcategoria')
+        let panel = document.getElementById('panelCategorias')
+        let boton = document.getElementById('envioDatosCategoria')
+
+
 
     }
 
@@ -188,7 +205,45 @@ export class VistaCategorias {
     }
 
     static async modificarSubcategoria() {
+        let categoriaInicial = document.getElementById('modificarCategoria')
+        let nombreSubcategoria = document.getElementById('nuevoNombreCategoria')
+        let idSubcategoria = document.getElementById('modificarSubcategoria')
+        let idNuevacategoria = document.getElementById('modificarCategoriaNuevaCategoria')
+        let panel = document.getElementById('panelCategorias')
+        let boton = document.getElementById('envioDatosCategoria')
 
+        boton.onclick = async ()=>{
+            if (nombreSubcategoria.value != '' && idNuevacategoria.value != '') {
+                let respuesta = await Controlador.modificarSubcategoria(nombreSubcategoria.value, idSubcategoria.value, idNuevacategoria.value)
+
+                if (!respuesta) {
+                    VistaCategorias.mostrarMensajeModificacion("No se ha podido modificar la categoría")
+                    VistaCategorias.mostrarCuadroDialogo()
+                    panel.onclick = () => {
+                        VistaCategorias.ocultarCuadroDialogo()
+                    }
+                } else{
+                    location.reload()
+                }
+            } else if (nombreSubcategoria.value != '' && idNuevacategoria.value == '') {
+                let respuesta = await Controlador.modificarSubcategoria(nombreSubcategoria.value, idSubcategoria.value, categoriaInicial.value)
+
+                if (!respuesta) {
+                    VistaCategorias.mostrarMensajeModificacion("No se ha podido modificar la categoría")
+                    VistaCategorias.mostrarCuadroDialogo()
+                    panel.onclick = () => {
+                        VistaCategorias.ocultarCuadroDialogo()
+                    }
+                } else{
+                    location.reload()
+                }
+            }
+            else if (nombreSubcategoria.value == '' && idNuevacategoria.value != '') {
+                
+            }
+            
+        }
+        
     }
 
     static async borrarSubcategoria() {

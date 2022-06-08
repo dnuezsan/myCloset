@@ -92,9 +92,10 @@ switch ($_POST['propiedad']) {
         insertarSubcategoria($nombreSubCategoria, $idSubCategoria, $usuario);
         break;
     case "modificarSubCategoria":
-        $nombreSubCategoria = $_POST['nombreSubCategoria'];
+        $nombreSubCategoria = $_POST['nombreSubcategoria'];
         $idCategoria= $_POST['idCategoria'];
-        modificarSubCategoria($nombreSubCategoria, $idCategoria);
+        $idSubcategoria = $_POST['idSubcategoria'];
+        modificarSubCategoria($nombreSubCategoria, $idCategoria, $idSubcategoria);
         break;
     case "borrarSubCategoria":
         $idSubCategoria=$_POST['idSubCategoria'];
@@ -327,11 +328,11 @@ function insertarSubcategoria($nombreCategoria, $idCategoria, $usuario){
     echo json_encode($response);
 }
 
-function modificarSubCategoria($nombreSubCategoria, $idCategoria){
+function modificarSubCategoria($nombreSubCategoria, $idCategoria, $idSubcategoria){
     $metodo = new Metodos();
     $response = array('success' => false, 'mensaje' => "", 'correo' => "");
 
-    if ($metodo->modificarSubCategoria($nombreSubCategoria, $idCategoria)) {
+    if ($metodo->modificarSubCategoria($nombreSubCategoria, $idCategoria, $idSubcategoria)) {
         $response['success'] = true;
         $response['mensaje'] = 'Se ha modificado su categoría correctamente';
 

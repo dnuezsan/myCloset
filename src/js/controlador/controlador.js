@@ -146,4 +146,9 @@ export class Controlador {
         return datos
     }
 
+    static async modificarSubcategoria(nombreSubCategoria, idSubcategoria, idNuevaCategoria){
+        let respuesta = Categorias.modificarSubcategoria(nombreSubCategoria, idSubcategoria, idNuevaCategoria)
+        return respuesta
+    }
+
 }

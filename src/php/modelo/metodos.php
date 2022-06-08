@@ -566,8 +566,8 @@ class Metodos
 
     }
 //Modificamos la subCategoria cambiando el nombre y la categoria que pertenece
-    function modificarSubCategoria($nombreSubCategoria, $idCategoria){
-        $consulta = "UPDATE `subcategoria` SET `nombreSubcategoria`=?,`idCategoria`=? WHERE 1";
+    function modificarSubCategoria($nombreSubCategoria, $idCategoria, $idSubcategoria){
+        $consulta = "UPDATE `subcategoria` SET `nombreSubcategoria`=?,`idCategoria`=? WHERE idSubcategoria = ?";
 
         //Preparamos con preparae
         if (!$sentencia = $this->conexion->mysqli->prepare($consulta)) {
@@ -576,7 +576,7 @@ class Metodos
 
         }
         //Pasamos los parametros y el tipo de dato
-        if (!$sentencia->bind_param("si", $nombreSubCategoria,$idCategoria)) {
+        if (!$sentencia->bind_param("sii", $nombreSubCategoria,$idCategoria, $idSubcategoria)) {
             //echo "Fallo en la vinculacion de parametros";
             //return false;
 

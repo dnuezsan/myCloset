@@ -90,7 +90,7 @@ export class Categorias {
         return datosJson
     }
 
-    static async modificarSubcategoria(nombreSubCategoria, idCategoria) {
+    static async modificarSubcategoria(nombreSubCategoria, idSubcategoria, idNuevaCategoria) {
         let modificarSubCategoria = 'modificarSubCategoria'
         let datos = await $.ajax(
             {
@@ -103,8 +103,9 @@ export class Categorias {
                 {
                     propiedad: modificarSubCategoria,
                     correo: sessionStorage.sesion,
-                    nombresubcategoria: nombreSubCategoria,
-                    idCategorias: idCategoria
+                    nombreSubcategoria: nombreSubCategoria,
+                    idCategoria: idNuevaCategoria,
+                    idSubcategoria: idSubcategoria
 
 
                 },
