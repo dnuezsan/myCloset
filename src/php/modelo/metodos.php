@@ -591,6 +591,31 @@ class Metodos
         }
     }
 
+    function modificarCambiarDeSubCategoria($idCategoria, $idSubcategoria){
+        $consulta = "UPDATE `subcategoria` SET `idCategoria`=? WHERE idSubcategoria = ?";
+
+        //Preparamos con preparae
+        if (!$sentencia = $this->conexion->mysqli->prepare($consulta)) {
+            //echo "La consulta fallo en su preparacion";
+            //return false;
+
+        }
+        //Pasamos los parametros y el tipo de dato
+        if (!$sentencia->bind_param("ii", $idCategoria, $idSubcategoria)) {
+            //echo "Fallo en la vinculacion de parametros";
+            //return false;
+
+        }
+        //Ejecutamos con execute
+        if (!$sentencia->execute()) {
+            //echo "Algo fallo en la ejecucion";
+
+            return false;
+        } else {
+            return true;
+        }
+    }
+
     function borrarSubCategoria($idSubCategoria){
         $consulta = "DELETE FROM `subcategoria` WHERE `idSubcategoria` = ?";
         $consultaRelacion = "DELETE FROM `relusuariosubcategoria` WHERE idSubcategoria =?";

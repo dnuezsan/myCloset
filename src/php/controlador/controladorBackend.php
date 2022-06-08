@@ -87,18 +87,23 @@ switch ($_POST['propiedad']) {
         break;
     case "insertarSubCategoria":
         $usuario = $_POST["correo"];
-        $idSubCategoria=$_POST['idCategoria'];
-        $nombreSubCategoria=$_POST['nombreSubcategoria'];
+        $idSubCategoria = $_POST['idCategoria'];
+        $nombreSubCategoria = $_POST['nombreSubcategoria'];
         insertarSubcategoria($nombreSubCategoria, $idSubCategoria, $usuario);
         break;
     case "modificarSubCategoria":
         $nombreSubCategoria = $_POST['nombreSubcategoria'];
-        $idCategoria= $_POST['idCategoria'];
+        $idCategoria = $_POST['idCategoria'];
         $idSubcategoria = $_POST['idSubcategoria'];
         modificarSubCategoria($nombreSubCategoria, $idCategoria, $idSubcategoria);
         break;
+    case "modificarCambioSubCategoria":
+        $idCategoria = $_POST['idCategoria'];
+        $idSubcategoria = $_POST['idSubcategoria'];
+        modificarCambiarSubcategoria($idCategoria, $idSubcategoria);
+        break;
     case "borrarSubCategoria":
-        $idSubCategoria=$_POST['idSubCategoria'];
+        $idSubCategoria = $_POST['idSubCategoria'];
         borrarSubCategoria($idSubCategoria);
         break;
 }
@@ -279,7 +284,8 @@ function cargarSubCategoria($categoria, $usuario)
 
     echo json_encode($metodo->cargarSubcategorias($categoria, $usuario));
 }
-function cargarNombresPrendas($usuario, $subcategoria){
+function cargarNombresPrendas($usuario, $subcategoria)
+{
 
     $metodo = new Metodos();
 
@@ -311,7 +317,8 @@ function borrarPrenda($idPrenda)
     echo json_encode($metodo->borrarPrenda($idPrenda));
 }
 
-function insertarSubcategoria($nombreCategoria, $idCategoria, $usuario){
+function insertarSubcategoria($nombreCategoria, $idCategoria, $usuario)
+{
     $metodo = new Metodos();
     $response = array('success' => false, 'mensaje' => "", 'correo' => "");
 
@@ -323,12 +330,12 @@ function insertarSubcategoria($nombreCategoria, $idCategoria, $usuario){
     } else {
         $response['success'] = false;
         $response['mensaje'] = "No se ha guardado su categoría correctamente";
-
     }
     echo json_encode($response);
 }
 
-function modificarSubCategoria($nombreSubCategoria, $idCategoria, $idSubcategoria){
+function modificarSubCategoria($nombreSubCategoria, $idCategoria, $idSubcategoria)
+{
     $metodo = new Metodos();
     $response = array('success' => false, 'mensaje' => "", 'correo' => "");
 
@@ -340,12 +347,30 @@ function modificarSubCategoria($nombreSubCategoria, $idCategoria, $idSubcategori
     } else {
         $response['success'] = false;
         $response['mensaje'] = "No se ha modificado su categoría correctamente";
-
     }
     echo json_encode($response);
 }
+
+function modificarCambiarSubcategoria($idCategoria, $idSubcategoria){
+    
+    $metodo = new Metodos();
+    $response = array('success' => false, 'mensaje' => "", 'correo' => "");
+
+    if ($metodo->modificarCambiarDeSubCategoria($idCategoria, $idSubcategoria)) {
+        $response['success'] = true;
+        $response['mensaje'] = 'Se ha modificado su categoría correctamente';
+
+        //echo $imagen;
+    } else {
+        $response['success'] = false;
+        $response['mensaje'] = "No se ha modificado su categoría correctamente";
+    }
+    echo json_encode($response);
+}
+
 //Borramos las subucategorias
-function borrarSubCategoria($idSubCategoria){
+function borrarSubCategoria($idSubCategoria)
+{
     $metodo = new Metodos();
     $response = array('success' => false, 'mensaje' => "", 'correo' => "");
 
@@ -357,7 +382,6 @@ function borrarSubCategoria($idSubCategoria){
     } else {
         $response['success'] = false;
         $response['mensaje'] = "No se ha borrado su categoría correctamente";
-
     }
     echo json_encode($response);
 }
