@@ -91,6 +91,15 @@ switch ($_POST['propiedad']) {
         $nombreSubCategoria=$_POST['nombreSubCategoria'];
         insertarSubcategoria($nombreSubCategoria, $idSubCategoria, $usuario);
         break;
+    case "modificarSubCategoria":
+        $nombreSubCategoria = $_POST['nombreSubCategoria'];
+        $idCategoria= $_POST['idCategoria'];
+        modificarSubCategoria($nombreSubCategoria, $idCategoria);
+        break;
+    case "borrarSubCategoria":
+        $idSubCategoria=$_POST['idSubCategoria'];
+        borrarSubCategoria($idSubCategoria);
+        break;
 }
 
 
@@ -308,12 +317,46 @@ function insertarSubcategoria($nombreCategoria, $idCategoria, $usuario){
     if ($metodo->insertarSubcategoria($nombreCategoria, $idCategoria, $usuario)) {
         $response['success'] = true;
         $response['mensaje'] = 'Se ha guardado su categoría correctamente';
-        $response['correo'] = '';
+
         //echo $imagen;
     } else {
         $response['success'] = false;
         $response['mensaje'] = "No se ha guardado su categoría correctamente";
-        $response['correo'] = '';
+
+    }
+    echo json_encode($response);
+}
+
+function modificarSubCategoria($nombreSubCategoria, $idCategoria){
+    $metodo = new Metodos();
+    $response = array('success' => false, 'mensaje' => "", 'correo' => "");
+
+    if ($metodo->modificarSubCategoria($nombreSubCategoria, $idCategoria)) {
+        $response['success'] = true;
+        $response['mensaje'] = 'Se ha modificado su categoría correctamente';
+
+        //echo $imagen;
+    } else {
+        $response['success'] = false;
+        $response['mensaje'] = "No se ha modificado su categoría correctamente";
+
+    }
+    echo json_encode($response);
+}
+//Borramos las subucategorias
+function borrarSubCategoria($idSubCategoria){
+    $metodo = new Metodos();
+    $response = array('success' => false, 'mensaje' => "", 'correo' => "");
+
+    if ($metodo->borrarSubCategoria($idSubCategoria)) {
+        $response['success'] = true;
+        $response['mensaje'] = 'Se ha borrado su categoría correctamente';
+
+        //echo $imagen;
+    } else {
+        $response['success'] = false;
+        $response['mensaje'] = "No se ha borrado su categoría correctamente";
+
     }
     echo json_encode($response);
 }
