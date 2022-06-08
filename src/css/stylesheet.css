@@ -576,6 +576,14 @@ body {
     font-family: "Roboto";
 }
 
+#panelGestionPrendas #cuadroDialogoGestionPrendas{
+    position: fixed;
+    display: none;
+    left: 0%;
+    z-index: 1;
+    bottom: 50%;
+}
+
 /* Estilos outfits */
 
 #panelOutfit{

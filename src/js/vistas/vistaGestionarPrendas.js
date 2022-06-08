@@ -14,6 +14,7 @@ export class VistaGestionarPrendas {
         this.cargarFoto()
         this.activarVideo()
         VistaGestionarPrendas.cargarCategoriasYSubcategorias()
+        VistaGestionarPrendas.mostrarMensajeConfirmacionBorrado()
     }
 
     /**
@@ -548,14 +549,17 @@ export class VistaGestionarPrendas {
         nodoPadre.appendChild(prenda)
     }
 
-    static precargaDatos(idPrenda, nombrePrenda, tallaPrenda, descripcionPrenda, idCategoria, nombreCategoria, idSubcategoria, subcategoriaPrenda) {
-        let selectCategoriaModificable = document.getElementById('categoriaPrendaGestionPrendas')
+    static async precargaDatos(idPrenda, nombrePrenda, tallaPrenda, descripcionPrenda, idCategoria, nombreCategoria, idSubcategoria, subcategoriaPrenda) {
+        /* let selectCategoriaModificable = document.getElementById('categoriaPrendaGestionPrendas')
         let selectSubcategoriaModificable = document.getElementById('subCategoriasPrendaGestionPrendas')
-        let selectNombrePrendaModificable = document.getElementById('nombrePrendaGestionPrendas')
-
-        let option = document.createElement('option')
-        selectCategoriaModificable.value = 3
-        $("#categoriaPrendaGestionPrendas").formSelect()
+        let selectNombrePrendaModificable = document.getElementById('nombrePrendaGestionPrendas') */
+        await VistaGestionarPrendas.precargaCategoria(idCategoria)
+        await VistaGestionarPrendas.precargaSubcategoria(idSubcategoria, subcategoriaPrenda)
+        await VistaGestionarPrendas.precargaNombrePrenda(idPrenda, nombrePrenda)
+        await VistaGestionarPrendas.precargaImagen(idPrenda)
+        /*  let option = document.createElement('option')
+         selectCategoriaModificable.value = 3
+         $("#categoriaPrendaGestionPrendas").formSelect() */
         /* selectCategoriaModificable.children[1].selected
         $("#categoriaPrendaGestionPrendas").formSelect() */
 
@@ -564,14 +568,115 @@ export class VistaGestionarPrendas {
 
     static precargaCategoria(idCategoria) {
         let opcionSelectCategoriaModificable = document.getElementById('categoriaPrendaGestionPrendas').children
+        let selectCategoriaModificable = document.getElementById('categoriaPrendaGestionPrendas')
 
         for (let i = 0; i < opcionSelectCategoriaModificable.length; i++) {
-                        
-            if (opcionSelectCategoriaModificable[i].value ===idCategoria) {
-                
+
+            if (opcionSelectCategoriaModificable[i].value === idCategoria) {
+
+                selectCategoriaModificable.value = idCategoria
+                $("#categoriaPrendaGestionPrendas").formSelect()
+
             }
-            
+        }
+    }
+
+    static precargaSubcategoria(idSubcategoria, nombreSubcategoria) {
+
+        let selectSubcategoriaModificable = document.getElementById('subCategoriasPrendaGestionPrendas')
+        let opcionSubcategoria = document.createElement("option")
+        opcionSubcategoria.value = idSubcategoria
+        opcionSubcategoria.textContent = nombreSubcategoria
+
+        selectSubcategoriaModificable.appendChild(opcionSubcategoria)
+        selectSubcategoriaModificable.value = idSubcategoria
+        $("#subCategoriasPrendaGestionPrendas").formSelect()
+    }
+
+    static precargaNombrePrenda(idPrenda, nombrePrenda) {
+        let selectNombrePrenda = document.getElementById('nombrePrendaGestionPrendas')
+        let opcionSubcategoria = document.createElement("option")
+        opcionSubcategoria.value = idPrenda
+        opcionSubcategoria.textContent = nombrePrenda
+
+        selectNombrePrenda.appendChild(opcionSubcategoria)
+        selectNombrePrenda.value = idPrenda
+        $("#nombrePrendaGestionPrendas").formSelect()
+    }
+
+    static precargaImagen(idPrenda) {
+        let imagenPrenda = document.getElementById('crop-imageGestion')
+        imagenPrenda.src = `src/php/imagenes_prendas/${idPrenda}.png`
+    }
+
+    static mostrarMensajeConfirmacionBorrado() {
+        let botonBorrado = document.getElementById('borrarUsuarioGestionPrendas')
+
+        botonBorrado.onclick = () => {
+            let idPrenda = document.getElementById('nombrePrendaGestionPrendas').value
+            VistaGestionarPrendas.confirmarBorrado(idPrenda)
+        }
+    }
+
+    static confirmarBorrado(idPrenda) {
+
+        let mensajeGeneral = document.getElementById('cambioGestionPrendas')
+        let panel = document.getElementById('panelGestionPrendas')
+
+        if (idPrenda === '') {
+            let fragmentoBorrado = document.getElementById('conjuntoBorradoGestionPrenda')
+            fragmentoBorrado.style.display = 'none'
+            mensajeGeneral.textContent = "Seleccione una prenda"
+            VistaGestionarPrendas.mostrarCuadroDialogo()
+            panel.addEventListener('click', () => {
+                VistaGestionarPrendas.ocultarCuadroDialogo()
+            }, true)
+
+        } else {
+            let mensaje = document.getElementById('mensajeBorradoGestionPrendas')
+            mensaje.textContent = '¿Está seguro de que desea borrar la prenda seleccionada?'
+            let botonConfirmarBorrado = document.getElementById('botonBorrarGestionPrenda')
+            let botonCancelarBorrado = document.getElementById('botonCancelarGestionPrenda')
+            VistaGestionarPrendas.mostrarCuadroDialogo()
+
+            botonConfirmarBorrado.onclick = () => {
+                VistaGestionarPrendas.borrarPrenda(idPrenda)
+                //VistaGestionarPrendas.ocultarCuadroDialogo()
+            }
+
+            botonCancelarBorrado.onclick = () => {
+                VistaGestionarPrendas.ocultarCuadroDialogo()
+            }
         }
 
+    }
+
+    static async borrarPrenda(idPrenda) {
+
+        let datos = await Controlador.borrarPrenda(idPrenda)
+
+        if (!datos.success) {
+            console.log('ha ocurrido un error');
+        } else {
+            location.reload()
+        }
+    }
+
+    static mostrarCuadroDialogo() {
+        let cuadroMensaje = document.getElementById('cuadroDialogoGestionPrendas')
+        cuadroMensaje.style.display = "block"
+
+    }
+
+    static ocultarCuadroDialogo() {
+        let cuadroMensaje = document.getElementById('cuadroDialogoGestionPrendas')
+        let mensajeGeneral = document.getElementById('cambioGestionPrendas')
+        let mensajeBorrado = document.getElementById('mensajeBorradoGestionPrendas')
+        let fragmentoBorrado = document.getElementById('conjuntoBorradoGestionPrenda')
+
+        mensajeGeneral.textContent = ''
+        mensajeBorrado.textContent = ''
+        cuadroMensaje.style.display = "none"
+        fragmentoBorrado.style.display = "block"
     }
 }

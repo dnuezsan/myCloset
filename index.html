@@ -702,11 +702,7 @@
                     <div class="input-field col s8 l6 offset-s2 offset-l3">
                         <select id="categoriasGestionPrendas">
                             <option value="">Pulsa aquí</option>
-                            <!-- <option value="1">Cabeza</option>
-                            <option value="2">Torso</option>
-                            <option value="3">Piernas</option>
-                            <option value="4">Calzado</option>
-                            <option value="5">Manos</option> -->
+
                         </select>
                         <label>Tipo de prenda</label>
                     </div>
@@ -715,10 +711,7 @@
                     <div class="input-field col s8 l6 offset-s2 offset-l3">
                         <select id="subCategoriasGestionPrendas">
                             <option value="">Pulsa aquí</option>
-                            <!-- <option value="">Ninguna</option>
-                            <option value="1">Opcion 1</option>
-                            <option value="2">Opcion 2</option>
-                            <option value="3">Opcion 3</option> -->
+
                         </select>
                         <label>Categoría</label>
                     </div>
@@ -733,7 +726,30 @@
             <div class="col s12" id="eliminarPrenda">
                 <h4>Borrar prenda seleccionada</h4>
                 <h6>La prenda seleccionada será borrada de forma permanente</h6>
-                <p><span id="borrarUsuario">Borrar prenda</span></p>
+                <p><span id="borrarUsuarioGestionPrendas">Borrar prenda</span></p>
+            </div>
+            <div class="row center">
+                <div id="cuadroDialogoGestionPrendas" class="col s8 offset-s2 m8 offset-m2 l4 offset-l4 card flow-text">
+                    <p id="cambioGestionPrendas" class="flow-text"></p>
+                    <div id="conjuntoBorradoGestionPrenda" class="row">
+                        <p id="mensajeBorradoGestionPrendas" class="col s12 flow-text">
+                        </p>
+                        <div class="borradoGestionPrenda">
+                            <button id="botonBorrarGestionPrenda"
+                                class="btn-small waves-effect waves-light valign-wrapper col s4 m3 l2 offset-s1 offset-m2 offset-l3"
+                                name="submit">
+                                Sí
+                                <i class="material-icons right">check</i>
+                            </button>
+                            <button id="botonCancelarGestionPrenda"
+                                class="btn-small waves-effect waves-light valign-wrapper col s4 m3 l2 offset-s2 offset-m2 offset-l2"
+                                name="submit">
+                                No
+                                <i class="material-icons right">close</i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -914,11 +930,7 @@
         document.addEventListener('DOMContentLoaded', (event) => {
             M.AutoInit();
         })
-
-        document.addEventListener('DOMContentLoaded', function () {
-            let elems = document.querySelectorAll('.materialboxed');
-            let instances = M.Materialbox.init(elems);
-        });
+        
     </script>
 </body>
 
