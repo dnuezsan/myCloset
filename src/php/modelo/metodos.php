@@ -238,7 +238,8 @@ class Metodos
             //$fila['idCategoria'];
             //$fila['nombreCategoria'];
             array_push($arrayAsociativo, array(
-                $fila['idCategoria'] => $fila['nombreCategoria']
+                "idCategoria" => $fila['idCategoria'],
+                 "nombreCategoria" => $fila['nombreCategoria']
             ));
         }
         return $arrayAsociativo;

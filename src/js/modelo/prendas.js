@@ -91,51 +91,6 @@ export class Prendas {
     }
 
 
-    static async cargarCategoria() {
-
-        let cargarCategoria = 'cargarCategoria'
-        let datos = await $.ajax(
-            {
-                //url:  "https://05.2daw.esvirgua.com/myCloset/src/php/controlador/controladorBackend.php",
-                url: "/DWEC/myCloset/src/php/controlador/controladorBackend.php",
-                //url: "https://myclosetss.000webhostapp.com/php/controlador/controladorBackend.php",
-                //url: "/myCloset/src/php/controlador/controladorBackend.php",
-                type: "POST",
-                data:
-                {
-                    propiedad: cargarCategoria,
-                    correo: sessionStorage.sesion,
-
-                },
-            })
-        let datosJson = JSON.parse(datos)
-        return datosJson
-    }
-
-
-
-    static async cargarSubCategoria(categoria) {
-        let cargarSubCategoria = 'cargarSubCategoria'
-        let datos = await $.ajax(
-            {
-                //url:  "https://05.2daw.esvirgua.com/myCloset/src/php/controlador/controladorBackend.php",
-                url: "/DWEC/myCloset/src/php/controlador/controladorBackend.php",
-                //url: "https://myclosetss.000webhostapp.com/php/controlador/controladorBackend.php",
-                //url: "/myCloset/src/php/controlador/controladorBackend.php",
-                type: "POST",
-                data:
-                {
-                    propiedad: cargarSubCategoria,
-                    correo: sessionStorage.sesion,
-                    categoria: categoria,
-
-                },
-            })
-        //console.log(datos);
-        let datosJson = JSON.parse(datos)
-        //console.log(datosJson);
-        return datosJson
-    }
 
     static async cargarMisPrendas() {
         let cargarMisPrendas = 'cargarMisPrendas'
@@ -272,27 +227,4 @@ export class Prendas {
         return datosJson
     }
 
-
-    static async insertarSubcategoria(nombreSubCategoria,idCategoria) {
-        let insertarSubCategoria = 'insertarSubCategoria'
-        let datos = await $.ajax(
-            {
-                //url:  "https://05.2daw.esvirgua.com/myCloset/src/php/controlador/controladorBackend.php",
-                url: "/DWEC/myCloset/src/php/controlador/controladorBackend.php",
-                //url: "https://myclosetss.000webhostapp.com/php/controlador/controladorBackend.php",
-                //url: "/myCloset/src/php/controlador/controladorBackend.php",
-                type: "POST",
-                data:
-                    {
-                        propiedad: insertarSubCategoria,
-                        correo: sessionStorage.sesion,
-                        nombresubcategoria: nombreSubCategoria,
-                        idCategorias: idCategoria
-
-
-                    },
-            })
-        let datosJson = JSON.parse(datos)
-        return datosJson
-    }
 }

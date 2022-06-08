@@ -1,6 +1,8 @@
 'use strict'
 import { Usuarios } from "../modelo/usuarios.js"
 import {Prendas} from "../modelo/prendas.js";
+import { Categorias } from "../modelo/categorias.js";
+
 /**
  *
  *Comunica el modelo con la vista
@@ -110,12 +112,12 @@ export class Controlador {
     }
 
     static async cargarCategoriasPrendas(){
-        let datos = await Prendas.cargarCategoria()
+        let datos = await Categorias.cargarCategoria()
         return datos
     }
 
     static async cargarSubcategoriasPrendas(categoria){
-        let datos = await Prendas.cargarSubCategoria(categoria)
+        let datos = await Categorias.cargarSubCategoria(categoria)
         return datos
     }
 
@@ -140,7 +142,8 @@ export class Controlador {
     }
 
     static async insertarSubcategoria(nombreSubCategoria, idCategoria){
-        let datos = await Prendas.insertarSubcategoria()
+        let datos = await Categorias.insertarSubcategoria(nombreSubCategoria, idCategoria)
+        return datos
     }
 
 }

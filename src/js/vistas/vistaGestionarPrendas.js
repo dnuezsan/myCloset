@@ -466,8 +466,8 @@ export class VistaGestionarPrendas {
 
         /* Se generan las categorias en su select */
         for (let i = 0; i < categorias.length; i++) {
-            VistaGestionarPrendas.cargaCategorias(categorias[i], i, selectCategorias)
-            VistaGestionarPrendas.cargaCategorias(categorias[i], i, selectCategoriaModificable)
+            VistaGestionarPrendas.cargaCategorias(categorias[i], selectCategorias)
+            VistaGestionarPrendas.cargaCategorias(categorias[i], selectCategoriaModificable)
         }
         /* Se generan las subcategorias correspondientes a la categoría elegida cada vez que esta cambia */
         selectCategorias.addEventListener('change', async () => {
@@ -520,12 +520,11 @@ export class VistaGestionarPrendas {
 
 
 
-    static cargaCategorias(datos, iterador, nodoPadre) {
+    static cargaCategorias(datos, nodoPadre) {
         let categoria = document.createElement('option')
-        let valor = iterador + 1
 
-        categoria.value = valor
-        categoria.textContent = datos[valor]
+        categoria.value = datos.idCategoria
+        categoria.textContent = datos.nombreCategoria
 
         nodoPadre.appendChild(categoria)
     }

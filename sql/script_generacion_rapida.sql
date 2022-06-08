@@ -96,9 +96,10 @@ CREATE TABLE my_closet.subcategoria (
 CREATE TABLE my_closet.prenda ( 
     idPrenda INT NOT NULL AUTO_INCREMENT , 
     idUsuario SMALLINT UNSIGNED NOT NULL , 
-    descripcion VARCHAR NULL ,
+    descripcion VARCHAR (255) NULL , 
     talla CHAR(3) NOT NULL , 
-    idSubcategoria INT  NOT NULL , 
+    idSubcategoria INT NOT NULL ,
+    nombrePrenda VARCHAR (25) NOT NULL,
     PRIMARY KEY (`idPrenda`));
 
 CREATE TABLE my_closet.relusuariosubcategoria ( 
@@ -106,7 +107,7 @@ CREATE TABLE my_closet.relusuariosubcategoria (
     idUsuario SMALLINT UNSIGNED NOT NULL );
 
 
-CREATE TABLE `my_closet`.`relprendaoutfit` ( 
+CREATE TABLE my_closet.relprendaoutfit ( 
     idOutfit INT NOT NULL , 
     idPrenda INT NOT NULL );
 
