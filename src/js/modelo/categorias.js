@@ -114,6 +114,29 @@ export class Categorias {
         return datosJson
     }
 
+    static async modificarCambioSubcategoria(idSubcategoria, idNuevaCategoria) {
+        let modificarSubCategoria = 'modificarCambioSubCategoria'
+        let datos = await $.ajax(
+            {
+                //url:  "https://05.2daw.esvirgua.com/myCloset/src/php/controlador/controladorBackend.php",
+                url: "/DWEC/myCloset/src/php/controlador/controladorBackend.php",
+                //url: "https://myclosetss.000webhostapp.com/php/controlador/controladorBackend.php",
+                //url: "/myCloset/src/php/controlador/controladorBackend.php",
+                type: "POST",
+                data:
+                {
+                    propiedad: modificarSubCategoria,
+                    correo: sessionStorage.sesion,
+                    idCategoria: idNuevaCategoria,
+                    idSubcategoria: idSubcategoria
+
+
+                },
+            })
+        let datosJson = JSON.parse(datos)
+        return datosJson
+    }
+
     static async borrarSubcategoria(idSubCategoria) {
         let borrarSubCategoria = 'borrarSubCategoria'
         let datos = await $.ajax(

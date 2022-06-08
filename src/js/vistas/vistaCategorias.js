@@ -154,22 +154,22 @@ export class VistaCategorias {
         }
 
         //Modificación
-        categoriaInicial.onchange = ()=>{
+        categoriaInicial.onchange = () => {
             VistaCategorias.modificarSubcategoria()
         }
-        nombreSubcategoriaModificable.onchange = ()=>{
+        nombreSubcategoriaModificable.onchange = () => {
             VistaCategorias.modificarSubcategoria()
         }
-        idSubcategoria.onchange = ()=>{
+        idSubcategoria.onchange = () => {
             VistaCategorias.modificarSubcategoria()
         }
-        idNuevacategoria.onchange = ()=>{
+        idNuevacategoria.onchange = () => {
             VistaCategorias.modificarSubcategoria()
         }
 
     }
 
-    static modificarCategoria(){
+    static modificarCategoria() {
         let nuevoNombreCategoria = document.getElementById('nuevoNombreCategoria')
         let categoria = document.getElementById('modificarCategoria')
         let subcategoria = document.getElementById('modificarSubcategoria')
@@ -190,7 +190,7 @@ export class VistaCategorias {
 
             if (nombreSubcategoria.value != '' && categoria.value != '') {
                 let respuesta = await Controlador.insertarSubcategoria(nombreSubcategoria.value, categoria.value)
-    
+
                 if (!respuesta.success) {
                     VistaCategorias.mostrarMensajeInserción(respuesta.mensaje)
                     VistaCategorias.mostrarCuadroDialogo()
@@ -212,38 +212,48 @@ export class VistaCategorias {
         let panel = document.getElementById('panelCategorias')
         let boton = document.getElementById('envioDatosCategoria')
 
-        boton.onclick = async ()=>{
+        boton.onclick = async () => {
             if (nombreSubcategoria.value != '' && idNuevacategoria.value != '') {
                 let respuesta = await Controlador.modificarSubcategoria(nombreSubcategoria.value, idSubcategoria.value, idNuevacategoria.value)
 
-                if (!respuesta) {
+                if (!respuesta.success) {
                     VistaCategorias.mostrarMensajeModificacion("No se ha podido modificar la categoría")
                     VistaCategorias.mostrarCuadroDialogo()
                     panel.onclick = () => {
                         VistaCategorias.ocultarCuadroDialogo()
                     }
-                } else{
+                } else {
                     location.reload()
                 }
             } else if (nombreSubcategoria.value != '' && idNuevacategoria.value == '') {
                 let respuesta = await Controlador.modificarSubcategoria(nombreSubcategoria.value, idSubcategoria.value, categoriaInicial.value)
 
-                if (!respuesta) {
+                if (!respuesta.success) {
                     VistaCategorias.mostrarMensajeModificacion("No se ha podido modificar la categoría")
                     VistaCategorias.mostrarCuadroDialogo()
                     panel.onclick = () => {
                         VistaCategorias.ocultarCuadroDialogo()
                     }
-                } else{
+                } else {
                     location.reload()
                 }
             }
             else if (nombreSubcategoria.value == '' && idNuevacategoria.value != '') {
-                
+                let respuesta = await Controlador.modificarCambioSubcategoria(idSubcategoria.value, idNuevacategoria.value)
+
+                if (!respuesta.success) {
+                    VistaCategorias.mostrarMensajeModificacion("No se ha podido modificar la categoría")
+                    VistaCategorias.mostrarCuadroDialogo()
+                    panel.onclick = () => {
+                        VistaCategorias.ocultarCuadroDialogo()
+                    }
+                } else {
+                    location.reload()
+                }
             }
-            
+
         }
-        
+
     }
 
     static async borrarSubcategoria() {
