@@ -315,6 +315,7 @@ export class VistaMisPrendas {
         for (let i = 0; i < datos.length; i++) {
             /* Creación de contenedor de prenda en version móvil y escritorio y adición de clases*/
             let contenedorItemMisPrendas = document.createElement('div')
+            contenedorItemMisPrendas.prenda = datos[i]
             contenedorItemMisPrendas.classList.add('contenedorItemMisPrendas', 'col', 's12', 'm10', 'offset-m1', 'left-align', 'offset-m1')
             let nombrePrenda = document.createElement('h4')
             nombrePrenda.classList.add('left-align', 'col', 'm12', 'l12')
@@ -335,12 +336,19 @@ export class VistaMisPrendas {
             categorias[i].onclick = async () => {
                 let datos = await Controlador.filtrarPrendasPorCategoria(categorias[i].textContent)
                 VistaMisPrendas.generarPrendaPorCategoria(datos, contenedorMisPrendas)
+                VistaMisPrendas.botonActualizacion()
+                VistaMisPrendas.botonBorrado()
             }
+            
             categoriasMovil[i].onclick = async () => {
                 let datosMovil = await Controlador.filtrarPrendasPorCategoria(categoriasMovil[i].textContent)
                 VistaMisPrendas.generarPrendaPorCategoria(datosMovil, contenedorMisPrendas)
+                VistaMisPrendas.botonActualizacion()
+                VistaMisPrendas.botonBorrado()
             }
+            
         }
+
     }
 
     static botonActualizacion() {

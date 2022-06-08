@@ -365,7 +365,7 @@ class Metodos
         $idUsuario = $fila['idUsuario'];
 
         //$consulta = "SELECT idPrenda, idUsuario, descripcion, talla, idSubcategoria FROM `prenda` WHERE idUsuario = $idUsuario";
-        $consulta = "SELECT idPrenda, prenda.idUsuario, descripcion, talla, prenda.idSubcategoria, subc.nombreSubcategoria, nombrePrenda
+        $consulta = "SELECT idPrenda, prenda.idUsuario, descripcion, talla, prenda.idSubcategoria, subc.nombreSubcategoria, nombrePrenda, categoria.idCategoria, categoria.nombreCategoria
         FROM `prenda`
         LEFT JOIN relusuariosubcategoria AS rus ON rus.idUsuario = prenda.idUsuario AND rus.idSubcategoria = prenda.idSubcategoria
         LEFT JOIN subcategoria AS subc ON subc.idSubcategoria = rus.idSubcategoria
@@ -380,10 +380,12 @@ class Metodos
             $imagenCodificada = base64_encode($files[0]);
             $imagen = substr($files[0], 2);
             array_push($arrayAsociativo, array(
-                "id" => $fila['idPrenda'],
+                "idPrenda" => $fila['idPrenda'],
                 "idUsuario" => $fila['idUsuario'],
                 "descripcion" => $fila['descripcion'],
                 "talla" => $fila['talla'],
+                "idCategoria" => $fila["idCategoria"],
+                "nombreCategoria" => $fila["nombreCategoria"],
                 "idSubcategoria" => $fila['idSubcategoria'],
                 "nombreSubcategoria"=>$fila['nombreSubcategoria'],
                 "imagenCodificada" => "src/php$imagen",//$imagenCodificada
