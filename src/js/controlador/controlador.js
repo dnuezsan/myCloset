@@ -139,4 +139,8 @@ export class Controlador {
         return datos
     }
 
+    static async insertarSubcategoria(nombreSubCategoria, idCategoria){
+        let datos = await Prendas.insertarSubcategoria()
+    }
+
 }

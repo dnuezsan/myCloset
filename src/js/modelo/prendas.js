@@ -273,7 +273,7 @@ export class Prendas {
     }
 
 
-    static async insertarCategoria(nombreSubCategoria,idCategoria) {
+    static async insertarSubcategoria(nombreSubCategoria,idCategoria) {
         let insertarSubCategoria = 'insertarSubCategoria'
         let datos = await $.ajax(
             {
