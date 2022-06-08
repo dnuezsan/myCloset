@@ -23,8 +23,20 @@ export class VistaMisPrendas {
         await VistaMisPrendas.cargarPrendas()
         VistaMisPrendas.botonActualizacion()
         VistaMisPrendas.botonBorrado()
+        VistaMisPrendas.zoom()
     }
 
+
+   /**
+    *Permite hacer zoom a las imágenes
+    *
+    * @static
+    * @memberof VistaMisPrendas
+    */
+   static zoom() {
+        let elems = document.querySelectorAll('.materialboxed');
+        let instances = M.Materialbox.init(elems);
+    }
 
     /**
      *Muestra el panel "panelMisPrendas" y asigna a la variable local de "vista" el value "panelMisPrendas"
@@ -111,7 +123,7 @@ export class VistaMisPrendas {
         let placeHolder = document.createElement('div')
         placeHolder.classList.add('material-placeholder')
         let imagen = document.createElement('img')
-        imagen.classList.add('responsive-img', 'circle', 'materialBoxed')
+        imagen.classList.add('responsive-img', 'circle', 'materialboxed')
         imagen.setAttribute('src', rutaImagen)
         imagen.setAttribute('alt', 'prenda')
 
@@ -208,7 +220,7 @@ export class VistaMisPrendas {
         let placeHolder = document.createElement('div')
         placeHolder.classList.add('material-placeholder')
         let imagen = document.createElement('img')
-        imagen.classList.add('responsive-img', 'circle', 'col', 's12', 'offset-s0', 'materialBoxed')
+        imagen.classList.add('responsive-img', 'circle', 'col', 's12', 'offset-s0', 'materialboxed')
         imagen.setAttribute('src', rutaImagen)
         imagen.setAttribute('alt', 'prenda')
 
@@ -312,6 +324,8 @@ export class VistaMisPrendas {
             VistaMisPrendas.generarPrendaMovil(datos[i].imagenCodificada, datos[i].talla, datos[i].nombreSubcategoria, datos[i].descripcion, contenedorItemMisPrendas)
             contenedorMisPrendas.appendChild(contenedorItemMisPrendas)
         }
+
+        VistaMisPrendas.zoom()
     }
 
     static filtrarPrendaPorCategoria(contenedorMisPrendas) {
