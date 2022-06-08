@@ -530,7 +530,38 @@ class Metodos
         }
     }
 
+    function insertarSubCategoria($nombreCategoria, $idCategoria, $usuario){
+        $consultaUsurio = "SELECT idUsuario FROM usuario WHERE correo = '$usuario'";
+        $resultadoUsuario = $this->conexion->consultas($consultaUsurio);
+        $fila = $this->conexion->extraerFila($resultadoUsuario);
+        $idUsuario = $fila['idUsuario'];
+        $consulta = "INSERT INTO `subcategoria`( `nombreSubcategoria`, `idCategoria`) VALUES (?,?);";
+        $consultaUsuarioCategoria = "INSERT INTO `relusuariosubcategoria`(`idSubcategoria`, `idUsuario`) VALUES ((SELECT MAX(idSubcategoria) AS id FROM subcategoria),$idUsuario);";
 
+        //Preparamos con preparae
+        if (!$sentencia = $this->conexion->mysqli->prepare($consulta)) {
+            //echo "La consulta fallo en su preparacion";
+            //return false;
+
+        }
+        //Pasamos los parametros y el tipo de dato
+        if (!$sentencia->bind_param("ss", $nombreCategoria,$idCategoria)) {
+            //echo "Fallo en la vinculacion de parametros";
+            //return false;
+
+        }
+        //Ejecutamos con execute
+        if (!$sentencia->execute()) {
+            //echo "Algo fallo en la ejecucion";
+
+            return false;
+        } else if($this->conexion->consultas($consultaUsuarioCategoria)){
+            return true;
+        }
+
+
+
+    }
 
     //Subimos las imagenes y pasamos el parametro Carpeta Destino que es donde se guardadn las imagenes del pedido,
     /*

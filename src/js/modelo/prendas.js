@@ -272,4 +272,27 @@ export class Prendas {
         return datosJson
     }
 
+
+    static async insertarCategoria(nombreSubCategoria,idCategoria) {
+        let insertarSubCategoria = 'insertarSubCategoria'
+        let datos = await $.ajax(
+            {
+                //url:  "https://05.2daw.esvirgua.com/myCloset/src/php/controlador/controladorBackend.php",
+                url: "/DWEC/myCloset/src/php/controlador/controladorBackend.php",
+                //url: "https://myclosetss.000webhostapp.com/php/controlador/controladorBackend.php",
+                //url: "/myCloset/src/php/controlador/controladorBackend.php",
+                type: "POST",
+                data:
+                    {
+                        propiedad: insertarSubCategoria,
+                        correo: sessionStorage.sesion,
+                        nombresubcategoria: nombreSubCategoria,
+                        idCategorias: idCategoria
+
+
+                    },
+            })
+        let datosJson = JSON.parse(datos)
+        return datosJson
+    }
 }

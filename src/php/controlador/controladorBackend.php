@@ -85,6 +85,11 @@ switch ($_POST['propiedad']) {
         $subcategoria = $_POST["subcategoria"];
         cargarNombresPrendas($usuario, $subcategoria);
         break;
+    case "insertarSubCategoria":
+        $usuario = $_POST["correo"];
+        $idSubCategoria=$_POST['idSubCategoria'];
+        $nombreSubCategoria=$_POST['nombreSubCategoria'];
+        break;
 }
 
 
@@ -293,4 +298,21 @@ function borrarPrenda($idPrenda)
 {
     $metodo = new Metodos();
     echo json_encode($metodo->borrarPrenda($idPrenda));
+}
+
+function insertarCategoria($nombreCategoria, $idCategoria, $usuario){
+    $metodo = new Metodos();
+    $response = array('success' => false, 'mensaje' => "", 'correo' => "");
+
+    if ($metodo->insertarCategoria($nombreCategoria, $idCategoria, $usuario)) {
+        $response['success'] = true;
+        $response['mensaje'] = 'Se ha guardado su prenda correctamente';
+        $response['correo'] = '';
+        //echo $imagen;
+    } else {
+        $response['success'] = false;
+        $response['mensaje'] = "No se ha guardado su prenda correctamente";
+        $response['correo'] = '';
+    }
+    echo json_encode($response);
 }
