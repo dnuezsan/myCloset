@@ -44,29 +44,6 @@ export class Categorias {
         return datosJson
     }
 
-    static async insertarSubcategoria(nombreSubCategoria, idCategoria) {
-        let insertarSubCategoria = 'insertarSubCategoria'
-        let datos = await $.ajax(
-            {
-                //url:  "https://05.2daw.esvirgua.com/myCloset/src/php/controlador/controladorBackend.php",
-                url: "/DWEC/myCloset/src/php/controlador/controladorBackend.php",
-                //url: "https://myclosetss.000webhostapp.com/php/controlador/controladorBackend.php",
-                //url: "/myCloset/src/php/controlador/controladorBackend.php",
-                type: "POST",
-                data:
-                    {
-                        propiedad: insertarSubCategoria,
-                        correo: sessionStorage.sesion,
-                        nombresubcategoria: nombreSubCategoria,
-                        idCategorias: idCategoria
-
-
-                    },
-            })
-        let datosJson = JSON.parse(datos)
-        return datosJson
-    }
-
     static async cargarSubCategoria(categoria) {
         let cargarSubCategoria = 'cargarSubCategoria'
         let datos = await $.ajax(
@@ -90,6 +67,71 @@ export class Categorias {
         return datosJson
     }
 
-    
-    
+    static async insertarSubcategoria(nombreSubCategoria, idCategoria) {
+        let insertarSubCategoria = 'insertarSubCategoria'
+        let datos = await $.ajax(
+            {
+                //url:  "https://05.2daw.esvirgua.com/myCloset/src/php/controlador/controladorBackend.php",
+                url: "/DWEC/myCloset/src/php/controlador/controladorBackend.php",
+                //url: "https://myclosetss.000webhostapp.com/php/controlador/controladorBackend.php",
+                //url: "/myCloset/src/php/controlador/controladorBackend.php",
+                type: "POST",
+                data:
+                {
+                    propiedad: insertarSubCategoria,
+                    correo: sessionStorage.sesion,
+                    nombresubcategoria: nombreSubCategoria,
+                    idCategorias: idCategoria
+
+
+                },
+            })
+        let datosJson = JSON.parse(datos)
+        return datosJson
+    }
+
+    static async modificarSubcategoria(nombreSubCategoria, idCategoria) {
+        let modificarSubCategoria = 'modificarSubCategoria'
+        let datos = await $.ajax(
+            {
+                //url:  "https://05.2daw.esvirgua.com/myCloset/src/php/controlador/controladorBackend.php",
+                url: "/DWEC/myCloset/src/php/controlador/controladorBackend.php",
+                //url: "https://myclosetss.000webhostapp.com/php/controlador/controladorBackend.php",
+                //url: "/myCloset/src/php/controlador/controladorBackend.php",
+                type: "POST",
+                data:
+                {
+                    propiedad: modificarSubCategoria,
+                    correo: sessionStorage.sesion,
+                    nombresubcategoria: nombreSubCategoria,
+                    idCategorias: idCategoria
+
+
+                },
+            })
+        let datosJson = JSON.parse(datos)
+        return datosJson
+    }
+
+    static async borrarSubcategoria(idSubCategoria) {
+        let borrarSubCategoria = 'borrarSubCategoria'
+        let datos = await $.ajax(
+            {
+                //url:  "https://05.2daw.esvirgua.com/myCloset/src/php/controlador/controladorBackend.php",
+                url: "/DWEC/myCloset/src/php/controlador/controladorBackend.php",
+                //url: "https://myclosetss.000webhostapp.com/php/controlador/controladorBackend.php",
+                //url: "/myCloset/src/php/controlador/controladorBackend.php",
+                type: "POST",
+                data:
+                {
+                    propiedad: borrarSubCategoria,
+                    correo: sessionStorage.sesion,
+                    idSubCategorias: idSubCategoria
+
+
+                },
+            })
+        let datosJson = JSON.parse(datos)
+        return datosJson
+    }
 }

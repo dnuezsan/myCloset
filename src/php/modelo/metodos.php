@@ -491,7 +491,7 @@ class Metodos
             return true;
         }
     }
-
+//borramos las prendas
     function borrarPrenda($idPrenda)
     {
         $consultaBorrar = "DELETE FROM `prenda` WHERE idPrenda = ?";
@@ -530,7 +530,7 @@ class Metodos
             return $respuesta;
         }
     }
-
+//insertamos las SubCategorias en casda usuario correspondiente
     function insertarSubCategoria($nombreSubCategoria, $idCategoria, $usuario){
         $consultaUsurio = "SELECT idUsuario FROM usuario WHERE correo = '$usuario'";
         $resultadoUsuario = $this->conexion->consultas($consultaUsurio);
@@ -563,7 +563,7 @@ class Metodos
 
 
     }
-
+//Modificamos la subCategoria cambiando el nombre y la categoria que pertenece
     function modificarSubCategoria($nombreSubCategoria, $idCategoria){
         $consulta = "UPDATE `subcategoria` SET `nombreSubcategoria`=?,`idCategoria`=? WHERE 1";
 
@@ -587,6 +587,49 @@ class Metodos
         } else {
             return true;
         }
+    }
+
+    function borrarSubCategoria($idSubCategoria){
+        $consulta = "DELETE FROM `subcategoria` WHERE `idSubcategoria` = ?";
+        $consultaRelacion = "DELETE FROM `relusuariosubcategoria` WHERE idSubcategoria =?";
+
+        //Preparamos con preparae
+        if (!$sentencia = $this->conexion->mysqli->prepare($consulta)) {
+            //echo "La consulta fallo en su preparacion";
+            //return false;
+
+        }
+        //Pasamos los parametros y el tipo de dato
+        if (!$sentencia->bind_param("i", $idSubCategoria)) {
+            //echo "Fallo en la vinculacion de parametros";
+            //return false;
+
+        }
+        //Ejecutamos con execute
+        if (!$sentencia->execute()) {
+            //echo "Algo fallo en la ejecucion";
+
+            return false;
+        } else if($sentencia = $this->conexion->mysqli->prepare($consultaRelacion)){
+            //Pasamos los parametros y el tipo de dato
+            if (!$sentencia->bind_param("i", $idSubCategoria)) {
+                //echo "Fallo en la vinculacion de parametros";
+                //return false;
+
+            }
+            //Ejecutamos con execute
+            if (!$sentencia->execute()) {
+                //echo "Algo fallo en la ejecucion";
+
+                return false;
+            } else {
+                return true;
+            }
+            return true;
+        }
+
+
+
     }
 
     //Subimos las imagenes y pasamos el parametro Carpeta Destino que es donde se guardadn las imagenes del pedido,
