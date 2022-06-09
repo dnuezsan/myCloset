@@ -615,7 +615,7 @@ class Metodos
             return true;
         }
     }
-
+//Borramos las subCategorias creadas por el usuario.
     function borrarSubCategoria($idSubCategoria){
         $consulta = "DELETE FROM `subcategoria` WHERE `idSubcategoria` = ?";
         $consultaRelacion = "DELETE FROM `relusuariosubcategoria` WHERE idSubcategoria =?";
@@ -657,6 +657,11 @@ class Metodos
 
 
 
+    }
+
+    function insertamosOutfit($usuario,$nombreOutfit, $fechaCreacion){
+        $consulta ="INSERT INTO `outfit`( `idUsuario`, `nombreOutfit`, `fechaCreacion`) VALUES ('[value-2]','[value-3]','[value-4]')";
+        $consulta ="INSERT INTO `relprendaoutfit`(`idOutfit`, `idPrenda`) VALUES ('[value-1]','[value-2]')";
     }
 
     //Subimos las imagenes y pasamos el parametro Carpeta Destino que es donde se guardadn las imagenes del pedido,
