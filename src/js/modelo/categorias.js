@@ -150,7 +150,7 @@ export class Categorias {
                 {
                     propiedad: borrarSubCategoria,
                     correo: sessionStorage.sesion,
-                    idSubCategorias: idSubCategoria
+                    idSubCategoria: idSubCategoria
 
 
                 },

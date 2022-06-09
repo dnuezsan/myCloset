@@ -144,6 +144,8 @@ export class VistaCategorias {
         let idSubcategoria = document.getElementById('modificarSubcategoria')
         let idNuevacategoria = document.getElementById('modificarCategoriaNuevaCategoria')
         //Borrado
+        let selectCategoria = document.getElementById('borrarCategoria')
+        let selectSubcategoria = document.getElementById('borrarSubcategoria')
 
         //Insercion
         nombreSubcategoria.onchange = () => {
@@ -167,18 +169,17 @@ export class VistaCategorias {
             VistaCategorias.modificarSubcategoria()
         }
 
-    }
-
-    static modificarCategoria() {
-        let nuevoNombreCategoria = document.getElementById('nuevoNombreCategoria')
-        let categoria = document.getElementById('modificarCategoria')
-        let subcategoria = document.getElementById('modificarSubcategoria')
-        let panel = document.getElementById('panelCategorias')
-        let boton = document.getElementById('envioDatosCategoria')
-
-
+        //borrado
+        selectCategoria.onchange = () => {
+            VistaCategorias.borrarSubcategoria()
+        }
+        selectSubcategoria.onchange = () => {
+            VistaCategorias.borrarSubcategoria()
+        }
 
     }
+
+
 
     static insertarSubcategoria() {
         let nombreSubcategoria = document.getElementById('nombreCategoria')
@@ -257,6 +258,18 @@ export class VistaCategorias {
     }
 
     static async borrarSubcategoria() {
+        let selectCategoria = document.getElementById('borrarCategoria')
+        let selectSubcategoria = document.getElementById('borrarSubcategoria')
+        let panel = document.getElementById('panelCategorias')
+        let boton = document.getElementById('envioDatosCategoria')
+
+        boton.onclick = () => {
+            if (selectSubcategoria.value != '') {
+                VistaCategorias.mostrarMensajeConfirmacion(selectSubcategoria.value)
+
+            }
+        }
+
 
     }
 
@@ -302,23 +315,31 @@ export class VistaCategorias {
     }
 
     static mostrarMensajeConfirmacion(idSubcategoria) {
+        VistaCategorias.mostrarCuadroDialogo()
         let conjunto = document.getElementById('conjuntoBorradoSubcategoria')
         conjunto.style.display = 'block'
 
         let botonConfirmarBorrado = document.getElementById('botonBorrarSubcategoria')
         let botonCancelarBorrado = document.getElementById('botonCancelarBorrarSubcategoria')
 
-        botonConfirmarBorrado.onclick = () => {
-            VistaCategorias.borrarSubcategoria(idSubcategoria)
+        botonConfirmarBorrado.onclick = async () => {
+            
+            let respuesta = await Controlador.borrarSubcategoria(idSubcategoria)
+
+            if (!respuesta.success) {
+                VistaCategorias.mostrarMensajeBorrado(respuesta.mensaje)
+                VistaCategorias.mostrarCuadroDialogo()
+                panel.onclick = () => {
+                    VistaCategorias.ocultarCuadroDialogo()
+                }
+            } else {
+                location.reload()
+            }
         }
 
         botonCancelarBorrado.onclick = () => {
             VistaCategorias.ocultarCuadroDialogo()
         }
-
-    }
-
-    static borrarSubcategoria() {
 
     }
 

@@ -142,9 +142,17 @@ export class VistaMenuPrincipal {
      */
     static mostrarArmario() {
         let boton = document.querySelectorAll('.miArmario')
+        let logo = document.getElementsByClassName('brand-logo')
 
         for (let i = 0; i < boton.length; i++) {
             boton[i].onclick = (evento) => {
+                VistaMenuPrincipal.ocultarPaneles()
+                VistaArmario.mostrarArmario()
+            }
+        }
+
+        for (let i = 0; i < logo.length; i++) {
+            logo[i].onclick = (evento) => {
                 VistaMenuPrincipal.ocultarPaneles()
                 VistaArmario.mostrarArmario()
             }

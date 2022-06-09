@@ -798,21 +798,21 @@
                     data-target="desplegableOutfit"><i class="material-icons">add</i></a>
             </div>
             <div class="panelLateralOutfit col m4 l3 card hide-on-small-only">
-                <div class="inputOutfit input-field col s12 m8 l8">
+                <div class="outfitCargado inputOutfit input-field col s12 m8 l8">
                     <select>
                         <option value="" disabled selected></option>
                         <option value="1">Option 1</option>
                         <option value="2">Option 2</option>
                         <option value="3">Option 3</option>
                     </select>
-                    <label>Colección de outfits</label>
+                    <label>Tus Outfits</label>
                 </div>
                 <div class="inputOutfit input-field col s12 m8 l8">
-                    <input placeholder="" type="text">
+                    <input id="nombreInput" class="nombreOutfit" placeholder="" type="text">
                     <label for="nombreOutfit">Nombre Outfit</label>
                 </div>
                 <div class="inputOutfit input-field col s12 m8 l8">
-                    <select id="prendaCabeza">
+                    <select id="prendaCabeza" class="prendaCabezaOutfit">
                         <option value="" disabled selected></option>
                         <option value="1">Option 1</option>
                         <option value="2">Option 2</option>
@@ -821,7 +821,7 @@
                     <label>Cabeza</label>
                 </div>
                 <div class="inputOutfit input-field col s12 m8 l8">
-                    <select id="prendaTorso">
+                    <select id="prendaTorso" class="prendaTorsoOutfit">
                         <option value="" disabled selected></option>
                         <option value="1">Option 1</option>
                         <option value="2">Option 2</option>
@@ -830,7 +830,7 @@
                     <label>Torso</label>
                 </div>
                 <div class="inputOutfit input-field col s12 m8 l8">
-                    <select id="prendaPiernas">
+                    <select id="prendaPiernas" class="prendaPiernasOutfit">
                         <option value="" disabled selected></option>
                         <option value="1">Option 1</option>
                         <option value="2">Option 2</option>
@@ -839,7 +839,7 @@
                     <label>Piernas</label>
                 </div>
                 <div class="inputOutfit input-field col s12 m8 l8">
-                    <select id="prendaPies">
+                    <select id="prendaPies" class="prendaPiesOutfit">
                         <option value="" disabled selected></option>
                         <option value="1">Option 1</option>
                         <option value="2">Option 2</option>
@@ -848,14 +848,15 @@
                     <label>Pies</label>
                 </div>
                 <div class="col s12">
-                    <div class="row center"><a class="waves-effect waves-light btn-small">Nuevo Outfit</a></div>
-                    <div class="row center"><a class="waves-effect waves-light btn-small">Borrar Outfit</a></div>
+                    <div class="row center"><a class="botonNuevoOutfit waves-effect waves-light btn-small">Nuevo Outfit</a></div>
+                    <div class="row center"><a class="botonGuardarOutfit waves-effect waves-light btn-small">Guardar Outfit</a></div>
+                    <div class="row center"><a class="botonBorrarOutfit waves-effect waves-light btn-small">Borrar Outfit</a></div>
                 </div>
             </div>
             <!-- SIDENAV -->
             <div id="desplegableOutfit" class="panelLateralOutfit col s7 sidenav">
                 <h4 class="center-align">Menu</h4>
-                <div class="inputOutfit input-field col s8">
+                <div class="outfitCargado inputOutfit input-field col s8">
                     <select>
                         <option value="" disabled selected></option>
                         <option value="1">Option 1</option>
@@ -865,11 +866,11 @@
                     <label>Colección de outfits</label>
                 </div>
                 <div class="inputOutfit input-field col s8">
-                    <input placeholder="" id="nombreOutfit" type="text">
+                    <input placeholder="" class="nombreOutfit" id="nombreOutfit" type="text">
                     <label for="nombreOutfit">Nombre Outfit</label>
                 </div>
                 <div class="inputOutfit input-field col s8">
-                    <select id="prendaCabeza">
+                    <select id="prendaCabeza" class="prendaCabezaOutfit">
                         <option value="" disabled selected></option>
                         <option value="1">Option 1</option>
                         <option value="2">Option 2</option>
@@ -878,7 +879,7 @@
                     <label>Cabeza</label>
                 </div>
                 <div class="inputOutfit input-field col s8">
-                    <select id="prendaTorso">
+                    <select id="prendaTorso" class="prendaTorsoOutfit">
                         <option value="" disabled selected></option>
                         <option value="1">Option 1</option>
                         <option value="2">Option 2</option>
@@ -887,7 +888,7 @@
                     <label>Torso</label>
                 </div>
                 <div class="inputOutfit input-field col s8">
-                    <select id="prendaPiernas">
+                    <select id="prendaPiernas" class="prendaPiernasOutfit">
                         <option value="" disabled selected></option>
                         <option value="1">Option 1</option>
                         <option value="2">Option 2</option>
@@ -896,7 +897,7 @@
                     <label>Piernas</label>
                 </div>
                 <div class="inputOutfit input-field col s8">
-                    <select id="prendaPies">
+                    <select id="prendaPies" class="prendaPiesOutfit">
                         <option value="" disabled selected></option>
                         <option value="1">Option 1</option>
                         <option value="2">Option 2</option>
@@ -905,8 +906,9 @@
                     <label>Pies</label>
                 </div>
                 <div class="col s12">
-                    <div class="row center"><a class="waves-effect waves-light btn-small">Nuevo Outfit</a></div>
-                    <div class="row center"><a class="waves-effect waves-light btn-small">Borrar Outfit</a></div>
+                    <div class="row center"><a class="botonNuevoOutfit waves-effect waves-light btn-small">Nuevo Outfit</a></div>
+                    <div class="row center"><a class="botonGuardarOutfit waves-effect waves-light btn-small">Guardar Outfit</a></div>
+                    <div class="row center"><a class="botonBorrarOutfit waves-effect waves-light btn-small">Borrar Outfit</a></div>
                 </div>
             </div>
             <!-- <div class="col l9">
@@ -954,9 +956,6 @@
         </div>
     </div>
 
-    <div id='gestionOutfit'>
-
-    </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="src/js/app.js" type="module"></script>
