@@ -1,6 +1,6 @@
 'use strict'
 
-import { Controlador } from "../controlador/controlador"
+import { Controlador } from "../controlador/controlador.js"
 
 export class VistaOutfits {
 
@@ -12,6 +12,8 @@ export class VistaOutfits {
 
     iniciar() {
         VistaOutfits.limpiarOutfit()
+
+        VistaOutfits.igualarFormularios()
     }
 
     static mostrarOutfits() {
@@ -97,22 +99,77 @@ export class VistaOutfits {
         }
     }
 
-    static async cargarPrendasCabeza() {
+    static async cargarOutfits() {
+        let selectOutfits = document.getElementsByClassName('outfitCargado')
 
+        let outfits = await Controlador.cargaOutfits()
+
+        for (let i = 0; i < outfits.length; i++) {
+
+            VistaOutfits.generarOptionOutfit(outfits[i], selectOutfits[0])
+            VistaOutfits.generarOptionOutfit(outfits[i], selectOutfits[1])
+
+        }
     }
 
-    static async cargarPrendasTorso() {
+    static async cargarPrendasCabeza(){
 
+        //Patron Borrado
+        /* for (let i = 0; i < selectOutfits.length; i++) {
+            if (selectOutfits[i].childElementCount>1) {
+                while (selectOutfits[i].childElementCount > 1) {
+                    selectOutfits[i].removeChild(selectOutfits[i].children[1])
+                }
+            }
+        } */
     }
 
-    static async cargarPrendasPiernas() {
+    static async cargarPrendasTorso(){
 
+        //Patron Borrado
+        /* for (let i = 0; i < selectOutfits.length; i++) {
+            if (selectOutfits[i].childElementCount>1) {
+                while (selectOutfits[i].childElementCount > 1) {
+                    selectOutfits[i].removeChild(selectOutfits[i].children[1])
+                }
+            }
+        } */
+    }
+    
+    static async cargarPrendasPierna(){
+
+        //Patron Borrado
+        /* for (let i = 0; i < selectOutfits.length; i++) {
+            if (selectOutfits[i].childElementCount>1) {
+                while (selectOutfits[i].childElementCount > 1) {
+                    selectOutfits[i].removeChild(selectOutfits[i].children[1])
+                }
+            }
+        } */
     }
 
-    static async cargarPrendasPies() {
+    static async cargarPrendasPies(){
 
+        //Patron Borrado
+        /* for (let i = 0; i < selectOutfits.length; i++) {
+            if (selectOutfits[i].childElementCount>1) {
+                while (selectOutfits[i].childElementCount > 1) {
+                    selectOutfits[i].removeChild(selectOutfits[i].children[1])
+                }
+            }
+        } */
     }
 
+    static generarOptionOutfit(datos, nodoPadre) {
+        let opcion = document.createElement('option')
+        //opcion.classList.add('prendaCabeza')
+
+        opcion.value = datos.idSubcategoria
+        opcion.textContent = datos.nombreSubcategoria
+        nodoPadre.appendChild(opcion)
+    }
+
+    //ACABAR METODO
     static detectarCambiosSelecta() {
         let selects = document.querySelectorAll('#panelOutfit select')
         let outfitsCargados = document.getElementsByClassName('outfitCargado')
@@ -123,16 +180,15 @@ export class VistaOutfits {
         let botonCambiar = document.getElementsByClassName('botonGuardarOutfit')
         let botonBorrar = document.getElementsByClassName('botonBorrarOutfit')
 
+        //PASAR VALORES DE SELECTS A LOS METODOS
         for (let i = 0; i < 2; i++) {
             selects[i].onchange = () => {
-
-                //FALTA MEÉTODO PARA IGUALAR LOS CAMPOS DE V. DE ESCRITORIO Y MÓVIL
 
                 for (let i = 0; i < botonCambiar.length; i++) {
                     botonCambiar[i].onclick = () => {
                         if (outfitsCargados[i].value == '') {
                             VistaOutfits.guardarOutfit()
-                        } else{
+                        } else {
                             VistaOutfits.modificarOutfit()
                         }
 
@@ -151,21 +207,75 @@ export class VistaOutfits {
 
     }
 
-    static async detectarCambiosSelect() {
+    static detectarCambiosSelect() {
         let outfitsCargados = document.getElementsByClassName('outfitCargado')
 
         for (let i = 0; i < array.length; i++) {
-            outfitsCargados[i].onclick = () => {
-                VistaOutfits.cargarPrendasCabeza()
+            outfitsCargados[i].onclick = async () => {
+                await VistaOutfits.cargarPrendasCabeza()
+                
+                await VistaOutfits.cargarPrendasTorso()
 
-                VistaOutfits.cargarPrendasTorso()
+                await VistaOutfits.cargarPrendasPiernas()
 
-                VistaOutfits.cargarPrendasPiernas()
-
-                VistaOutfits.cargarPrendasPies()
+                await VistaOutfits.cargarPrendasPies()
             }
 
         }
         $('#panelOutfit select').formSelect()
     }
+
+    static igualarFormularios() {
+        let outfitsCargados = document.getElementsByClassName('outfitCargado')
+        let selectCabeza = document.getElementsByClassName('prendaCabezaOutfit')
+        let selectTorso = document.getElementsByClassName('prendaTorsoOutfit')
+        let selectPiernas = document.getElementsByClassName('prendaPiernasOutfit')
+        let selectPies = document.getElementsByClassName('prendaPiesOutfit')
+        let nombreDeOutfit = document.getElementsByClassName('nombreOutfit')
+        let valor = null
+
+        for (let i = 0; i < 2; i++) {
+            outfitsCargados[i].onchange = () => {
+                valor = outfitsCargados[i].value
+                for (let j = 0; j < outfitsCargados.length; j++) {
+                    outfitsCargados[j].value = valor
+                    console.log(valor);
+                }
+            }
+            selectCabeza[i].onchange = () => {
+                valor = selectCabeza[i].value
+                for (let j = 0; j < selectCabeza.length; j++) {
+                    selectCabeza[j].value = valor
+                }
+            }
+            selectTorso[i].onchange = () => {
+                valor = selectTorso[i].value
+                for (let j = 0; j < selectTorso.length; j++) {
+                    selectTorso[j].value = valor
+                }
+            }
+            selectPiernas[i].onchange = () => {
+                valor = selectPiernas[i].value
+                for (let j = 0; j < selectPiernas.length; j++) {
+                    selectPiernas[j].value = valor
+                }
+            }
+            selectPies[i].onchange = () => {
+                valor = selectPies[i].value
+                for (let j = 0; j < selectPies.length; j++) {
+                    selectPies[j].value = valor
+                }
+            }
+
+            nombreDeOutfit[i].onchange = () => {
+                valor = nombreDeOutfit[i].value
+                for (let j = 0; j < nombreDeOutfit.length; j++) {
+                    nombreDeOutfit[j].value = valor
+                }
+            }
+
+            $('#panelOutfit select').formSelect()
+        }
+    }
+
 }

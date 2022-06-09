@@ -1,6 +1,4 @@
 
-import { Rest } from '../servicios/rest.js'
-
 /**
  *Clase que gestiona los datos de los outfits
  *

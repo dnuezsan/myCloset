@@ -162,6 +162,11 @@ export class Controlador {
         return respuesta
     }
 
+    static async cargaOutfits(){
+        let respuesta = await Outfits.cargaOutfits()
+        return respuesta
+    }
+
     static async guardarOutfit(){
         let respuesta = await Outfits.guardarOutfit()
         return respuesta
