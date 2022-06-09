@@ -167,6 +167,26 @@ export class Controlador {
         return respuesta
     }
 
+    static async cargarPrendasCabeza(){
+        //let respuesta = await Outfits.
+        return respuesta
+    }
+
+    static async cargarPrendasTorso(){
+        //let respuesta = await Outfits.
+        return respuesta
+    }
+
+    static async cargarPrendasPiernas(){
+        //let respuesta = await Outfits.
+        return respuesta
+    }
+
+    static async cargarPrendasPies(){
+        //let respuesta = await Outfits.
+        return respuesta
+    }
+
     static async guardarOutfit(){
         let respuesta = await Outfits.guardarOutfit()
         return respuesta
