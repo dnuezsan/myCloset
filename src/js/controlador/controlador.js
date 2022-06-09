@@ -2,6 +2,7 @@
 import { Usuarios } from "../modelo/usuarios.js"
 import {Prendas} from "../modelo/prendas.js";
 import { Categorias } from "../modelo/categorias.js";
+import { Outfits } from "../modelo/outfits.js";
 
 /**
  *
@@ -153,6 +154,26 @@ export class Controlador {
 
     static async modificarCambioSubcategoria(idSubcategoria, idNuevaCategoria){
         let respuesta = Categorias.modificarCambioSubcategoria(idSubcategoria, idNuevaCategoria)
+        return respuesta
+    }
+
+    static async borrarSubcategoria(idSubcategoria){
+        let respuesta = await Categorias.borrarSubcategoria(idSubcategoria)
+        return respuesta
+    }
+
+    static async guardarOutfit(){
+        let respuesta = await Outfits.guardarOutfit()
+        return respuesta
+    }
+
+    static async modificarOutfit(idOutfit){
+        let respuesta = await Outfits.modificarOutfit(idOutfit)
+        return respuesta
+    }
+
+    static async borrarOutfit(idOutfit){
+        let respuesta = await Outfits.borrarOutfit(idOutfit)
         return respuesta
     }
 
