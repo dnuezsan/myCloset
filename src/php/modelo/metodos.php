@@ -621,7 +621,7 @@ class Metodos
         $consultaRelacion = "DELETE FROM `relusuariosubcategoria` WHERE idSubcategoria =?";
 
         //Preparamos con preparae
-        if (!$sentencia = $this->conexion->mysqli->prepare($consulta)) {
+        if (!$sentencia = $this->conexion->mysqli->prepare($consultaRelacion)) {
             //echo "La consulta fallo en su preparacion";
             //return false;
 
@@ -637,7 +637,7 @@ class Metodos
             //echo "Algo fallo en la ejecucion";
 
             return false;
-        } else if($sentencia = $this->conexion->mysqli->prepare($consultaRelacion)){
+        } else if($sentencia = $this->conexion->mysqli->prepare($consulta)){
             //Pasamos los parametros y el tipo de dato
             if (!$sentencia->bind_param("i", $idSubCategoria)) {
                 //echo "Fallo en la vinculacion de parametros";
