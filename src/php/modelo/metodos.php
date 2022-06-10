@@ -1041,7 +1041,6 @@ class Metodos
         return $arrayAsociativo;
     }
 
-    function insertamosOutfit($usuario,$nombreOutfit, $fechaCreacion){
     function insertamosOutfit($usuario,$nombreOutfit, $fechaCreacion, $idPrenda){
         $consulta ="INSERT INTO `outfit`( `idUsuario`, `nombreOutfit`, `fechaCreacion`) VALUES (?,?,?)";
         $consultaRelacion ="INSERT INTO `relprendaoutfit`(`idOutfit`, `idPrenda`) VALUES (?,?)";
