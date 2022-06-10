@@ -168,22 +168,22 @@ export class Controlador {
     }
 
     static async cargarPrendasCabeza(){
-        //let respuesta = await Outfits.
+        let respuesta = await Outfits.cargarPrendasCabeza()
         return respuesta
     }
 
     static async cargarPrendasTorso(){
-        //let respuesta = await Outfits.
+        let respuesta = await Outfits.cargarPrendasTorso()
         return respuesta
     }
 
     static async cargarPrendasPiernas(){
-        //let respuesta = await Outfits.
+        let respuesta = await Outfits.cargarPrendasPiernas()
         return respuesta
     }
 
     static async cargarPrendasPies(){
-        //let respuesta = await Outfits.
+        let respuesta = await Outfits.cargarPiernasPies()
         return respuesta
     }
 

@@ -66,7 +66,8 @@ switch ($_POST['propiedad']) {
         $talla = $_POST['talla'];
         $idSubCategoria = $_POST['idSubCategoria'];
         $usuario = $_SESSION['usuario'];
-        modificarPrenda($descripcion, $talla, $idSubCategoria, $usuario);
+        $nombrePrenda = $_POST['nombrePrenda'];
+        modificarPrenda($descripcion, $talla, $idSubCategoria, $usuario, $nombrePrenda);
         break;
     case "borrarPrenda":
         $idPrenda = $_POST['idPrenda'];
@@ -105,6 +106,26 @@ switch ($_POST['propiedad']) {
     case "borrarSubCategoria":
         $idSubCategoria = $_POST['idSubCategoria'];
         borrarSubCategoria($idSubCategoria);
+        break;
+    case "cargarOutfits":
+        $usuario = $_POST['correo'];
+        cargarOutfits($usuario);
+        break;
+    case "cargarPrendasCabeza":
+        $usuario = $_POST['correo'];
+        cargarPrendasCabeza($usuario);
+        break;
+    case "cargarPrendasTorso":
+        $usuario = $_POST['correo'];
+        cargarPrendasTorso($usuario);
+        break;
+    case "cargarPrendasPiernas":
+        $usuario = $_POST['correo'];
+        cargarPrendasPiernas($usuario);
+        break;
+    case "cargarPrendasPies":
+        $usuario = $_POST['correo'];
+        cargarPrendasPies($usuario);
         break;
 }
 
@@ -306,10 +327,10 @@ function filtrarPrendasPorCategoria($usuario, $categoria)
     echo json_encode($metodo->filtrarPrendasPorCategoria($usuario, $categoria));
 }
 
-function modificarPrenda($descripcion, $talla, $idSubcategoria, $usuario)
+function modificarPrenda($descripcion, $talla, $idSubcategoria, $usuario, $nombrePrenda)
 {
     $metodo = new Metodos();
-    echo json_encode($metodo->modificarPrenda($descripcion, $talla, $idSubcategoria, $usuario));
+    echo json_encode($metodo->modificarPrenda($descripcion, $talla, $idSubcategoria, $usuario, $nombrePrenda));
 }
 function borrarPrenda($idPrenda)
 {
@@ -351,8 +372,9 @@ function modificarSubCategoria($nombreSubCategoria, $idCategoria, $idSubcategori
     echo json_encode($response);
 }
 
-function modificarCambiarSubcategoria($idCategoria, $idSubcategoria){
-    
+function modificarCambiarSubcategoria($idCategoria, $idSubcategoria)
+{
+
     $metodo = new Metodos();
     $response = array('success' => false, 'mensaje' => "", 'correo' => "");
 
@@ -384,4 +406,39 @@ function borrarSubCategoria($idSubCategoria)
         $response['mensaje'] = "No se ha borrado su categoría correctamente";
     }
     echo json_encode($response);
+}
+
+function cargarOutfits($usuario)
+{
+    $metodo = new Metodos();
+
+    echo json_encode($metodo->cargarOutfits($usuario));
+}
+
+function cargarPrendasCabeza($usuario)
+{
+    $metodo = new Metodos();
+
+    echo json_encode($metodo->cargarPrendasCabeza($usuario));
+}
+
+function cargarPrendasTorso($usuario)
+{
+    $metodo = new Metodos();
+
+    echo json_encode($metodo->cargarPrendasTorso($usuario));
+}
+
+function cargarPrendasPiernas($usuario)
+{
+    $metodo = new Metodos();
+
+    echo json_encode($metodo->cargarPrendasPiernas($usuario));
+}
+
+function cargarPrendasPies($usuario)
+{
+    $metodo = new Metodos();
+
+    echo json_encode($metodo->cargarPrendasPies($usuario));
 }

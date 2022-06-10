@@ -15,6 +15,7 @@ export class VistaGestionarPrendas {
         this.activarVideo()
         VistaGestionarPrendas.cargarCategoriasYSubcategorias()
         VistaGestionarPrendas.mostrarMensajeConfirmacionBorrado()
+        VistaGestionarPrendas.modificarPrenda()
     }
 
     /**
@@ -648,6 +649,35 @@ export class VistaGestionarPrendas {
             }
         }
 
+    }
+
+    static async modificarPrenda(){
+        let categoriaPrendaOriginal = document.getElementById('categoriaPrendaGestionPrendas')
+        let subcategoriaPrendaOriginal = document.getElementById('subCategoriasPrendaGestionPrendas')
+        let nombrePrendaOriginal = document.getElementById('nombrePrendaGestionPrendas')
+        let nombreGestionPrenda = document.getElementById('nombreGestionPrenda')
+        let tallaGestionPrenda = document.getElementById('tallaGestionPrenda')
+        let descripcionGestionPrenda = document.getElementById('descripcionGestionPrenda')
+        let categoriasGestionPrendas = document.getElementById('categoriasGestionPrendas')
+        let subCategoriasGestionPrendas = document.getElementById('subCategoriasGestionPrendas')
+
+        let boton = document.getElementById('botonModificarPrenda')
+        boton.addEventListener('click', ()=>{
+            if (nombreGestionPrenda.value == '') {
+                nombreGestionPrenda.value = nombrePrendaOriginal.value
+            }
+            if (tallaGestionPrenda == '') {
+                
+            }
+            if (subCategoriasGestionPrendas == '') {
+                
+            }
+            if (descripcionGestionPrenda == '') {
+                
+            }
+            console.log(nombreGestionPrenda.value);
+        }, true)
+        
     }
 
     static async borrarPrenda(idPrenda) {
