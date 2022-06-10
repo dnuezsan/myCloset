@@ -849,6 +849,50 @@ class Metodos
     {
         $consulta = "INSERT INTO `outfit`( `idUsuario`, `nombreOutfit`, `fechaCreacion`) VALUES ('[value-2]','[value-3]','[value-4]')";
         $consulta = "INSERT INTO `relprendaoutfit`(`idOutfit`, `idPrenda`) VALUES ('[value-1]','[value-2]')";
+    function insertamosOutfit($usuario,$nombreOutfit, $fechaCreacion){
+        $consulta ="INSERT INTO `outfit`( `idUsuario`, `nombreOutfit`, `fechaCreacion`) VALUES (?,?,?)";
+        $consultaRelacion ="INSERT INTO `relprendaoutfit`(`idOutfit`, `idPrenda`) VALUES (?,?)";
+        $consultaUsurio = "SELECT idUsuario FROM usuario WHERE correo = '$usuario'";
+        $resultadoUsuario = $this->conexion->consultas($consultaUsurio);
+        $fila = $this->conexion->extraerFila($resultadoUsuario);
+        $consultaUltimoOutfit = "SELECT MAX(idPrenda) AS id FROM prenda";
+        $idUsuario = $fila['idUsuario'];
+        //Preparamos con preparae
+        if (!$sentencia = $this->conexion->mysqli->prepare($consulta)) {
+            //echo "La consulta fallo en su preparacion";
+            //return false;
+
+        }
+        //Pasamos los parametros y el tipo de dato
+        if (!$sentencia->bind_param("iss", $idUsuario, $nombreOutfit, $fechaCreacion)) {
+            //echo "Fallo en la vinculacion de parametros";
+            //return false;
+
+        }
+        //Ejecutamos con execute
+        if (!$sentencia->execute()) {
+            //echo "Algo fallo en la ejecucion";
+
+            return false;
+        } else if($sentencia = $this->conexion->mysqli->prepare($consultaRelacion)){
+            $ultimo_id = $this->conexion->insert_id;
+            //Pasamos los parametros y el tipo de dato
+            if (!$sentencia->bind_param("ii", $ultimo_id,$idPrenda)) {
+                //echo "Fallo en la vinculacion de parametros";
+                //return false;
+
+            }
+            //Ejecutamos con execute
+            if (!$sentencia->execute()) {
+                //echo "Algo fallo en la ejecucion";
+
+                return false;
+            } else {
+                return true;
+            }
+            return true;
+        }
+
     }
 
     //Subimos las imagenes y pasamos el parametro Carpeta Destino que es donde se guardadn las imagenes del pedido,
