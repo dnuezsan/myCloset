@@ -89,7 +89,7 @@ export class Outfits {
     }
 
     static async cargaOutfits(){
-        let propiedad = ""
+        let propiedad = "cargarOutfits"
         let datos = await $.ajax(
             {
                 //url:  "https://05.2daw.esvirgua.com/myCloset/src/php/controlador/controladorBackend.php",
@@ -102,8 +102,6 @@ export class Outfits {
                     propiedad: propiedad,
                     correo: sessionStorage.sesion,
 
-
-
                 },
             })
         let datosJson = JSON.parse(datos)
@@ -111,7 +109,7 @@ export class Outfits {
     }
 
     static async cargarPrendasCabeza(){
-        let propiedad = ""
+        let propiedad = "cargarPrendasCabeza"
         let datos = await $.ajax(
             {
                 //url:  "https://05.2daw.esvirgua.com/myCloset/src/php/controlador/controladorBackend.php",
@@ -133,7 +131,7 @@ export class Outfits {
     }
 
     static async cargarPrendasTorso(){
-        let propiedad = ""
+        let propiedad = "cargarPrendasTorso"
         let datos = await $.ajax(
             {
                 //url:  "https://05.2daw.esvirgua.com/myCloset/src/php/controlador/controladorBackend.php",
@@ -155,7 +153,7 @@ export class Outfits {
     }
 
     static async cargarPrendasPiernas(){
-        let propiedad = ""
+        let propiedad = "cargarPrendasPiernas"
         let datos = await $.ajax(
             {
                 //url:  "https://05.2daw.esvirgua.com/myCloset/src/php/controlador/controladorBackend.php",
@@ -177,7 +175,7 @@ export class Outfits {
     }
 
     static async cargarPiernasPies(){
-        let propiedad = ""
+        let propiedad = "cargarPrendasPies"
         let datos = await $.ajax(
             {
                 //url:  "https://05.2daw.esvirgua.com/myCloset/src/php/controlador/controladorBackend.php",

@@ -108,7 +108,24 @@ switch ($_POST['propiedad']) {
         borrarSubCategoria($idSubCategoria);
         break;
     case "cargarOutfits":
-        cargarOutfits();
+        $usuario = $_POST['correo'];
+        cargarOutfits($usuario);
+        break;
+    case "cargarPrendasCabeza":
+        $usuario = $_POST['correo'];
+        cargarPrendasCabeza($usuario);
+        break;
+    case "cargarPrendasTorso":
+        $usuario = $_POST['correo'];
+        cargarPrendasTorso($usuario);
+        break;
+    case "cargarPrendasPiernas":
+        $usuario = $_POST['correo'];
+        cargarPrendasPiernas($usuario);
+        break;
+    case "cargarPrendasPies":
+        $usuario = $_POST['correo'];
+        cargarPrendasPies($usuario);
         break;
 }
 
@@ -391,8 +408,37 @@ function borrarSubCategoria($idSubCategoria)
     echo json_encode($response);
 }
 
-function cargarOutfits(){
+function cargarOutfits($usuario)
+{
     $metodo = new Metodos();
 
-    echo json_encode($metodo->cargarOutfits());
+    echo json_encode($metodo->cargarOutfits($usuario));
+}
+
+function cargarPrendasCabeza($usuario)
+{
+    $metodo = new Metodos();
+
+    echo json_encode($metodo->cargarPrendasCabeza($usuario));
+}
+
+function cargarPrendasTorso($usuario)
+{
+    $metodo = new Metodos();
+
+    echo json_encode($metodo->cargarPrendasTorso($usuario));
+}
+
+function cargarPrendasPiernas($usuario)
+{
+    $metodo = new Metodos();
+
+    echo json_encode($metodo->cargarPrendasPiernas($usuario));
+}
+
+function cargarPrendasPies($usuario)
+{
+    $metodo = new Metodos();
+
+    echo json_encode($metodo->cargarPrendasPies($usuario));
 }

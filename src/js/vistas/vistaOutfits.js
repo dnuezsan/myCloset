@@ -12,7 +12,11 @@ export class VistaOutfits {
 
     iniciar() {
         VistaOutfits.limpiarOutfit()
-        //VistaOutfits.cargarOutfits()
+        VistaOutfits.cargarOutfits()
+        VistaOutfits.cargarPrendasCabeza()
+        VistaOutfits.cargarPrendasTorso()
+        VistaOutfits.cargarPrendasPiernas()
+        VistaOutfits.cargarPrendasPies()
         VistaOutfits.detectarCambiosSelectYCargar()
         VistaOutfits.detectarCambiosSelect()
         VistaOutfits.igualarFormularios()
@@ -112,17 +116,12 @@ export class VistaOutfits {
             VistaOutfits.generarOptionOutfit(outfits[i], selectOutfits[1])
 
         }
+
+        $('.outfitCargado').formSelect()
     }
 
-    static prueba() {
-        let nombre = document.getElementsByClassName('nombreOutfit')
-        for (let i = 0; i < nombre.length; i++) {
-            console.log(nombre[i].value);
-        }
-    }
-    static cargarPrendasCabeza() {
-        console.log('metodos de cabeza');
-        /* let prendaCabeza = document.getElementsByClassName('prendaCabezaOutfit')
+    static async cargarPrendasCabeza() {
+        let prendaCabeza = document.getElementsByClassName('prendaCabezaOutfit')
 
         for (let i = 0; i < prendaCabeza.length; i++) {
             if (prendaCabeza[i].childElementCount > 1) {
@@ -136,14 +135,17 @@ export class VistaOutfits {
 
         for (let i = 0; i < prendas.length; i++) {
 
-            VistaOutfits.generarOptionOutfit(prendas[i], prendaCabeza[0])
-            VistaOutfits.generarOptionOutfit(prendas[i], prendaCabeza[1])
-        } */
+            VistaOutfits.generarOptionPrenda(prendas[i], prendaCabeza[0])
+            VistaOutfits.generarOptionPrenda(prendas[i], prendaCabeza[1])
+        }
+
+        $('.prendaCabezaOutfit').formSelect()
+
     }
 
     static async cargarPrendasTorso() {
-        console.log('metodos de torso');
-        /* let prendaTorso = document.getElementsByClassName('prendaTorsoOutfit')
+
+        let prendaTorso = document.getElementsByClassName('prendaTorsoOutfit')
 
         for (let i = 0; i < prendaTorso.length; i++) {
             if (prendaTorso[i].childElementCount > 1) {
@@ -157,14 +159,15 @@ export class VistaOutfits {
 
         for (let i = 0; i < prendas.length; i++) {
 
-            VistaOutfits.generarOptionOutfit(prendas[i], prendaTorso[0])
-            VistaOutfits.generarOptionOutfit(prendas[i], prendaTorso[1])
-        } */
+            VistaOutfits.generarOptionPrenda(prendas[i], prendaTorso[0])
+            VistaOutfits.generarOptionPrenda(prendas[i], prendaTorso[1])
+        }
+        $('.prendaTorsoOutfit').formSelect()
     }
 
-    static async cargarPrendasPierna() {
-        console.log('metodos de piernas');
-        /* let prendaPiernas = document.getElementsByClassName('prendaPiernasOutfit')
+    static async cargarPrendasPiernas() {
+
+        let prendaPiernas = document.getElementsByClassName('prendaPiernasOutfit')
 
         for (let i = 0; i < prendaPiernas.length; i++) {
             if (prendaPiernas[i].childElementCount > 1) {
@@ -178,15 +181,15 @@ export class VistaOutfits {
 
         for (let i = 0; i < prendas.length; i++) {
 
-            VistaOutfits.generarOptionOutfit(prendas[i], prendaPiernas[0])
-            VistaOutfits.generarOptionOutfit(prendas[i], prendaPiernas[1])
+            VistaOutfits.generarOptionPrenda(prendas[i], prendaPiernas[0])
+            VistaOutfits.generarOptionPrenda(prendas[i], prendaPiernas[1])
         }
- */
+        $('.prendaPiernasOutfit').formSelect()
     }
 
     static async cargarPrendasPies() {
-        console.log('metodos de pies');
-        /* let prendaPies = document.getElementsByClassName('prendaPiesOutfit')
+
+        let prendaPies = document.getElementsByClassName('prendaPiesOutfit')
 
         for (let i = 0; i < prendaPies.length; i++) {
             if (prendaPies[i].childElementCount > 1) {
@@ -200,17 +203,27 @@ export class VistaOutfits {
 
         for (let i = 0; i < prendas.length; i++) {
 
-            VistaOutfits.generarOptionOutfit(prendas[i], prendaPies[0])
-            VistaOutfits.generarOptionOutfit(prendas[i], prendaPies[1])
-        } */
+            VistaOutfits.generarOptionPrenda(prendas[i], prendaPies[0])
+            VistaOutfits.generarOptionPrenda(prendas[i], prendaPies[1])
+        }
+        $('.prendaPiesOutfit').formSelect()
     }
 
     static generarOptionOutfit(datos, nodoPadre) {
         let opcion = document.createElement('option')
         //opcion.classList.add('prendaCabeza')
 
-        opcion.value = datos.idSubcategoria
-        opcion.textContent = datos.nombreSubcategoria
+        opcion.value = datos.idOufit
+        opcion.textContent = datos.nombreOutfit
+        nodoPadre.appendChild(opcion)
+    }
+
+    static generarOptionPrenda(datos, nodoPadre) {
+        let opcion = document.createElement('option')
+        //opcion.classList.add('prendaCabeza')
+
+        opcion.value = datos.idPrenda
+        opcion.textContent = `${datos.nombreSubcategoria} - ${datos.nombrePrenda}`
         nodoPadre.appendChild(opcion)
     }
 
@@ -256,15 +269,14 @@ export class VistaOutfits {
 
         for (let i = 0; i < outfitsCargados.length; i++) {
             outfitsCargados[i].onchange = async () => {
-                await VistaOutfits.cargarPrendasCabeza()
+                await VistaOutfits.cargarPrendasCabezaOutfit()
 
-                await VistaOutfits.cargarPrendasTorso()
+                await VistaOutfits.cargarPrendasTorsoOutfit()
 
-                await VistaOutfits.cargarPrendasPiernas()
+                await VistaOutfits.cargarPrendasPiernasOutfit()
 
-                await VistaOutfits.cargarPrendasPies()
+                await VistaOutfits.cargarPrendasPiesOutfit()
 
-                await VistaOutfits.prueba()
             }
 
         }
