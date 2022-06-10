@@ -659,13 +659,13 @@ class Metodos
 
     }
 
-    function insertamosOutfit($usuario,$nombreOutfit, $fechaCreacion){
+    function insertamosOutfit($usuario,$nombreOutfit, $fechaCreacion, $idPrenda){
         $consulta ="INSERT INTO `outfit`( `idUsuario`, `nombreOutfit`, `fechaCreacion`) VALUES (?,?,?)";
         $consultaRelacion ="INSERT INTO `relprendaoutfit`(`idOutfit`, `idPrenda`) VALUES (?,?)";
         $consultaUsurio = "SELECT idUsuario FROM usuario WHERE correo = '$usuario'";
         $resultadoUsuario = $this->conexion->consultas($consultaUsurio);
         $fila = $this->conexion->extraerFila($resultadoUsuario);
-        $consultaUltimoOutfit = "SELECT MAX(idPrenda) AS id FROM prenda";
+        $consultaUltimoOutfit = "SELECT MAX(idOutfit) AS id FROM outfit";
         $idUsuario = $fila['idUsuario'];
         //Preparamos con preparae
         if (!$sentencia = $this->conexion->mysqli->prepare($consulta)) {
