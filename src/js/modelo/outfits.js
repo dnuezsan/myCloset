@@ -174,7 +174,7 @@ export class Outfits {
         return datosJson
     }
 
-    static async cargarPiernasPies(){
+    static async cargarPrendasPies(){
         let propiedad = "cargarPrendasPies"
         let datos = await $.ajax(
             {
@@ -188,6 +188,94 @@ export class Outfits {
                     propiedad: propiedad,
                     correo: sessionStorage.sesion,
 
+
+
+                },
+            })
+        let datosJson = JSON.parse(datos)
+        return datosJson
+    }
+
+    static async cargarPrendasCabezaOutfit(idOutfit){
+        let propiedad = "cargarPrendasCabezaOufit"
+        let datos = await $.ajax(
+            {
+                //url:  "https://05.2daw.esvirgua.com/myCloset/src/php/controlador/controladorBackend.php",
+                url: "/DWEC/myCloset/src/php/controlador/controladorBackend.php",
+                //url: "https://myclosetss.000webhostapp.com/php/controlador/controladorBackend.php",
+                //url: "/myCloset/src/php/controlador/controladorBackend.php",
+                type: "POST",
+                data:
+                {
+                    propiedad: propiedad,
+                    correo: sessionStorage.sesion,
+                    idOutfit: idOutfit
+
+
+                },
+            })
+        let datosJson = JSON.parse(datos)
+        return datosJson
+    }
+
+    static async cargarPrendasTorsoOutfit(idOutfit){
+        let propiedad = "cargarPrendasTorsoOufit"
+        let datos = await $.ajax(
+            {
+                //url:  "https://05.2daw.esvirgua.com/myCloset/src/php/controlador/controladorBackend.php",
+                url: "/DWEC/myCloset/src/php/controlador/controladorBackend.php",
+                //url: "https://myclosetss.000webhostapp.com/php/controlador/controladorBackend.php",
+                //url: "/myCloset/src/php/controlador/controladorBackend.php",
+                type: "POST",
+                data:
+                {
+                    propiedad: propiedad,
+                    correo: sessionStorage.sesion,
+                    idOutfit: idOutfit
+
+
+                },
+            })
+        let datosJson = JSON.parse(datos)
+        return datosJson
+    }
+
+    static async cargarPrendasPiernasOutfit(idOutfit){
+        let propiedad = "cargarPrendasPiernasOufit"
+        let datos = await $.ajax(
+            {
+                //url:  "https://05.2daw.esvirgua.com/myCloset/src/php/controlador/controladorBackend.php",
+                url: "/DWEC/myCloset/src/php/controlador/controladorBackend.php",
+                //url: "https://myclosetss.000webhostapp.com/php/controlador/controladorBackend.php",
+                //url: "/myCloset/src/php/controlador/controladorBackend.php",
+                type: "POST",
+                data:
+                {
+                    propiedad: propiedad,
+                    correo: sessionStorage.sesion,
+                    idOutfit: idOutfit
+
+
+                },
+            })
+        let datosJson = JSON.parse(datos)
+        return datosJson
+    }
+
+    static async cargarPrendasPiesOutfit(idOutfit){
+        let propiedad = "cargarPrendasPiesOufit"
+        let datos = await $.ajax(
+            {
+                //url:  "https://05.2daw.esvirgua.com/myCloset/src/php/controlador/controladorBackend.php",
+                url: "/DWEC/myCloset/src/php/controlador/controladorBackend.php",
+                //url: "https://myclosetss.000webhostapp.com/php/controlador/controladorBackend.php",
+                //url: "/myCloset/src/php/controlador/controladorBackend.php",
+                type: "POST",
+                data:
+                {
+                    propiedad: propiedad,
+                    correo: sessionStorage.sesion,
+                    idOutfit: idOutfit
 
 
                 },

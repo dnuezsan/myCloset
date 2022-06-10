@@ -183,7 +183,27 @@ export class Controlador {
     }
 
     static async cargarPrendasPies(){
-        let respuesta = await Outfits.cargarPiernasPies()
+        let respuesta = await Outfits.cargarPrendasPies()
+        return respuesta
+    }
+
+    static async cargarPrendasCabezaOutfit(idOutfit){
+        let respuesta = await Outfits.cargarPrendasCabezaOutfit(idOutfit)
+        return respuesta
+    }
+
+    static async cargarPrendasTorsoOutfit(idOutfit){
+        let respuesta = await Outfits.cargarPrendasTorsoOutfit(idOutfit)
+        return respuesta
+    }
+
+    static async cargarPrendasPiernasOutfit(idOutfit){
+        let respuesta = await Outfits.cargarPrendasPiernasOutfit(idOutfit)
+        return respuesta
+    }
+
+    static async cargarPrendasPiesOutfit(idOutfit){
+        let respuesta = await Outfits.cargarPrendasPiesOutfit(idOutfit)
         return respuesta
     }
 

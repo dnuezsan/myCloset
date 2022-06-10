@@ -10,16 +10,16 @@ export class VistaOutfits {
         this.iniciar()
     }
 
-    iniciar() {
+    async iniciar() {
         VistaOutfits.limpiarOutfit()
         VistaOutfits.cargarOutfits()
-        VistaOutfits.cargarPrendasCabeza()
-        VistaOutfits.cargarPrendasTorso()
-        VistaOutfits.cargarPrendasPiernas()
-        VistaOutfits.cargarPrendasPies()
-        VistaOutfits.detectarCambiosSelectYCargar()
+        await VistaOutfits.cargarPrendasCabeza()
+        await VistaOutfits.cargarPrendasTorso()
+        await VistaOutfits.cargarPrendasPiernas()
+        await VistaOutfits.cargarPrendasPies()
         VistaOutfits.detectarCambiosSelect()
         VistaOutfits.igualarFormularios()
+        VistaOutfits.detectarCambiosSelectYCargar()
     }
 
     static mostrarOutfits() {
@@ -213,7 +213,7 @@ export class VistaOutfits {
         let opcion = document.createElement('option')
         //opcion.classList.add('prendaCabeza')
 
-        opcion.value = datos.idOufit
+        opcion.value = datos.idOutfit
         opcion.textContent = datos.nombreOutfit
         nodoPadre.appendChild(opcion)
     }
@@ -225,6 +225,67 @@ export class VistaOutfits {
         opcion.value = datos.idPrenda
         opcion.textContent = `${datos.nombreSubcategoria} - ${datos.nombrePrenda}`
         nodoPadre.appendChild(opcion)
+    }
+
+    //ACABAR METODO
+    static async cargarPrendasCabezaOutfit() {
+        let outfitCargado = document.getElementsByClassName('outfitCargado')
+        let prendaCabeza = document.getElementsByClassName('prendaCabezaOutfit')
+        
+        let prendaCabezaOutfit = null
+        let idOutfit = null
+        for (let i = 0; i < outfitCargado.length; i++) {
+            idOutfit = outfitCargado[i].value
+            prendaCabezaOutfit = await Controlador.cargarPrendasCabezaOutfit(idOutfit)
+            prendaCabeza[i].value=1
+            prendaCabeza[i].value = prendaCabezaOutfit[0].idPrenda
+            $('.prendaCabezaOutfit').formSelect()
+        }
+    }
+
+    static async cargarPrendasTorsoOutfit() {
+        let outfitCargado = document.getElementsByClassName('outfitCargado')
+        let prendaTorso = document.getElementsByClassName('prendaTorsoOutfit')
+        
+        let prendaTorsoOutfit = null
+        let idOutfit = null
+        for (let i = 0; i < outfitCargado.length; i++) {
+            idOutfit = outfitCargado[i].value
+            prendaTorsoOutfit = await Controlador.cargarPrendasTorsoOutfit(idOutfit)
+            prendaTorso[i].value=1
+            prendaTorso[i].value = prendaTorsoOutfit[0].idPrenda
+            $('.prendaTorsoOutfit').formSelect()
+        }
+    }
+
+    static async cargarPrendasPiernasOutfit() {
+        let outfitCargado = document.getElementsByClassName('outfitCargado')
+        let prendaPiernas = document.getElementsByClassName('prendaPiernasOutfit')
+        
+        let prendaPiernasOutfit = null
+        let idOutfit = null
+        for (let i = 0; i < outfitCargado.length; i++) {
+            idOutfit = outfitCargado[i].value
+            prendaPiernasOutfit = await Controlador.cargarPrendasPiernasOutfit(idOutfit)
+            prendaPiernas[i].value=1
+            prendaPiernas[i].value = prendaPiernasOutfit[0].idPrenda
+            $('.prendaPiernasOutfit').formSelect()
+        }
+    }
+
+    static async cargarPrendasPiesOutfit() {
+        let outfitCargado = document.getElementsByClassName('outfitCargado')
+        let prendaPies = document.getElementsByClassName('prendaPiesOutfit')
+        
+        let prendaPiesOutfit = null
+        let idOutfit = null
+        for (let i = 0; i < outfitCargado.length; i++) {
+            idOutfit = outfitCargado[i].value
+            prendaPiesOutfit = await Controlador.cargarPrendasPiesOutfit(idOutfit)
+            prendaPies[i].value=1
+            prendaPies[i].value = prendaPiesOutfit[0].idPrenda
+            $('.prendaPiesOutfit').formSelect()
+        }
     }
 
     //ACABAR METODO
@@ -266,9 +327,11 @@ export class VistaOutfits {
     static detectarCambiosSelectYCargar() {
         let outfitsCargados = document.getElementsByClassName('outfitCargado')
 
-
+        
         for (let i = 0; i < outfitsCargados.length; i++) {
-            outfitsCargados[i].onchange = async () => {
+            
+            outfitsCargados[i].addEventListener('change', async ()=>{
+
                 await VistaOutfits.cargarPrendasCabezaOutfit()
 
                 await VistaOutfits.cargarPrendasTorsoOutfit()
@@ -276,10 +339,9 @@ export class VistaOutfits {
                 await VistaOutfits.cargarPrendasPiernasOutfit()
 
                 await VistaOutfits.cargarPrendasPiesOutfit()
-
-            }
-
+            }, true) 
         }
+
         $('#panelOutfit select').formSelect()
     }
 
@@ -324,12 +386,12 @@ export class VistaOutfits {
                 }
             }
 
-            nombreDeOutfit[i].onchange = () => {
+            /* nombreDeOutfit[i].onchange = () => {
                 valor = nombreDeOutfit[i].value
                 for (let j = 0; j < nombreDeOutfit.length; j++) {
                     nombreDeOutfit[j].value = valor
                 }
-            }
+            } */
 
             $('#panelOutfit select').formSelect()
         }

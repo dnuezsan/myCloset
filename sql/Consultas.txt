@@ -5,3 +5,22 @@ SELECT  FROM prenda
 LEFT JOIN usuario ON usuario.idUsuario = prenda.idUsuario
 LEFT JOIN relusuariosubcategoria AS rs ON rs.idUsuario =usuario.idUsuario
 LEFT JOIN subcategoria ON subcategoria.idSubcategoria = rs.idSubcategoria
+
+
+Filtrar prenda por usuario, idOutift y categoria de la prenda (para sacar la prenda del outfit selecionado)
+
+SELECT * FROM prenda 
+LEFT JOIN relprendaoutfit ON relprendaoutfit.idPrenda = prenda.idPrenda
+LEFT JOIN outfit ON outfit.idOutfit = relprendaoutfit.idOutfit
+LEFT JOIN subcategoria ON subcategoria.idSubcategoria = prenda.idSubcategoria
+WHERE prenda.idUsuario =21 AND outfit.idOutfit =1 AND subcategoria.idCategoria =2
+
+Filtrar prenda por usuario, categoria de la prenda y ordenadas por categoria (para extraer todas las prendas por categorias)
+
+SELECT * FROM prenda 
+LEFT JOIN relprendaoutfit ON relprendaoutfit.idPrenda = prenda.idPrenda
+LEFT JOIN outfit ON outfit.idOutfit = relprendaoutfit.idOutfit
+LEFT JOIN subcategoria ON subcategoria.idSubcategoria = prenda.idSubcategoria
+WHERE prenda.idUsuario =21 AND subcategoria.idCategoria =2
+ORDER BY subcategoria.nombreSubcategoria ASC
+

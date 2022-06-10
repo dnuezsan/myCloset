@@ -340,7 +340,7 @@ class Metodos
         while ($fila = $this->conexion->extraerFila($resultado)) {
             $imagen = $fila['idPrenda'];
             $files = glob("../imagenes_prendas/$imagen.png");
-            $imagenCodificada = base64_encode($files[0]);
+            //$imagenCodificada = base64_encode($files[0]);
             $imagen = substr($files[0], 2);
             array_push($arrayAsociativo, array(
                 "idPrenda" => $fila['idPrenda'],
@@ -844,11 +844,205 @@ class Metodos
         return $arrayAsociativo;
     }
 
-
-    function insertamosOutfit($usuario, $nombreOutfit, $fechaCreacion)
+    function cargarPrendasCabezaOutfit($usuario, $idOutfit)
     {
-        $consulta = "INSERT INTO `outfit`( `idUsuario`, `nombreOutfit`, `fechaCreacion`) VALUES ('[value-2]','[value-3]','[value-4]')";
-        $consulta = "INSERT INTO `relprendaoutfit`(`idOutfit`, `idPrenda`) VALUES ('[value-1]','[value-2]')";
+        $consulta = "SELECT idUsuario FROM usuario WHERE nombre = '$usuario'";
+
+        if (!$resultado = $this->conexion->consultas($consulta)) {
+
+            return false;
+        }
+
+        if (!$fila =  $this->conexion->extraerFila($resultado)) {
+
+            return false;
+        }
+
+        $idUsuario = $fila['idUsuario'];
+
+        $consulta2 = "SELECT prenda.idPrenda, subcategoria.nombreSubcategoria, prenda.nombrePrenda FROM prenda 
+        LEFT JOIN relprendaoutfit ON relprendaoutfit.idPrenda = prenda.idPrenda
+        LEFT JOIN outfit ON outfit.idOutfit = relprendaoutfit.idOutfit
+        LEFT JOIN subcategoria ON subcategoria.idSubcategoria = prenda.idSubcategoria
+        WHERE prenda.idUsuario =$idUsuario AND outfit.idOutfit =$idOutfit AND subcategoria.idCategoria =1";
+
+        $resultado2 = $this->conexion->consultas($consulta2);
+        $arrayAsociativo = array();
+
+        $filas_afectadas = $this->conexion->numeroFilas($this->conexion->consultas($consulta2));
+
+        if ($filas_afectadas == 0) {
+            
+            $arrayAsociativoDefault = array([
+                "idPrenda"=>'',
+                "nombreSubcategoria" =>'',
+                "nombrePrenda" => '']
+            );
+            return $arrayAsociativoDefault;
+        }
+
+        while ($fila =  $this->conexion->extraerFila($resultado2)) {
+            //$fila['idCategoria'];
+            //$fila['nombreCategoria'];
+            array_push($arrayAsociativo, array(
+                "idPrenda" => $fila['idPrenda'],
+                "nombreSubcategoria" => $fila['nombreSubcategoria'],
+                "nombrePrenda" => $fila['nombrePrenda']
+            ));
+        }
+        return $arrayAsociativo;
+    }
+
+    function cargarPrendasTorsoOutfit($usuario, $idOutfit)
+    {
+        $consulta = "SELECT idUsuario FROM usuario WHERE nombre = '$usuario'";
+
+        if (!$resultado = $this->conexion->consultas($consulta)) {
+
+            return false;
+        }
+
+        if (!$fila =  $this->conexion->extraerFila($resultado)) {
+
+            return false;
+        }
+
+        $idUsuario = $fila['idUsuario'];
+
+        $consulta2 = "SELECT prenda.idPrenda, subcategoria.nombreSubcategoria, prenda.nombrePrenda FROM prenda 
+        LEFT JOIN relprendaoutfit ON relprendaoutfit.idPrenda = prenda.idPrenda
+        LEFT JOIN outfit ON outfit.idOutfit = relprendaoutfit.idOutfit
+        LEFT JOIN subcategoria ON subcategoria.idSubcategoria = prenda.idSubcategoria
+        WHERE prenda.idUsuario =$idUsuario AND outfit.idOutfit =$idOutfit AND subcategoria.idCategoria =2";
+
+        $resultado2 = $this->conexion->consultas($consulta2);
+        $arrayAsociativo = array();
+
+        $filas_afectadas = $this->conexion->numeroFilas($this->conexion->consultas($consulta2));
+
+        if ($filas_afectadas == 0) {
+            
+            $arrayAsociativoDefault = array([
+                "idPrenda"=>'',
+                "nombreSubcategoria" =>'',
+                "nombrePrenda" => '']
+            );
+            return $arrayAsociativoDefault;
+        }
+
+        while ($fila =  $this->conexion->extraerFila($resultado2)) {
+            //$fila['idCategoria'];
+            //$fila['nombreCategoria'];
+            array_push($arrayAsociativo, array(
+                "idPrenda" => $fila['idPrenda'],
+                "nombreSubcategoria" => $fila['nombreSubcategoria'],
+                "nombrePrenda" => $fila['nombrePrenda']
+            ));
+        }
+        return $arrayAsociativo;
+    }
+
+    function cargarPrendasPiernasOutfit($usuario, $idOutfit)
+    {
+        $consulta = "SELECT idUsuario FROM usuario WHERE nombre = '$usuario'";
+
+        if (!$resultado = $this->conexion->consultas($consulta)) {
+
+            return false;
+        }
+
+        if (!$fila =  $this->conexion->extraerFila($resultado)) {
+
+            return false;
+        }
+
+        $idUsuario = $fila['idUsuario'];
+
+        $consulta2 = "SELECT prenda.idPrenda, subcategoria.nombreSubcategoria, prenda.nombrePrenda FROM prenda 
+        LEFT JOIN relprendaoutfit ON relprendaoutfit.idPrenda = prenda.idPrenda
+        LEFT JOIN outfit ON outfit.idOutfit = relprendaoutfit.idOutfit
+        LEFT JOIN subcategoria ON subcategoria.idSubcategoria = prenda.idSubcategoria
+        WHERE prenda.idUsuario =$idUsuario AND outfit.idOutfit =$idOutfit AND subcategoria.idCategoria =3";
+
+        $resultado2 = $this->conexion->consultas($consulta2);
+        $arrayAsociativo = array();
+
+        $filas_afectadas = $this->conexion->numeroFilas($this->conexion->consultas($consulta2));
+
+        if ($filas_afectadas == 0) {
+            
+            $arrayAsociativoDefault = array([
+                "idPrenda"=>'',
+                "nombreSubcategoria" =>'',
+                "nombrePrenda" => '']
+            );
+            return $arrayAsociativoDefault;
+        }
+
+        while ($fila =  $this->conexion->extraerFila($resultado2)) {
+            //$fila['idCategoria'];
+            //$fila['nombreCategoria'];
+            array_push($arrayAsociativo, array(
+                "idPrenda" => $fila['idPrenda'],
+                "nombreSubcategoria" => $fila['nombreSubcategoria'],
+                "nombrePrenda" => $fila['nombrePrenda']
+            ));
+        }
+        return $arrayAsociativo;
+    }
+
+    function cargarPrendasPiesOutfit($usuario, $idOutfit)
+    {
+        $consulta = "SELECT idUsuario FROM usuario WHERE nombre = '$usuario'";
+
+        if (!$resultado = $this->conexion->consultas($consulta)) {
+
+            return false;
+        }
+
+        if (!$fila =  $this->conexion->extraerFila($resultado)) {
+
+            return false;
+        }
+
+        $idUsuario = $fila['idUsuario'];
+
+        $consulta2 = "SELECT prenda.idPrenda, subcategoria.nombreSubcategoria, prenda.nombrePrenda FROM prenda 
+        LEFT JOIN relprendaoutfit ON relprendaoutfit.idPrenda = prenda.idPrenda
+        LEFT JOIN outfit ON outfit.idOutfit = relprendaoutfit.idOutfit
+        LEFT JOIN subcategoria ON subcategoria.idSubcategoria = prenda.idSubcategoria
+        WHERE prenda.idUsuario =$idUsuario AND outfit.idOutfit =$idOutfit AND subcategoria.idCategoria =4";
+
+        $resultado2 = $this->conexion->consultas($consulta2);
+        $filas_afectadas = $this->conexion->numeroFilas($this->conexion->consultas($consulta2));
+        
+        $arrayAsociativoDefault = array();
+
+        $filas_afectadas = $this->conexion->numeroFilas($this->conexion->consultas($consulta2));
+
+        if ($filas_afectadas == 0) {
+            
+            $arrayAsociativoDefault = array([
+                "idPrenda"=>'',
+                "nombreSubcategoria" =>'',
+                "nombrePrenda" => '']
+            );
+            return $arrayAsociativoDefault;
+        }
+
+        $arrayAsociativo = array();
+
+        while ($fila =  $this->conexion->extraerFila($resultado2)) {
+            
+            array_push($arrayAsociativo, array(
+                "idPrenda" => $fila['idPrenda'],
+                "nombreSubcategoria" => $fila['nombreSubcategoria'],
+                "nombrePrenda" => $fila['nombrePrenda']
+            ));
+        }
+        return $arrayAsociativo;
+    }
+
     function insertamosOutfit($usuario,$nombreOutfit, $fechaCreacion){
         $consulta ="INSERT INTO `outfit`( `idUsuario`, `nombreOutfit`, `fechaCreacion`) VALUES (?,?,?)";
         $consultaRelacion ="INSERT INTO `relprendaoutfit`(`idOutfit`, `idPrenda`) VALUES (?,?)";
