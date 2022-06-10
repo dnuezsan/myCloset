@@ -1087,6 +1087,45 @@ class Metodos
 
     }
 
+    function borrarOutfit($idOutfit){
+        $consultaRelacion="DELETE FROM relprendaoutfit WHERE idOutfit=?";
+        $consulta="DELETE FROM `outfit` WHERE idOutfit=?";
+        //Preparamos con preparae
+        if (!$sentencia = $this->conexion->mysqli->prepare($consultaRelacion)) {
+            //echo "La consulta fallo en su preparacion";
+            //return false;
+
+        }
+        //Pasamos los parametros y el tipo de dato
+        if (!$sentencia->bind_param("i", $idOutfit)) {
+            //echo "Fallo en la vinculacion de parametros";
+            //return false;
+
+        }
+        //Ejecutamos con execute
+        if (!$sentencia->execute()) {
+            //echo "Algo fallo en la ejecucion";
+
+            return false;
+        } else if($sentencia = $this->conexion->mysqli->prepare($consulta)){
+            //Pasamos los parametros y el tipo de dato
+            if (!$sentencia->bind_param("i", $idOutfit)) {
+                //echo "Fallo en la vinculacion de parametros";
+                //return false;
+
+            }
+            //Ejecutamos con execute
+            if (!$sentencia->execute()) {
+                //echo "Algo fallo en la ejecucion";
+
+                return false;
+            } else {
+                return true;
+            }
+
+        }
+    }
+
     //Subimos las imagenes y pasamos el parametro Carpeta Destino que es donde se guardadn las imagenes del pedido,
     /*
      * @param mixed $carpetaDestino

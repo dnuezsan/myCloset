@@ -56,7 +56,7 @@ export class VistaOutfits {
 
     }
 
-    static async guardarOutfit() {
+    static async insertarOutfit() {
         let outfit = document.getElementsByClassName('outfitCargado')
 
         for (let i = 0; i < outfit.length; i++) {
@@ -308,7 +308,7 @@ export class VistaOutfits {
                         if (outfitsCargados[i].value == '') {
                             VistaOutfits.guardarOutfit()
                         } else {
-                            VistaOutfits.modificarOutfit()
+                            VistaOutfits.insertarOutfit()
                         }
 
                     }

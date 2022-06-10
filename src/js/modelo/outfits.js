@@ -24,8 +24,8 @@ export class Outfits {
         return Rest.post('pelicula', this)
     }
 
-    static async guardarOutfit() {
-        let propiedad = ""
+    static async insertarOutfit() {
+        let insertarOutfit = "insetarOutfit"
         let datos = await $.ajax(
             {
                 //url:  "https://05.2daw.esvirgua.com/myCloset/src/php/controlador/controladorBackend.php",
@@ -35,7 +35,7 @@ export class Outfits {
                 type: "POST",
                 data:
                 {
-                    propiedad: propiedad,
+                    propiedad: insertarOutfit,
                     correo: sessionStorage.sesion,
 
                 },

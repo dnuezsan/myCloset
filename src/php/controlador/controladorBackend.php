@@ -147,346 +147,385 @@ switch ($_POST['propiedad']) {
         $usuario = $_POST['correo'];
         cargarPrendasPies($usuario);
         break;
+    case "insetarOutfit":
+        $usuario = $_POST['correo'];
+        $nombreOutfit= $_POST['nombreOutfit'];
+        $fechaCreacion = $_POST['fechaCreacion'];
+        $idPrenda = $_POST['idPrenda'];
+        insertarOutfit($usuario,$nombreOutfit, $fechaCreacion, $idPrenda);
+        break;
+    case "borrarOutfit":
+        $idOutfit = $_POST['idOutfit'];
+        borrarOutfit($idOutfit);
+        break;
 }
 
 
 
-/**
- * @param mixed $usuario
- * @param mixed $password
- * Envia datos del login al formulario y devuelve la respuesta al front
- * @return [type]
- */
-function sesion($usuario, $password)
-{
-    $metodo = new Metodos();
-    $response = array('success' => false, 'mensaje' => "", 'nombre' => "", 'us_id' => "");
+    /**
+     * @param mixed $usuario
+     * @param mixed $password
+     * Envia datos del login al formulario y devuelve la respuesta al front
+     * @return [type]
+     */
+    function sesion($usuario, $password)
+    {
+        $metodo = new Metodos();
+        $response = array('success' => false, 'mensaje' => "", 'nombre' => "", 'us_id' => "");
 
-    //$metodo->iniciarSesion($usuario, $password);
+        //$metodo->iniciarSesion($usuario, $password);
 
-    if ($metodo->iniciarSesion($usuario, $password)) {
-        $response['success'] = true;
-        $response['mensaje'] = 'Todo es correcto';
-        $response['usuario'] = $usuario;
-    } else {
-        $response['success'] = false;
-        $response['mensaje'] = "Correo o contraseña incorrecta";
-        $response['usuario'] = $usuario;
+        if ($metodo->iniciarSesion($usuario, $password)) {
+            $response['success'] = true;
+            $response['mensaje'] = 'Todo es correcto';
+            $response['usuario'] = $usuario;
+        } else {
+            $response['success'] = false;
+            $response['mensaje'] = "Correo o contraseña incorrecta";
+            $response['usuario'] = $usuario;
+        }
+        echo json_encode($response);
     }
-    echo json_encode($response);
-}
 
-/**
- * @param mixed $nombre
- * @param mixed $correo
- * @param mixed $password
- * @param mixed $rpassword
- * Pasa los del registro de ususario al modelo y devuelve la respuesta al front
- * @return [type]
- */
-function registrar($nombre, $correo, $password, $rpassword)
-{
-    $metodo = new Metodos();
-    $response = array('success' => false, 'mensaje' => "", 'correo' => "");
+    /**
+     * @param mixed $nombre
+     * @param mixed $correo
+     * @param mixed $password
+     * @param mixed $rpassword
+     * Pasa los del registro de ususario al modelo y devuelve la respuesta al front
+     * @return [type]
+     */
+    function registrar($nombre, $correo, $password, $rpassword)
+    {
+        $metodo = new Metodos();
+        $response = array('success' => false, 'mensaje' => "", 'correo' => "");
 
-    if ($metodo->altaUsuario($nombre, $correo, $password, $rpassword)) {
-        $response['success'] = true;
-        $response['mensaje'] = 'El registro se efectuó correctamente';
-        $response['correo'] = $correo;
-    } else {
-        $response['success'] = false;
-        $response['mensaje'] = "El correo introducido ya existe";
-        $response['correo'] = $correo;
+        if ($metodo->altaUsuario($nombre, $correo, $password, $rpassword)) {
+            $response['success'] = true;
+            $response['mensaje'] = 'El registro se efectuó correctamente';
+            $response['correo'] = $correo;
+        } else {
+            $response['success'] = false;
+            $response['mensaje'] = "El correo introducido ya existe";
+            $response['correo'] = $correo;
+        }
+        echo json_encode($response);
     }
-    echo json_encode($response);
-}
 
-/**
- * @param String $nombreUsuario
- * @param String $correo
- * @param String $password
- * @param String $newpassword
- * @param String $rnewpassword
- * Pasa los datos al método del modelo que produce la modificación y procesa y retorna la respuesta
- * @return json_encode
- */
-function modificarUsuario($nombreUsuario, $correo, $password, $newpassword, $rnewpassword)
-{
-    $metodo = new Metodos();
-    $response = array('success' => false, 'mensaje' => "", 'correo' => "");
+    /**
+     * @param String $nombreUsuario
+     * @param String $correo
+     * @param String $password
+     * @param String $newpassword
+     * @param String $rnewpassword
+     * Pasa los datos al método del modelo que produce la modificación y procesa y retorna la respuesta
+     * @return json_encode
+     */
+    function modificarUsuario($nombreUsuario, $correo, $password, $newpassword, $rnewpassword)
+    {
+        $metodo = new Metodos();
+        $response = array('success' => false, 'mensaje' => "", 'correo' => "");
 
-    if ($metodo->modicarUsuario($nombreUsuario, $correo, $password, $newpassword, $rnewpassword)) {
-        $response['success'] = true;
-        $response['mensaje'] = 'Modificacion es correcta';
-        $response['correo'] = $correo;
-    } else {
-        $response['success'] = false;
-        $response['mensaje'] = "Error al modificar tus datos datos";
-        $response['correo'] = $correo;
+        if ($metodo->modicarUsuario($nombreUsuario, $correo, $password, $newpassword, $rnewpassword)) {
+            $response['success'] = true;
+            $response['mensaje'] = 'Modificacion es correcta';
+            $response['correo'] = $correo;
+        } else {
+            $response['success'] = false;
+            $response['mensaje'] = "Error al modificar tus datos datos";
+            $response['correo'] = $correo;
+        }
+        echo json_encode($response);
     }
-    echo json_encode($response);
-}
 
-/**
- * @param String $correo
- * Envía el correo del usuario para obtener su nombre y recibe, procesa y retorna la respuesta
- * @return json_encode
- */
-function cargaDatosUsuario($correo)
-{
-    $metodo = new Metodos();
-    $response = array('success' => false, 'mensaje' => "", 'correo' => "");
-    $arrayAsociativo = $metodo->cagarDatosUsuario($correo);
-    //var_dump($arrayAsociativo);
-    if ($arrayAsociativo["respuesta"]) {
+    /**
+     * @param String $correo
+     * Envía el correo del usuario para obtener su nombre y recibe, procesa y retorna la respuesta
+     * @return json_encode
+     */
+    function cargaDatosUsuario($correo)
+    {
+        $metodo = new Metodos();
+        $response = array('success' => false, 'mensaje' => "", 'correo' => "");
+        $arrayAsociativo = $metodo->cagarDatosUsuario($correo);
+        //var_dump($arrayAsociativo);
+        if ($arrayAsociativo["respuesta"]) {
 
-        $response['success'] = true;
-        $response['mensaje'] = 'carga de datos correcto';
-        $response['nombreUsuario'] = $arrayAsociativo["respuesta2"];
-        $response['correo'] = $arrayAsociativo['respuesta3'];
-    } else {
-        $response['success'] = false;
-        $response['mensaje'] = "Error al modificar tus datos datos";
-        $response['nombreUsuario'] = $arrayAsociativo['respuesta2'];
+            $response['success'] = true;
+            $response['mensaje'] = 'carga de datos correcto';
+            $response['nombreUsuario'] = $arrayAsociativo["respuesta2"];
+            $response['correo'] = $arrayAsociativo['respuesta3'];
+        } else {
+            $response['success'] = false;
+            $response['mensaje'] = "Error al modificar tus datos datos";
+            $response['nombreUsuario'] = $arrayAsociativo['respuesta2'];
+        }
+        echo json_encode($response);
     }
-    echo json_encode($response);
-}
 
-/**
- * @param String $correo
- * Envía el correo del usuario para borrarlo de la base de datos y recibe, procesa y retorna la respuesta
- * @return json_encode
- */
-function borrarUsuario($correo)
-{
-    $metodo = new Metodos();
-    $response = array('success' => false, 'mensaje' => "", 'correo' => "");
+    /**
+     * @param String $correo
+     * Envía el correo del usuario para borrarlo de la base de datos y recibe, procesa y retorna la respuesta
+     * @return json_encode
+     */
+    function borrarUsuario($correo)
+    {
+        $metodo = new Metodos();
+        $response = array('success' => false, 'mensaje' => "", 'correo' => "");
 
-    if ($metodo->borrarUsuario($correo)) {
-        $response['success'] = true;
-        $response['mensaje'] = 'Se borro correctamente el usuario';
-        $response['correo'] = $correo;
-    } else {
-        $response['success'] = false;
-        $response['mensaje'] = "Error al borrar el usuario";
-        $response['correo'] = $correo;
+        if ($metodo->borrarUsuario($correo)) {
+            $response['success'] = true;
+            $response['mensaje'] = 'Se borro correctamente el usuario';
+            $response['correo'] = $correo;
+        } else {
+            $response['success'] = false;
+            $response['mensaje'] = "Error al borrar el usuario";
+            $response['correo'] = $correo;
+        }
+        echo json_encode($response);
     }
-    echo json_encode($response);
-}
-/**
- * @param String $subCategoria
- * @param String $descripcion
- * @param String $talla
- * @param String $correo
- * @param String $imagen
- * Envía datos necesarios al modelo para insertar una prenda y recibe, procesa y retorna la respuesta
- * @return json_encode
- */
-function subidaDePrenda($subCategoria, $descripcion, $talla, $correo, $nombrePrenda, $imagen)
-{
+    /**
+     * @param String $subCategoria
+     * @param String $descripcion
+     * @param String $talla
+     * @param String $correo
+     * @param String $imagen
+     * Envía datos necesarios al modelo para insertar una prenda y recibe, procesa y retorna la respuesta
+     * @return json_encode
+     */
+    function subidaDePrenda($subCategoria, $descripcion, $talla, $correo, $nombrePrenda, $imagen)
+    {
 
-    $metodo = new Metodos();
-    $response = array('success' => false, 'mensaje' => "", 'correo' => "");
+        $metodo = new Metodos();
+        $response = array('success' => false, 'mensaje' => "", 'correo' => "");
 
-    if ($metodo->insertarPrendas($subCategoria, $descripcion, $talla, $correo, $nombrePrenda, $imagen)) {
-        $response['success'] = true;
-        $response['mensaje'] = 'Se ha guardado su prenda correctamente';
-        $response['correo'] = '';
-        //echo $imagen;
-    } else {
-        $response['success'] = false;
-        $response['mensaje'] = "No se ha guardado su prenda correctamente";
-        $response['correo'] = '';
+        if ($metodo->insertarPrendas($subCategoria, $descripcion, $talla, $correo, $nombrePrenda, $imagen)) {
+            $response['success'] = true;
+            $response['mensaje'] = 'Se ha guardado su prenda correctamente';
+            $response['correo'] = '';
+            //echo $imagen;
+        } else {
+            $response['success'] = false;
+            $response['mensaje'] = "No se ha guardado su prenda correctamente";
+            $response['correo'] = '';
+        }
+        echo json_encode($response);
     }
-    echo json_encode($response);
-}
 
 
-function cargarCategoria()
-{
-    $metodo = new Metodos();
-    $response = array('success' => false, 'mensaje' => "", 'correo' => "");
+    function cargarCategoria()
+    {
+        $metodo = new Metodos();
+        $response = array('success' => false, 'mensaje' => "", 'correo' => "");
 
-    echo json_encode($metodo->cargarCategorias());
-}
-
-function cargarCategoriaMisPrendas()
-{
-    $metodo = new Metodos();
-
-    echo json_encode($metodo->cargarCategoriasMisPrendas());
-}
-
-function cargarSubCategoria($categoria, $usuario)
-{
-    $metodo = new Metodos();
-    $response = array('success' => false, 'mensaje' => "", 'correo' => "");
-    //$metodo->cargarSubcategorias($categoria, $usuario);
-
-    echo json_encode($metodo->cargarSubcategorias($categoria, $usuario));
-}
-function cargarNombresPrendas($usuario, $subcategoria)
-{
-
-    $metodo = new Metodos();
-
-    echo json_encode($metodo->cargarNombrePrendas($usuario, $subcategoria));
-}
-
-function cargarMisPrenda($usuario)
-{
-    $metodo = new Metodos();
-
-    echo json_encode($metodo->cargarMisPrendas($usuario));
-}
-
-function filtrarPrendasPorCategoria($usuario, $categoria)
-{
-    $metodo = new Metodos();
-
-    echo json_encode($metodo->filtrarPrendasPorCategoria($usuario, $categoria));
-}
-
-function modificarPrenda($descripcion, $talla, $idSubcategoria, $usuario, $nombrePrenda)
-{
-    $metodo = new Metodos();
-    echo json_encode($metodo->modificarPrenda($descripcion, $talla, $idSubcategoria, $usuario, $nombrePrenda));
-}
-function borrarPrenda($idPrenda)
-{
-    $metodo = new Metodos();
-    echo json_encode($metodo->borrarPrenda($idPrenda));
-}
-
-function insertarSubcategoria($nombreCategoria, $idCategoria, $usuario)
-{
-    $metodo = new Metodos();
-    $response = array('success' => false, 'mensaje' => "", 'correo' => "");
-
-    if ($metodo->insertarSubcategoria($nombreCategoria, $idCategoria, $usuario)) {
-        $response['success'] = true;
-        $response['mensaje'] = 'Se ha guardado su categoría correctamente';
-
-        //echo $imagen;
-    } else {
-        $response['success'] = false;
-        $response['mensaje'] = "No se ha guardado su categoría correctamente";
+        echo json_encode($metodo->cargarCategorias());
     }
-    echo json_encode($response);
-}
 
-function modificarSubCategoria($nombreSubCategoria, $idCategoria, $idSubcategoria)
-{
-    $metodo = new Metodos();
-    $response = array('success' => false, 'mensaje' => "", 'correo' => "");
+    function cargarCategoriaMisPrendas()
+    {
+        $metodo = new Metodos();
 
-    if ($metodo->modificarSubCategoria($nombreSubCategoria, $idCategoria, $idSubcategoria)) {
-        $response['success'] = true;
-        $response['mensaje'] = 'Se ha modificado su categoría correctamente';
-
-        //echo $imagen;
-    } else {
-        $response['success'] = false;
-        $response['mensaje'] = "No se ha modificado su categoría correctamente";
+        echo json_encode($metodo->cargarCategoriasMisPrendas());
     }
-    echo json_encode($response);
-}
 
-function modificarCambiarSubcategoria($idCategoria, $idSubcategoria)
-{
+    function cargarSubCategoria($categoria, $usuario)
+    {
+        $metodo = new Metodos();
+        $response = array('success' => false, 'mensaje' => "", 'correo' => "");
+        //$metodo->cargarSubcategorias($categoria, $usuario);
 
-    $metodo = new Metodos();
-    $response = array('success' => false, 'mensaje' => "", 'correo' => "");
-
-    if ($metodo->modificarCambiarDeSubCategoria($idCategoria, $idSubcategoria)) {
-        $response['success'] = true;
-        $response['mensaje'] = 'Se ha modificado su categoría correctamente';
-
-        //echo $imagen;
-    } else {
-        $response['success'] = false;
-        $response['mensaje'] = "No se ha modificado su categoría correctamente";
+        echo json_encode($metodo->cargarSubcategorias($categoria, $usuario));
     }
-    echo json_encode($response);
-}
+    function cargarNombresPrendas($usuario, $subcategoria)
+    {
 
-//Borramos las subucategorias
-function borrarSubCategoria($idSubCategoria)
-{
-    $metodo = new Metodos();
-    $response = array('success' => false, 'mensaje' => "", 'correo' => "");
+        $metodo = new Metodos();
 
-    if ($metodo->borrarSubCategoria($idSubCategoria)) {
-        $response['success'] = true;
-        $response['mensaje'] = 'Se ha borrado su categoría correctamente';
-
-        //echo $imagen;
-    } else {
-        $response['success'] = false;
-        $response['mensaje'] = "No se ha borrado su categoría correctamente";
+        echo json_encode($metodo->cargarNombrePrendas($usuario, $subcategoria));
     }
-    echo json_encode($response);
-}
 
-function cargarOutfits($usuario)
-{
-    $metodo = new Metodos();
+    function cargarMisPrenda($usuario)
+    {
+        $metodo = new Metodos();
 
-    echo json_encode($metodo->cargarOutfits($usuario));
-}
+        echo json_encode($metodo->cargarMisPrendas($usuario));
+    }
 
-function cargarPrendasCabeza($usuario)
-{
-    $metodo = new Metodos();
+    function filtrarPrendasPorCategoria($usuario, $categoria)
+    {
+        $metodo = new Metodos();
 
-    echo json_encode($metodo->cargarPrendasCabeza($usuario));
-}
+        echo json_encode($metodo->filtrarPrendasPorCategoria($usuario, $categoria));
+    }
 
-function cargarPrendasTorso($usuario)
-{
-    $metodo = new Metodos();
+    function modificarPrenda($descripcion, $talla, $idSubcategoria, $usuario, $nombrePrenda)
+    {
+        $metodo = new Metodos();
+        echo json_encode($metodo->modificarPrenda($descripcion, $talla, $idSubcategoria, $usuario, $nombrePrenda));
+    }
+    function borrarPrenda($idPrenda)
+    {
+        $metodo = new Metodos();
+        echo json_encode($metodo->borrarPrenda($idPrenda));
+    }
 
-    echo json_encode($metodo->cargarPrendasTorso($usuario));
-}
+    function insertarSubcategoria($nombreCategoria, $idCategoria, $usuario){
+        $metodo = new Metodos();
+        $response = array('success' => false, 'mensaje' => "", 'correo' => "");
 
-function cargarPrendasPiernas($usuario)
-{
-    $metodo = new Metodos();
+        if ($metodo->insertarSubcategoria($nombreCategoria, $idCategoria, $usuario)) {
+            $response['success'] = true;
+            $response['mensaje'] = 'Se ha guardado su categoría correctamente';
 
-    echo json_encode($metodo->cargarPrendasPiernas($usuario));
-}
+            //echo $imagen;
+        } else {
+            $response['success'] = false;
+            $response['mensaje'] = "No se ha guardado su categoría correctamente";
+        }
+        echo json_encode($response);
+    }
 
-function cargarPrendasPies($usuario)
-{
-    $metodo = new Metodos();
+    function modificarSubCategoria($nombreSubCategoria, $idCategoria, $idSubcategoria){
+        $metodo = new Metodos();
+        $response = array('success' => false, 'mensaje' => "", 'correo' => "");
 
-    echo json_encode($metodo->cargarPrendasPies($usuario));
-}
+        if ($metodo->modificarSubCategoria($nombreSubCategoria, $idCategoria, $idSubcategoria)) {
+            $response['success'] = true;
+            $response['mensaje'] = 'Se ha modificado su categoría correctamente';
 
-function cargarPrendasCabezaOutfit($usuario, $idOutfit){
+            //echo $imagen;
+        } else {
+            $response['success'] = false;
+            $response['mensaje'] = "No se ha modificado su categoría correctamente";
+        }
+        echo json_encode($response);
+    }
 
-    $metodo = new Metodos();
+    function modificarCambiarSubcategoria($idCategoria, $idSubcategoria){
 
-    echo json_encode($metodo->cargarPrendasCabezaOutfit($usuario, $idOutfit));
-}
+        $metodo = new Metodos();
+        $response = array('success' => false, 'mensaje' => "", 'correo' => "");
 
-function cargarPrendasTorsoOutfit($usuario, $idOutfit){
+        if ($metodo->modificarCambiarDeSubCategoria($idCategoria, $idSubcategoria)) {
+            $response['success'] = true;
+            $response['mensaje'] = 'Se ha modificado su categoría correctamente';
 
-    $metodo = new Metodos();
+            //echo $imagen;
+        } else {
+            $response['success'] = false;
+            $response['mensaje'] = "No se ha modificado su categoría correctamente";
+        }
+        echo json_encode($response);
+    }
 
-    echo json_encode($metodo->cargarPrendasTorsoOutfit($usuario, $idOutfit));
-}
+    //Borramos las subucategorias
+    function borrarSubCategoria($idSubCategoria){
+        $metodo = new Metodos();
+        $response = array('success' => false, 'mensaje' => "", 'correo' => "");
 
-function cargarPrendasPiernasOutfit($usuario, $idOutfit){
+        if ($metodo->borrarSubCategoria($idSubCategoria)) {
+            $response['success'] = true;
+            $response['mensaje'] = 'Se ha borrado su categoría correctamente';
 
-    $metodo = new Metodos();
+            //echo $imagen;
+        } else {
+            $response['success'] = false;
+            $response['mensaje'] = "No se ha borrado su categoría correctamente";
+        }
+        echo json_encode($response);
+    }
 
-    echo json_encode($metodo->cargarPrendasPiernasOutfit($usuario, $idOutfit));
-}
+    function cargarOutfits($usuario)
+    {
+        $metodo = new Metodos();
 
-function cargarPrendasPiesOutfit($usuario, $idOutfit){
+        echo json_encode($metodo->cargarOutfits($usuario));
+    }
 
-    $metodo = new Metodos();
+    function cargarPrendasCabeza($usuario)
+    {
+        $metodo = new Metodos();
 
-    echo json_encode($metodo->cargarPrendasPiesOutfit($usuario, $idOutfit));
-}
+        echo json_encode($metodo->cargarPrendasCabeza($usuario));
+    }
+
+    function cargarPrendasTorso($usuario)
+    {
+        $metodo = new Metodos();
+
+        echo json_encode($metodo->cargarPrendasTorso($usuario));
+    }
+
+    function cargarPrendasPiernas($usuario)
+    {
+        $metodo = new Metodos();
+
+        echo json_encode($metodo->cargarPrendasPiernas($usuario));
+    }
+
+    function cargarPrendasPies($usuario)
+    {
+        $metodo = new Metodos();
+
+        echo json_encode($metodo->cargarPrendasPies($usuario));
+    }
+
+    function cargarPrendasCabezaOutfit($usuario, $idOutfit){
+
+        $metodo = new Metodos();
+
+        echo json_encode($metodo->cargarPrendasCabezaOutfit($usuario, $idOutfit));
+    }
+
+    function cargarPrendasTorsoOutfit($usuario, $idOutfit){
+
+        $metodo = new Metodos();
+
+        echo json_encode($metodo->cargarPrendasTorsoOutfit($usuario, $idOutfit));
+    }
+
+    function cargarPrendasPiernasOutfit($usuario, $idOutfit){
+
+        $metodo = new Metodos();
+
+        echo json_encode($metodo->cargarPrendasPiernasOutfit($usuario, $idOutfit));
+    }
+
+    function cargarPrendasPiesOutfit($usuario, $idOutfit){
+
+        $metodo = new Metodos();
+
+        echo json_encode($metodo->cargarPrendasPiesOutfit($usuario, $idOutfit));
+    }
+    function insertarOutfit($usuario,$nombreOutfit, $fechaCreacion, $idPrenda){
+        $metodo = new Metodos();
+        $response = array('success' => false, 'mensaje' => "", 'correo' => "");
+
+        if ($metodo->insertamosOutfit($usuario,$nombreOutfit, $fechaCreacion, $idPrenda)) {
+            $response['success'] = true;
+            $response['mensaje'] = 'Se ha insrtado su outfit correctamente';
+
+            //echo $imagen;
+        } else {
+            $response['success'] = false;
+            $response['mensaje'] = "No se ha guardo su outfit correctamente";
+        }
+        echo json_encode($response);
+    }
+
+    function borrarOutfit($idOutfit){
+        $metodo = new Metodos();
+        $response = array('success' => false, 'mensaje' => "", 'correo' => "");
+
+        if ($metodo->borrarOutfit($idOutfit)) {
+            $response['success'] = true;
+            $response['mensaje'] = 'Se ha borrado su outfit correctamente';
+
+            //echo $imagen;
+        } else {
+            $response['success'] = false;
+            $response['mensaje'] = "No se ha borrado su outfit correctamente";
+        }
+        echo json_encode($response);
+    }
+
