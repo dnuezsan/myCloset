@@ -115,8 +115,8 @@ export class Prendas {
     }
 
 
-    static async modificarPrenda(descripcion, talla, idSubCategoria) {
-        let modificarPrenda = 'modicarPrenda'
+    static async modificarPrenda(descripcion, talla, idSubCategoria, nombrePrenda) {
+        let modificarPrenda = 'modificarPrenda'
         let datos = await $.ajax(
             {
                 //url:  "https://05.2daw.esvirgua.com/myCloset/src/php/controlador/controladorBackend.php",
@@ -126,12 +126,12 @@ export class Prendas {
                 type: "POST",
                 data:
                 {
-                    propiedad: cargarMisPrendas,
+                    propiedad: modificarPrenda,
                     correo: sessionStorage.sesion,
                     descripcion: descripcion,
                     talla: talla,
-                    idSubcategoria: idSubCategoria
-
+                    idSubcategoria: idSubCategoria,
+                    nombrePrenda: nombrePrenda
 
                 },
             })

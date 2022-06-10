@@ -463,13 +463,13 @@ class Metodos
         return true;
     }
 
-    function modificarPrenda($descripcion, $talla, $idSubcategoria, $usuario)
+    function modificarPrenda($descripcion, $talla, $idSubcategoria, $usuario, $nombrePrenda)
     {
         $consultaUsurio = "SELECT idUsuario FROM usuario WHERE correo = '$usuario'";
         $resultadoUsuario = $this->conexion->consultas($consultaUsurio);
         $fila = $this->conexion->extraerFila($resultadoUsuario);
         $idUsuario = $fila['idUsuario'];
-        $consulta = "UPDATE `prenda` SET `descripcion`=?,`talla`=?,idSubcategoria=? WHERE idUsuario = ?";
+        $consulta = "UPDATE `prenda` SET `descripcion`=?,`talla`=?,idSubcategoria=?, nombrePrenda=? WHERE idUsuario = ?";
         //$resultado = $this->conexion->consultas($consulta);
 
         //Preparamos con preparae
@@ -479,7 +479,7 @@ class Metodos
 
         }
         //Pasamos los parametros y el tipo de dato
-        if (!$sentencia->bind_param("ssii", $descripcion, $talla, $idSubcategoria, $idUsuario)) {
+        if (!$sentencia->bind_param("ssiis", $descripcion, $talla, $idSubcategoria, $idUsuario, $nombrePrenda)) {
             //echo "Fallo en la vinculacion de parametros";
             //return false;
 
@@ -658,6 +658,8 @@ class Metodos
 
 
     }
+
+    ca
 
     function insertamosOutfit($usuario,$nombreOutfit, $fechaCreacion){
         $consulta ="INSERT INTO `outfit`( `idUsuario`, `nombreOutfit`, `fechaCreacion`) VALUES ('[value-2]','[value-3]','[value-4]')";

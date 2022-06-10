@@ -117,8 +117,7 @@ export class VistaOutfits {
     static prueba() {
         let nombre = document.getElementsByClassName('nombreOutfit')
         for (let i = 0; i < nombre.length; i++) {
-            console.log(nombre.value);
-
+            console.log(nombre[i].value);
         }
     }
     static cargarPrendasCabeza() {
@@ -245,94 +244,84 @@ export class VistaOutfits {
                     }
 
                 }
-
             }
-
             $('#panelOutfit select').formSelect()
         }
-
     }
 
     //FALTA PASAR VALORES METODOS PARA CARGA DE PRENDAS
     static detectarCambiosSelectYCargar() {
         let outfitsCargados = document.getElementsByClassName('outfitCargado')
-        let nombre = document.getElementsByClassName('nombreOutfit')
 
-        for (let i = 0; i < nombre.length; i++) {
-            nombre[0].addEventListener('change', () => {
-                console.log(nombre[i].value);
-                VistaOutfits.prueba()
-            }, true)
-        }
 
-    /* for (let i = 0; i < outfitsCargados.length; i++) {
-        outfitsCargados[i].onchange = async () => {
-            await VistaOutfits.cargarPrendasCabeza()
+        for (let i = 0; i < outfitsCargados.length; i++) {
+            outfitsCargados[i].onchange = async () => {
+                await VistaOutfits.cargarPrendasCabeza()
 
-            await VistaOutfits.cargarPrendasTorso()
+                await VistaOutfits.cargarPrendasTorso()
 
-            await VistaOutfits.cargarPrendasPiernas()
+                await VistaOutfits.cargarPrendasPiernas()
 
-            await VistaOutfits.cargarPrendasPies()
+                await VistaOutfits.cargarPrendasPies()
 
-            await VistaOutfits.prueba()
-        }
-
-    }
-    $('#panelOutfit select').formSelect() */
-}
-
-    static igualarFormularios() {
-    let outfitsCargados = document.getElementsByClassName('outfitCargado')
-    let selectCabeza = document.getElementsByClassName('prendaCabezaOutfit')
-    let selectTorso = document.getElementsByClassName('prendaTorsoOutfit')
-    let selectPiernas = document.getElementsByClassName('prendaPiernasOutfit')
-    let selectPies = document.getElementsByClassName('prendaPiesOutfit')
-    let nombreDeOutfit = document.getElementsByClassName('nombreOutfit')
-    let valor = null
-
-    for (let i = 0; i < 2; i++) {
-        outfitsCargados[i].onchange = () => {
-            valor = outfitsCargados[i].value
-            for (let j = 0; j < outfitsCargados.length; j++) {
-                outfitsCargados[j].value = valor
+                await VistaOutfits.prueba()
             }
-        }
-        selectCabeza[i].onchange = () => {
-            valor = selectCabeza[i].value
-            for (let j = 0; j < selectCabeza.length; j++) {
-                selectCabeza[j].value = valor
-            }
-        }
-        selectTorso[i].onchange = () => {
-            valor = selectTorso[i].value
-            for (let j = 0; j < selectTorso.length; j++) {
-                selectTorso[j].value = valor
-            }
-        }
-        selectPiernas[i].onchange = () => {
-            valor = selectPiernas[i].value
-            for (let j = 0; j < selectPiernas.length; j++) {
-                selectPiernas[j].value = valor
-            }
-        }
-        selectPies[i].onchange = () => {
-            valor = selectPies[i].value
-            for (let j = 0; j < selectPies.length; j++) {
-                selectPies[j].value = valor
-            }
-        }
 
-        nombreDeOutfit[i].onchange = () => {
-            valor = nombreDeOutfit[i].value
-            for (let j = 0; j < nombreDeOutfit.length; j++) {
-                nombreDeOutfit[j].value = valor
-            }
         }
-
         $('#panelOutfit select').formSelect()
     }
-}
+
+    static igualarFormularios() {
+        let outfitsCargados = document.getElementsByClassName('outfitCargado')
+        let selectCabeza = document.getElementsByClassName('prendaCabezaOutfit')
+        let selectTorso = document.getElementsByClassName('prendaTorsoOutfit')
+        let selectPiernas = document.getElementsByClassName('prendaPiernasOutfit')
+        let selectPies = document.getElementsByClassName('prendaPiesOutfit')
+        let nombreDeOutfit = document.getElementsByClassName('nombreOutfit')
+        let valor = null
+
+        for (let i = 0; i < 2; i++) {
+            outfitsCargados[i].onchange = () => {
+                valor = outfitsCargados[i].value
+                for (let j = 0; j < outfitsCargados.length; j++) {
+                    outfitsCargados[j].value = valor
+                }
+            }
+            selectCabeza[i].onchange = () => {
+                valor = selectCabeza[i].value
+                for (let j = 0; j < selectCabeza.length; j++) {
+                    selectCabeza[j].value = valor
+                }
+            }
+            selectTorso[i].onchange = () => {
+                valor = selectTorso[i].value
+                for (let j = 0; j < selectTorso.length; j++) {
+                    selectTorso[j].value = valor
+                }
+            }
+            selectPiernas[i].onchange = () => {
+                valor = selectPiernas[i].value
+                for (let j = 0; j < selectPiernas.length; j++) {
+                    selectPiernas[j].value = valor
+                }
+            }
+            selectPies[i].onchange = () => {
+                valor = selectPies[i].value
+                for (let j = 0; j < selectPies.length; j++) {
+                    selectPies[j].value = valor
+                }
+            }
+
+            nombreDeOutfit[i].onchange = () => {
+                valor = nombreDeOutfit[i].value
+                for (let j = 0; j < nombreDeOutfit.length; j++) {
+                    nombreDeOutfit[j].value = valor
+                }
+            }
+
+            $('#panelOutfit select').formSelect()
+        }
+    }
 
     //Patron Borrado
     /* for (let i = 0; i < selectOutfits.length; i++) {
