@@ -1127,6 +1127,22 @@ class Metodos
 
         }
     }
+    function modificarOutfit($idPrenda, $idPrendaNueva, $idOutfit, $nombreOutfit){
+        $consultaRelacionOutfit="UPDATE `relprendaoutfit` SET `idPrenda`= $idPrendaNueva WHERE idOutfit =  and idPrenda = $idPrenda ";
+        $consulta = "UPDATE `outfit` SET `nombreOutfit`= $nombreOutfit WHERE idOutfit= $idOutfit";
+
+        if(!$this->conexion->consultas($consulta)){
+            return  false;
+        }elseif (!$this->conexion->consultas($consulta)){
+            return false;
+        }else{
+            return true;
+        }
+
+
+
+
+    }
 
     //Subimos las imagenes y pasamos el parametro Carpeta Destino que es donde se guardadn las imagenes del pedido,
     /*

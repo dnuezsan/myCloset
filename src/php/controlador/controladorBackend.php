@@ -159,6 +159,13 @@ switch ($_POST['propiedad']) {
         $idOutfit = $_POST['idOutfit'];
         borrarOutfit($idOutfit);
         break;
+    case "modificarOutfit":
+        $idPrenda = $_POST['idPrenda'];
+        $idPrendaNueva= $_POST['idPrendaNueva'];
+        $idOutfit = $_POST['idOutfit'];
+        $nombreOutfit= $_POST['nombreOutfit'];
+        modificarOutfit($idPrenda, $idPrendaNueva, $idOutfit, $nombreOutfit);
+        break;
 }
 
 
@@ -526,6 +533,21 @@ switch ($_POST['propiedad']) {
         } else {
             $response['success'] = false;
             $response['mensaje'] = "No se ha borrado su outfit correctamente";
+        }
+        echo json_encode($response);
+    }
+    function modificarOutfit($idPrenda, $idPrendaNueva, $idOutfit, $nombreOutfit){
+        $metodo = new Metodos();
+        $response = array('success' => false, 'mensaje' => "", 'correo' => "");
+
+        if ($metodo->modificarOutfit($idPrenda, $idPrendaNueva, $idOutfit, $nombreOutfit)) {
+            $response['success'] = true;
+            $response['mensaje'] = 'Se ha modificado su outfit correctamente';
+
+            //echo $imagen;
+        } else {
+            $response['success'] = false;
+            $response['mensaje'] = "No se ha modificado su outfit correctamente";
         }
         echo json_encode($response);
     }

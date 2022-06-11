@@ -46,8 +46,8 @@ export class Outfits {
         return datosJson
     }
 
-    static async modificarOutfit(idOutfit) {
-        let propiedad = ""
+    static async modificarOutfit(idPrenda, $idPrendaNueva, idOutfit, nombreOutfit) {
+        let modificarOutfit = "modificarOutfit";
         let datos = await $.ajax(
             {
                 //url:  "https://05.2daw.esvirgua.com/myCloset/src/php/controlador/controladorBackend.php",
@@ -57,9 +57,12 @@ export class Outfits {
                 type: "POST",
                 data:
                 {
-                    propiedad: propiedad,
+                    propiedad: modificarOutfit,
                     correo: sessionStorage.sesion,
-                    idOutfit: idOutfit
+                    idOutfit: idOutfit,
+                    idPrenda: idPrenda,
+                    idPrendaNueva: idPrendaNueva,
+                    nombreOutfit: nombreOutfit
 
                 },
             })
