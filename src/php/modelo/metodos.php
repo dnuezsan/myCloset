@@ -1049,7 +1049,7 @@ class Metodos
         $consultaUsurio = "SELECT idUsuario FROM usuario WHERE correo = '$usuario'";
         $resultadoUsuario = $this->conexion->consultas($consultaUsurio);
         $fila = $this->conexion->extraerFila($resultadoUsuario);
-        $consultaUltimoOutfit = "SELECT MAX(idPrenda) AS id FROM prenda";
+        $consultaUltimoOutfit = "SELECT MAX(idOutfit) AS id FROM outfit";
         $idUsuario = $fila['idUsuario'];
         //Preparamos con preparae
         if (!$sentencia = $this->conexion->mysqli->prepare($consulta)) {
@@ -1069,7 +1069,9 @@ class Metodos
 
             return false;
         } else if($sentencia = $this->conexion->mysqli->prepare($consultaRelacion)){
-            $ultimo_id = $this->conexion->insert_id;
+            $resultadoUltimoOutfit = $this->conexion->consultas($consultaUltimoOutfit);
+            $fila= $this->conexion->extraerFila($resultadoUltimoOutfit);
+            $ultimo_id = $fila['id'];
             //Pasamos los parametros y el tipo de dato
             if (!$sentencia->bind_param("ii", $ultimo_id,$idPrenda)) {
                 //echo "Fallo en la vinculacion de parametros";
