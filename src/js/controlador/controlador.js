@@ -207,8 +207,8 @@ export class Controlador {
         return respuesta
     }
 
-    static async insertarOutfit(){
-        let respuesta = await Outfits.guardarOutfit()
+    static async insertarOutfit(idPrenda, nombreOutfit){
+        let respuesta = await Outfits.insertarOutfit(idPrenda, nombreOutfit)
         return respuesta
     }
 
