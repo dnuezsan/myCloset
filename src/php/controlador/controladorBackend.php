@@ -64,10 +64,11 @@ switch ($_POST['propiedad']) {
     case "modificarPrenda":
         $descripcion = $_POST['descripcion'];
         $talla = $_POST['talla'];
-        $idSubCategoria = $_POST['idSubCategoria'];
+        $idSubCategoria = $_POST['idSubcategoria'];
         $usuario = $_SESSION['usuario'];
         $nombrePrenda = $_POST['nombrePrenda'];
-        modificarPrenda($descripcion, $talla, $idSubCategoria, $usuario, $nombrePrenda);
+        $idPrenda = $_POST['idPrenda'];
+        modificarPrenda($descripcion, $talla, $idSubCategoria, $nombrePrenda, $usuario, $idPrenda);
         break;
     case "borrarPrenda":
         $idPrenda = $_POST['idPrenda'];
@@ -366,10 +367,21 @@ switch ($_POST['propiedad']) {
         echo json_encode($metodo->filtrarPrendasPorCategoria($usuario, $categoria));
     }
 
-    function modificarPrenda($descripcion, $talla, $idSubcategoria, $usuario, $nombrePrenda)
+    function modificarPrenda($descripcion, $talla, $idSubcategoria, $nombrePrenda, $usuario, $idPrenda)
     {
         $metodo = new Metodos();
-        echo json_encode($metodo->modificarPrenda($descripcion, $talla, $idSubcategoria, $usuario, $nombrePrenda));
+
+        if ($metodo->modificarPrenda($descripcion, $talla, $idSubcategoria, $nombrePrenda, $usuario, $idPrenda)) {
+            $response['success'] = true;
+            $response['mensaje'] = 'Se ha modificado su prenda correctamente';
+
+            //echo $imagen;
+        } else {
+            $response['success'] = false;
+            $response['mensaje'] = "No se ha modificado su prenda";
+        }
+
+        echo json_encode($response);
     }
     function borrarPrenda($idPrenda)
     {

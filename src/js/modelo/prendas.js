@@ -115,7 +115,7 @@ export class Prendas {
     }
 
 
-    static async modificarPrenda(descripcion, talla, idSubCategoria, nombrePrenda) {
+    static async modificarPrenda(descripcion, talla, idSubCategoria, nombrePrenda, idPrenda) {
         let modificarPrenda = 'modificarPrenda'
         let datos = await $.ajax(
             {
@@ -131,7 +131,8 @@ export class Prendas {
                     descripcion: descripcion,
                     talla: talla,
                     idSubcategoria: idSubCategoria,
-                    nombrePrenda: nombrePrenda
+                    nombrePrenda: nombrePrenda,
+                    idPrenda: idPrenda
 
                 },
             })

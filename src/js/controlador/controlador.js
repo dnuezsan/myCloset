@@ -137,6 +137,12 @@ export class Controlador {
         return datos
     }
 
+    static async modificarPrenda(descripcion, talla, idSubcategoria, nombrePrenda, idPrenda){
+        console.log(descripcion, talla, idSubcategoria, nombrePrenda, idPrenda);
+        let respuesta = await Prendas.modificarPrenda(descripcion, talla, idSubcategoria, nombrePrenda, idPrenda)
+        return respuesta
+    }
+
     static async borrarPrenda(idPrenda){
         let datos = await Prendas.borrarPrenda(idPrenda)
         return datos
@@ -213,7 +219,6 @@ export class Controlador {
     }
 
     static async modificarOutfit(idPrenda, idPrendaNueva, idOutfit, nombreOutfit){
-        console.log(idPrenda, idPrendaNueva, idOutfit, nombreOutfit);
         let respuesta = await Outfits.modificarOutfit(idPrenda, idPrendaNueva, idOutfit, nombreOutfit)
         return respuesta
     }

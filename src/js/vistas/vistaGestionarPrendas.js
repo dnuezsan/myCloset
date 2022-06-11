@@ -481,10 +481,10 @@ export class VistaGestionarPrendas {
             let opciones = document.querySelectorAll('#subCategoriasGestionPrendas option')
             /* Se borran las subcategorias anteriores */
             if (opciones.length > 1) {
-                let listaSubcategorias = document.getElementsByClassName('subcategoriaGestionPrendas')
+                let listaSubcategorias = document.getElementById('subCategoriasGestionPrendas')
 
-                while (listaSubcategorias.length > 0) {
-                    selectSubcategorias.removeChild(listaSubcategorias[0])
+                while (listaSubcategorias.length > 1) {
+                    selectSubcategorias.removeChild(listaSubcategorias[1])
                 }
             }
             /* Se cargan las nuevas subcategorias */
@@ -582,20 +582,10 @@ export class VistaGestionarPrendas {
     }
 
     static async precargaDatos(idPrenda, nombrePrenda, tallaPrenda, descripcionPrenda, idCategoria, nombreCategoria, idSubcategoria, subcategoriaPrenda) {
-        /* let selectCategoriaModificable = document.getElementById('categoriaPrendaGestionPrendas')
-        let selectSubcategoriaModificable = document.getElementById('subCategoriasPrendaGestionPrendas')
-        let selectNombrePrendaModificable = document.getElementById('nombrePrendaGestionPrendas') */
         await VistaGestionarPrendas.precargaCategoria(idCategoria)
         await VistaGestionarPrendas.precargaSubcategoria(idSubcategoria, subcategoriaPrenda)
         await VistaGestionarPrendas.precargaNombrePrenda(idPrenda, nombrePrenda)
         await VistaGestionarPrendas.precargaImagen(idPrenda)
-        /*  let option = document.createElement('option')
-         selectCategoriaModificable.value = 3
-         $("#categoriaPrendaGestionPrendas").formSelect() */
-        /* selectCategoriaModificable.children[1].selected
-        $("#categoriaPrendaGestionPrendas").formSelect() */
-
-
     }
 
     static precargaCategoria(idCategoria) {
@@ -683,7 +673,7 @@ export class VistaGestionarPrendas {
 
     }
 
-    static async modificarPrenda() {
+    static modificarPrenda() {
         let categoriaPrendaOriginal = document.getElementById('categoriaPrendaGestionPrendas')
         let subcategoriaPrendaOriginal = document.getElementById('subCategoriasPrendaGestionPrendas')
         let nombrePrendaOriginal = document.getElementById('nombrePrendaGestionPrendas')
@@ -694,20 +684,40 @@ export class VistaGestionarPrendas {
         let subCategoriasGestionPrendas = document.getElementById('subCategoriasGestionPrendas')
 
         let boton = document.getElementById('botonModificarPrenda')
-        boton.addEventListener('click', () => {
-            if (nombreGestionPrenda.value == '') {
-                nombreGestionPrenda.value = nombrePrendaOriginal.value
-            }
-            if (tallaGestionPrenda == '') {
+        boton.addEventListener('click', async () => {
+            if (nombrePrendaOriginal.value == '') {
+                //Aquí gestion mensaje
+            } else {
+                let prendaOriginal = await VistaGestionarPrendas.extraerDatosPrendaPorId(nombrePrendaOriginal.value)
+                let respuesta = null
 
+                if (nombreGestionPrenda.value == '') {
+                    nombreGestionPrenda.value = prendaOriginal.nombrePrenda
+                }
+                if (tallaGestionPrenda == '') {
+                    tallaGestionPrenda.value = prendaOriginal.tallaPrenda
+                }
+                if (descripcionGestionPrenda == '') {
+                    descripcionGestionPrenda.value = prendaOriginal.descripcionPrenda
+                }
+                if (subCategoriasGestionPrendas.value == '') {
+                    respuesta = await Controlador.modificarPrenda(descripcionGestionPrenda.value, tallaGestionPrenda.value, subcategoriaPrendaOriginal.value, nombreGestionPrenda.value, nombrePrendaOriginal.value)
+                    if (respuesta.success) {
+                        console.log(respuesta.mensaje);
+                        location.reload()
+                    } else {
+                        console.log(respuesta.mensaje);
+                    }
+                } else {
+                    respuesta = await Controlador.modificarPrenda(descripcionGestionPrenda.value, tallaGestionPrenda.value, subCategoriasGestionPrendas.value, nombreGestionPrenda.value, nombrePrendaOriginal.value)
+                    if (respuesta.success) {
+                        console.log(respuesta.mensaje);
+                        location.reload()
+                    } else {
+                        console.log(respuesta.mensaje);
+                    }
+                }
             }
-            if (subCategoriasGestionPrendas == '') {
-
-            }
-            if (descripcionGestionPrenda == '') {
-
-            }
-            console.log(nombreGestionPrenda.value);
         }, true)
 
     }
@@ -740,4 +750,17 @@ export class VistaGestionarPrendas {
         cuadroMensaje.style.display = "none"
         fragmentoBorrado.style.display = "block"
     }
+
+    static async extraerDatosPrendaPorId(idPrenda) {
+        let subcategoriaPrendaOriginal = document.getElementById('subCategoriasPrendaGestionPrendas')
+        let prendas = await Controlador.cargarNombresPrendas(subcategoriaPrendaOriginal.value)
+        for (let i = 0; i < prendas.length; i++) {
+            if (prendas[i].idPrenda == idPrenda) {
+                return prendas[i]
+            }
+
+
+        }
+    }
+
 }

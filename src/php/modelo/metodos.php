@@ -466,15 +466,14 @@ class Metodos
         return true;
     }
 
-    function modificarPrenda($descripcion, $talla, $idSubcategoria, $usuario)
+    function modificarPrenda($descripcion, $talla, $idSubcategoria, $nombrePrenda, $usuario, $idPrenda)
     {
-        $consultaUsurio = "SELECT idUsuario FROM usuario WHERE correo = '$usuario'";
-        $resultadoUsuario = $this->conexion->consultas($consultaUsurio);
+        $consultaUsuario = "SELECT idUsuario FROM usuario WHERE correo = '$usuario'";
+        $resultadoUsuario = $this->conexion->consultas($consultaUsuario);
         $fila = $this->conexion->extraerFila($resultadoUsuario);
         $idUsuario = $fila['idUsuario'];
-        $consulta = "UPDATE `prenda` SET `descripcion`=?,`talla`=?,idSubcategoria=? WHERE idUsuario = ?";
+        $consulta = "UPDATE `prenda` SET `descripcion`=?,`talla`=?,idSubcategoria=?,nombrePrenda=? WHERE idUsuario = ? AND idPrenda = ?";
         //$resultado = $this->conexion->consultas($consulta);
-
         //Preparamos con preparae
         if (!$sentencia = $this->conexion->mysqli->prepare($consulta)) {
             //echo "La consulta fallo en su preparacion";
@@ -482,7 +481,7 @@ class Metodos
 
         }
         //Pasamos los parametros y el tipo de dato
-        if (!$sentencia->bind_param("ssii", $descripcion, $talla, $idSubcategoria, $idUsuario)) {
+        if (!$sentencia->bind_param("ssisii", $descripcion, $talla, $idSubcategoria, $nombrePrenda, $idUsuario, $idPrenda)) {
             //echo "Fallo en la vinculacion de parametros";
             //return false;
 
