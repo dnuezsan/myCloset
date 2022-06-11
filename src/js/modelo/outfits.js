@@ -66,7 +66,7 @@ export class Outfits {
     }
 
     static async borrarOutfit(idOutfit) {
-        let propiedad = ""
+        let borrarOutfit = "borrarOutfit"
         let datos = await $.ajax(
             {
                 //url:  "https://05.2daw.esvirgua.com/myCloset/src/php/controlador/controladorBackend.php",
@@ -76,7 +76,7 @@ export class Outfits {
                 type: "POST",
                 data:
                 {
-                    propiedad: propiedad,
+                    propiedad: borrarOutfit,
                     correo: sessionStorage.sesion,
                     idOutfit: idOutfit
 
