@@ -56,13 +56,13 @@ export class VistaOutfits {
 
     }
 
-    static async insertarOutfit() {
+    static async insertarOutfit(idPrenda, nombreOutfit) {
         let outfit = document.getElementsByClassName('outfitCargado')
 
         for (let i = 0; i < outfit.length; i++) {
             if (outfit[i].value == '') {
                 if (outfit[i].value != '') {
-                    let respuesta = await Controlador.guardarOutfit()
+                    let respuesta = await Controlador.insertarOutfit(idPrenda, nombreOutfit)
                     if (!respuesta.success) {
                         console.log('error');
                     } else {
@@ -286,46 +286,23 @@ export class VistaOutfits {
 
     //ACABAR METODO
     static detectarCambiosSelect() {
-        let selects = document.querySelectorAll('#panelOutfit select')
+        let panel = document.getElementById('panelOutfit')
         let outfitsCargados = document.getElementsByClassName('outfitCargado')
         let selectCabeza = document.getElementsByClassName('prendaCabezaOutfit')
         let selectTorso = document.getElementsByClassName('prendaTorsoOutfit')
         let selectPiernas = document.getElementsByClassName('prendaPiernasOutfit')
         let selectPies = document.getElementsByClassName('prendaPiesOutfit')
-        let botonCambiar = document.getElementsByClassName('botonGuardarOutfit')
+        let botonInsertar = document.getElementsByClassName('botonGuardarOutfit')
         let botonBorrar = document.getElementsByClassName('botonBorrarOutfit')
-
+        let nombreOufit = document.getElementsByClassName('nombreOutfit')
         //PASAR VALORES DE SELECTS A LOS METODOS
-        for (let i = 0; i < selects.length; i++) {
-            /* selects[i].onchange = () => {
-                console.log('hjmyjHG');
-                for (let j = 0; j < botonCambiar.length; j++) {
-                    botonCambiar[j].onclick = () => {
-                        if (outfitsCargados[j].value == '') {
-                            VistaOutfits.guardarOutfit()
-                        } else {
-                            VistaOutfits.insertarOutfit()
-                        }
-
-                    }
-
-                    botonBorrar[j].onclick = () => {
-                        VistaOutfits.borrarOutfit()
-                    }
-                    
-
-                    VistaOutfits.cargarImgPrendaCabeza(selectCabeza[j].value) 
-                    VistaOutfits.cargarImgPrendaTorso(selectTorso[j].value)
-                    VistaOutfits.cargarImgPrendaPiernas(selectPiernas[j].value)
-                    VistaOutfits.cargarImgPrendaPies(selectPies[j].value)
-                }
-
-            } */
+        /* for (let i = 0; i < selects.length; i++) {
+            
             selects[i].addEventListener('change', () => {
                 for (let j = 0; j < botonCambiar.length; j++) {
                     botonCambiar[j].onclick = () => {
                         if (outfitsCargados[j].value == '') {
-                            VistaOutfits.guardarOutfit()
+                            VistaOutfits.insertarOutfit()
                         } else {
                             VistaOutfits.modificarOutfit()
                         }
@@ -335,39 +312,85 @@ export class VistaOutfits {
                     botonBorrar[j].onclick = () => {
                         VistaOutfits.borrarOutfit()
                     }
-                    //Se puede reutilizar el iterador
-                    /* console.log(selectCabeza[j].value); */
+                    
                 }
-                /* for (let l = 0; l < 2; l++) {
-                    console.log(selectCabeza[l].value);
-
-                    VistaOutfits.cargarImgPrendaCabeza(selectCabeza[l].value)
-                    VistaOutfits.cargarImgPrendaTorso(selectTorso[l].value)
-                    VistaOutfits.cargarImgPrendaPiernas(selectPiernas[l].value)
-                    VistaOutfits.cargarImgPrendaPies(selectPies[l].value)
-                } */
 
             }, true)
 
-
-            /* VistaOutfits.cargarImgPrendaCabeza(selectCabeza[0].value)
-            VistaOutfits.cargarImgPrendaCabeza(selectCabeza[1].value)
-            VistaOutfits.cargarImgPrendaTorso(selectTorso[0].value)
-            VistaOutfits.cargarImgPrendaTorso(selectTorso[1].value)
-            VistaOutfits.cargarImgPrendaPiernas(selectPiernas[0].value)
-            VistaOutfits.cargarImgPrendaPiernas(selectPiernas[1].value)
-            VistaOutfits.cargarImgPrendaPies(selectPies[0].value)
-            VistaOutfits.cargarImgPrendaPies(selectPies[1].value) */
-
             $('#panelOutfit select').formSelect()
+        } */
+        let valorClase = null
+        let respuestaCabeza = null
+        let respuestaTorso = null
+        let respuestaPiernas = null
+        let respuestaPies = null
+
+        for (let i = 0; i < 2; i++) {
+            botonInsertar[i].onclick = async () => {
+                valorClase = i
+                if (outfitsCargados[valorClase].value == "") {
+                    if (nombreOufit[valorClase].value == '') {
+                        try {
+                            respuestaCabeza = await Controlador.insertarOutfit(selectCabeza[valorClase].value, 'Outfit sin nombre')
+                            console.log(respuestaCabeza.mensaje);
+                            respuestaTorso = await Controlador.insertarOutfit(selectTorso[valorClase].value, 'Outfit sin nombre')
+                            respuestaPiernas = await Controlador.insertarOutfit(selectPiernas[valorClase].value, 'Outfit sin nombre')
+                            respuestaPies = await Controlador.insertarOutfit(selectPies[valorClase].value, 'Outfit sin nombre')
+                        } catch (error) {
+                            console.error(error);
+                        }
+                    } else {
+                        try {
+                            respuestaCabeza = await Controlador.insertarOutfit(valor, nombreOufit[i].value)
+                            console.log(respuestaCabeza.mensaje);
+                            respuestaTorso = await Controlador.insertarOutfit(selectTorso[valorClase].value, nombreOufit[i].value)
+                            respuestaPiernas = await Controlador.insertarOutfit(selectPiernas[valorClase].value, nombreOufit[i].value)
+                            respuestaPies = await Controlador.insertarOutfit(selectPies[valorClase].value, nombreOufit[i].value)
+                        } catch (error) {
+                            console.error(error);
+                        }
+                    }
+                }
+                //ACTUALIZACION
+                else {
+
+                }
+            }
+            //BORRADO
+            botonBorrar[i].addEventListener('click', async () => {
+                valorClase = i
+                if (outfitsCargados[valorClase].value == '') {
+                    
+                    VistaOutfits.mostrarMensaje('Selecciona algún outfit')
+                    panel.addEventListener('click', () => { VistaOutfits.ocultarMensaje() }, true)
+                }
+                else {
+                    VistaOutfits.mostrarCuadroDialogo()
+                    let botonBorrar = document.getElementById('botonBorrarOutfits')
+                    let botonCancelar = document.getElementById('botonCancelarOutfits')
+                    botonBorrar.onclick = async () => {
+                        try {
+                            let respuestaBorrado = await Controlador.borrarOutfit(outfitsCargados[valorClase].value)
+                            if (respuestaBorrado.success) {
+                                location.reload()
+                            } else {
+                                VistaOutfits.mostrarMensaje('No se pudo eliminar su outfit')
+                                panel.onclick = () => { VistaOutfits.ocultarMensaje() }
+                            }
+                        } catch (error) {
+                            console.error(error);
+                        }
+                    }
+                    botonCancelar.onclick = () => {
+                        VistaOutfits.ocultarCuadroDialogo()
+                    }
+                }
+            }, true)
         }
     }
 
-    //FALTA PASAR VALORES METODOS PARA CARGA DE PRENDAS
     static detectarCambiosSelectYCargar() {
         let outfitsCargados = document.getElementsByClassName('outfitCargado')
-
-
         for (let i = 0; i < outfitsCargados.length; i++) {
 
             outfitsCargados[i].addEventListener('change', async () => {
@@ -381,7 +404,6 @@ export class VistaOutfits {
                 await VistaOutfits.cargarPrendasPiesOutfit()
             }, true)
         }
-
         $('#panelOutfit select').formSelect()
     }
 
@@ -483,6 +505,41 @@ export class VistaOutfits {
         } else {
             cajaImg.src = `src/php/imagenes_prendas/${idPrenda}.png`
         }
+    }
+
+    static mostrarCuadroDialogo() {
+        let cuadroDialogo = document.getElementById('cuadroDialogoOutfits')
+        let mensajeBorradoOutfits = document.getElementById('mensajeBorradoOutfits')
+        mensajeBorradoOutfits.textContent = `¿Está seguro de que desea borrar el outfit seleccionado?`
+        cuadroDialogo.style.display = 'block'
+
+    }
+
+    static ocultarCuadroDialogo() {
+        let cuadroDialogo = document.getElementById('cuadroDialogoOutfits')
+        let mensajeBorradoOutfits = document.getElementById('mensajeBorradoOutfits')
+        mensajeBorradoOutfits.textContent = ``
+        cuadroDialogo.style.display = 'none'
+    }
+
+    static mostrarMensaje(mensaje) {
+        let cuadroDialogo = document.getElementById('cuadroDialogoOutfits')
+        let conjuntoBorradoOutfits = document.getElementById('conjuntoBorradoOutfits')
+        let bloqueMensaje = document.getElementById('cambioOutfits')
+        bloqueMensaje.textContent = mensaje
+        conjuntoBorradoOutfits.style.display = 'none'
+        cuadroDialogo.style.display = 'block'
+        bloqueMensaje.style.display = 'block'
+    }
+
+    static ocultarMensaje() {
+        let cuadroDialogo = document.getElementById('cuadroDialogoOutfits')
+        let conjuntoBorradoOutfits = document.getElementById('conjuntoBorradoOutfits')
+        let bloqueMensaje = document.getElementById('cambioOutfits')
+        cuadroDialogo.style.display = 'none'
+        bloqueMensaje.textContent = ''
+        bloqueMensaje.style.display = 'none'
+        conjuntoBorradoOutfits.style.display = 'block'
     }
 
     //Patron Borrado

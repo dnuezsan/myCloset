@@ -663,6 +663,13 @@ body {
     margin-top: 40px !important;
 }
 
+#panelOutfit #cuadroDialogoOutfits{
+    position: fixed;
+    display: none;
+    bottom: 50%;
+    z-index: 1;
+}
+
 /* Media querys */
 
 /* Medias querys generales */

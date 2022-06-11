@@ -24,8 +24,8 @@ export class Outfits {
         return Rest.post('pelicula', this)
     }
 
-    static async insertarOutfit() {
-        let insertarOutfit = "insetarOutfit"
+    static async insertarOutfit(idPrenda, nombreOutfit) {
+        let insertarOutfit = "insertarOutfit"
         let datos = await $.ajax(
             {
                 //url:  "https://05.2daw.esvirgua.com/myCloset/src/php/controlador/controladorBackend.php",
@@ -37,7 +37,9 @@ export class Outfits {
                 {
                     propiedad: insertarOutfit,
                     correo: sessionStorage.sesion,
-
+                    nombreOutfit: nombreOutfit,
+                    idPrenda: idPrenda
+                    
                 },
             })
         let datosJson = JSON.parse(datos)
@@ -66,7 +68,7 @@ export class Outfits {
     }
 
     static async borrarOutfit(idOutfit) {
-        let propiedad = ""
+        let propiedad = "borrarOutfit"
         let datos = await $.ajax(
             {
                 //url:  "https://05.2daw.esvirgua.com/myCloset/src/php/controlador/controladorBackend.php",
@@ -77,7 +79,6 @@ export class Outfits {
                 data:
                 {
                     propiedad: propiedad,
-                    correo: sessionStorage.sesion,
                     idOutfit: idOutfit
 
 

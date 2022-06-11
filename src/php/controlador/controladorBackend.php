@@ -147,10 +147,11 @@ switch ($_POST['propiedad']) {
         $usuario = $_POST['correo'];
         cargarPrendasPies($usuario);
         break;
-    case "insetarOutfit":
+    case "insertarOutfit":
         $usuario = $_POST['correo'];
         $nombreOutfit= $_POST['nombreOutfit'];
-        $fechaCreacion = $_POST['fechaCreacion'];
+        //$fechaCreacion = $_POST['fechaCreacion'];
+        $fechaCreacion = "CURDATE()";
         $idPrenda = $_POST['idPrenda'];
         insertarOutfit($usuario,$nombreOutfit, $fechaCreacion, $idPrenda);
         break;

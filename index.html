@@ -608,11 +608,6 @@
                 <div class="input-field col s8 l6 offset-s2 offset-l3">
                     <select id="categoriaPrendaGestionPrendas">
                         <option value="">Pulsa aquí</option>
-                        <!-- <option value="1">Cabeza</option>
-                        <option value="2">Torso</option>
-                        <option value="3">Piernas</option>
-                        <option value="4">Calzado</option>
-                        <option value="5">Manos</option> -->
                     </select>
                     <label>Tipo de prenda</label>
                 </div>
@@ -621,10 +616,6 @@
                 <div class="input-field col s8 l6 offset-s2 offset-l3">
                     <select id="subCategoriasPrendaGestionPrendas">
                         <option value="">Pulsa aquí</option>
-                        <!-- <option value="">Ninguna</option>
-                        <option value="1">Opcion 1</option>
-                        <option value="2">Opcion 2</option>
-                        <option value="3">Opcion 3</option> -->
                     </select>
                     <label>Categoría</label>
                 </div>
@@ -633,11 +624,6 @@
                 <div class="selectorGestionPrendas input-field col s8 l6 offset-s2 offset-l3">
                     <select id="nombrePrendaGestionPrendas">
                         <option value="">Pulsa aquí</option>
-                        <!-- <option value="1">Cabeza</option>
-                        <option value="2">Torso</option>
-                        <option value="3">Piernas</option>
-                        <option value="4">Calzado</option>
-                        <option value="5">Manos</option> -->
                     </select>
                     <label>Nombre de la prenda</label>
                 </div>
@@ -881,34 +867,6 @@
                     <div class="row center"><a class="botonBorrarOutfit waves-effect waves-light btn-small">Borrar Outfit</a></div>
                 </div>
             </div>
-            <!-- <div class="col l9">
-                <div class="col l2 offset-l1">
-                    <div>
-                        <h4>Cabeza</h4>
-                        <img id="cabezaOutfit" class="responsive-img"
-                            src="./src/img/mi-armario-mis prendas/prendas-prueba.jpg" alt="" srcset="">
-                    </div>
-                    <div id="cajaPiernasOutfit">
-                        <h4>Piernas</h4>
-                        <img id="piernasOutfit" class="responsive-img"
-                            src="./src/img/mi-armario-mis prendas/prendas-prueba.jpg" alt="" srcset="">
-                    </div>
-                </div>
-                <div id="cajaMonigote" class="col l6">
-                    <img class="responsive-img" src="src/img/monigote.png" alt="" srcset="">
-                </div>
-                <div class="col l2">
-                    <div>
-                        <h4>Torso</h4>
-                        <img id="torsoOutfit" class="responsive-img"
-                            src="./src/img/mi-armario-mis prendas/prendas-prueba.jpg" alt="" srcset="">
-                    </div>
-                    <div id="cajaPiesOutfit">
-                        <h4>Pies</h4>
-                        <img id="piesOutfit" class="responsive-img"
-                            src="./src/img/mi-armario-mis prendas/prendas-prueba.jpg" alt="" srcset="">
-                    </div>
-                </div> -->
             <div id="contenedorCentralOutfit" class="col s12 m6 l9">
                 <div id="cajaMonigote" class="col s12 l12" style="background-image: url(src/img/monigote.png);">
                     <div class="col s12 l12">
@@ -920,6 +878,29 @@
                             src="./src/img/logo.png" alt="" srcset="">
                         <img id="piesOutfit" class="responsive-img col l4 offset-l4"
                             src="./src/img/logo.png" alt="" srcset="">
+                    </div>
+                </div>
+            </div>
+            <div class="row center">
+                <div id="cuadroDialogoOutfits" class="col s8 offset-s2 m8 offset-m2 l4 offset-l4 card flow-text">
+                    <p id="cambioOutfits" class="flow-text"></p>
+                    <div id="conjuntoBorradoOutfits" class="row">
+                        <p id="mensajeBorradoOutfits" class="col s12 flow-text">
+                        </p>
+                        <div class="borradoOutfits">
+                            <button id="botonBorrarOutfits"
+                                class="btn-small waves-effect waves-light valign-wrapper col s4 m3 l2 offset-s1 offset-m2 offset-l3"
+                                name="submit">
+                                Sí
+                                <i class="material-icons right">check</i>
+                            </button>
+                            <button id="botonCancelarOutfits"
+                                class="btn-small waves-effect waves-light valign-wrapper col s4 m3 l2 offset-s2 offset-m2 offset-l2"
+                                name="submit">
+                                No
+                                <i class="material-icons right">close</i>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
