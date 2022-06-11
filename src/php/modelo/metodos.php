@@ -313,7 +313,9 @@ class Metodos
         while ($fila = $this->conexion->extraerFila($resultado)) {
             array_push($arraySubcategorias, array(
                 'idPrenda' => $fila['idPrenda'],
-                'nombrePrenda' => $fila['nombrePrenda']
+                'nombrePrenda' => $fila['nombrePrenda'],
+                'descripcionPrenda'=> $fila['descripcion'],
+                'tallaPrenda' => $fila['talla']
             ));
         }
 

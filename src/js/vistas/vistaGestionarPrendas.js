@@ -462,6 +462,11 @@ export class VistaGestionarPrendas {
         let selectCategoriaModificable = document.getElementById('categoriaPrendaGestionPrendas')
         let selectSubcategoriaModificable = document.getElementById('subCategoriasPrendaGestionPrendas')
         let selectNombrePrendaModificable = document.getElementById('nombrePrendaGestionPrendas')
+        //datos modificables de la prenda
+        let imagenPrenda = document.getElementById('crop-imageGestion')
+        let nombreNuevoPrenda = document.getElementById('nombreGestionPrenda')
+        let tallaNuevaPrenda = document.getElementById('tallaGestionPrenda')
+        let descripcionNuevaPrenda = document.getElementById('descripcionGestionPrenda')
         /* Se cargan las categorias */
         let categorias = await Controlador.cargarCategoriasPrendas()
 
@@ -503,18 +508,46 @@ export class VistaGestionarPrendas {
         })
 
         selectSubcategoriaModificable.addEventListener('change', async () => {
-            let subcategorias = await Controlador.cargarNombresPrendas(selectSubcategoriaModificable.value)
+            let prendas = await Controlador.cargarNombresPrendas(selectSubcategoriaModificable.value)
             if (selectNombrePrendaModificable.childElementCount > 1) {
                 while (selectNombrePrendaModificable.children.length > 1) {
                     selectNombrePrendaModificable.removeChild(selectNombrePrendaModificable.children[1])
                 }
             }
-            for (let i = 0; i < subcategorias.length; i++) {
-                VistaGestionarPrendas.cargaNombresPrendas(subcategorias[i], selectNombrePrendaModificable)
+            for (let i = 0; i < prendas.length; i++) {
+                VistaGestionarPrendas.cargaNombresPrendas(prendas[i], selectNombrePrendaModificable)
+                selectNombrePrendaModificable.addEventListener('change', () => {
+                    if (selectNombrePrendaModificable.value == '') {
+                        imagenPrenda.src = `./src/img/logo.png`
+                    } else {
+                        imagenPrenda.src = `src/php/imagenes_prendas/${selectNombrePrendaModificable.value}.png`
+                    }
+                    if (selectNombrePrendaModificable.value == prendas[i].idPrenda) {
+                        nombreNuevoPrenda.value = prendas[i].nombrePrenda
+                        tallaNuevaPrenda.value = prendas[i].tallaPrenda
+                        descripcionNuevaPrenda.value = prendas[i].descripcionPrenda
+                    }
+
+                }, true)
             }
             $('#nombrePrendaGestionPrendas').formSelect()
-        })
 
+
+            /* selectNombrePrendaModificable.addEventListener('change', () => {
+                if (selectNombrePrendaModificable.value == '') {
+                    imagenPrenda.src = `./src/img/logo.png`
+                } else{
+                    imagenPrenda.src = `src/php/imagenes_prendas/${selectNombrePrendaModificable.value}.png`
+                }
+                nombreNuevoPrenda.value= prendas[i].nombrePrenda
+                tallaNuevaPrenda.value= prendas[i].tallaPrenda
+                descripcionNuevaPrenda.value= prendas[i].descripcionPrenda
+    
+            }, true) */
+
+
+        })
+        //meter por aqui lo de la imagen
         $('#categoriasGestionPrendas').formSelect()
         $('#categoriaPrendaGestionPrendas').formSelect()
     }
@@ -543,7 +576,6 @@ export class VistaGestionarPrendas {
 
     static cargaNombresPrendas(datos, nodoPadre) {
         let prenda = document.createElement('option')
-
         prenda.value = datos.idPrenda
         prenda.textContent = datos.nombrePrenda
         nodoPadre.appendChild(prenda)
@@ -651,7 +683,7 @@ export class VistaGestionarPrendas {
 
     }
 
-    static async modificarPrenda(){
+    static async modificarPrenda() {
         let categoriaPrendaOriginal = document.getElementById('categoriaPrendaGestionPrendas')
         let subcategoriaPrendaOriginal = document.getElementById('subCategoriasPrendaGestionPrendas')
         let nombrePrendaOriginal = document.getElementById('nombrePrendaGestionPrendas')
@@ -662,22 +694,22 @@ export class VistaGestionarPrendas {
         let subCategoriasGestionPrendas = document.getElementById('subCategoriasGestionPrendas')
 
         let boton = document.getElementById('botonModificarPrenda')
-        boton.addEventListener('click', ()=>{
+        boton.addEventListener('click', () => {
             if (nombreGestionPrenda.value == '') {
                 nombreGestionPrenda.value = nombrePrendaOriginal.value
             }
             if (tallaGestionPrenda == '') {
-                
+
             }
             if (subCategoriasGestionPrendas == '') {
-                
+
             }
             if (descripcionGestionPrenda == '') {
-                
+
             }
             console.log(nombreGestionPrenda.value);
         }, true)
-        
+
     }
 
     static async borrarPrenda(idPrenda) {
