@@ -504,7 +504,7 @@ switch ($_POST['propiedad']) {
 
         if ($metodo->insertamosOutfit($usuario,$nombreOutfit, $fechaCreacion, $idPrenda)) {
             $response['success'] = true;
-            $response['mensaje'] = 'Se ha insrtado su outfit correctamente';
+            $response['mensaje'] = 'Se ha insertado su outfit correctamente';
 
             //echo $imagen;
         } else {

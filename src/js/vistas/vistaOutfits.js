@@ -18,7 +18,7 @@ export class VistaOutfits {
         await VistaOutfits.cargarPrendasPiernas()
         await VistaOutfits.cargarPrendasPies()
         VistaOutfits.igualarFormularios()
-        VistaOutfits.detectarCambiosSelect()
+        VistaOutfits.crudOutfits()
         VistaOutfits.detectarCambiosSelectYCargar()
     }
 
@@ -285,7 +285,7 @@ export class VistaOutfits {
     }
 
     //ACABAR METODO
-    static detectarCambiosSelect() {
+    static crudOutfits() {
         let panel = document.getElementById('panelOutfit')
         let outfitsCargados = document.getElementsByClassName('outfitCargado')
         let selectCabeza = document.getElementsByClassName('prendaCabezaOutfit')
@@ -296,29 +296,6 @@ export class VistaOutfits {
         let botonBorrar = document.getElementsByClassName('botonBorrarOutfit')
         let nombreOufit = document.getElementsByClassName('nombreOutfit')
         //PASAR VALORES DE SELECTS A LOS METODOS
-        /* for (let i = 0; i < selects.length; i++) {
-            
-            selects[i].addEventListener('change', () => {
-                for (let j = 0; j < botonCambiar.length; j++) {
-                    botonCambiar[j].onclick = () => {
-                        if (outfitsCargados[j].value == '') {
-                            VistaOutfits.insertarOutfit()
-                        } else {
-                            VistaOutfits.modificarOutfit()
-                        }
-
-                    }
-
-                    botonBorrar[j].onclick = () => {
-                        VistaOutfits.borrarOutfit()
-                    }
-                    
-                }
-
-            }, true)
-
-            $('#panelOutfit select').formSelect()
-        } */
         let valorClase = null
         let respuestaCabeza = null
         let respuestaTorso = null
@@ -328,6 +305,7 @@ export class VistaOutfits {
         for (let i = 0; i < 2; i++) {
             botonInsertar[i].onclick = async () => {
                 valorClase = i
+                //Metodos de inserción con mensajes
                 if (outfitsCargados[valorClase].value == "") {
                     if (nombreOufit[valorClase].value == '') {
                         try {
@@ -336,6 +314,22 @@ export class VistaOutfits {
                             respuestaTorso = await Controlador.insertarOutfit(selectTorso[valorClase].value, 'Outfit sin nombre')
                             respuestaPiernas = await Controlador.insertarOutfit(selectPiernas[valorClase].value, 'Outfit sin nombre')
                             respuestaPies = await Controlador.insertarOutfit(selectPies[valorClase].value, 'Outfit sin nombre')
+                            if (!respuestaCabeza.success && !respuestaTorso.success  && !respuestaPiernas.success && !respuestaPies.success) {
+                                VistaOutfits.mostrarMensaje(respuestaCabeza.mensaje)
+
+                            } else if (!respuestaCabeza.success) {
+                                VistaOutfits.mostrarMensaje('No se pudo insertar su prenda de cabeza en el outfit')
+                                panel.onclick = () => { VistaOutfits.ocultarMensaje() }
+                            }else if (!respuestaTorso.success) {
+                                VistaOutfits.mostrarMensaje('No se pudo insertar su prenda del torso en el outfit')
+                                panel.onclick = () => { VistaOutfits.ocultarMensaje() }
+                            }else if (!respuestaPiernas.success) {
+                                VistaOutfits.mostrarMensaje('No se pudo insertar su prenda de las piernas en el outfit')
+                                panel.onclick = () => { VistaOutfits.ocultarMensaje() }
+                            }else if (!respuestaPies.success) {
+                                VistaOutfits.mostrarMensaje('No se pudo insertar su prenda de los pies en el outfit')
+                                panel.onclick = () => { VistaOutfits.ocultarMensaje() }
+                            }
                         } catch (error) {
                             console.error(error);
                         }
@@ -346,6 +340,22 @@ export class VistaOutfits {
                             respuestaTorso = await Controlador.insertarOutfit(selectTorso[valorClase].value, nombreOufit[i].value)
                             respuestaPiernas = await Controlador.insertarOutfit(selectPiernas[valorClase].value, nombreOufit[i].value)
                             respuestaPies = await Controlador.insertarOutfit(selectPies[valorClase].value, nombreOufit[i].value)
+                            if (!respuestaCabeza.success && !respuestaTorso.success  && !respuestaPiernas.success && !respuestaPies.success) {
+                                VistaOutfits.mostrarMensaje(respuestaCabeza.mensaje)
+
+                            } else if (!respuestaCabeza.success) {
+                                VistaOutfits.mostrarMensaje('No se pudo insertar su prenda de cabeza en el outfit')
+                                panel.onclick = () => { VistaOutfits.ocultarMensaje() }
+                            }else if (!respuestaTorso.success) {
+                                VistaOutfits.mostrarMensaje('No se pudo insertar su prenda del torso en el outfit')
+                                panel.onclick = () => { VistaOutfits.ocultarMensaje() }
+                            }else if (!respuestaPiernas.success) {
+                                VistaOutfits.mostrarMensaje('No se pudo insertar su prenda de las piernas en el outfit')
+                                panel.onclick = () => { VistaOutfits.ocultarMensaje() }
+                            }else if (!respuestaPies.success) {
+                                VistaOutfits.mostrarMensaje('No se pudo insertar su prenda de los pies en el outfit')
+                                panel.onclick = () => { VistaOutfits.ocultarMensaje() }
+                            }
                         } catch (error) {
                             console.error(error);
                         }
