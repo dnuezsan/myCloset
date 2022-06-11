@@ -46,7 +46,7 @@ export class Outfits {
         return datosJson
     }
 
-    static async modificarOutfit(idPrenda, $idPrendaNueva, idOutfit, nombreOutfit) {
+    static async modificarOutfit(idPrenda, idPrendaNueva, idOutfit, nombreOutfit) {
         let modificarOutfit = "modificarOutfit";
         let datos = await $.ajax(
             {

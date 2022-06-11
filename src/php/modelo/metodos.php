@@ -111,12 +111,13 @@ class Metodos
      * Valida los parámetros y actualiza los datos de un usuario en la tabla "usuario"
      * @return boolean
      */
-    public function modicarUsuario($nombreUsuario, $correo, $password, $newpassword, $rnewpassword){
+    public function modicarUsuario($nombreUsuario, $correo, $password, $newpassword, $rnewpassword)
+    {
 
         $consultaNombre = "UPDATE usuario SET nombre=? WHERE correo = ?";
         $consultaPassword = "UPDATE usuario SET nombre=?, clave=? WHERE correo = ?";
 
-        if ($password !='null' && $newpassword !='null' && $newpassword == $rnewpassword) {
+        if ($password != 'null' && $newpassword != 'null' && $newpassword == $rnewpassword) {
 
             if ($this->iniciarSesion($correo, $password)) {
                 //Preparamos con preparaep
@@ -146,13 +147,11 @@ class Metodos
             if (!$sentencia = $this->conexion->mysqli->prepare($consultaNombre)) {
                 //echo "La consulta fallo en su preparacion";
                 return false;
-
             }
             //Pasamos los parametros y el tipo de dato
             if (!$sentencia->bind_param("ss", $nombreUsuario, $correo)) {
                 //echo "Fallo en la vinculacion de parametros";
                 return false;
-
             }
             //Ejecutamos con execute
             if (!$sentencia->execute()) {
@@ -239,7 +238,7 @@ class Metodos
             //$fila['nombreCategoria'];
             array_push($arrayAsociativo, array(
                 "idCategoria" => $fila['idCategoria'],
-                 "nombreCategoria" => $fila['nombreCategoria']
+                "nombreCategoria" => $fila['nombreCategoria']
             ));
         }
         return $arrayAsociativo;
@@ -255,8 +254,8 @@ class Metodos
             //$fila['idCategoria'];
             //$fila['nombreCategoria'];
             array_push($arrayAsociativo, array(
-               'idCategoria'=>$fila['idCategoria'],
-               'nombreCategoria' => $fila['nombreCategoria']
+                'idCategoria' => $fila['idCategoria'],
+                'nombreCategoria' => $fila['nombreCategoria']
             ));
         }
         return $arrayAsociativo;
@@ -292,7 +291,8 @@ class Metodos
         return $arraySubcategorias;
     }
 
-    function cargarNombrePrendas($usuario, $subcategoria){
+    function cargarNombrePrendas($usuario, $subcategoria)
+    {
         $consultaUsurio = "SELECT idUsuario FROM usuario WHERE correo = '$usuario'";
         $resultadoUsuario = $this->conexion->consultas($consultaUsurio);
         $fila = $this->conexion->extraerFila($resultadoUsuario);
@@ -314,7 +314,7 @@ class Metodos
             array_push($arraySubcategorias, array(
                 'idPrenda' => $fila['idPrenda'],
                 'nombrePrenda' => $fila['nombrePrenda'],
-                'descripcionPrenda'=> $fila['descripcion'],
+                'descripcionPrenda' => $fila['descripcion'],
                 'tallaPrenda' => $fila['talla']
             ));
         }
@@ -352,15 +352,16 @@ class Metodos
                 "idCategoria" => $fila['idCategoria'],
                 "nombreCategoria" => $fila["nombreCategoria"],
                 "idSubcategoria" => $fila['idSubcategoria'],
-                "nombreSubcategoria"=>$fila['nombreSubcategoria'],
-                "imagenCodificada" => "src/php$imagen",//$imagenCodificada
+                "nombreSubcategoria" => $fila['nombreSubcategoria'],
+                "imagenCodificada" => "src/php$imagen", //$imagenCodificada
                 "nombrePrenda" => $fila["nombrePrenda"]
             ));
         }
         return $arrayAsociativo;
     }
 
-    function filtrarPrendasPorCategoria($usuario, $categoria){
+    function filtrarPrendasPorCategoria($usuario, $categoria)
+    {
         $consultaUsurio = "SELECT idUsuario FROM usuario WHERE correo = '$usuario'";
         $resultadoUsuario = $this->conexion->consultas($consultaUsurio);
         $fila = $this->conexion->extraerFila($resultadoUsuario);
@@ -389,8 +390,8 @@ class Metodos
                 "idCategoria" => $fila["idCategoria"],
                 "nombreCategoria" => $fila["nombreCategoria"],
                 "idSubcategoria" => $fila['idSubcategoria'],
-                "nombreSubcategoria"=>$fila['nombreSubcategoria'],
-                "imagenCodificada" => "src/php$imagen",//$imagenCodificada
+                "nombreSubcategoria" => $fila['nombreSubcategoria'],
+                "imagenCodificada" => "src/php$imagen", //$imagenCodificada
                 "nombrePrenda" => $fila["nombrePrenda"]
 
             ));
@@ -458,7 +459,7 @@ class Metodos
         $data = explode(',', $imagen64);
 
         //Crear imagen
-         fwrite($file, base64_decode($data[1]));
+        fwrite($file, base64_decode($data[1]));
         fclose($file);
 
 
@@ -495,7 +496,7 @@ class Metodos
             return true;
         }
     }
-//borramos las prendas
+    //borramos las prendas
     function borrarPrenda($idPrenda)
     {
         $consultaBorrar = "DELETE FROM `prenda` WHERE idPrenda = ?";
@@ -521,21 +522,22 @@ class Metodos
         //Ejecutamos con execute
         if (!$sentencia->execute()) {
             //echo "Algo fallo en la ejecucion";
-            $respuesta = Array(
+            $respuesta = array(
                 "success" => false,
                 "mensaje" => "No se pudo eliminar la prenda. Inténtalo en otro momento",
             );
             return $respuesta;
         } else {
-            $respuesta = Array(
+            $respuesta = array(
                 "success" => true,
                 "mensaje" => "La prenda fue borrada satisfactoriamente",
             );
             return $respuesta;
         }
     }
-//insertamos las SubCategorias en casda usuario correspondiente
-    function insertarSubCategoria($nombreSubCategoria, $idCategoria, $usuario){
+    //insertamos las SubCategorias en casda usuario correspondiente
+    function insertarSubCategoria($nombreSubCategoria, $idCategoria, $usuario)
+    {
         $consultaUsurio = "SELECT idUsuario FROM usuario WHERE correo = '$usuario'";
         $resultadoUsuario = $this->conexion->consultas($consultaUsurio);
         $fila = $this->conexion->extraerFila($resultadoUsuario);
@@ -550,7 +552,7 @@ class Metodos
 
         }
         //Pasamos los parametros y el tipo de dato
-        if (!$sentencia->bind_param("si", $nombreSubCategoria,$idCategoria)) {
+        if (!$sentencia->bind_param("si", $nombreSubCategoria, $idCategoria)) {
             //echo "Fallo en la vinculacion de parametros";
             //return false;
 
@@ -560,15 +562,13 @@ class Metodos
             //echo "Algo fallo en la ejecucion";
 
             return false;
-        } else if($this->conexion->consultas($consultaUsuarioCategoria)){
+        } else if ($this->conexion->consultas($consultaUsuarioCategoria)) {
             return true;
         }
-
-
-
     }
-//Modificamos la subCategoria cambiando el nombre y la categoria que pertenece
-    function modificarSubCategoria($nombreSubCategoria, $idCategoria, $idSubcategoria){
+    //Modificamos la subCategoria cambiando el nombre y la categoria que pertenece
+    function modificarSubCategoria($nombreSubCategoria, $idCategoria, $idSubcategoria)
+    {
         $consulta = "UPDATE `subcategoria` SET `nombreSubcategoria`=?,`idCategoria`=? WHERE idSubcategoria = ?";
 
         //Preparamos con preparae
@@ -578,7 +578,7 @@ class Metodos
 
         }
         //Pasamos los parametros y el tipo de dato
-        if (!$sentencia->bind_param("sii", $nombreSubCategoria,$idCategoria, $idSubcategoria)) {
+        if (!$sentencia->bind_param("sii", $nombreSubCategoria, $idCategoria, $idSubcategoria)) {
             //echo "Fallo en la vinculacion de parametros";
             //return false;
 
@@ -593,7 +593,8 @@ class Metodos
         }
     }
 
-    function modificarCambiarDeSubCategoria($idCategoria, $idSubcategoria){
+    function modificarCambiarDeSubCategoria($idCategoria, $idSubcategoria)
+    {
         $consulta = "UPDATE `subcategoria` SET `idCategoria`=? WHERE idSubcategoria = ?";
 
         //Preparamos con preparae
@@ -617,8 +618,9 @@ class Metodos
             return true;
         }
     }
-//Borramos las subCategorias creadas por el usuario.
-    function borrarSubCategoria($idSubCategoria){
+    //Borramos las subCategorias creadas por el usuario.
+    function borrarSubCategoria($idSubCategoria)
+    {
         $consulta = "DELETE FROM `subcategoria` WHERE `idSubcategoria` = ?";
         $consultaRelacion = "DELETE FROM `relusuariosubcategoria` WHERE idSubcategoria =?";
 
@@ -639,7 +641,7 @@ class Metodos
             //echo "Algo fallo en la ejecucion";
 
             return false;
-        } else if($sentencia = $this->conexion->mysqli->prepare($consulta)){
+        } else if ($sentencia = $this->conexion->mysqli->prepare($consulta)) {
             //Pasamos los parametros y el tipo de dato
             if (!$sentencia->bind_param("i", $idSubCategoria)) {
                 //echo "Fallo en la vinculacion de parametros";
@@ -872,11 +874,13 @@ class Metodos
         $filas_afectadas = $this->conexion->numeroFilas($this->conexion->consultas($consulta2));
 
         if ($filas_afectadas == 0) {
-            
-            $arrayAsociativoDefault = array([
-                "idPrenda"=>'',
-                "nombreSubcategoria" =>'',
-                "nombrePrenda" => '']
+
+            $arrayAsociativoDefault = array(
+                [
+                    "idPrenda" => '',
+                    "nombreSubcategoria" => '',
+                    "nombrePrenda" => ''
+                ]
             );
             return $arrayAsociativoDefault;
         }
@@ -921,11 +925,13 @@ class Metodos
         $filas_afectadas = $this->conexion->numeroFilas($this->conexion->consultas($consulta2));
 
         if ($filas_afectadas == 0) {
-            
-            $arrayAsociativoDefault = array([
-                "idPrenda"=>'',
-                "nombreSubcategoria" =>'',
-                "nombrePrenda" => '']
+
+            $arrayAsociativoDefault = array(
+                [
+                    "idPrenda" => '',
+                    "nombreSubcategoria" => '',
+                    "nombrePrenda" => ''
+                ]
             );
             return $arrayAsociativoDefault;
         }
@@ -970,11 +976,13 @@ class Metodos
         $filas_afectadas = $this->conexion->numeroFilas($this->conexion->consultas($consulta2));
 
         if ($filas_afectadas == 0) {
-            
-            $arrayAsociativoDefault = array([
-                "idPrenda"=>'',
-                "nombreSubcategoria" =>'',
-                "nombrePrenda" => '']
+
+            $arrayAsociativoDefault = array(
+                [
+                    "idPrenda" => '',
+                    "nombreSubcategoria" => '',
+                    "nombrePrenda" => ''
+                ]
             );
             return $arrayAsociativoDefault;
         }
@@ -1015,17 +1023,19 @@ class Metodos
 
         $resultado2 = $this->conexion->consultas($consulta2);
         $filas_afectadas = $this->conexion->numeroFilas($this->conexion->consultas($consulta2));
-        
+
         $arrayAsociativoDefault = array();
 
         $filas_afectadas = $this->conexion->numeroFilas($this->conexion->consultas($consulta2));
 
         if ($filas_afectadas == 0) {
-            
-            $arrayAsociativoDefault = array([
-                "idPrenda"=>'',
-                "nombreSubcategoria" =>'',
-                "nombrePrenda" => '']
+
+            $arrayAsociativoDefault = array(
+                [
+                    "idPrenda" => '',
+                    "nombreSubcategoria" => '',
+                    "nombrePrenda" => ''
+                ]
             );
             return $arrayAsociativoDefault;
         }
@@ -1033,7 +1043,7 @@ class Metodos
         $arrayAsociativo = array();
 
         while ($fila =  $this->conexion->extraerFila($resultado2)) {
-            
+
             array_push($arrayAsociativo, array(
                 "idPrenda" => $fila['idPrenda'],
                 "nombreSubcategoria" => $fila['nombreSubcategoria'],
@@ -1043,9 +1053,10 @@ class Metodos
         return $arrayAsociativo;
     }
 
-    function insertamosOutfit($usuario,$nombreOutfit, $fechaCreacion, $idPrenda){
-        $consulta ="INSERT INTO `outfit`( `idUsuario`, `nombreOutfit`, `fechaCreacion`) VALUES (?,?,?)";
-        $consultaRelacion ="INSERT INTO `relprendaoutfit`(`idOutfit`, `idPrenda`) VALUES (?,?)";
+    function insertamosOutfit($usuario, $nombreOutfit, $fechaCreacion, $idPrenda)
+    {
+        $consulta = "INSERT INTO `outfit`( `idUsuario`, `nombreOutfit`, `fechaCreacion`) VALUES (?,?,?)";
+        $consultaRelacion = "INSERT INTO `relprendaoutfit`(`idOutfit`, `idPrenda`) VALUES (?,?)";
         $consultaUsurio = "SELECT idUsuario FROM usuario WHERE correo = '$usuario'";
         $resultadoUsuario = $this->conexion->consultas($consultaUsurio);
         $fila = $this->conexion->extraerFila($resultadoUsuario);
@@ -1068,12 +1079,12 @@ class Metodos
             //echo "Algo fallo en la ejecucion";
 
             return false;
-        } else if($sentencia = $this->conexion->mysqli->prepare($consultaRelacion)){
+        } else if ($sentencia = $this->conexion->mysqli->prepare($consultaRelacion)) {
             $resultadoUltimoOutfit = $this->conexion->consultas($consultaUltimoOutfit);
-            $fila= $this->conexion->extraerFila($resultadoUltimoOutfit);
+            $fila = $this->conexion->extraerFila($resultadoUltimoOutfit);
             $ultimo_id = $fila['id'];
             //Pasamos los parametros y el tipo de dato
-            if (!$sentencia->bind_param("ii", $ultimo_id,$idPrenda)) {
+            if (!$sentencia->bind_param("ii", $ultimo_id, $idPrenda)) {
                 //echo "Fallo en la vinculacion de parametros";
                 //return false;
 
@@ -1088,12 +1099,12 @@ class Metodos
             }
             return true;
         }
-
     }
 
-    function borrarOutfit($idOutfit){
-        $consultaRelacion="DELETE FROM relprendaoutfit WHERE idOutfit=?";
-        $consulta="DELETE FROM `outfit` WHERE idOutfit=?";
+    function borrarOutfit($idOutfit)
+    {
+        $consultaRelacion = "DELETE FROM relprendaoutfit WHERE idOutfit=?";
+        $consulta = "DELETE FROM `outfit` WHERE idOutfit=?";
         //Preparamos con preparae
         if (!$sentencia = $this->conexion->mysqli->prepare($consultaRelacion)) {
             //echo "La consulta fallo en su preparacion";
@@ -1111,7 +1122,7 @@ class Metodos
             //echo "Algo fallo en la ejecucion";
 
             return false;
-        } else if($sentencia = $this->conexion->mysqli->prepare($consulta)){
+        } else if ($sentencia = $this->conexion->mysqli->prepare($consulta)) {
             //Pasamos los parametros y el tipo de dato
             if (!$sentencia->bind_param("i", $idOutfit)) {
                 //echo "Fallo en la vinculacion de parametros";
@@ -1126,24 +1137,25 @@ class Metodos
             } else {
                 return true;
             }
-
         }
     }
-    function modificarOutfit($idPrenda, $idPrendaNueva, $idOutfit, $nombreOutfit){
-        $consultaRelacionOutfit="UPDATE `relprendaoutfit` SET `idPrenda`= $idPrendaNueva WHERE idOutfit =  and idPrenda = $idPrenda ";
-        $consulta = "UPDATE `outfit` SET `nombreOutfit`= $nombreOutfit WHERE idOutfit= $idOutfit";
+    function modificarOutfit($idPrenda, $idPrendaNueva, $idOutfit, $nombreOutfit)
+    {
 
-        if(!$this->conexion->consultas($consulta)){
-            return  false;
-        }elseif (!$this->conexion->consultas($consulta)){
-            return false;
-        }else{
-            return true;
+        if ($idPrendaNueva == '') {
+            $idPrendaNueva = "null";
         }
 
+        $consultaRelacionOutfit = "UPDATE `relprendaoutfit` SET `idPrenda`= $idPrendaNueva WHERE idOutfit = $idOutfit and idPrenda = $idPrenda ";
+        $consulta = "UPDATE `outfit` SET `nombreOutfit`= '$nombreOutfit' WHERE idOutfit = $idOutfit";
 
-
-
+        if (!$this->conexion->consultas($consultaRelacionOutfit)) {
+            return  false;
+        } else if (!$this->conexion->consultas($consulta)) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
     //Subimos las imagenes y pasamos el parametro Carpeta Destino que es donde se guardadn las imagenes del pedido,

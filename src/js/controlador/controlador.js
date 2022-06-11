@@ -212,8 +212,9 @@ export class Controlador {
         return respuesta
     }
 
-    static async modificarOutfit(idOutfit){
-        let respuesta = await Outfits.modificarOutfit(idOutfit)
+    static async modificarOutfit(idPrenda, idPrendaNueva, idOutfit, nombreOutfit){
+        console.log(idPrenda, idPrendaNueva, idOutfit, nombreOutfit);
+        let respuesta = await Outfits.modificarOutfit(idPrenda, idPrendaNueva, idOutfit, nombreOutfit)
         return respuesta
     }
 
