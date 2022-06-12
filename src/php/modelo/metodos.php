@@ -1140,14 +1140,15 @@ class Metodos
     }
     function modificarOutfit($idPrenda, $idPrendaNueva, $idOutfit, $nombreOutfit)
     {
-
         if ($idPrendaNueva == '') {
             $idPrendaNueva = "null";
         }
-
+        if ($idPrenda == '') {
+            $idPrenda = 'null';
+        }
         $consultaRelacionOutfit = "UPDATE `relprendaoutfit` SET `idPrenda`= $idPrendaNueva WHERE idOutfit = $idOutfit and idPrenda = $idPrenda ";
         $consulta = "UPDATE `outfit` SET `nombreOutfit`= '$nombreOutfit' WHERE idOutfit = $idOutfit";
-
+        echo 1;
         if (!$this->conexion->consultas($consultaRelacionOutfit)) {
             return  false;
         } else if (!$this->conexion->consultas($consulta)) {

@@ -754,13 +754,12 @@ export class VistaGestionarPrendas {
     static async extraerDatosPrendaPorId(idPrenda) {
         let subcategoriaPrendaOriginal = document.getElementById('subCategoriasPrendaGestionPrendas')
         let prendas = await Controlador.cargarNombresPrendas(subcategoriaPrendaOriginal.value)
-        for (let i = 0; i < prendas.length; i++) {
-            if (prendas[i].idPrenda == idPrenda) {
-                return prendas[i]
+
+        prendas.forEach(prenda => {
+            if (prenda.idPrenda == idPrenda) {
+                return prenda
             }
-
-
-        }
+        });
     }
 
 }

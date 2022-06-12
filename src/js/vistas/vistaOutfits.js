@@ -234,11 +234,12 @@ export class VistaOutfits {
 
         let nombreOutfit = await Controlador.cargaOutfits()
 
-        for (let i = 0; i < inputNombreOutfit.length; i++) {
-            if (nombreOutfit[i].idOutfit == idOutfit) {
-                inputNombreOutfit[i].value = nombreOutfit[i].nombreOutfit
+        nombreOutfit.forEach(nombre => {
+            if (nombre.idOutfit == idOutfit) {
+                inputNombreOutfit[0].value = nombre.nombreOutfit
+                inputNombreOutfit[1].value = nombre.nombreOutfit
             }
-        }
+        });
 
     }
 
@@ -382,7 +383,6 @@ export class VistaOutfits {
                     let prendaTorsoOutfit = await Controlador.cargarPrendasTorsoOutfit(idOutfit)
                     let prendaPiernasOutfit = await Controlador.cargarPrendasPiesOutfit(idOutfit)
                     let prendaPiesOutfit = await Controlador.cargarPrendasPiesOutfit(idOutfit)
-    
                     if (nombreOufit[i].value == '') {
                         try {
                             respuestaCabeza = await Controlador.modificarOutfit(prendaCabezaOutfit[0].idPrenda, selectCabeza[i].value, outfitsCargados[i].value, 'Outfit sin nombre')
@@ -410,7 +410,7 @@ export class VistaOutfits {
                             console.log(error);
                         }
                     }
-                    else{
+                    else {
                         try {
                             respuestaCabeza = await Controlador.modificarOutfit(prendaCabezaOutfit[0].idPrenda, selectCabeza[i].value, outfitsCargados[i].value, nombreOufit[i].value)
                             respuestaTorso = await Controlador.modificarOutfit(prendaTorsoOutfit[0].idPrenda, selectTorso[i].value, outfitsCargados[i].value, nombreOufit[i].value)
@@ -418,7 +418,6 @@ export class VistaOutfits {
                             respuestaPies = await Controlador.modificarOutfit(prendaPiesOutfit[0].idPrenda, selectPies[i].value, outfitsCargados[i].value, nombreOufit[i].value)
                             if (!respuestaCabeza.success && !respuestaTorso.success && !respuestaPiernas.success && !respuestaPies.success) {
                                 VistaOutfits.mostrarMensaje(respuestaCabeza.mensaje)
-
                             } else if (!respuestaCabeza.success) {
                                 VistaOutfits.mostrarMensaje('No se pudo modificar su prenda de cabeza en el outfit')
                                 panel.onclick = () => { VistaOutfits.ocultarMensaje() }
@@ -441,7 +440,7 @@ export class VistaOutfits {
             }
             //BORRADO
             botonBorrar[i].addEventListener('click', async () => {
-                
+
                 if (outfitsCargados[i].value == '') {
 
                     VistaOutfits.mostrarMensaje('Selecciona algún outfit')
@@ -475,7 +474,7 @@ export class VistaOutfits {
     static detectarCambiosSelectYCargar() {
         let outfitsCargados = document.getElementsByClassName('outfitCargado')
         for (let i = 0; i < outfitsCargados.length; i++) {
-
+console.log('CAMBIAR EN ESTE METODO PARA AÑADIR IMAGENES')
             outfitsCargados[i].addEventListener('change', async () => {
                 await VistaOutfits.cargarNombreOutfit(outfitsCargados[i].value)
 
@@ -512,8 +511,9 @@ export class VistaOutfits {
                 for (let j = 0; j < selectCabeza.length; j++) {
                     selectCabeza[j].value = valor
                 }
-                VistaOutfits.cargarImgPrendaCabeza(valor)
+                VistaOutfits.cargarImgPrendaCabeza(selectCabeza[j].value)
                 console.log(valor);
+
             }
             selectTorso[i].onchange = () => {
                 valor = selectTorso[i].value
@@ -521,6 +521,7 @@ export class VistaOutfits {
                     selectTorso[j].value = valor
                 }
                 console.log(valor);
+                debugger
                 VistaOutfits.cargarImgPrendaTorso(valor)
             }
             selectPiernas[i].onchange = () => {
@@ -537,6 +538,7 @@ export class VistaOutfits {
                     selectPies[j].value = valor
                 }
                 console.log(valor);
+                $('.prendaPiesOutfit').formSelect()
                 VistaOutfits.cargarImgPrendaPies(valor)
             }
 
