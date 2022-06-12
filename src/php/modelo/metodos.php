@@ -1138,23 +1138,50 @@ class Metodos
             }
         }
     }
-    function modificarOutfit($idPrenda, $idPrendaNueva, $idOutfit, $nombreOutfit)
-    {
+    function modificarOutfit($idPrenda, $idPrendaNueva, $idOutfit, $nombreOutfit){
+
         if ($idPrendaNueva == '') {
             $idPrendaNueva = "null";
         }
         if ($idPrenda == '') {
             $idPrenda = 'null';
         }
+
         $consultaRelacionOutfit = "UPDATE `relprendaoutfit` SET `idPrenda`= $idPrendaNueva WHERE idOutfit = $idOutfit and idPrenda = $idPrenda ";
         $consulta = "UPDATE `outfit` SET `nombreOutfit`= '$nombreOutfit' WHERE idOutfit = $idOutfit";
-        
         if (!$this->conexion->consultas($consultaRelacionOutfit)) {
-            return  false;
-        } else if (!$this->conexion->consultas($consulta)) {
             return false;
-        } else {
-            return true;
+        } elseif ($this->conexion->filasAfectadas() == 0) {
+            if ($idPrendaNueva == 'null') {
+                $consultaDelete = "DELETE FROM relprendaoutfit WHERE idPrenda = 0";
+                if (!$this->conexion->consultas($consultaDelete)) {
+                    return false;
+                }
+            }
+                elseif ($idPrendaNueva != 'null' && $idPrenda == 'null') {
+                $consultaRelacion = "INSERT INTO `relprendaoutfit`(`idOutfit`, `idPrenda`) VALUES (?,?)";
+                if ($sentencia = $this->conexion->mysqli->prepare($consultaRelacion)) {
+
+                    //Pasamos los parametros y el tipo de dato
+                    if (!$sentencia->bind_param("ii", $idOutfit, $idPrendaNueva)) {
+                        //echo "Fallo en la vinculacion de parametros";
+                        //return false;
+
+                    }
+                    //Ejecutamos con execute
+                    if (!$sentencia->execute()) {
+                        //echo "Algo fallo en la ejecucion";
+
+                        return false;
+                    } else {
+                        return true;
+                    }
+                }
+            } elseif (!$this->conexion->consultas($consulta)) {
+                return false;
+            } else {
+                return true;
+            }
         }
     }
 
@@ -1178,6 +1205,7 @@ class Metodos
                     $tamano = $_FILES['imagenes']['size'][$key];
                     $temp = $_FILES['imagenes']['tmp_name'][$key];
                     //Se comprueba si el archivo a cargar es correcto observando su extensión y tamaño
+
                     if (!((strpos($tipo, "gif") || strpos($tipo, "jpeg") || strpos($tipo, "jpg") || strpos($tipo, "png")) && ($tamano < 2000000))) {
                         echo '<div><b>Error. La extensión o el tamaño de los archivos no es correcta.<br/>
         - Se permiten archivos .gif, .jpg, .png. y de 200 kb como máximo.</b></div>';

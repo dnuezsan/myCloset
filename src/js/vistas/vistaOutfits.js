@@ -393,22 +393,6 @@ export class VistaOutfits {
                             respuestaTorso = await Controlador.modificarOutfit(prendaTorsoOutfit[0].idPrenda, selectTorso[i].value, outfitsCargados[i].value, 'Outfit sin nombre')
                             respuestaPiernas = await Controlador.modificarOutfit(prendaPiernasOutfit[0].idPrenda, selectPiernas[i].value, outfitsCargados[i].value, 'Outfit sin nombre')
                             respuestaPies = await Controlador.modificarOutfit(prendaPiesOutfit[0].idPrenda, selectPies[i].value, outfitsCargados[i].value, 'Outfit sin nombre')
-                            if (!respuestaCabeza.success && !respuestaTorso.success && !respuestaPiernas.success && !respuestaPies.success) {
-                                VistaOutfits.mostrarMensaje(respuestaCabeza.mensaje)
-
-                            } else if (!respuestaCabeza.success) {
-                                VistaOutfits.mostrarMensaje('No se pudo modificar su prenda de cabeza en el outfit')
-                                panel.onclick = () => { VistaOutfits.ocultarMensaje() }
-                            } else if (!respuestaTorso.success) {
-                                VistaOutfits.mostrarMensaje('No se pudo modificar su prenda del torso en el outfit')
-                                panel.onclick = () => { VistaOutfits.ocultarMensaje() }
-                            } else if (!respuestaPiernas.success) {
-                                VistaOutfits.mostrarMensaje('No se pudo modificar su prenda de las piernas en el outfit')
-                                panel.onclick = () => { VistaOutfits.ocultarMensaje() }
-                            } else if (!respuestaPies.success) {
-                                VistaOutfits.mostrarMensaje('No se pudo modificar su prenda de los pies en el outfit')
-                                panel.onclick = () => { VistaOutfits.ocultarMensaje() }
-                            }
                             location.reload()
                         } catch (error) {
                             console.log(error);
@@ -420,21 +404,6 @@ export class VistaOutfits {
                             respuestaTorso = await Controlador.modificarOutfit(prendaTorsoOutfit[0].idPrenda, selectTorso[i].value, outfitsCargados[i].value, nombreOufit[i].value)
                             respuestaPiernas = await Controlador.modificarOutfit(prendaPiernasOutfit[0].idPrenda, selectPiernas[i].value, outfitsCargados[i].value, nombreOufit[i].value)
                             respuestaPies = await Controlador.modificarOutfit(prendaPiesOutfit[0].idPrenda, selectPies[i].value, outfitsCargados[i].value, nombreOufit[i].value)
-                            if (!respuestaCabeza.success && !respuestaTorso.success && !respuestaPiernas.success && !respuestaPies.success) {
-                                VistaOutfits.mostrarMensaje(respuestaCabeza.mensaje)
-                            } else if (!respuestaCabeza.success) {
-                                VistaOutfits.mostrarMensaje('No se pudo modificar su prenda de cabeza en el outfit')
-                                panel.onclick = () => { VistaOutfits.ocultarMensaje() }
-                            } else if (!respuestaTorso.success) {
-                                VistaOutfits.mostrarMensaje('No se pudo modificar su prenda del torso en el outfit')
-                                panel.onclick = () => { VistaOutfits.ocultarMensaje() }
-                            } else if (!respuestaPiernas.success) {
-                                VistaOutfits.mostrarMensaje('No se pudo modificar su prenda de las piernas en el outfit')
-                                panel.onclick = () => { VistaOutfits.ocultarMensaje() }
-                            } else if (!respuestaPies.success) {
-                                VistaOutfits.mostrarMensaje('No se pudo modificar su prenda de los pies en el outfit')
-                                panel.onclick = () => { VistaOutfits.ocultarMensaje() }
-                            }
                             location.reload()
                         } catch (error) {
                             console.log(error);
