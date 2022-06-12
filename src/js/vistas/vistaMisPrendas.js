@@ -27,13 +27,13 @@ export class VistaMisPrendas {
     }
 
 
-   /**
-    *Permite hacer zoom a las imágenes
-    *
-    * @static
-    * @memberof VistaMisPrendas
-    */
-   static zoom() {
+    /**
+     *Permite hacer zoom a las imágenes
+     *
+     * @static
+     * @memberof VistaMisPrendas
+     */
+    static zoom() {
         let elems = document.querySelectorAll('.materialboxed');
         let instances = M.Materialbox.init(elems);
     }
@@ -61,6 +61,12 @@ export class VistaMisPrendas {
         panel.style.display = 'none'
     }
 
+    /**
+     *Carga las prendas y las genera dinámicamente
+     *
+     * @static
+     * @memberof VistaMisPrendas
+     */
     static async cargarPrendas() {
 
         //let datos = await Controlador.cargaDePrendas()
@@ -95,6 +101,17 @@ export class VistaMisPrendas {
         VistaMisPrendas.filtrarPrendaPorCategoria(contenedor)
     }
 
+    /**
+     *Genera la estructura de nodos, con sus atributos y contenido
+     *
+     * @static
+     * @param {String} rutaImagen
+     * @param {String} tallaPrenda
+     * @param {String} subcategoriaPrenda
+     * @param {String} descripcionPrenda
+     * @param {Node} nodoPadre
+     * @memberof VistaMisPrendas
+     */
     static generarPrenda(rutaImagen, tallaPrenda, subcategoriaPrenda, descripcionPrenda, nodoPadre) {
         /* Caja que contiene los elementos de la prenda */
         let cajaPrenda = document.createElement('div')
@@ -190,6 +207,17 @@ export class VistaMisPrendas {
         //contenedor.appendChild(cajaPrenda)
     }
 
+    /**
+     *Genera la estructura de nodos, con sus atributos y contenido para la versión de móvil y tableta
+     *
+     * @static
+     * @param {String} rutaImagen
+     * @param {String} tallaPrenda
+     * @param {String} subcategoriaPrenda
+     * @param {String} descripcionPrenda
+     * @param {Node} nodoPadre
+     * @memberof VistaMisPrendas
+     */
     static generarPrendaMovil(rutaImagen, tallaPrenda, subcategoriaPrenda, descripcionPrenda, nodoPadre) {
         /* Caja que contiene los elementos de la prenda */
         let cajaPrenda = document.createElement('div')
@@ -290,6 +318,14 @@ export class VistaMisPrendas {
 
     }
 
+    /**
+     *genera las categorías y las introduce en el nodo correspondiente
+     *
+     * @static
+     * @param {String} nombreCategoria
+     * @param {Node} nodoPadre
+     * @memberof VistaMisPrendas
+     */
     static generarCategoria(nombreCategoria, nodoPadre) {
         let categoria = document.createElement('p')
         categoria.classList.add('col', 's12', 'white-text')
@@ -300,6 +336,14 @@ export class VistaMisPrendas {
         //return categoria
     }
 
+    /**
+     *Borra las prendas que habia en un nodo y le adjunta otras
+     *
+     * @static
+     * @param {JSON} datos
+     * @param {Node} contenedorMisPrendas
+     * @memberof VistaMisPrendas
+     */
     static async generarPrendaPorCategoria(datos, contenedorMisPrendas) {
         /* hay que borrar */
 
@@ -329,6 +373,13 @@ export class VistaMisPrendas {
         VistaMisPrendas.zoom()
     }
 
+    /**
+     *Muesta las prendas que pertenecen a una determinada categoría
+     *
+     * @static
+     * @param {Node} contenedorMisPrendas
+     * @memberof VistaMisPrendas
+     */
     static filtrarPrendaPorCategoria(contenedorMisPrendas) {
         let categorias = document.querySelectorAll('#categoriasMisPrendas p span')
         let categoriasMovil = document.querySelectorAll('#categoriaMisPrendasMovil p span')
@@ -339,18 +390,24 @@ export class VistaMisPrendas {
                 VistaMisPrendas.botonActualizacion()
                 VistaMisPrendas.botonBorrado()
             }
-            
+
             categoriasMovil[i].onclick = async () => {
                 let datosMovil = await Controlador.filtrarPrendasPorCategoria(categoriasMovil[i].textContent)
                 VistaMisPrendas.generarPrendaPorCategoria(datosMovil, contenedorMisPrendas)
                 VistaMisPrendas.botonActualizacion()
                 VistaMisPrendas.botonBorrado()
             }
-            
+
         }
 
     }
 
+    /**
+     *Adjunta el proceso de actualización a los botones correspondientes mediante un evento de click
+     *
+     * @static
+     * @memberof VistaMisPrendas
+     */
     static botonActualizacion() {
         let idPrenda = null
         let idCategoria = null
@@ -388,14 +445,34 @@ export class VistaMisPrendas {
 
     }
 
+    /**
+     *Dirige al panel de gestión de prendas y pasa los valores de la prenda al formulario
+     *
+     * @static
+     * @param {int} idPrenda
+     * @param {String} nombrePrenda
+     * @param {String} tallaPrenda
+     * @param {String} descripcionPrenda
+     * @param {int} idCategoria
+     * @param {string} nombreCategoria
+     * @param {int} idSubcategoria
+     * @param {String} subcategoriaPrenda
+     * @memberof VistaMisPrendas
+     */
     static actualizarPrenda(idPrenda, nombrePrenda, tallaPrenda, descripcionPrenda, idCategoria, nombreCategoria, idSubcategoria, subcategoriaPrenda) {
         VistaMenuPrincipal.ocultarPaneles()
         VistaGestionarPrendas.mostrarGestionarPrendas()
         VistaGestionarPrendas.precargaDatos(idPrenda, nombrePrenda, tallaPrenda, descripcionPrenda, idCategoria, nombreCategoria, idSubcategoria, subcategoriaPrenda)
-        
-        
+
+
     }
 
+    /**
+     *Adjunta el proceso de borrado a los botones correspondientes mediante un evento de click
+     *
+     * @static
+     * @memberof VistaMisPrendas
+     */
     static botonBorrado() {
         let idPrenda = null
         let nombrePrenda = null
@@ -411,6 +488,14 @@ export class VistaMisPrendas {
         }
     }
 
+    /**
+     *Muesrta el uadro de confirmación de borrado de una prenda
+     *
+     * @static
+     * @param {int} idPrenda
+     * @param {String} nombrePrenda
+     * @memberof VistaMisPrendas
+     */
     static cuadroDialogo(idPrenda, nombrePrenda) {
 
         let botonConfirmacion = document.getElementById('botonBorrarMisPrendas')
@@ -432,6 +517,13 @@ export class VistaMisPrendas {
 
     }
 
+    /**
+     *Envía los datos al controlador para borrar una prenda
+     *
+     * @static
+     * @param {int} idPrenda
+     * @memberof VistaMisPrendas
+     */
     static async borrarPrenda(idPrenda) {
         let datos = await Controlador.borrarPrenda(idPrenda)
 
@@ -442,11 +534,23 @@ export class VistaMisPrendas {
         }
     }
 
+    /**
+     *Oculta el cuadro de confirmación de borrado
+     *
+     * @static
+     * @memberof VistaMisPrendas
+     */
     static ocultarCuadroConfirmacion() {
         let cuadro = document.getElementById('cuadroDialogoMisPrendas')
         cuadro.style.display = 'none'
     }
 
+    /**
+     *Muestra el cuadro de confirmación de borrado
+     *
+     * @static
+     * @memberof VistaMisPrendas
+     */
     static mostrarCuadroConfirmacion() {
         let cuadro = document.getElementById('cuadroDialogoMisPrendas')
         cuadro.style.display = 'block'

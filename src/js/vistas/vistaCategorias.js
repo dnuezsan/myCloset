@@ -49,6 +49,12 @@ export class VistaCategorias {
     }
 
 
+    /**
+     *Iguala todos los campos del panel a 0
+     *
+     * @static
+     * @memberof VistaCategorias
+     */
     static limpiarFormulario() {
         let inputsTexto = document.querySelectorAll('#panelCategorias input')
         let selectores = document.querySelectorAll('#panelCategorias select')
@@ -63,6 +69,12 @@ export class VistaCategorias {
     }
 
 
+    /**
+     *Carga las categorías y categorías en los selects correspondientes
+     *
+     * @static
+     * @memberof VistaCategorias
+     */
     static async cargarCategoriasYSubcategorias() {
         let insertarCategoria = document.getElementById('categoriaCrearCategoria')
         let selectModificarCategorias = document.getElementById('modificarCategoria')
@@ -93,6 +105,15 @@ export class VistaCategorias {
     }
 
 
+    /**
+     *Genera las subcaterías de las categorías seleccionadas en los select correspondientes
+     *
+     * @static
+     * @param {Node} nodoSelectCategoria
+     * @param {Node} nodoSelectSubCategoria
+     * @param {Node} nombreNodo
+     * @memberof VistaCategorias
+     */
     static generarSubCategorias(nodoSelectCategoria, nodoSelectSubCategoria, nombreNodo) {
         nodoSelectCategoria.addEventListener('change', async () => {
 
@@ -114,6 +135,14 @@ export class VistaCategorias {
         })
     }
 
+    /**
+     *Genera opciones para los select de categorías, configura su valor y texto y las ajunta al select que se le pasa como parámetro
+     *
+     * @static
+     * @param {JSON} datos
+     * @param {Node} nodoPadre
+     * @memberof VistaCategorias
+     */
     static cargaCategorias(datos, nodoPadre) {
         let categoria = document.createElement('option')
 
@@ -123,6 +152,14 @@ export class VistaCategorias {
         nodoPadre.appendChild(categoria)
     }
 
+    /**
+     *Genera opciones para los select de subcategorías, configura su valor y texto y las ajunta al select que se le pasa como parámetro
+     *
+     * @static
+     * @param {JSON} datos
+     * @param {Node} nodoPadre
+     * @memberof VistaCategorias
+     */
     static cargaSubCategorias(datos, nodoPadre) {
 
         let subCategoria = document.createElement('option')
@@ -134,6 +171,12 @@ export class VistaCategorias {
         nodoPadre.appendChild(subCategoria)
     }
 
+    /**
+     *Habilita la llamada de los métodos cuando se modifica alguno de los select
+     *
+     * @static
+     * @memberof VistaCategorias
+     */
     static detectarCambios() {
         //Insertar
         let nombreSubcategoria = document.getElementById('nombreCategoria')
@@ -180,7 +223,12 @@ export class VistaCategorias {
     }
 
 
-
+    /**
+     *Manda al controlador los valores necesarios para insertar en la BD una subcategoría
+     *
+     * @static
+     * @memberof VistaCategorias
+     */
     static insertarSubcategoria() {
         let nombreSubcategoria = document.getElementById('nombreCategoria')
         let categoria = document.getElementById('categoriaCrearCategoria')
@@ -205,6 +253,13 @@ export class VistaCategorias {
         }
     }
 
+
+    /**
+     *Manda al controlador los valores necesarios para modificar una subcategoría
+     *
+     * @static
+     * @memberof VistaCategorias
+     */
     static async modificarSubcategoria() {
         let categoriaInicial = document.getElementById('modificarCategoria')
         let nombreSubcategoria = document.getElementById('nuevoNombreCategoria')
@@ -257,6 +312,13 @@ export class VistaCategorias {
 
     }
 
+
+    /**
+     *Manda al controlador los valores necesarios para borrar una subcategoría de la BD
+     *
+     * @static
+     * @memberof VistaCategorias
+     */
     static async borrarSubcategoria() {
         let selectCategoria = document.getElementById('borrarCategoria')
         let selectSubcategoria = document.getElementById('borrarSubcategoria')
@@ -273,12 +335,26 @@ export class VistaCategorias {
 
     }
 
+
+    /**
+     *Muestra el cuadro de los mensajes
+     *
+     * @static
+     * @memberof VistaCategorias
+     */
     static mostrarCuadroDialogo() {
         let cuadroDialogo = document.getElementById('cuadroDialogoCategorias')
         cuadroDialogo.style.display = 'block'
 
     }
 
+
+    /**
+     *Oculta el cuadro de los mensajes, susu elementos y vacía su contenido
+     *
+     * @static
+     * @memberof VistaCategorias
+     */
     static ocultarCuadroDialogo() {
         let cuadroDialogo = document.getElementById('cuadroDialogoCategorias')
         let fragmentoBorrado = document.getElementById('conjuntoBorradoSubcategoria')
@@ -296,24 +372,53 @@ export class VistaCategorias {
         mensajeBorrado.textContent = ''
     }
 
+
+    /**
+     *Muestra un mensaje pasado como parámetro en la inserción de una subcategoría
+     *
+     * @static
+     * @param {String} mensajeRespuesta
+     * @memberof VistaCategorias
+     */
     static mostrarMensajeInserción(mensajeRespuesta) {
         let mensaje = document.getElementById("mensajeInsertarSubcategoria")
         mensaje.textContent = mensajeRespuesta
         mensaje.style.display = 'block'
     }
 
+    /**
+     *Muestra un mensaje pasado como parámetro en la modificación de una subcategoría
+     *
+     * @static
+     * @param {String} mensajeRespuesta
+     * @memberof VistaCategorias
+     */
     static mostrarMensajeModificacion(mensajeRespuesta) {
         let mensaje = document.getElementById("mensajeModificarSubcategoria")
         mensaje.textContent = mensajeRespuesta
         mensaje.style.display = 'block'
     }
 
+    /**
+     *Muestra un mensaje pasado como parámetro para borrar una subcategoría
+     *
+     * @static
+     * @param {String} mensajeRespuesta
+     * @memberof VistaCategorias
+     */
     static mostrarMensajeBorrado(mensajeRespuesta) {
         let mensaje = document.getElementById("BorrarSubcategoria")
         mensaje.textContent = mensajeRespuesta
         mensaje.style.display = 'block'
     }
 
+    /**
+     *Muestra el cuadro con el mensaje de confirmacion del borrado y gestiona los eventos para su cancelación o confirmación
+     *
+     * @static
+     * @param {int} idSubcategoria
+     * @memberof VistaCategorias
+     */
     static mostrarMensajeConfirmacion(idSubcategoria) {
         VistaCategorias.mostrarCuadroDialogo()
         let conjunto = document.getElementById('conjuntoBorradoSubcategoria')

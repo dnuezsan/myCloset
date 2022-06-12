@@ -160,6 +160,12 @@ export class VistaMenuPrincipal {
 
     }
 
+    /**
+     *Muestra el panel de outfits
+     *
+     * @static
+     * @memberof VistaMenuPrincipal
+     */
     static mostrarOutfits() {
         let boton = document.querySelectorAll('.outfits')
 

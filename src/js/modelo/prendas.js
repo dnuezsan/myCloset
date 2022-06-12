@@ -92,6 +92,13 @@ export class Prendas {
 
 
 
+    /**
+     *Envía la petición al servidor para cargas todas las prendas y devuelve la respuesta
+     *
+     * @static
+     * @return {JSON} 
+     * @memberof Prendas
+     */
     static async cargarMisPrendas() {
         let cargarMisPrendas = 'cargarMisPrendas'
         let datos = await $.ajax(
@@ -115,6 +122,18 @@ export class Prendas {
     }
 
 
+    /**
+     *Envía la petición y los datos necesarios al servidor para modificar una prenda
+     *
+     * @static
+     * @param {String} descripcion
+     * @param {String} talla
+     * @param {int} idSubCategoria
+     * @param {String} nombrePrenda
+     * @param {int} idPrenda
+     * @return {JSON} 
+     * @memberof Prendas
+     */
     static async modificarPrenda(descripcion, talla, idSubCategoria, nombrePrenda, idPrenda) {
         let modificarPrenda = 'modificarPrenda'
         let datos = await $.ajax(
@@ -141,6 +160,16 @@ export class Prendas {
 
         return datosJson
     }
+
+
+    /**
+     *Envía la petición y los datos necesarios al servidor para borrar una prenda
+     *
+     * @static
+     * @param {int} idPrenda
+     * @return {JSON} 
+     * @memberof Prendas
+     */
     static async borrarPrenda(idPrenda) {
         let borrarPrenda = 'borrarPrenda'
         let datos = await $.ajax(
@@ -165,6 +194,14 @@ export class Prendas {
         return datosJson
     }
 
+
+    /**
+     *Envía la petición al servidor para cargar las categorias de las prendas
+     *
+     * @static
+     * @return {JSON} 
+     * @memberof Prendas
+     */
     static async cargarCategoriasMisPrendas() {
         let cargarCategoria = 'cargarCategoriasMisPrendas'
         let datos = await $.ajax(
@@ -186,6 +223,15 @@ export class Prendas {
 
     }
 
+
+    /**
+     *
+     *
+     * @static
+     * @param {*} categoria
+     * @return {*} 
+     * @memberof Prendas
+     */
     static async filtrarPrendasPorCategoria(categoria) {
         let cargarCategoria = 'filtrarPrendasPorCategoria'
         let datos = await $.ajax(
@@ -207,6 +253,14 @@ export class Prendas {
         return datosJson
     }
 
+    /**
+     *Envía la petición y el id de una subcategoría para cargar las prendas dentro de esta subcategoría
+     *
+     * @static
+     * @param {int} subcategoria
+     * @return {JSON} 
+     * @memberof Prendas
+     */
     static async cargarDatosPrendas(subcategoria) {
         let cargarCategoria = 'cargarNombresPrendas'
         let datos = await $.ajax(

@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: vistaOutfits.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: vistaOutfits.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>'use strict'
+
+import { Controlador } from "../controlador/controlador.js"
+
+/**
+ *
+ *
+ * @export
+ * @class VistaOutfits
+ */
+export class VistaOutfits {
+
+    /**
+     * @constructor
+     * @param {Object} controlador
+     * @param {Node} base
+     * @memberof VistaOutfits
+     */
+    constructor(controlador, base) {
+        this.controlador = controlador
+        this.base = base
+        this.iniciar()
+    }
+
+    /**
+     *Método que ejecuta varios métodos
+     *
+     * @memberof VistaOutfits
+     */
+    async iniciar() {
+        VistaOutfits.limpiarOutfit()
+        VistaOutfits.cargarOutfits()
+        await VistaOutfits.cargarPrendasCabeza()
+        await VistaOutfits.cargarPrendasTorso()
+        await VistaOutfits.cargarPrendasPiernas()
+        await VistaOutfits.cargarPrendasPies()
+        VistaOutfits.igualarFormularios()
+        VistaOutfits.crudOutfits()
+        VistaOutfits.detectarCambiosSelectYCargar()
+    }
+
+    /**
+     *Muestra el panel de outfits y configura la variable local
+     *
+     * @static
+     * @memberof VistaOutfits
+     */
+    static mostrarOutfits() {
+        let panel = document.getElementById('panelOutfit')
+        panel.style.display = 'flex'
+        localStorage.setItem('vista', 'vistaOutfits')
+    }
+
+    /**
+     *Oculta el panel y limpia el formulario
+     *
+     * @static
+     * @memberof VistaOutfits
+     */
+    static ocultarOutfits() {
+        let panel = document.getElementById('panelOutfit')
+        panel.style.display = 'none'
+        VistaOutfits.limpiarFormulario()
+    }
+
+    /**
+     *Deja en blanco los valores del formulario
+     *
+     * @static
+     * @memberof VistaOutfits
+     */
+    static limpiarFormulario() {
+        let inputs = document.querySelectorAll('#panelOutfit input')
+        let selects = document.querySelectorAll('#panelOutfit select')
+
+        inputs.forEach(input => {
+            input.value = ''
+        });
+
+        selects.forEach(select => {
+            select.value = ''
+        });
+    }
+
+    /**
+     *Deja en blanco el formulario al pulsar el boton indicado
+     *
+     * @static
+     * @memberof VistaOutfits
+     */
+    static limpiarOutfit() {
+        let botones = document.getElementsByClassName('botonNuevoOutfit')
+
+        for (let i = 0; i &lt; botones.length; i++) {
+            botones[i].addEventListener('click', VistaOutfits.limpiarFormulario, true)
+        }
+
+    }
+
+    /* ADAPTARLOS Y LUEGO UTILIZAR EN CRUDOUTFITS */
+
+    /* static async insertarOutfit(idPrenda, nombreOutfit) {
+        let outfit = document.getElementsByClassName('outfitCargado')
+
+        for (let i = 0; i &lt; outfit.length; i++) {
+            if (outfit[i].value == '') {
+                if (outfit[i].value != '') {
+                    let respuesta = await Controlador.insertarOutfit(idPrenda, nombreOutfit)
+                    if (!respuesta.success) {
+                        console.log('error');
+                    } else {
+                        location.reload()
+                    }
+                }
+            }
+        }
+    } */
+
+    /* ADAPTARLO Y LUEGO UTILIZAR EN CRUDOUTFITS */
+    /* static async modificarOutfit() {
+        let outfit = document.getElementsByClassName('outfitCargado')
+
+        for (let i = 0; i &lt; outfit.length; i++) {
+            if (outfit[i].value != '') {
+                if (outfit[i].value != '') {
+                    let respuesta = await Controlador.modificarOutfit(outfit[i].value)
+                    if (!respuesta.success) {
+                        console.log('error');
+                    } else {
+                        location.reload()
+                    }
+                }
+            }
+        }
+    } */
+    /* ADAPTARLOS Y LUEGO UTILIZAR EN CRUDOUTFITS */
+    /* static async borrarOutfit() {
+        let outfit = document.getElementsByClassName('outfitCargado')
+
+        for (let i = 0; i &lt; outfit.length; i++) {
+            if (outfit[i].value != '') {
+                let respuesta = await Controlador.borrarOutfit(outfit[i].value)
+                if (!respuesta.success) {
+                    console.log('error');
+                } else {
+                    location.reload()
+                }
+            }
+        }
+    } */
+
+    /**
+     *Carga todos los outfits y los introduce en los select correspondientes
+     *
+     * @static
+     * @memberof VistaOutfits
+     */
+    static async cargarOutfits() {
+        let selectOutfits = document.getElementsByClassName('outfitCargado')
+
+        let outfits = await Controlador.cargaOutfits()
+
+        for (let i = 0; i &lt; outfits.length; i++) {
+
+            VistaOutfits.generarOptionOutfit(outfits[i], selectOutfits[0])
+            VistaOutfits.generarOptionOutfit(outfits[i], selectOutfits[1])
+
+        }
+
+        $('.outfitCargado').formSelect()
+    }
+
+    /**
+     *Elimina las opciones que había con anterioridad en los select y genera nuevas prendas de cabeza en los selects correspondientes
+     *
+     * @static
+     * @memberof VistaOutfits
+     */
+    static async cargarPrendasCabeza() {
+        let prendaCabeza = document.getElementsByClassName('prendaCabezaOutfit')
+
+        for (let i = 0; i &lt; prendaCabeza.length; i++) {
+            if (prendaCabeza[i].childElementCount > 1) {
+                while (prendaCabeza[i].childElementCount > 1) {
+                    prendaCabeza[i].removeChild(prendaCabeza[i].children[1])
+                }
+            }
+        }
+
+        let prendas = await Controlador.cargarPrendasCabeza()
+
+        for (let i = 0; i &lt; prendas.length; i++) {
+
+            VistaOutfits.generarOptionPrenda(prendas[i], prendaCabeza[0])
+            VistaOutfits.generarOptionPrenda(prendas[i], prendaCabeza[1])
+        }
+
+        $('.prendaCabezaOutfit').formSelect()
+
+    }
+
+    /**
+     *Elimina las opciones que había con anterioridad en los select y genera nuevas prendas de torso en los selects correspondientes
+     *
+     * @static
+     * @memberof VistaOutfits
+     */
+    static async cargarPrendasTorso() {
+
+        let prendaTorso = document.getElementsByClassName('prendaTorsoOutfit')
+
+        for (let i = 0; i &lt; prendaTorso.length; i++) {
+            if (prendaTorso[i].childElementCount > 1) {
+                while (prendaTorso[i].childElementCount > 1) {
+                    prendaTorso[i].removeChild(prendaTorso[i].children[1])
+                }
+            }
+        }
+
+        let prendas = await Controlador.cargarPrendasTorso()
+
+        for (let i = 0; i &lt; prendas.length; i++) {
+
+            VistaOutfits.generarOptionPrenda(prendas[i], prendaTorso[0])
+            VistaOutfits.generarOptionPrenda(prendas[i], prendaTorso[1])
+        }
+        $('.prendaTorsoOutfit').formSelect()
+    }
+
+    /**
+     *Elimina las opciones que había con anterioridad en los select y genera nuevas prendas de piernas en los selects correspondientes
+     *
+     * @static
+     * @memberof VistaOutfits
+     */
+    static async cargarPrendasPiernas() {
+
+        let prendaPiernas = document.getElementsByClassName('prendaPiernasOutfit')
+
+        for (let i = 0; i &lt; prendaPiernas.length; i++) {
+            if (prendaPiernas[i].childElementCount > 1) {
+                while (prendaPiernas[i].childElementCount > 1) {
+                    prendaPiernas[i].removeChild(prendaPiernas[i].children[1])
+                }
+            }
+        }
+
+        let prendas = await Controlador.cargarPrendasPiernas()
+
+        for (let i = 0; i &lt; prendas.length; i++) {
+
+            VistaOutfits.generarOptionPrenda(prendas[i], prendaPiernas[0])
+            VistaOutfits.generarOptionPrenda(prendas[i], prendaPiernas[1])
+        }
+        $('.prendaPiernasOutfit').formSelect()
+    }
+
+    /**
+     *Elimina las opciones que había con anterioridad en los select y genera nuevas prendas de pies en los selects correspondientes
+     *
+     * @static
+     * @memberof VistaOutfits
+     */
+    static async cargarPrendasPies() {
+
+        let prendaPies = document.getElementsByClassName('prendaPiesOutfit')
+
+        for (let i = 0; i &lt; prendaPies.length; i++) {
+            if (prendaPies[i].childElementCount > 1) {
+                while (prendaPies[i].childElementCount > 1) {
+                    prendaPies[i].removeChild(prendaPies[i].children[1])
+                }
+            }
+        }
+
+        let prendas = await Controlador.cargarPrendasPies()
+
+        for (let i = 0; i &lt; prendas.length; i++) {
+
+            VistaOutfits.generarOptionPrenda(prendas[i], prendaPies[0])
+            VistaOutfits.generarOptionPrenda(prendas[i], prendaPies[1])
+        }
+        $('.prendaPiesOutfit').formSelect()
+    }
+
+    /**
+     *Genera opciones para introducir los outfits y sus valores
+     *
+     * @static
+     * @param {JSON} datos
+     * @param {Node} nodoPadre
+     * @memberof VistaOutfits
+     */
+    static generarOptionOutfit(datos, nodoPadre) {
+        let opcion = document.createElement('option')
+        //opcion.classList.add('prendaCabeza')
+
+        opcion.value = datos.idOutfit
+        opcion.textContent = datos.nombreOutfit
+        nodoPadre.appendChild(opcion)
+    }
+
+    /**
+     *Genera opciones para introducir las prendas, sus valores y un texto con su nombre y subcategoria
+     *
+     * @static
+     * @param {JSON} datos
+     * @param {Node} nodoPadre
+     * @memberof VistaOutfits
+     */
+    static generarOptionPrenda(datos, nodoPadre) {
+        let opcion = document.createElement('option')
+        //opcion.classList.add('prendaCabeza')
+
+        opcion.value = datos.idPrenda
+        opcion.textContent = `${datos.nombreSubcategoria} - ${datos.nombrePrenda}`
+        nodoPadre.appendChild(opcion)
+    }
+
+    /**
+     *Carga en los inputs de nombre de outfit, en nombre del outfit seleccionado
+     *
+     * @static
+     * @param {int} idOutfit
+     * @memberof VistaOutfits
+     */
+    static async cargarNombreOutfit(idOutfit) {
+        let inputNombreOutfit = document.getElementsByClassName('nombreOutfit')
+
+        let nombreOutfit = await Controlador.cargaOutfits()
+
+        nombreOutfit.forEach(nombre => {
+            if (nombre.idOutfit == idOutfit) {
+                inputNombreOutfit[0].value = nombre.nombreOutfit
+                inputNombreOutfit[1].value = nombre.nombreOutfit
+            }
+        });
+
+    }
+
+    /**
+     *Carga la prenda de cabeza del outfit seleccionado
+     *
+     * @static
+     * @return {int} 
+     * @memberof VistaOutfits
+     */
+    static async cargarPrendasCabezaOutfit() {
+        let outfitCargado = document.getElementsByClassName('outfitCargado')
+        let prendaCabeza = document.getElementsByClassName('prendaCabezaOutfit')
+
+        let prendaCabezaOutfit = null
+        let idOutfit = null
+        for (let i = 0; i &lt; outfitCargado.length; i++) {
+            idOutfit = outfitCargado[i].value
+            prendaCabezaOutfit = await Controlador.cargarPrendasCabezaOutfit(idOutfit)
+            prendaCabeza[i].value = prendaCabezaOutfit[0].idPrenda
+            $('.prendaCabezaOutfit').formSelect()
+            return prendaCabeza[i].value
+        }
+    }
+
+    /**
+     *Carga la prenda de torso del outfit seleccionado
+     *
+     * @static
+     * @return {int} 
+     * @memberof VistaOutfits
+     */
+    static async cargarPrendasTorsoOutfit() {
+        let outfitCargado = document.getElementsByClassName('outfitCargado')
+        let prendaTorso = document.getElementsByClassName('prendaTorsoOutfit')
+
+        let prendaTorsoOutfit = null
+        let idOutfit = null
+        for (let i = 0; i &lt; outfitCargado.length; i++) {
+            idOutfit = outfitCargado[i].value
+            prendaTorsoOutfit = await Controlador.cargarPrendasTorsoOutfit(idOutfit)
+            prendaTorso[i].value = prendaTorsoOutfit[0].idPrenda
+            $('.prendaTorsoOutfit').formSelect()
+            return prendaTorso[i].value
+        }
+    }
+
+    /**
+     *Carga la prenda de Piernas del outfit seleccionado
+     *
+     * @static
+     * @return {int} 
+     * @memberof VistaOutfits
+     */
+    static async cargarPrendasPiernasOutfit() {
+        let outfitCargado = document.getElementsByClassName('outfitCargado')
+        let prendaPiernas = document.getElementsByClassName('prendaPiernasOutfit')
+
+        let prendaPiernasOutfit = null
+        let idOutfit = null
+        for (let i = 0; i &lt; outfitCargado.length; i++) {
+            idOutfit = outfitCargado[i].value
+            prendaPiernasOutfit = await Controlador.cargarPrendasPiernasOutfit(idOutfit)
+            prendaPiernas[i].value = prendaPiernasOutfit[0].idPrenda
+            $('.prendaPiernasOutfit').formSelect()
+            return prendaPiernas[i].value
+        }
+    }
+
+    /**
+     *Carga la prenda de pies del outfit seleccionado
+     *
+     * @static
+     * @return {int} 
+     * @memberof VistaOutfits
+     */
+    static async cargarPrendasPiesOutfit() {
+        let outfitCargado = document.getElementsByClassName('outfitCargado')
+        let prendaPies = document.getElementsByClassName('prendaPiesOutfit')
+
+        let prendaPiesOutfit = null
+        let idOutfit = null
+        for (let i = 0; i &lt; outfitCargado.length; i++) {
+            idOutfit = outfitCargado[i].value
+            prendaPiesOutfit = await Controlador.cargarPrendasPiesOutfit(idOutfit)
+            prendaPies[i].value = prendaPiesOutfit[0].idPrenda
+            $('.prendaPiesOutfit').formSelect()
+            return prendaPies[i].value
+        }
+    }
+
+
+    /**
+     *Determina las inserciones o modificaciones de un outfit o borrado del mismo, y envia los valores para esto al controlador
+     *
+     * @static
+     * @memberof VistaOutfits
+     */
+    static crudOutfits() {
+        let panel = document.getElementById('panelOutfit')
+        let outfitsCargados = document.getElementsByClassName('outfitCargado')
+        let selectCabeza = document.getElementsByClassName('prendaCabezaOutfit')
+        let selectTorso = document.getElementsByClassName('prendaTorsoOutfit')
+        let selectPiernas = document.getElementsByClassName('prendaPiernasOutfit')
+        let selectPies = document.getElementsByClassName('prendaPiesOutfit')
+        let botonInsertar = document.getElementsByClassName('botonGuardarOutfit')
+        let botonBorrar = document.getElementsByClassName('botonBorrarOutfit')
+        let nombreOufit = document.getElementsByClassName('nombreOutfit')
+        //PASAR VALORES DE SELECTS A LOS METODOS
+        let valorClase = null
+        let respuestaCabeza = null
+        let respuestaTorso = null
+        let respuestaPiernas = null
+        let respuestaPies = null
+
+        for (let i = 0; i &lt; 2; i++) {
+            botonInsertar[i].onclick = async () => {
+
+                //Metodos de inserción con mensajes
+                if (outfitsCargados[i].value == "") {
+                    if (nombreOufit[i].value == '') {
+                        try {
+                            respuestaCabeza = await Controlador.insertarOutfit(selectCabeza[i].value, 'Outfit sin nombre')
+                            respuestaTorso = await Controlador.insertarOutfit(selectTorso[i].value, 'Outfit sin nombre')
+                            respuestaPiernas = await Controlador.insertarOutfit(selectPiernas[i].value, 'Outfit sin nombre')
+                            respuestaPies = await Controlador.insertarOutfit(selectPies[i].value, 'Outfit sin nombre')
+                            if (!respuestaCabeza.success &amp;&amp; !respuestaTorso.success &amp;&amp; !respuestaPiernas.success &amp;&amp; !respuestaPies.success) {
+                                VistaOutfits.mostrarMensaje(respuestaCabeza.mensaje)
+
+                            } else if (!respuestaCabeza.success) {
+                                VistaOutfits.mostrarMensaje('No se pudo insertar su prenda de cabeza en el outfit')
+                                panel.onclick = () => { VistaOutfits.ocultarMensaje() }
+                            } else if (!respuestaTorso.success) {
+                                VistaOutfits.mostrarMensaje('No se pudo insertar su prenda del torso en el outfit')
+                                panel.onclick = () => { VistaOutfits.ocultarMensaje() }
+                            } else if (!respuestaPiernas.success) {
+                                VistaOutfits.mostrarMensaje('No se pudo insertar su prenda de las piernas en el outfit')
+                                panel.onclick = () => { VistaOutfits.ocultarMensaje() }
+                            } else if (!respuestaPies.success) {
+                                VistaOutfits.mostrarMensaje('No se pudo insertar su prenda de los pies en el outfit')
+                                panel.onclick = () => { VistaOutfits.ocultarMensaje() }
+                            }
+                            location.reload()
+                        } catch (error) {
+                            console.error(error);
+                        }
+                    } else {
+                        try {
+                            respuestaCabeza = await Controlador.insertarOutfit(selectCabeza[i], nombreOufit[i].value)
+                            respuestaTorso = await Controlador.insertarOutfit(selectTorso[i].value, nombreOufit[i].value)
+                            respuestaPiernas = await Controlador.insertarOutfit(selectPiernas[i].value, nombreOufit[i].value)
+                            respuestaPies = await Controlador.insertarOutfit(selectPies[i].value, nombreOufit[i].value)
+                            if (!respuestaCabeza.success &amp;&amp; !respuestaTorso.success &amp;&amp; !respuestaPiernas.success &amp;&amp; !respuestaPies.success) {
+                                VistaOutfits.mostrarMensaje(respuestaCabeza.mensaje)
+
+                            } else if (!respuestaCabeza.success) {
+                                VistaOutfits.mostrarMensaje('No se pudo insertar su prenda de cabeza en el outfit')
+                                panel.onclick = () => { VistaOutfits.ocultarMensaje() }
+                            } else if (!respuestaTorso.success) {
+                                VistaOutfits.mostrarMensaje('No se pudo insertar su prenda del torso en el outfit')
+                                panel.onclick = () => { VistaOutfits.ocultarMensaje() }
+                            } else if (!respuestaPiernas.success) {
+                                VistaOutfits.mostrarMensaje('No se pudo insertar su prenda de las piernas en el outfit')
+                                panel.onclick = () => { VistaOutfits.ocultarMensaje() }
+                            } else if (!respuestaPies.success) {
+                                VistaOutfits.mostrarMensaje('No se pudo insertar su prenda de los pies en el outfit')
+                                panel.onclick = () => { VistaOutfits.ocultarMensaje() }
+                            }
+                            location.reload()
+                        } catch (error) {
+                            console.error(error);
+                        }
+                    }
+                }
+                //ACTUALIZACION
+                else {
+                    let idOutfit = outfitsCargados[i].value
+                    let prendaCabezaOutfit = await Controlador.cargarPrendasCabezaOutfit(idOutfit)
+                    let prendaTorsoOutfit = await Controlador.cargarPrendasTorsoOutfit(idOutfit)
+                    let prendaPiernasOutfit = await Controlador.cargarPrendasPiesOutfit(idOutfit)
+                    let prendaPiesOutfit = await Controlador.cargarPrendasPiesOutfit(idOutfit)
+                    if (nombreOufit[i].value == '') {
+                        try {
+                            respuestaCabeza = await Controlador.modificarOutfit(prendaCabezaOutfit[0].idPrenda, selectCabeza[i].value, outfitsCargados[i].value, 'Outfit sin nombre')
+                            respuestaTorso = await Controlador.modificarOutfit(prendaTorsoOutfit[0].idPrenda, selectTorso[i].value, outfitsCargados[i].value, 'Outfit sin nombre')
+                            respuestaPiernas = await Controlador.modificarOutfit(prendaPiernasOutfit[0].idPrenda, selectPiernas[i].value, outfitsCargados[i].value, 'Outfit sin nombre')
+                            respuestaPies = await Controlador.modificarOutfit(prendaPiesOutfit[0].idPrenda, selectPies[i].value, outfitsCargados[i].value, 'Outfit sin nombre')
+                            location.reload()
+                        } catch (error) {
+                            console.log(error);
+                        }
+                    }
+                    else {
+                        try {
+                            respuestaCabeza = await Controlador.modificarOutfit(prendaCabezaOutfit[0].idPrenda, selectCabeza[i].value, outfitsCargados[i].value, nombreOufit[i].value)
+                            respuestaTorso = await Controlador.modificarOutfit(prendaTorsoOutfit[0].idPrenda, selectTorso[i].value, outfitsCargados[i].value, nombreOufit[i].value)
+                            respuestaPiernas = await Controlador.modificarOutfit(prendaPiernasOutfit[0].idPrenda, selectPiernas[i].value, outfitsCargados[i].value, nombreOufit[i].value)
+                            respuestaPies = await Controlador.modificarOutfit(prendaPiesOutfit[0].idPrenda, selectPies[i].value, outfitsCargados[i].value, nombreOufit[i].value)
+                            location.reload()
+                        } catch (error) {
+                            console.log(error);
+                        }
+                    }
+                }
+            }
+            //BORRADO
+            botonBorrar[i].addEventListener('click', async () => {
+
+                if (outfitsCargados[i].value == '') {
+
+                    VistaOutfits.mostrarMensaje('Selecciona algún outfit')
+                    panel.addEventListener('click', () => { VistaOutfits.ocultarMensaje() }, true)
+                }
+                else {
+                    VistaOutfits.mostrarCuadroDialogo()
+                    let botonBorrar = document.getElementById('botonBorrarOutfits')
+                    let botonCancelar = document.getElementById('botonCancelarOutfits')
+                    botonBorrar.onclick = async () => {
+                        try {
+                            let respuestaBorrado = await Controlador.borrarOutfit(outfitsCargados[i].value)
+                            if (respuestaBorrado.success) {
+                                location.reload()
+                            } else {
+                                VistaOutfits.mostrarMensaje('No se pudo eliminar su outfit')
+                                panel.onclick = () => { VistaOutfits.ocultarMensaje() }
+                            }
+                        } catch (error) {
+                            console.error(error);
+                        }
+                    }
+                    botonCancelar.onclick = () => {
+                        VistaOutfits.ocultarCuadroDialogo()
+                    }
+                }
+            }, true)
+        }
+    }
+
+    /**
+     *Carga las prendas e imágenes de el outfit seleccionado cada vez que este cambia
+     *
+     * @static
+     * @memberof VistaOutfits
+     */
+    static detectarCambiosSelectYCargar() {
+        let outfitsCargados = document.getElementsByClassName('outfitCargado')
+        for (let i = 0; i &lt; outfitsCargados.length; i++) {
+            console.log('CAMBIAR EN ESTE METODO PARA AÑADIR IMAGENES')
+            outfitsCargados[i].addEventListener('change', async () => {
+                await VistaOutfits.cargarNombreOutfit(outfitsCargados[i].value)
+
+                VistaOutfits.cargarImgPrendaCabeza(await VistaOutfits.cargarPrendasCabezaOutfit())
+
+                VistaOutfits.cargarImgPrendaTorso(await VistaOutfits.cargarPrendasTorsoOutfit())
+
+                VistaOutfits.cargarImgPrendaPiernas(await VistaOutfits.cargarPrendasPiernasOutfit())
+
+                VistaOutfits.cargarImgPrendaPies(await VistaOutfits.cargarPrendasPiesOutfit())
+            }, true)
+        }
+        $('#panelOutfit select').formSelect()
+    }
+
+    /**
+     *Pasa los valores generados en un formulario al otro
+     *
+     * @static
+     * @memberof VistaOutfits
+     */
+    static igualarFormularios() {
+        let outfitsCargados = document.getElementsByClassName('outfitCargado')
+        let selectCabeza = document.getElementsByClassName('prendaCabezaOutfit')
+        let selectTorso = document.getElementsByClassName('prendaTorsoOutfit')
+        let selectPiernas = document.getElementsByClassName('prendaPiernasOutfit')
+        let selectPies = document.getElementsByClassName('prendaPiesOutfit')
+        let nombreDeOutfit = document.getElementsByClassName('nombreOutfit')
+        let valor = null
+
+        for (let i = 0; i &lt; 2; i++) {
+            outfitsCargados[i].onchange = () => {
+                valor = outfitsCargados[i].value
+                for (let j = 0; j &lt; outfitsCargados.length; j++) {
+                    outfitsCargados[j].value = valor
+                }
+            }
+            selectCabeza[i].onchange = () => {
+                valor = selectCabeza[i].value
+                for (let j = 0; j &lt; selectCabeza.length; j++) {
+                    selectCabeza[j].value = valor
+                }
+                VistaOutfits.cargarImgPrendaCabeza(selectCabeza[j].value)
+                console.log(valor);
+
+            }
+            selectTorso[i].onchange = () => {
+                valor = selectTorso[i].value
+                for (let j = 0; j &lt; selectTorso.length; j++) {
+                    selectTorso[j].value = valor
+                }
+                console.log(valor);
+                VistaOutfits.cargarImgPrendaTorso(valor)
+            }
+            selectPiernas[i].onchange = () => {
+                valor = selectPiernas[i].value
+                for (let j = 0; j &lt; selectPiernas.length; j++) {
+                    selectPiernas[j].value = valor
+                }
+                console.log(valor);
+                VistaOutfits.cargarImgPrendaPiernas(valor)
+            }
+            selectPies[i].onchange = () => {
+                valor = selectPies[i].value
+                for (let j = 0; j &lt; selectPies.length; j++) {
+                    selectPies[j].value = valor
+                }
+                console.log(valor);
+                $('.prendaPiesOutfit').formSelect()
+                VistaOutfits.cargarImgPrendaPies(valor)
+            }
+
+            nombreDeOutfit[i].onchange = () => {
+                valor = nombreDeOutfit[i].value
+                for (let j = 0; j &lt; nombreDeOutfit.length; j++) {
+                    nombreDeOutfit[j].value = valor
+                }
+            }
+
+            $('#panelOutfit select').formSelect()
+        }
+    }
+
+    /**
+     *Carga la imagen de una prenda de cabeza o en su defecto, carga una imagen predefinida
+     *
+     * @static
+     * @param {int} idPrenda
+     * @memberof VistaOutfits
+     */
+    static cargarImgPrendaCabeza(idPrenda) {
+        let cajaImg = document.getElementById('cabezaOutfit')
+
+        if (idPrenda == '') {
+            cajaImg.src = `./src/img/logo.png`
+        } else {
+            cajaImg.src = `src/php/imagenes_prendas/${idPrenda}.png`
+        }
+    }
+
+    /**
+     *Carga la imagen de una prenda de torso o en su defecto, carga una imagen predefinida
+     *
+     * @static
+     * @param {int} idPrenda
+     * @memberof VistaOutfits
+     */
+    static cargarImgPrendaTorso(idPrenda) {
+        let cajaImg = document.getElementById('torsoOutfit')
+
+        if (idPrenda == '') {
+            cajaImg.src = `./src/img/logo.png`
+        } else {
+            cajaImg.src = `src/php/imagenes_prendas/${idPrenda}.png`
+        }
+    }
+
+    /**
+     *Carga la imagen de una prenda de piernas o en su defecto, carga una imagen predefinida
+     *
+     * @static
+     * @param {int} idPrenda
+     * @memberof VistaOutfits
+     */
+    static cargarImgPrendaPiernas(idPrenda) {
+        let cajaImg = document.getElementById('piernasOutfit')
+
+        if (idPrenda == '') {
+            cajaImg.src = `./src/img/logo.png`
+        } else {
+            cajaImg.src = `src/php/imagenes_prendas/${idPrenda}.png`
+        }
+    }
+
+    /**
+     *Carga la imagen de una prenda de pies o en su defecto, carga una imagen predefinida
+     *
+     * @static
+     * @param {int} idPrenda
+     * @memberof VistaOutfits
+     */
+    static cargarImgPrendaPies(idPrenda) {
+        let cajaImg = document.getElementById('piesOutfit')
+
+        if (idPrenda == '') {
+            cajaImg.src = `./src/img/logo.png`
+        } else {
+            cajaImg.src = `src/php/imagenes_prendas/${idPrenda}.png`
+        }
+    }
+
+    /**
+     *Muestra el cuadro de diálogo con la confirmación de borrado
+     *
+     * @static
+     * @memberof VistaOutfits
+     */
+    static mostrarCuadroDialogo() {
+        let cuadroDialogo = document.getElementById('cuadroDialogoOutfits')
+        let mensajeBorradoOutfits = document.getElementById('mensajeBorradoOutfits')
+        mensajeBorradoOutfits.textContent = `¿Está seguro de que desea borrar el outfit seleccionado?`
+        cuadroDialogo.style.display = 'block'
+
+    }
+
+    /**
+     *Oculta el cuadro de diálogo con la confirmación de borrado
+     *
+     * @static
+     * @memberof VistaOutfits
+     */
+    static ocultarCuadroDialogo() {
+        let cuadroDialogo = document.getElementById('cuadroDialogoOutfits')
+        let mensajeBorradoOutfits = document.getElementById('mensajeBorradoOutfits')
+        mensajeBorradoOutfits.textContent = ``
+        cuadroDialogo.style.display = 'none'
+    }
+
+    /**
+     *Muestra el cuadro de mensajes y genera un mensaje
+     *
+     * @static
+     * @param {String} mensaje
+     * @memberof VistaOutfits
+     */
+    static mostrarMensaje(mensaje) {
+        let cuadroDialogo = document.getElementById('cuadroDialogoOutfits')
+        let conjuntoBorradoOutfits = document.getElementById('conjuntoBorradoOutfits')
+        let bloqueMensaje = document.getElementById('cambioOutfits')
+        bloqueMensaje.textContent = mensaje
+        conjuntoBorradoOutfits.style.display = 'none'
+        cuadroDialogo.style.display = 'block'
+        bloqueMensaje.style.display = 'block'
+    }
+
+    /**
+     *Oculta el cuadro de mensajes y vacía su contenido
+     *
+     * @static
+     * @memberof VistaOutfits
+     */
+    static ocultarMensaje() {
+        let cuadroDialogo = document.getElementById('cuadroDialogoOutfits')
+        let conjuntoBorradoOutfits = document.getElementById('conjuntoBorradoOutfits')
+        let bloqueMensaje = document.getElementById('cambioOutfits')
+        cuadroDialogo.style.display = 'none'
+        bloqueMensaje.textContent = ''
+        bloqueMensaje.style.display = 'none'
+        conjuntoBorradoOutfits.style.display = 'block'
+    }
+
+    //Patron Borrado
+    /* for (let i = 0; i &lt; selectOutfits.length; i++) {
+        if (selectOutfits[i].childElementCount>1) {
+            while (selectOutfits[i].childElementCount > 1) {
+                selectOutfits[i].removeChild(selectOutfits[i].children[1])
+            }
+        }
+    } */
+
+}</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Controlador.html">Controlador</a></li><li><a href="Controlador.exports.Controlador.html">exports.Controlador</a></li><li><a href="Outfits.html">Outfits</a></li><li><a href="Outfits.exports.Outfits.html">exports.Outfits</a></li><li><a href="Prendas.html">Prendas</a></li><li><a href="Prendas.exports.Prendas.html">exports.Prendas</a></li><li><a href="Subcategorias.html">Subcategorias</a></li><li><a href="Subcategorias.exports.Categorias.html">exports.Categorias</a></li><li><a href="Usuarios.html">Usuarios</a></li><li><a href="Usuarios.exports.Usuarios.html">exports.Usuarios</a></li><li><a href="VistaArmario.html">VistaArmario</a></li><li><a href="VistaArmario.exports.VistaArmario.html">exports.VistaArmario</a></li><li><a href="VistaCategorias.html">VistaCategorias</a></li><li><a href="VistaCategorias.exports.VistaCategorias.html">exports.VistaCategorias</a></li><li><a href="VistaGestionarPrendas.html">VistaGestionarPrendas</a></li><li><a href="VistaGestionarPrendas.exports.VistaGestionarPrendas.html">exports.VistaGestionarPrendas</a></li><li><a href="VistaLogin.html">VistaLogin</a></li><li><a href="VistaLogin.exports.VistaLogin.html">exports.VistaLogin</a></li><li><a href="VistaMenuPrincipal.html">VistaMenuPrincipal</a></li><li><a href="VistaMenuPrincipal.exports.VistaMenuPrincipal.html">exports.VistaMenuPrincipal</a></li><li><a href="VistaMisPrendas.html">VistaMisPrendas</a></li><li><a href="VistaMisPrendas.exports.VistaMisPrendas.html">exports.VistaMisPrendas</a></li><li><a href="VistaOutfits.html">VistaOutfits</a></li><li><a href="VistaOutfits.exports.VistaOutfits.html">exports.VistaOutfits</a></li><li><a href="VistaPerfilUsuario.html">VistaPerfilUsuario</a></li><li><a href="VistaPerfilUsuario.exports.VistaPerfilUsuario.html">exports.VistaPerfilUsuario</a></li><li><a href="VistaPrincipal.html">VistaPrincipal</a></li><li><a href="VistaPrincipal.exports.VistaPrincipal.html">exports.VistaPrincipal</a></li><li><a href="VistaRegistroUsuario.html">VistaRegistroUsuario</a></li><li><a href="VistaRegistroUsuario.exports.VistaRegistroUsuario.html">exports.VistaRegistroUsuario</a></li><li><a href="VistaSubirPrenda.html">VistaSubirPrenda</a></li><li><a href="VistaSubirPrenda.exports.VistaSubirPrenda.html">exports.VistaSubirPrenda</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Mon Jun 13 2022 01:37:28 GMT+0200 (hora de verano de Europa central)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

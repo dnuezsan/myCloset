@@ -31,6 +31,126 @@ Search.appendIndex(
             "summary": "",
             "url": "namespaces/default.html#function_subidaDePrenda"
         },                {
+            "fqsen": "\\cargarCategoria\u0028\u0029",
+            "name": "cargarCategoria",
+            "summary": "",
+            "url": "namespaces/default.html#function_cargarCategoria"
+        },                {
+            "fqsen": "\\cargarCategoriaMisPrendas\u0028\u0029",
+            "name": "cargarCategoriaMisPrendas",
+            "summary": "",
+            "url": "namespaces/default.html#function_cargarCategoriaMisPrendas"
+        },                {
+            "fqsen": "\\cargarSubCategoria\u0028\u0029",
+            "name": "cargarSubCategoria",
+            "summary": "",
+            "url": "namespaces/default.html#function_cargarSubCategoria"
+        },                {
+            "fqsen": "\\cargarNombresPrendas\u0028\u0029",
+            "name": "cargarNombresPrendas",
+            "summary": "",
+            "url": "namespaces/default.html#function_cargarNombresPrendas"
+        },                {
+            "fqsen": "\\cargarMisPrenda\u0028\u0029",
+            "name": "cargarMisPrenda",
+            "summary": "",
+            "url": "namespaces/default.html#function_cargarMisPrenda"
+        },                {
+            "fqsen": "\\filtrarPrendasPorCategoria\u0028\u0029",
+            "name": "filtrarPrendasPorCategoria",
+            "summary": "",
+            "url": "namespaces/default.html#function_filtrarPrendasPorCategoria"
+        },                {
+            "fqsen": "\\modificarPrenda\u0028\u0029",
+            "name": "modificarPrenda",
+            "summary": "",
+            "url": "namespaces/default.html#function_modificarPrenda"
+        },                {
+            "fqsen": "\\borrarPrenda\u0028\u0029",
+            "name": "borrarPrenda",
+            "summary": "",
+            "url": "namespaces/default.html#function_borrarPrenda"
+        },                {
+            "fqsen": "\\insertarSubcategoria\u0028\u0029",
+            "name": "insertarSubcategoria",
+            "summary": "",
+            "url": "namespaces/default.html#function_insertarSubcategoria"
+        },                {
+            "fqsen": "\\modificarSubCategoria\u0028\u0029",
+            "name": "modificarSubCategoria",
+            "summary": "",
+            "url": "namespaces/default.html#function_modificarSubCategoria"
+        },                {
+            "fqsen": "\\modificarCambiarSubcategoria\u0028\u0029",
+            "name": "modificarCambiarSubcategoria",
+            "summary": "",
+            "url": "namespaces/default.html#function_modificarCambiarSubcategoria"
+        },                {
+            "fqsen": "\\borrarSubCategoria\u0028\u0029",
+            "name": "borrarSubCategoria",
+            "summary": "",
+            "url": "namespaces/default.html#function_borrarSubCategoria"
+        },                {
+            "fqsen": "\\cargarOutfits\u0028\u0029",
+            "name": "cargarOutfits",
+            "summary": "",
+            "url": "namespaces/default.html#function_cargarOutfits"
+        },                {
+            "fqsen": "\\cargarPrendasCabeza\u0028\u0029",
+            "name": "cargarPrendasCabeza",
+            "summary": "",
+            "url": "namespaces/default.html#function_cargarPrendasCabeza"
+        },                {
+            "fqsen": "\\cargarPrendasTorso\u0028\u0029",
+            "name": "cargarPrendasTorso",
+            "summary": "",
+            "url": "namespaces/default.html#function_cargarPrendasTorso"
+        },                {
+            "fqsen": "\\cargarPrendasPiernas\u0028\u0029",
+            "name": "cargarPrendasPiernas",
+            "summary": "",
+            "url": "namespaces/default.html#function_cargarPrendasPiernas"
+        },                {
+            "fqsen": "\\cargarPrendasPies\u0028\u0029",
+            "name": "cargarPrendasPies",
+            "summary": "",
+            "url": "namespaces/default.html#function_cargarPrendasPies"
+        },                {
+            "fqsen": "\\cargarPrendasCabezaOutfit\u0028\u0029",
+            "name": "cargarPrendasCabezaOutfit",
+            "summary": "",
+            "url": "namespaces/default.html#function_cargarPrendasCabezaOutfit"
+        },                {
+            "fqsen": "\\cargarPrendasTorsoOutfit\u0028\u0029",
+            "name": "cargarPrendasTorsoOutfit",
+            "summary": "",
+            "url": "namespaces/default.html#function_cargarPrendasTorsoOutfit"
+        },                {
+            "fqsen": "\\cargarPrendasPiernasOutfit\u0028\u0029",
+            "name": "cargarPrendasPiernasOutfit",
+            "summary": "",
+            "url": "namespaces/default.html#function_cargarPrendasPiernasOutfit"
+        },                {
+            "fqsen": "\\cargarPrendasPiesOutfit\u0028\u0029",
+            "name": "cargarPrendasPiesOutfit",
+            "summary": "",
+            "url": "namespaces/default.html#function_cargarPrendasPiesOutfit"
+        },                {
+            "fqsen": "\\insertarOutfit\u0028\u0029",
+            "name": "insertarOutfit",
+            "summary": "",
+            "url": "namespaces/default.html#function_insertarOutfit"
+        },                {
+            "fqsen": "\\borrarOutfit\u0028\u0029",
+            "name": "borrarOutfit",
+            "summary": "",
+            "url": "namespaces/default.html#function_borrarOutfit"
+        },                {
+            "fqsen": "\\modificarOutfit\u0028\u0029",
+            "name": "modificarOutfit",
+            "summary": "",
+            "url": "namespaces/default.html#function_modificarOutfit"
+        },                {
             "fqsen": "\\Conexion",
             "name": "Conexion",
             "summary": "Clase\u0020que\u0020establece\u0020conexion\u0020y\u0020ejecuta\u0020consultas\u0020sobre\u0020la\u0020BD",
@@ -136,10 +256,35 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Metodos.html#method_borrarUsuario"
         },                {
+            "fqsen": "\\Metodos\u003A\u003AcargarCategorias\u0028\u0029",
+            "name": "cargarCategorias",
+            "summary": "",
+            "url": "classes/Metodos.html#method_cargarCategorias"
+        },                {
+            "fqsen": "\\Metodos\u003A\u003AcargarCategoriasMisPrendas\u0028\u0029",
+            "name": "cargarCategoriasMisPrendas",
+            "summary": "",
+            "url": "classes/Metodos.html#method_cargarCategoriasMisPrendas"
+        },                {
+            "fqsen": "\\Metodos\u003A\u003AcargarSubcategorias\u0028\u0029",
+            "name": "cargarSubcategorias",
+            "summary": "",
+            "url": "classes/Metodos.html#method_cargarSubcategorias"
+        },                {
+            "fqsen": "\\Metodos\u003A\u003AcargarNombrePrendas\u0028\u0029",
+            "name": "cargarNombrePrendas",
+            "summary": "",
+            "url": "classes/Metodos.html#method_cargarNombrePrendas"
+        },                {
             "fqsen": "\\Metodos\u003A\u003AcargarMisPrendas\u0028\u0029",
             "name": "cargarMisPrendas",
             "summary": "",
             "url": "classes/Metodos.html#method_cargarMisPrendas"
+        },                {
+            "fqsen": "\\Metodos\u003A\u003AfiltrarPrendasPorCategoria\u0028\u0029",
+            "name": "filtrarPrendasPorCategoria",
+            "summary": "",
+            "url": "classes/Metodos.html#method_filtrarPrendasPorCategoria"
         },                {
             "fqsen": "\\Metodos\u003A\u003AinsertarPrendas\u0028\u0029",
             "name": "insertarPrendas",
@@ -151,25 +296,100 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Metodos.html#method_decofificacionImagenes"
         },                {
+            "fqsen": "\\Metodos\u003A\u003AmodificarPrenda\u0028\u0029",
+            "name": "modificarPrenda",
+            "summary": "",
+            "url": "classes/Metodos.html#method_modificarPrenda"
+        },                {
+            "fqsen": "\\Metodos\u003A\u003AborrarPrenda\u0028\u0029",
+            "name": "borrarPrenda",
+            "summary": "",
+            "url": "classes/Metodos.html#method_borrarPrenda"
+        },                {
+            "fqsen": "\\Metodos\u003A\u003AinsertarSubCategoria\u0028\u0029",
+            "name": "insertarSubCategoria",
+            "summary": "",
+            "url": "classes/Metodos.html#method_insertarSubCategoria"
+        },                {
+            "fqsen": "\\Metodos\u003A\u003AmodificarSubCategoria\u0028\u0029",
+            "name": "modificarSubCategoria",
+            "summary": "",
+            "url": "classes/Metodos.html#method_modificarSubCategoria"
+        },                {
+            "fqsen": "\\Metodos\u003A\u003AmodificarCambiarDeSubCategoria\u0028\u0029",
+            "name": "modificarCambiarDeSubCategoria",
+            "summary": "",
+            "url": "classes/Metodos.html#method_modificarCambiarDeSubCategoria"
+        },                {
+            "fqsen": "\\Metodos\u003A\u003AborrarSubCategoria\u0028\u0029",
+            "name": "borrarSubCategoria",
+            "summary": "",
+            "url": "classes/Metodos.html#method_borrarSubCategoria"
+        },                {
+            "fqsen": "\\Metodos\u003A\u003AcargarOutfits\u0028\u0029",
+            "name": "cargarOutfits",
+            "summary": "",
+            "url": "classes/Metodos.html#method_cargarOutfits"
+        },                {
+            "fqsen": "\\Metodos\u003A\u003AcargarPrendasCabeza\u0028\u0029",
+            "name": "cargarPrendasCabeza",
+            "summary": "",
+            "url": "classes/Metodos.html#method_cargarPrendasCabeza"
+        },                {
+            "fqsen": "\\Metodos\u003A\u003AcargarPrendasTorso\u0028\u0029",
+            "name": "cargarPrendasTorso",
+            "summary": "",
+            "url": "classes/Metodos.html#method_cargarPrendasTorso"
+        },                {
+            "fqsen": "\\Metodos\u003A\u003AcargarPrendasPiernas\u0028\u0029",
+            "name": "cargarPrendasPiernas",
+            "summary": "",
+            "url": "classes/Metodos.html#method_cargarPrendasPiernas"
+        },                {
+            "fqsen": "\\Metodos\u003A\u003AcargarPrendasPies\u0028\u0029",
+            "name": "cargarPrendasPies",
+            "summary": "",
+            "url": "classes/Metodos.html#method_cargarPrendasPies"
+        },                {
+            "fqsen": "\\Metodos\u003A\u003AcargarPrendasCabezaOutfit\u0028\u0029",
+            "name": "cargarPrendasCabezaOutfit",
+            "summary": "",
+            "url": "classes/Metodos.html#method_cargarPrendasCabezaOutfit"
+        },                {
+            "fqsen": "\\Metodos\u003A\u003AcargarPrendasTorsoOutfit\u0028\u0029",
+            "name": "cargarPrendasTorsoOutfit",
+            "summary": "",
+            "url": "classes/Metodos.html#method_cargarPrendasTorsoOutfit"
+        },                {
+            "fqsen": "\\Metodos\u003A\u003AcargarPrendasPiernasOutfit\u0028\u0029",
+            "name": "cargarPrendasPiernasOutfit",
+            "summary": "",
+            "url": "classes/Metodos.html#method_cargarPrendasPiernasOutfit"
+        },                {
+            "fqsen": "\\Metodos\u003A\u003AcargarPrendasPiesOutfit\u0028\u0029",
+            "name": "cargarPrendasPiesOutfit",
+            "summary": "",
+            "url": "classes/Metodos.html#method_cargarPrendasPiesOutfit"
+        },                {
+            "fqsen": "\\Metodos\u003A\u003AinsertamosOutfit\u0028\u0029",
+            "name": "insertamosOutfit",
+            "summary": "",
+            "url": "classes/Metodos.html#method_insertamosOutfit"
+        },                {
+            "fqsen": "\\Metodos\u003A\u003AborrarOutfit\u0028\u0029",
+            "name": "borrarOutfit",
+            "summary": "",
+            "url": "classes/Metodos.html#method_borrarOutfit"
+        },                {
+            "fqsen": "\\Metodos\u003A\u003AmodificarOutfit\u0028\u0029",
+            "name": "modificarOutfit",
+            "summary": "",
+            "url": "classes/Metodos.html#method_modificarOutfit"
+        },                {
             "fqsen": "\\Metodos\u003A\u003AsubidaControladaImagenes\u0028\u0029",
             "name": "subidaControladaImagenes",
             "summary": "",
             "url": "classes/Metodos.html#method_subidaControladaImagenes"
-        },                {
-            "fqsen": "\\Metodos\u003A\u003AcrearCarpetaPedido\u0028\u0029",
-            "name": "crearCarpetaPedido",
-            "summary": "",
-            "url": "classes/Metodos.html#method_crearCarpetaPedido"
-        },                {
-            "fqsen": "\\Metodos\u003A\u003AultimoPedido\u0028\u0029",
-            "name": "ultimoPedido",
-            "summary": "",
-            "url": "classes/Metodos.html#method_ultimoPedido"
-        },                {
-            "fqsen": "\\Metodos\u003A\u003AcrearPedido\u0028\u0029",
-            "name": "crearPedido",
-            "summary": "",
-            "url": "classes/Metodos.html#method_crearPedido"
         },                {
             "fqsen": "\\",
             "name": "\\",

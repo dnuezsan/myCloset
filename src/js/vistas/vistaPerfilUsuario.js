@@ -117,21 +117,6 @@ export class VistaPerfilUsuario {
 
     }
 
-
-    /* static modificacionUsuarioIntro() {
-        let inputs = document.querySelectorAll('#panelPerfilUsuario .section input')
-
-        for (let i = 0; i < inputs.length; i++) {
-            inputs[i].onkeydown = (evento) => {
-                if (evento.key === "Enter") {
-                    VistaPerfilUsuario.modificarUsuario()
-                }
-            }
-
-        }
-    } */
-
-
     /**
      *Muestra en pantalla los datos "nombre" y "correo" del usuario
      *
@@ -147,25 +132,6 @@ export class VistaPerfilUsuario {
         inputCorreo.value = datos.correo
 
     }
-
-
-    /* static borrarUsuario() {
-        let botonBorrar = document.getElementById('botonBorrarUsuario')
-        let botonCancelar = document.getElementById('botonCancelarBorrarUsuario')
-
-        botonBorrar.addEventListener('click', async () => {
-            let respuesta = await Controlador.borrarUsuario()
-
-            if (respuesta.success == true) {
-                VistaPerfilUsuario.borradoCuadroConfirmacion(respuesta.mensaje)
-
-            } else if (respuesta.success == false) {
-
-            }
-
-        }
-        )
-    } */
 
 
     /**
@@ -255,8 +221,14 @@ export class VistaPerfilUsuario {
         }
     }
 
+
+    /**
+     *Deja en blanco los valores del formulario
+     *
+     * @static
+     * @memberof VistaPerfilUsuario
+     */
     static limpiarFormulario(){
-        let nombre = document.getElementById('nombrePerfil')
         let contrasenia = document.getElementById('contraseniaPerfil')
         let contraseniaNueva = document.getElementById('contraseniaNuevaPerfil')
         let contraseniaRepetida = document.getElementById('contraseniaRepetidaPerfil')

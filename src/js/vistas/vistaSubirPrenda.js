@@ -124,7 +124,7 @@ export class VistaSubirPrenda {
     /**
      *Configura el canvas, dibuja una instantánea del vídeo en este y transmite el resultado al recortador tras apagar la cámara
      *
-     * @param {DOM element} video
+     * @param {Node} video
      * @param {stream} mediaStream
      * @memberof VistaSubirPrenda
      */
@@ -160,7 +160,7 @@ export class VistaSubirPrenda {
     /**
      *Oculta la etiqueta de video y llama al método que detiene el flujo de la cámara y de la etiqueta video
      *
-     * @param {DOM element} video
+     * @param {Node} video
      * @param {stream} mediaStream
      * @memberof VistaSubirPrenda
      */
@@ -176,7 +176,7 @@ export class VistaSubirPrenda {
     /**
      *Detiene el flujo de la etiqueta video y oculta la caja que contiene la etiqueta de video y sus botones
      *
-     * @param {DOM element} video
+     * @param {Node} video
      * @param {stream} mediaStream
      * @memberof VistaSubirPrenda
      */
@@ -479,6 +479,13 @@ export class VistaSubirPrenda {
     }
 
 
+    /**
+     *Genera y muestra un mensaje
+     *
+     * @static
+     * @param {String} mensaje
+     * @memberof VistaSubirPrenda
+     */
     static generarMensaje(mensaje) {
         let cuadroDialogo = document.querySelector('#cuadroDialogoSubirPrenda')
         let cuadroDialogoMensaje = document.querySelector('#cuadroDialogoSubirPrenda p')
@@ -486,6 +493,12 @@ export class VistaSubirPrenda {
         cuadroDialogoMensaje.innerHTML = mensaje
     }
 
+    /**
+     *Oculta un mensaje y deja su contenido vacío
+     *
+     * @static
+     * @memberof VistaSubirPrenda
+     */
     static ocultarMensaje() {
         let cuadroDialogo = document.querySelector('#cuadroDialogoSubirPrenda')
         let cuadroDialogoMensaje = document.querySelector('#cuadroDialogoSubirPrenda p')
@@ -493,6 +506,12 @@ export class VistaSubirPrenda {
         cuadroDialogoMensaje.innerHTML = ''
     }
 
+    /**
+     *Deja el contenido del formulario en blanco
+     *
+     * @static
+     * @memberof VistaSubirPrenda
+     */
     static limpiarFormulario() {
         let inputs = document.querySelectorAll('#panelSubirPrenda input')
         let selectores = document.querySelectorAll('#panelSubirPrenda select')
@@ -510,6 +529,12 @@ export class VistaSubirPrenda {
 
     }
 
+    /**
+     *Carga las categorías en los cmapos correspondiente y las subcategorías de las categorías elegidas de forma dinámica
+     *
+     * @static
+     * @memberof VistaSubirPrenda
+     */
     static async cargarCategoriasYSubcategorias() {
         let selectCategorias = document.getElementById('categoriaSubirPrendas')
         let selectSubcategorias = document.getElementById('subCategoriaSubirPrendas')
@@ -518,7 +543,7 @@ export class VistaSubirPrenda {
         
         /* Se generan las categorias en su select */
         for (let i = 0; i < categorias.length; i++) {
-            VistaSubirPrenda.cargaCategorias(categorias[i], selectCategorias)
+            VistaSubirPrenda.generarCategorias(categorias[i], selectCategorias)
         }
         /* Se generan las subcategorias correspondientes a la categoría elegida cada vez que esta cambia */
         selectCategorias.addEventListener('change', async () => {
@@ -542,7 +567,15 @@ export class VistaSubirPrenda {
         $('#categoriaSubirPrendas').formSelect()
     }
 
-    static cargaCategorias(datos, nodoPadre) {
+    /**
+     *Genera la opciones de las subcategorías y configura su valor y las introduce en el nodo indicado
+     *
+     * @static
+     * @param {JSON} datos
+     * @param {Node} nodoPadre
+     * @memberof VistaSubirPrenda
+     */
+    static generarCategorias(datos, nodoPadre) {
         let categoria = document.createElement('option')
 
         categoria.value = datos.idCategoria
@@ -551,6 +584,14 @@ export class VistaSubirPrenda {
         nodoPadre.appendChild(categoria)
     }
 
+    /**
+     *Genera la opciones de las subcategorías, configura su valor, clase y las introduce en el nodo indicado
+     *
+     * @static
+     * @param {JSON} datos
+     * @param {Node} nodoPadre
+     * @memberof VistaSubirPrenda
+     */
     static cargaSubCategorias(datos, nodoPadre) {
 
         let subCategoria = document.createElement('option')

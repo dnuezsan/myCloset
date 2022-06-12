@@ -118,7 +118,7 @@ export class VistaGestionarPrendas {
     /**
      *Configura el canvas, dibuja una instantánea del vídeo en este y transmite el resultado al recortador tras apagar la cámara
      *
-     * @param {DOM element} video
+     * @param {Node} video
      * @param {stream} mediaStream
      * @memberof VistaGestionarPrendas
      */
@@ -155,7 +155,7 @@ export class VistaGestionarPrendas {
     /**
      *Oculta la etiqueta de video y llama al método que detiene el flujo de la cámara y de la etiqueta video
      *
-     * @param {DOM element} video
+     * @param {Node} video
      * @param {stream} mediaStream
      * @memberof VistaGestionarPrendas
      */
@@ -172,7 +172,7 @@ export class VistaGestionarPrendas {
     /**
      *Detiene el flujo de la etiqueta video y oculta la caja que contiene la etiqueta de video y sus botones
      *
-     * @param {DOM element} video
+     * @param {Node} video
      * @param {stream} mediaStream
      * @memberof VistaGestionarPrendas
      */
@@ -438,6 +438,12 @@ export class VistaGestionarPrendas {
         iconos[3].style.display = 'block'
     }
 
+    /**
+     *Deja en blanco los valores del formulario
+     *
+     * @static
+     * @memberof VistaGestionarPrendas
+     */
     static limpiarFormulario() {
 
         let inputs = document.querySelectorAll('#panelGestionPrendas input')
@@ -456,6 +462,12 @@ export class VistaGestionarPrendas {
 
     }
 
+    /**
+     *Carga categorías, las subcategorias según las categorias, y las prendas según las subcategorías
+     *
+     * @static
+     * @memberof VistaGestionarPrendas
+     */
     static async cargarCategoriasYSubcategorias() {
         let selectCategorias = document.getElementById('categoriasGestionPrendas')
         let selectSubcategorias = document.getElementById('subCategoriasGestionPrendas')
@@ -554,6 +566,14 @@ export class VistaGestionarPrendas {
 
 
 
+    /**
+     *Genera las opciones de las categorías y configura su valor
+     *
+     * @static
+     * @param {JSON} datos
+     * @param {Node} nodoPadre
+     * @memberof VistaGestionarPrendas
+     */
     static cargaCategorias(datos, nodoPadre) {
         let categoria = document.createElement('option')
 
@@ -563,6 +583,14 @@ export class VistaGestionarPrendas {
         nodoPadre.appendChild(categoria)
     }
 
+    /**
+     *Genera las opciones de las subcategorías y configura su valor y clase
+     *
+     * @static
+     * @param {JSON} datos
+     * @param {Node} nodoPadre
+     * @memberof VistaGestionarPrendas
+     */
     static cargaSubCategorias(datos, nodoPadre) {
 
         let subCategoria = document.createElement('option')
@@ -574,6 +602,14 @@ export class VistaGestionarPrendas {
         nodoPadre.appendChild(subCategoria)
     }
 
+    /**
+     *Genera las opciones de las prendas y configura su valor
+     *
+     * @static
+     * @param {*} datos
+     * @param {*} nodoPadre
+     * @memberof VistaGestionarPrendas
+     */
     static cargaNombresPrendas(datos, nodoPadre) {
         let prenda = document.createElement('option')
         prenda.value = datos.idPrenda
@@ -581,6 +617,20 @@ export class VistaGestionarPrendas {
         nodoPadre.appendChild(prenda)
     }
 
+    /**
+     *Carga los datos en el formulario de la prenda recibida al carga el panel con la actualización del istado de prendas
+     *
+     * @static
+     * @param {int} idPrenda
+     * @param {String} nombrePrenda
+     * @param {String} tallaPrenda
+     * @param {String} descripcionPrenda
+     * @param {int} idCategoria
+     * @param {String} nombreCategoria
+     * @param {int} idSubcategoria
+     * @param {String} subcategoriaPrenda
+     * @memberof VistaGestionarPrendas
+     */
     static async precargaDatos(idPrenda, nombrePrenda, tallaPrenda, descripcionPrenda, idCategoria, nombreCategoria, idSubcategoria, subcategoriaPrenda) {
         await VistaGestionarPrendas.precargaCategoria(idCategoria)
         await VistaGestionarPrendas.precargaSubcategoria(idSubcategoria, subcategoriaPrenda)
@@ -588,6 +638,13 @@ export class VistaGestionarPrendas {
         await VistaGestionarPrendas.precargaImagen(idPrenda)
     }
 
+    /**
+     *Carga la categoria del id recibido en el input correspondiente
+     *
+     * @static
+     * @param {int} idCategoria
+     * @memberof VistaGestionarPrendas
+     */
     static precargaCategoria(idCategoria) {
         let opcionSelectCategoriaModificable = document.getElementById('categoriaPrendaGestionPrendas').children
         let selectCategoriaModificable = document.getElementById('categoriaPrendaGestionPrendas')
@@ -603,6 +660,14 @@ export class VistaGestionarPrendas {
         }
     }
 
+    /**
+     *Carga la subcategoria del id y nombre recibido en el input correspondiente
+     *
+     * @static
+     * @param {int} idSubcategoria
+     * @param {String} nombreSubcategoria
+     * @memberof VistaGestionarPrendas
+     */
     static precargaSubcategoria(idSubcategoria, nombreSubcategoria) {
 
         let selectSubcategoriaModificable = document.getElementById('subCategoriasPrendaGestionPrendas')
@@ -615,6 +680,14 @@ export class VistaGestionarPrendas {
         $("#subCategoriasPrendaGestionPrendas").formSelect()
     }
 
+    /**
+     *Carga el nombre de la prenda del id y nombre recibido en el input correspondiente
+     *
+     * @static
+     * @param {int} idPrenda
+     * @param {String} nombrePrenda
+     * @memberof VistaGestionarPrendas
+     */
     static precargaNombrePrenda(idPrenda, nombrePrenda) {
         let selectNombrePrenda = document.getElementById('nombrePrendaGestionPrendas')
         let opcionSubcategoria = document.createElement("option")
@@ -640,6 +713,13 @@ export class VistaGestionarPrendas {
         }
     }
 
+    /**
+     *Muestra el cuadro de diálogo para confirmar el borrado y envía los datos al controlador
+     *
+     * @static
+     * @param {int} idPrenda
+     * @memberof VistaGestionarPrendas
+     */
     static confirmarBorrado(idPrenda) {
 
         let mensajeGeneral = document.getElementById('cambioGestionPrendas')
@@ -673,6 +753,12 @@ export class VistaGestionarPrendas {
 
     }
 
+    /**
+     *Envía los datos al controlador para modificar una prenda
+     *
+     * @static
+     * @memberof VistaGestionarPrendas
+     */
     static modificarPrenda() {
         let categoriaPrendaOriginal = document.getElementById('categoriaPrendaGestionPrendas')
         let subcategoriaPrendaOriginal = document.getElementById('subCategoriasPrendaGestionPrendas')
@@ -722,6 +808,13 @@ export class VistaGestionarPrendas {
 
     }
 
+    /**
+     *Envía los datos necesarios al controlador para borrar la prenda
+     *
+     * @static
+     * @param {int} idPrenda
+     * @memberof VistaGestionarPrendas
+     */
     static async borrarPrenda(idPrenda) {
 
         let datos = await Controlador.borrarPrenda(idPrenda)
@@ -733,12 +826,24 @@ export class VistaGestionarPrendas {
         }
     }
 
+    /**
+     *Muestra el cuadro de diálogo
+     *
+     * @static
+     * @memberof VistaGestionarPrendas
+     */
     static mostrarCuadroDialogo() {
         let cuadroMensaje = document.getElementById('cuadroDialogoGestionPrendas')
         cuadroMensaje.style.display = "block"
 
     }
 
+    /**
+     *Oculta el cuadro de diálogo y vacía sus mensajes
+     *
+     * @static
+     * @memberof VistaGestionarPrendas
+     */
     static ocultarCuadroDialogo() {
         let cuadroMensaje = document.getElementById('cuadroDialogoGestionPrendas')
         let mensajeGeneral = document.getElementById('cambioGestionPrendas')
@@ -751,6 +856,13 @@ export class VistaGestionarPrendas {
         fragmentoBorrado.style.display = "block"
     }
 
+    /**
+     *Método que extrae los datos de la prenda del id recibido
+     *
+     * @static
+     * @param {*} idPrenda
+     * @memberof VistaGestionarPrendas
+     */
     static async extraerDatosPrendaPorId(idPrenda) {
         let subcategoriaPrendaOriginal = document.getElementById('subCategoriasPrendaGestionPrendas')
         let prendas = await Controlador.cargarDatosPrendas(subcategoriaPrendaOriginal.value)

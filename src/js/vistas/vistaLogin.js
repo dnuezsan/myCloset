@@ -172,6 +172,12 @@ export class VistaLogin {
     }
 
     
+    /**
+     *Deja en blanco el valor de los inputs
+     *
+     * @static
+     * @memberof VistaLogin
+     */
     static limpiarInputs(){
         let inputs = document.querySelectorAll('#panelLogin input')
 
@@ -181,7 +187,4 @@ export class VistaLogin {
         })  
     }
 
-    saludo(){
-        console.log('hola mundo');
-    }
 }
