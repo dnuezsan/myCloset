@@ -1148,7 +1148,7 @@ class Metodos
         }
         $consultaRelacionOutfit = "UPDATE `relprendaoutfit` SET `idPrenda`= $idPrendaNueva WHERE idOutfit = $idOutfit and idPrenda = $idPrenda ";
         $consulta = "UPDATE `outfit` SET `nombreOutfit`= '$nombreOutfit' WHERE idOutfit = $idOutfit";
-        echo 1;
+        
         if (!$this->conexion->consultas($consultaRelacionOutfit)) {
             return  false;
         } else if (!$this->conexion->consultas($consulta)) {

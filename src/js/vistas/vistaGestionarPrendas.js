@@ -508,7 +508,7 @@ export class VistaGestionarPrendas {
         })
 
         selectSubcategoriaModificable.addEventListener('change', async () => {
-            let prendas = await Controlador.cargarNombresPrendas(selectSubcategoriaModificable.value)
+            let prendas = await Controlador.cargarDatosPrendas(selectSubcategoriaModificable.value)
             if (selectNombrePrendaModificable.childElementCount > 1) {
                 while (selectNombrePrendaModificable.children.length > 1) {
                     selectNombrePrendaModificable.removeChild(selectNombrePrendaModificable.children[1])
@@ -753,7 +753,7 @@ export class VistaGestionarPrendas {
 
     static async extraerDatosPrendaPorId(idPrenda) {
         let subcategoriaPrendaOriginal = document.getElementById('subCategoriasPrendaGestionPrendas')
-        let prendas = await Controlador.cargarNombresPrendas(subcategoriaPrendaOriginal.value)
+        let prendas = await Controlador.cargarDatosPrendas(subcategoriaPrendaOriginal.value)
 
         prendas.forEach(prenda => {
             if (prenda.idPrenda == idPrenda) {

@@ -207,7 +207,7 @@ export class Prendas {
         return datosJson
     }
 
-    static async cargarNombresPrendas(subcategoria) {
+    static async cargarDatosPrendas(subcategoria) {
         let cargarCategoria = 'cargarNombresPrendas'
         let datos = await $.ajax(
             {
