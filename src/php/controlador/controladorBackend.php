@@ -321,7 +321,10 @@ switch ($_POST['propiedad']) {
         echo json_encode($response);
     }
 
-
+/**
+ * Carga de Categorias
+ * @return void
+ */
     function cargarCategoria()
     {
         $metodo = new Metodos();
@@ -330,6 +333,10 @@ switch ($_POST['propiedad']) {
         echo json_encode($metodo->cargarCategorias());
     }
 
+/**
+ * Carga de mis prendas
+ * @return void
+ */
     function cargarCategoriaMisPrendas()
     {
         $metodo = new Metodos();
@@ -337,6 +344,12 @@ switch ($_POST['propiedad']) {
         echo json_encode($metodo->cargarCategoriasMisPrendas());
     }
 
+/**
+ * @param $categoria
+ * @param $usuario
+ * Carga de SubCategorias
+ * @return void
+ */
     function cargarSubCategoria($categoria, $usuario)
     {
         $metodo = new Metodos();
@@ -345,6 +358,13 @@ switch ($_POST['propiedad']) {
 
         echo json_encode($metodo->cargarSubcategorias($categoria, $usuario));
     }
+
+/**
+ * @param $usuario
+ * @param $subcategoria
+ * Carga de nombre de las prendas
+ * @return void
+ */
     function cargarNombresPrendas($usuario, $subcategoria)
     {
 
@@ -353,6 +373,11 @@ switch ($_POST['propiedad']) {
         echo json_encode($metodo->cargarNombrePrendas($usuario, $subcategoria));
     }
 
+/**
+ * @param $usuario
+ * Carga de las prendas del usuario
+ * @return void
+ */
     function cargarMisPrenda($usuario)
     {
         $metodo = new Metodos();
@@ -360,6 +385,12 @@ switch ($_POST['propiedad']) {
         echo json_encode($metodo->cargarMisPrendas($usuario));
     }
 
+/**
+ * @param $usuario
+ * @param $categoria
+ * Fitro de las prendas por Categorias
+ * @return void
+ */
     function filtrarPrendasPorCategoria($usuario, $categoria)
     {
         $metodo = new Metodos();
@@ -367,6 +398,16 @@ switch ($_POST['propiedad']) {
         echo json_encode($metodo->filtrarPrendasPorCategoria($usuario, $categoria));
     }
 
+/**
+ * @param $descripcion
+ * @param $talla
+ * @param $idSubcategoria
+ * @param $nombrePrenda
+ * @param $usuario
+ * @param $idPrenda
+ * Modificamos las Prendas del usuario
+ * @return void
+ */
     function modificarPrenda($descripcion, $talla, $idSubcategoria, $nombrePrenda, $usuario, $idPrenda)
     {
         $metodo = new Metodos();
@@ -383,12 +424,25 @@ switch ($_POST['propiedad']) {
 
         echo json_encode($response);
     }
+
+/**
+ * @param $idPrenda
+ * Borrado de la prenda
+ * @return void
+ */
     function borrarPrenda($idPrenda)
     {
         $metodo = new Metodos();
         echo json_encode($metodo->borrarPrenda($idPrenda));
     }
 
+/**
+ * @param $nombreCategoria
+ * @param $idCategoria
+ * @param $usuario
+ * Insertamos las nuevas SubCategorias
+ * @return void
+ */
     function insertarSubcategoria($nombreCategoria, $idCategoria, $usuario){
         $metodo = new Metodos();
         $response = array('success' => false, 'mensaje' => "", 'correo' => "");
@@ -405,6 +459,13 @@ switch ($_POST['propiedad']) {
         echo json_encode($response);
     }
 
+/**
+ * @param $nombreSubCategoria
+ * @param $idCategoria
+ * @param $idSubcategoria
+ * Modificamos las subCategorias del usuario
+ * @return void
+ */
     function modificarSubCategoria($nombreSubCategoria, $idCategoria, $idSubcategoria){
         $metodo = new Metodos();
         $response = array('success' => false, 'mensaje' => "", 'correo' => "");
@@ -421,6 +482,12 @@ switch ($_POST['propiedad']) {
         echo json_encode($response);
     }
 
+/**
+ * @param $idCategoria
+ * @param $idSubcategoria
+ * Modificamos las subcategorias de la Categoria que pertenece
+ * @return void
+ */
     function modificarCambiarSubcategoria($idCategoria, $idSubcategoria){
 
         $metodo = new Metodos();
@@ -438,6 +505,11 @@ switch ($_POST['propiedad']) {
         echo json_encode($response);
     }
 
+/**
+ * @param $idSubCategoria
+ * Borrado de las subcategoria
+ * @return void
+ */
     //Borramos las subucategorias
     function borrarSubCategoria($idSubCategoria){
         $metodo = new Metodos();
@@ -455,6 +527,11 @@ switch ($_POST['propiedad']) {
         echo json_encode($response);
     }
 
+/**
+ * @param $usuario
+ * Carga de los Outfit
+ * @return void
+ */
     function cargarOutfits($usuario)
     {
         $metodo = new Metodos();
@@ -462,6 +539,11 @@ switch ($_POST['propiedad']) {
         echo json_encode($metodo->cargarOutfits($usuario));
     }
 
+/**
+ * @param $usuario
+ * Cargamoas las prendas de la Cabeza
+ * @return void
+ */
     function cargarPrendasCabeza($usuario)
     {
         $metodo = new Metodos();
@@ -469,6 +551,11 @@ switch ($_POST['propiedad']) {
         echo json_encode($metodo->cargarPrendasCabeza($usuario));
     }
 
+/**
+ * @param $usuario
+ * Cargamoas las prendas de la Torso
+ * @return void
+ */
     function cargarPrendasTorso($usuario)
     {
         $metodo = new Metodos();
@@ -476,6 +563,11 @@ switch ($_POST['propiedad']) {
         echo json_encode($metodo->cargarPrendasTorso($usuario));
     }
 
+/**
+ * @param $usuario
+ * Cargamoas las prendas de la Piernas
+ * @return void
+ */
     function cargarPrendasPiernas($usuario)
     {
         $metodo = new Metodos();
@@ -483,6 +575,11 @@ switch ($_POST['propiedad']) {
         echo json_encode($metodo->cargarPrendasPiernas($usuario));
     }
 
+/**
+ * @param $usuario
+ * Cargamoas las prendas de la Pies
+ * @return void
+ */
     function cargarPrendasPies($usuario)
     {
         $metodo = new Metodos();
@@ -490,6 +587,12 @@ switch ($_POST['propiedad']) {
         echo json_encode($metodo->cargarPrendasPies($usuario));
     }
 
+/**
+ * @param $usuario
+ * @param $idOutfit
+ * Cargamos las prendas de Cabeza en los Outfit
+ * @return void
+ */
     function cargarPrendasCabezaOutfit($usuario, $idOutfit){
 
         $metodo = new Metodos();
@@ -497,6 +600,13 @@ switch ($_POST['propiedad']) {
         echo json_encode($metodo->cargarPrendasCabezaOutfit($usuario, $idOutfit));
     }
 
+/**
+ * @param $usuario
+ * @param $idOutfit
+ * Cargamos las prendas de Torso en los Outfit
+ * @return void
+ *
+ */
     function cargarPrendasTorsoOutfit($usuario, $idOutfit){
 
         $metodo = new Metodos();
@@ -504,6 +614,12 @@ switch ($_POST['propiedad']) {
         echo json_encode($metodo->cargarPrendasTorsoOutfit($usuario, $idOutfit));
     }
 
+/**
+ * @param $usuario
+ * @param $idOutfit
+ * Cargamos las prendas de Piernas en los Outfit
+ * @return void
+ */
     function cargarPrendasPiernasOutfit($usuario, $idOutfit){
 
         $metodo = new Metodos();
@@ -511,12 +627,27 @@ switch ($_POST['propiedad']) {
         echo json_encode($metodo->cargarPrendasPiernasOutfit($usuario, $idOutfit));
     }
 
+/**
+ * @param $usuario
+ * @param $idOutfit
+ * Cargamos las prendas de Pies en los Outfit
+ * @return void
+ */
     function cargarPrendasPiesOutfit($usuario, $idOutfit){
 
         $metodo = new Metodos();
 
         echo json_encode($metodo->cargarPrendasPiesOutfit($usuario, $idOutfit));
     }
+
+/***
+ * @param $usuario
+ * @param $nombreOutfit
+ * @param $fechaCreacion
+ * @param $idPrenda
+ * Insertamos los Outfit
+ * @return void
+ */
     function insertarOutfit($usuario,$nombreOutfit, $fechaCreacion, $idPrenda){
         $metodo = new Metodos();
         $response = array('success' => false, 'mensaje' => "", 'correo' => "");
@@ -533,6 +664,11 @@ switch ($_POST['propiedad']) {
         echo json_encode($response);
     }
 
+/**
+ * @param $idOutfit
+ * Borramos los Outfit
+ * @return void
+ */
     function borrarOutfit($idOutfit){
         $metodo = new Metodos();
         $response = array('success' => false, 'mensaje' => "", 'correo' => "");
@@ -548,6 +684,15 @@ switch ($_POST['propiedad']) {
         }
         echo json_encode($response);
     }
+
+/**
+ * @param $idPrenda
+ * @param $idPrendaNueva
+ * @param $idOutfit
+ * @param $nombreOutfit
+ * Modificamos los outfit del Usuario
+ * @return void
+ */
     function modificarOutfit($idPrenda, $idPrendaNueva, $idOutfit, $nombreOutfit){
         $metodo = new Metodos();
         $response = array('success' => false, 'mensaje' => "", 'correo' => "");
