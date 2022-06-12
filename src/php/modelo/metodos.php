@@ -1278,26 +1278,26 @@ class Metodos
      * @return bool|void
      */
     function modificarOutfit($idPrenda, $idPrendaNueva, $idOutfit, $nombreOutfit){
+
         if ($idPrendaNueva == '') {
             $idPrendaNueva = "null";
         }
         if ($idPrenda == '') {
             $idPrenda = 'null';
         }
+
         $consultaRelacionOutfit = "UPDATE `relprendaoutfit` SET `idPrenda`= $idPrendaNueva WHERE idOutfit = $idOutfit and idPrenda = $idPrenda ";
         $consulta = "UPDATE `outfit` SET `nombreOutfit`= '$nombreOutfit' WHERE idOutfit = $idOutfit";
-
         if (!$this->conexion->consultas($consultaRelacionOutfit)) {
             return false;
         } elseif ($this->conexion->filasAfectadas() == 0) {
-            if ($idPrendaNueva == '') {
-                $consultaDelete = "Delete from prenda where idPrenda = $idPrenda";
+            if ($idPrendaNueva == 'null') {
+                $consultaDelete = "DELETE FROM relprendaoutfit WHERE idPrenda = 0";
                 if (!$this->conexion->consultas($consultaDelete)) {
                     return false;
-                } else {
-                    return true;
                 }
-            } elseif ($idPrendaNueva == '' && $idPrenda == '') {
+            }
+                elseif ($idPrendaNueva != 'null' && $idPrenda == 'null') {
                 $consultaRelacion = "INSERT INTO `relprendaoutfit`(`idOutfit`, `idPrenda`) VALUES (?,?)";
                 if ($sentencia = $this->conexion->mysqli->prepare($consultaRelacion)) {
 
