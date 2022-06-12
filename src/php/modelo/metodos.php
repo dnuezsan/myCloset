@@ -65,15 +65,15 @@ class Metodos
 
         //Preparamos con preparae
         if (!$sentencia = $this->conexion->mysqli->prepare($consulta)) {
-            echo "La consulta fallo en su preparacion";
+           // echo "La consulta fallo en su preparacion";
         }
         //Pasamos los parametros y el tipo de dato
         if (!$sentencia->bind_param("s", $correo)) {
-            echo "Fallo en la vinculacion de parametros";
+           // echo "Fallo en la vinculacion de parametros";
         }
         //Ejecutamos con execute
         if (!$sentencia->execute()) {
-            echo "Algo fallo en la ejecucion";
+            //echo "Algo fallo en la ejecucion";
         }
         // Vemos lo que nos devuelve con get_result
         $resultado = $sentencia->get_result();
@@ -226,7 +226,11 @@ class Metodos
             return true;
         }
     }
-
+    /**
+     *
+     * Busca todas las Categorias para cargarlas en un array y enviarlas
+     * @return array
+     */
     function cargarCategorias()
     {
         $consulta = "SELECT idCategoria, nombreCategoria FROM `categoria` WHERE 1";
@@ -243,7 +247,11 @@ class Metodos
         }
         return $arrayAsociativo;
     }
+    /**
 
+     * Buscamos Mis prendas para poder cargarlas y guardarlas en un array desde la BD
+     * @return Array
+     */
     function cargarCategoriasMisPrendas()
     {
         $consulta = "SELECT idCategoria, nombreCategoria FROM `categoria` WHERE 1";
@@ -261,7 +269,12 @@ class Metodos
         return $arrayAsociativo;
     }
 
-
+    /**
+     * @param $categoria
+     * @param $usuario
+     * Este metodo se encarga de coger las subcategorias de cada Categoria para cargalas
+     * @return array
+     */
     //Cogemos las subcategorias de cada Categoria
     function cargarSubcategorias($categoria, $usuario)
     {
@@ -291,6 +304,12 @@ class Metodos
         return $arraySubcategorias;
     }
 
+    /**
+     * @param $usuario
+     * @param $subcategoria
+     * Aqui solo cogemos los nombre de las prendas para cargarlas desde la BD
+     * @return array
+     */
     function cargarNombrePrendas($usuario, $subcategoria)
     {
         $consultaUsurio = "SELECT idUsuario FROM usuario WHERE correo = '$usuario'";
@@ -321,7 +340,11 @@ class Metodos
 
         return $arraySubcategorias;
     }
-
+    /**
+     * @param $usuario
+     * Aqui cargamos todas las prendas para mostralas en el listado
+     * @return array
+     */
     //Cargamos las Prendas del usuaario
     function cargarMisPrendas($usuario)
     {
@@ -359,7 +382,13 @@ class Metodos
         }
         return $arrayAsociativo;
     }
-
+    /**
+     * @param $usuario
+     * @param $categoria
+     * Aqui fitrasmos las prendas por las categorias para cargalas en el usuario
+     * @return array
+     */
+    //filtramos todas las prendass por su categoria para cada usuario
     function filtrarPrendasPorCategoria($usuario, $categoria)
     {
         $consultaUsurio = "SELECT idUsuario FROM usuario WHERE correo = '$usuario'";
@@ -466,6 +495,16 @@ class Metodos
         return true;
     }
 
+    /**
+     * @param $descripcion
+     * @param $talla
+     * @param $idSubcategoria
+     * @param $nombrePrenda
+     * @param $usuario
+     * @param $idPrenda
+     * Modificamos los datos de las prendas y los guardamos en las BD
+     * @return bool
+     */
     function modificarPrenda($descripcion, $talla, $idSubcategoria, $nombrePrenda, $usuario, $idPrenda)
     {
         $consultaUsuario = "SELECT idUsuario FROM usuario WHERE correo = '$usuario'";
@@ -495,6 +534,11 @@ class Metodos
             return true;
         }
     }
+    /**
+     * @param $idPrenda
+     * Seleciomos la prenda y la borramos y mostramos los mensajes.
+     * @return array|false
+     */
     //borramos las prendas
     function borrarPrenda($idPrenda)
     {
@@ -534,6 +578,13 @@ class Metodos
             return $respuesta;
         }
     }
+    /**
+     * @param $nombreSubCategoria
+     * @param $idCategoria
+     * @param $usuario
+     * Insertamos las SubCategorias y las guardamos en las BD
+     * @return bool|void
+     */
     //insertamos las SubCategorias en casda usuario correspondiente
     function insertarSubCategoria($nombreSubCategoria, $idCategoria, $usuario)
     {
@@ -565,6 +616,13 @@ class Metodos
             return true;
         }
     }
+    /**
+     * @param $nombreSubCategoria
+     * @param $idCategoria
+     * @param $idSubcategoria
+     * Modificamos las subcategorias del usuario
+     * @return bool
+     */
     //Modificamos la subCategoria cambiando el nombre y la categoria que pertenece
     function modificarSubCategoria($nombreSubCategoria, $idCategoria, $idSubcategoria)
     {
@@ -592,6 +650,12 @@ class Metodos
         }
     }
 
+    /**
+     * @param $idCategoria
+     * @param $idSubcategoria
+     * Modificamos unas subCategoria de Categoria
+     * @return bool
+     */
     function modificarCambiarDeSubCategoria($idCategoria, $idSubcategoria)
     {
         $consulta = "UPDATE `subcategoria` SET `idCategoria`=? WHERE idSubcategoria = ?";
@@ -617,6 +681,11 @@ class Metodos
             return true;
         }
     }
+    /**
+     * @param $idSubCategoria
+     * borramos las subCategorias Creadas por el usuario
+     * @return bool|void
+     */
     //Borramos las subCategorias creadas por el usuario.
     function borrarSubCategoria($idSubCategoria)
     {
@@ -659,6 +728,11 @@ class Metodos
         }
     }
 
+    /**
+     * @param $usuario
+     * Cargamos todos los Outfit para enviarlos al listado
+     * @return array|false
+     */
     function cargarOutfits($usuario)
     {
 
@@ -692,6 +766,11 @@ class Metodos
         return $arrayAsociativo;
     }
 
+    /**
+     * @param $usuario
+     * Cargamos solo las prendas de Cabeza
+     * @return array|false
+     */
     function cargarPrendasCabeza($usuario)
     {
         $consulta = "SELECT idUsuario FROM usuario WHERE nombre = '$usuario'";
@@ -730,7 +809,11 @@ class Metodos
         return $arrayAsociativo;
     }
 
-
+    /**
+     * @param $usuario
+     * Cargamos solo las prendas de Torso
+     * @return array|false
+     */
     function cargarPrendasTorso($usuario)
     {
         $consulta = "SELECT idUsuario FROM usuario WHERE nombre = '$usuario'";
@@ -769,6 +852,11 @@ class Metodos
         return $arrayAsociativo;
     }
 
+    /**
+     * @param $usuario
+     * Cargamos solo las prendas de Piernas
+     * @return array|false
+     */
     function cargarPrendasPiernas($usuario)
     {
         $consulta = "SELECT idUsuario FROM usuario WHERE nombre = '$usuario'";
@@ -807,6 +895,11 @@ class Metodos
         return $arrayAsociativo;
     }
 
+    /**
+     * @param $usuario
+     * Cargamos solo las prendas de Pies
+     * @return array|false
+     */
     function cargarPrendasPies($usuario)
     {
         $consulta = "SELECT idUsuario FROM usuario WHERE nombre = '$usuario'";
@@ -845,6 +938,12 @@ class Metodos
         return $arrayAsociativo;
     }
 
+    /**
+     * @param $usuario
+     * @param $idOutfit
+     * Cargamos las prendas en los outfit de las categoria Cabeza
+     * @return array|false|string[][]
+     */
     function cargarPrendasCabezaOutfit($usuario, $idOutfit)
     {
         $consulta = "SELECT idUsuario FROM usuario WHERE nombre = '$usuario'";
@@ -896,6 +995,12 @@ class Metodos
         return $arrayAsociativo;
     }
 
+    /**
+     * @param $usuario
+     * @param $idOutfit
+     * Cargamos las prendas en los outfit de las categoria Torso
+     * @return array|false|string[][]
+     */
     function cargarPrendasTorsoOutfit($usuario, $idOutfit)
     {
         $consulta = "SELECT idUsuario FROM usuario WHERE nombre = '$usuario'";
@@ -947,6 +1052,12 @@ class Metodos
         return $arrayAsociativo;
     }
 
+    /**
+     * @param $usuario
+     * @param $idOutfit
+     * Cargamos las prendas en los outfit de las categoria Piernas
+     * @return array|false|string[][]
+     */
     function cargarPrendasPiernasOutfit($usuario, $idOutfit)
     {
         $consulta = "SELECT idUsuario FROM usuario WHERE nombre = '$usuario'";
@@ -998,6 +1109,12 @@ class Metodos
         return $arrayAsociativo;
     }
 
+    /**
+     * @param $usuario
+     * @param $idOutfit
+     * Cargamos las prendas en los outfit de las categoria Pies
+     * @return array|false|string[][]
+     */
     function cargarPrendasPiesOutfit($usuario, $idOutfit)
     {
         $consulta = "SELECT idUsuario FROM usuario WHERE nombre = '$usuario'";
@@ -1052,6 +1169,14 @@ class Metodos
         return $arrayAsociativo;
     }
 
+    /**
+     * @param $usuario
+     * @param $nombreOutfit
+     * @param $fechaCreacion
+     * @param $idPrenda
+     * Guardamos el outfit que se ha generado en la base de datos
+     * @return bool|void
+     */
     function insertamosOutfit($usuario, $nombreOutfit, $fechaCreacion, $idPrenda)
     {
         $consulta = "INSERT INTO `outfit`( `idUsuario`, `nombreOutfit`, `fechaCreacion`) VALUES (?,?,?)";
@@ -1100,6 +1225,11 @@ class Metodos
         }
     }
 
+    /**
+     * @param $idOutfit
+     * Borramos el outfit que nos pasan de la BD
+     * @return bool|void
+     */
     function borrarOutfit($idOutfit)
     {
         $consultaRelacion = "DELETE FROM relprendaoutfit WHERE idOutfit=?";
@@ -1138,6 +1268,15 @@ class Metodos
             }
         }
     }
+
+    /**
+     * @param $idPrenda
+     * @param $idPrendaNueva
+     * @param $idOutfit
+     * @param $nombreOutfit
+     * Modifica los Outfit del usuario ya creados en la BD
+     * @return bool|void
+     */
     function modificarOutfit($idPrenda, $idPrendaNueva, $idOutfit, $nombreOutfit){
         if ($idPrendaNueva == '') {
             $idPrendaNueva = "null";
@@ -1185,52 +1324,5 @@ class Metodos
         }
     }
 
-    //Subimos las imagenes y pasamos el parametro Carpeta Destino que es donde se guardadn las imagenes del pedido,
-    /*
-     * @param mixed $carpetaDestino
-     * Procesa y guarda un conjunto de imágenes
-     * @return mixed
-     */
-    function subidaControladaImagenes($carpetaDestino)
-    {
-        if (isset($_FILES['imagenes'])) {
 
-
-            foreach ($_FILES["imagenes"]['tmp_name'] as $key => $tmp_name) {
-                //Si el archivo contiene algo y es diferente de vacio
-                if ($_FILES['imagenes']['name'][$key]) {
-                    $archivo = $_FILES['imagenes']['name'][$key];
-                    //Obtenemos algunos datos necesarios sobre el archivo
-                    $tipo = $_FILES['imagenes']['type'][$key];
-                    $tamano = $_FILES['imagenes']['size'][$key];
-                    $temp = $_FILES['imagenes']['tmp_name'][$key];
-                    //Se comprueba si el archivo a cargar es correcto observando su extensión y tamaño
-
-                    if (!((strpos($tipo, "gif") || strpos($tipo, "jpeg") || strpos($tipo, "jpg") || strpos($tipo, "png")) && ($tamano < 2000000))) {
-                        echo '<div><b>Error. La extensión o el tamaño de los archivos no es correcta.<br/>
-        - Se permiten archivos .gif, .jpg, .png. y de 200 kb como máximo.</b></div>';
-                    } else {
-                        //Abrimos la carpeta
-                        $dir = opendir($carpetaDestino);
-                        //Si la imagen es correcta en tamaño y tipo
-                        //Se intenta subir al servidor
-                        if (move_uploaded_file($temp, $carpetaDestino . "/" . $archivo)) {
-                            //Cambiamos los permisos del archivo a 777 para poder modificarlo posteriormente
-                            //chmod('images/'.$archivo, 0777);
-                            //Mostramos el mensaje de que se ha subido co éxito
-                            echo '<p>Se ha subido correctamente la imagen.</p>';
-                            //Mostramos la imagen subida
-                            echo '<div id="imagenesSubidas" style="width: 500px;"><img src="' . $carpetaDestino . '/' . $archivo . '"></div>';
-                        } else {
-                            //Si no se ha podido subir la imagen, mostramos un mensaje de error
-                            echo '<div><b>Ocurrió algún error al subir el fichero. No pudo guardarse.</b></div>';
-                        }
-                        //cerrramos el fichero
-                        closedir($dir);
-                    }
-                }
-            }
-            echo "<a class='subir' href='home.php'>Terminar Pedido</a>";
-        }
-    }
 }
