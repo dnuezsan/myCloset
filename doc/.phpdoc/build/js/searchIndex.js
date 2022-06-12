@@ -33,12 +33,12 @@ Search.appendIndex(
         },                {
             "fqsen": "\\cargarCategoria\u0028\u0029",
             "name": "cargarCategoria",
-            "summary": "",
+            "summary": "Carga\u0020de\u0020Categorias",
             "url": "namespaces/default.html#function_cargarCategoria"
         },                {
             "fqsen": "\\cargarCategoriaMisPrendas\u0028\u0029",
             "name": "cargarCategoriaMisPrendas",
-            "summary": "",
+            "summary": "Carga\u0020de\u0020mis\u0020prendas",
             "url": "namespaces/default.html#function_cargarCategoriaMisPrendas"
         },                {
             "fqsen": "\\cargarSubCategoria\u0028\u0029",
@@ -258,12 +258,12 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Metodos\u003A\u003AcargarCategorias\u0028\u0029",
             "name": "cargarCategorias",
-            "summary": "",
+            "summary": "Busca\u0020todas\u0020las\u0020Categorias\u0020para\u0020cargarlas\u0020en\u0020un\u0020array\u0020y\u0020enviarlas",
             "url": "classes/Metodos.html#method_cargarCategorias"
         },                {
             "fqsen": "\\Metodos\u003A\u003AcargarCategoriasMisPrendas\u0028\u0029",
             "name": "cargarCategoriasMisPrendas",
-            "summary": "",
+            "summary": "Buscamos\u0020Mis\u0020prendas\u0020para\u0020poder\u0020cargarlas\u0020y\u0020guardarlas\u0020en\u0020un\u0020array\u0020desde\u0020la\u0020BD",
             "url": "classes/Metodos.html#method_cargarCategoriasMisPrendas"
         },                {
             "fqsen": "\\Metodos\u003A\u003AcargarSubcategorias\u0028\u0029",
@@ -385,11 +385,6 @@ Search.appendIndex(
             "name": "modificarOutfit",
             "summary": "",
             "url": "classes/Metodos.html#method_modificarOutfit"
-        },                {
-            "fqsen": "\\Metodos\u003A\u003AsubidaControladaImagenes\u0028\u0029",
-            "name": "subidaControladaImagenes",
-            "summary": "",
-            "url": "classes/Metodos.html#method_subidaControladaImagenes"
         },                {
             "fqsen": "\\",
             "name": "\\",
