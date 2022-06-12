@@ -254,6 +254,7 @@ export class VistaOutfits {
             prendaCabezaOutfit = await Controlador.cargarPrendasCabezaOutfit(idOutfit)
             prendaCabeza[i].value = prendaCabezaOutfit[0].idPrenda
             $('.prendaCabezaOutfit').formSelect()
+            return prendaCabeza[i].value
         }
     }
 
@@ -268,6 +269,7 @@ export class VistaOutfits {
             prendaTorsoOutfit = await Controlador.cargarPrendasTorsoOutfit(idOutfit)
             prendaTorso[i].value = prendaTorsoOutfit[0].idPrenda
             $('.prendaTorsoOutfit').formSelect()
+            return prendaTorso[i].value
         }
     }
 
@@ -282,6 +284,7 @@ export class VistaOutfits {
             prendaPiernasOutfit = await Controlador.cargarPrendasPiernasOutfit(idOutfit)
             prendaPiernas[i].value = prendaPiernasOutfit[0].idPrenda
             $('.prendaPiernasOutfit').formSelect()
+            return prendaPiernas[i].value
         }
     }
 
@@ -296,6 +299,7 @@ export class VistaOutfits {
             prendaPiesOutfit = await Controlador.cargarPrendasPiesOutfit(idOutfit)
             prendaPies[i].value = prendaPiesOutfit[0].idPrenda
             $('.prendaPiesOutfit').formSelect()
+            return prendaPies[i].value
         }
     }
 
@@ -474,17 +478,17 @@ export class VistaOutfits {
     static detectarCambiosSelectYCargar() {
         let outfitsCargados = document.getElementsByClassName('outfitCargado')
         for (let i = 0; i < outfitsCargados.length; i++) {
-console.log('CAMBIAR EN ESTE METODO PARA AÑADIR IMAGENES')
+            console.log('CAMBIAR EN ESTE METODO PARA AÑADIR IMAGENES')
             outfitsCargados[i].addEventListener('change', async () => {
                 await VistaOutfits.cargarNombreOutfit(outfitsCargados[i].value)
 
-                await VistaOutfits.cargarPrendasCabezaOutfit()
+                VistaOutfits.cargarImgPrendaCabeza(await VistaOutfits.cargarPrendasCabezaOutfit())
 
-                await VistaOutfits.cargarPrendasTorsoOutfit()
+                VistaOutfits.cargarImgPrendaTorso(await VistaOutfits.cargarPrendasTorsoOutfit())
 
-                await VistaOutfits.cargarPrendasPiernasOutfit()
+                VistaOutfits.cargarImgPrendaPiernas(await VistaOutfits.cargarPrendasPiernasOutfit())
 
-                await VistaOutfits.cargarPrendasPiesOutfit()
+                VistaOutfits.cargarImgPrendaPies(await VistaOutfits.cargarPrendasPiesOutfit())
             }, true)
         }
         $('#panelOutfit select').formSelect()
@@ -521,7 +525,6 @@ console.log('CAMBIAR EN ESTE METODO PARA AÑADIR IMAGENES')
                     selectTorso[j].value = valor
                 }
                 console.log(valor);
-                debugger
                 VistaOutfits.cargarImgPrendaTorso(valor)
             }
             selectPiernas[i].onchange = () => {
