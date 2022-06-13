@@ -613,7 +613,7 @@ export class VistaOutfits {
                 for (let j = 0; j < selectCabeza.length; j++) {
                     selectCabeza[j].value = valor
                 }
-                VistaOutfits.cargarImgPrendaCabeza(selectCabeza[j].value)
+                VistaOutfits.cargarImgPrendaCabeza(valor)
                 console.log(valor);
 
             }
