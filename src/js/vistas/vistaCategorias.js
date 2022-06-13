@@ -407,7 +407,7 @@ export class VistaCategorias {
      * @memberof VistaCategorias
      */
     static mostrarMensajeBorrado(mensajeRespuesta) {
-        let mensaje = document.getElementById("BorrarSubcategoria")
+        let mensaje = document.getElementById("mensajeBorrarSubcategoria")
         mensaje.textContent = mensajeRespuesta
         mensaje.style.display = 'block'
     }
@@ -430,7 +430,7 @@ export class VistaCategorias {
         botonConfirmarBorrado.onclick = async () => {
             
             let respuesta = await Controlador.borrarSubcategoria(idSubcategoria)
-
+            
             if (!respuesta.success) {
                 VistaCategorias.mostrarMensajeBorrado(respuesta.mensaje)
                 VistaCategorias.mostrarCuadroDialogo()

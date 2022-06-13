@@ -691,41 +691,56 @@ class Metodos
     {
         $consulta = "DELETE FROM `subcategoria` WHERE `idSubcategoria` = ?";
         $consultaRelacion = "DELETE FROM `relusuariosubcategoria` WHERE idSubcategoria =?";
+        $consultaSubcategoriaEnPrenda = "SELECT COUNT(idSubcategoria) AS num FROM prenda WHERE idSubcategoria = $idSubCategoria";
+
+        if ($comprobacion = $this->conexion->consultas($consultaSubcategoriaEnPrenda)) {
+            
+            $numeroFilas = $this->conexion->extraerFila($comprobacion);
+            $numeroFilas = $numeroFilas['num'];
+
+            if ( $numeroFilas == 0) {
+                /* echo var_dump($comprobacion);
+                echo $numeroFilas; */
+                if (!$sentencia = $this->conexion->mysqli->prepare($consultaRelacion)) {
+                    //echo "La consulta fallo en su preparacion";
+                    //return false;
+                    return false;
+                }
+                //Pasamos los parametros y el tipo de dato
+                if (!$sentencia->bind_param("i", $idSubCategoria)) {
+                    //echo "Fallo en la vinculacion de parametros";
+                    //return false;
+                    return false;
+                }
+                //Ejecutamos con execute
+                if (!$sentencia->execute()) {
+                    //echo "Algo fallo en la ejecucion";
+
+                    return false;
+                }
+                if ($sentencia = $this->conexion->mysqli->prepare($consulta)) {
+                    //Pasamos los parametros y el tipo de dato
+                    if (!$sentencia->bind_param("i", $idSubCategoria)) {
+                        //echo "Fallo en la vinculacion de parametros";
+                        //return false;
+
+                    }
+                    //Ejecutamos con execute
+                    if (!$sentencia->execute()) {
+                        //echo "Algo fallo en la ejecucion";
+
+                        return false;
+                    } else {
+                        return true;
+                    }
+                    return true;
+                }
+            }
+            return false;
+        }
 
         //Preparamos con preparae
-        if (!$sentencia = $this->conexion->mysqli->prepare($consultaRelacion)) {
-            //echo "La consulta fallo en su preparacion";
-            //return false;
 
-        }
-        //Pasamos los parametros y el tipo de dato
-        if (!$sentencia->bind_param("i", $idSubCategoria)) {
-            //echo "Fallo en la vinculacion de parametros";
-            //return false;
-
-        }
-        //Ejecutamos con execute
-        if (!$sentencia->execute()) {
-            //echo "Algo fallo en la ejecucion";
-
-            return false;
-        } else if ($sentencia = $this->conexion->mysqli->prepare($consulta)) {
-            //Pasamos los parametros y el tipo de dato
-            if (!$sentencia->bind_param("i", $idSubCategoria)) {
-                //echo "Fallo en la vinculacion de parametros";
-                //return false;
-
-            }
-            //Ejecutamos con execute
-            if (!$sentencia->execute()) {
-                //echo "Algo fallo en la ejecucion";
-
-                return false;
-            } else {
-                return true;
-            }
-            return true;
-        }
     }
 
     /**
@@ -1257,13 +1272,12 @@ class Metodos
         if (!$sentencia->execute()) {
             //echo "Algo fallo en la ejecucion";
             return false;
-
-        } else if($resultadoUltimoOutfit = $this->conexion->consultas($consultaUltimoOutfit)){
+        } else if ($resultadoUltimoOutfit = $this->conexion->consultas($consultaUltimoOutfit)) {
             $fila = $this->conexion->extraerFila($resultadoUltimoOutfit);
             $ultimo_id = $fila['id'];
 
             if ($sentenciaRelacion = $this->conexion->mysqli->prepare($consultaRelacion)) {
-                for ($i=0; $i < count($arrayIdPrendas); $i++) {
+                for ($i = 0; $i < count($arrayIdPrendas); $i++) {
                     $sentenciaRelacion->bind_param("ii", $ultimo_id, $arrayIdPrendas[$i]);
                     $sentenciaRelacion->execute();
                 }
