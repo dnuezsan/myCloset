@@ -30,20 +30,8 @@
 
 import { Controlador } from "../controlador/controlador.js"
 
-/**
- *
- *
- * @export
- * @class VistaOutfits
- */
 export class VistaOutfits {
 
-    /**
-     * @constructor
-     * @param {Object} controlador
-     * @param {Node} base
-     * @memberof VistaOutfits
-     */
     constructor(controlador, base) {
         this.controlador = controlador
         this.base = base
@@ -108,6 +96,7 @@ export class VistaOutfits {
         selects.forEach(select => {
             select.value = ''
         });
+
     }
 
     /**
@@ -120,62 +109,16 @@ export class VistaOutfits {
         let botones = document.getElementsByClassName('botonNuevoOutfit')
 
         for (let i = 0; i &lt; botones.length; i++) {
-            botones[i].addEventListener('click', VistaOutfits.limpiarFormulario, true)
+            botones[i].addEventListener('click', () => {
+                VistaOutfits.limpiarFormulario()
+                VistaOutfits.cargarImgPrendaCabeza('')
+                VistaOutfits.cargarImgPrendaTorso('')
+                VistaOutfits.cargarImgPrendaPiernas('')
+                VistaOutfits.cargarImgPrendaPies('')
+            }, true)
         }
 
     }
-
-    /* ADAPTARLOS Y LUEGO UTILIZAR EN CRUDOUTFITS */
-
-    /* static async insertarOutfit(idPrenda, nombreOutfit) {
-        let outfit = document.getElementsByClassName('outfitCargado')
-
-        for (let i = 0; i &lt; outfit.length; i++) {
-            if (outfit[i].value == '') {
-                if (outfit[i].value != '') {
-                    let respuesta = await Controlador.insertarOutfit(idPrenda, nombreOutfit)
-                    if (!respuesta.success) {
-                        console.log('error');
-                    } else {
-                        location.reload()
-                    }
-                }
-            }
-        }
-    } */
-
-    /* ADAPTARLO Y LUEGO UTILIZAR EN CRUDOUTFITS */
-    /* static async modificarOutfit() {
-        let outfit = document.getElementsByClassName('outfitCargado')
-
-        for (let i = 0; i &lt; outfit.length; i++) {
-            if (outfit[i].value != '') {
-                if (outfit[i].value != '') {
-                    let respuesta = await Controlador.modificarOutfit(outfit[i].value)
-                    if (!respuesta.success) {
-                        console.log('error');
-                    } else {
-                        location.reload()
-                    }
-                }
-            }
-        }
-    } */
-    /* ADAPTARLOS Y LUEGO UTILIZAR EN CRUDOUTFITS */
-    /* static async borrarOutfit() {
-        let outfit = document.getElementsByClassName('outfitCargado')
-
-        for (let i = 0; i &lt; outfit.length; i++) {
-            if (outfit[i].value != '') {
-                let respuesta = await Controlador.borrarOutfit(outfit[i].value)
-                if (!respuesta.success) {
-                    console.log('error');
-                } else {
-                    location.reload()
-                }
-            }
-        }
-    } */
 
     /**
      *Carga todos los outfits y los introduce en los select correspondientes
@@ -189,7 +132,7 @@ export class VistaOutfits {
         let outfits = await Controlador.cargaOutfits()
 
         for (let i = 0; i &lt; outfits.length; i++) {
-
+            console.log(outfits)
             VistaOutfits.generarOptionOutfit(outfits[i], selectOutfits[0])
             VistaOutfits.generarOptionOutfit(outfits[i], selectOutfits[1])
 
@@ -382,7 +325,8 @@ export class VistaOutfits {
         for (let i = 0; i &lt; outfitCargado.length; i++) {
             idOutfit = outfitCargado[i].value
             prendaCabezaOutfit = await Controlador.cargarPrendasCabezaOutfit(idOutfit)
-            prendaCabeza[i].value = prendaCabezaOutfit[0].idPrenda
+            prendaCabeza[0].value = prendaCabezaOutfit[0].idPrenda
+            prendaCabeza[1].value = prendaCabezaOutfit[0].idPrenda
             $('.prendaCabezaOutfit').formSelect()
             return prendaCabeza[i].value
         }
@@ -404,7 +348,8 @@ export class VistaOutfits {
         for (let i = 0; i &lt; outfitCargado.length; i++) {
             idOutfit = outfitCargado[i].value
             prendaTorsoOutfit = await Controlador.cargarPrendasTorsoOutfit(idOutfit)
-            prendaTorso[i].value = prendaTorsoOutfit[0].idPrenda
+            prendaTorso[0].value = prendaTorsoOutfit[0].idPrenda
+            prendaTorso[1].value = prendaTorsoOutfit[0].idPrenda
             $('.prendaTorsoOutfit').formSelect()
             return prendaTorso[i].value
         }
@@ -426,7 +371,8 @@ export class VistaOutfits {
         for (let i = 0; i &lt; outfitCargado.length; i++) {
             idOutfit = outfitCargado[i].value
             prendaPiernasOutfit = await Controlador.cargarPrendasPiernasOutfit(idOutfit)
-            prendaPiernas[i].value = prendaPiernasOutfit[0].idPrenda
+            prendaPiernas[0].value = prendaPiernasOutfit[0].idPrenda
+            prendaPiernas[1].value = prendaPiernasOutfit[0].idPrenda
             $('.prendaPiernasOutfit').formSelect()
             return prendaPiernas[i].value
         }
@@ -448,7 +394,8 @@ export class VistaOutfits {
         for (let i = 0; i &lt; outfitCargado.length; i++) {
             idOutfit = outfitCargado[i].value
             prendaPiesOutfit = await Controlador.cargarPrendasPiesOutfit(idOutfit)
-            prendaPies[i].value = prendaPiesOutfit[0].idPrenda
+            prendaPies[0].value = prendaPiesOutfit[0].idPrenda
+            prendaPies[1].value = prendaPiesOutfit[0].idPrenda
             $('.prendaPiesOutfit').formSelect()
             return prendaPies[i].value
         }
@@ -473,10 +420,11 @@ export class VistaOutfits {
         let nombreOufit = document.getElementsByClassName('nombreOutfit')
         //PASAR VALORES DE SELECTS A LOS METODOS
         let valorClase = null
-        let respuestaCabeza = null
+        let respuestaPrendas = null
+        /* let respuestaCabeza = null
         let respuestaTorso = null
         let respuestaPiernas = null
-        let respuestaPies = null
+        let respuestaPies = null */
 
         for (let i = 0; i &lt; 2; i++) {
             botonInsertar[i].onclick = async () => {
@@ -485,53 +433,25 @@ export class VistaOutfits {
                 if (outfitsCargados[i].value == "") {
                     if (nombreOufit[i].value == '') {
                         try {
-                            respuestaCabeza = await Controlador.insertarOutfit(selectCabeza[i].value, 'Outfit sin nombre')
-                            respuestaTorso = await Controlador.insertarOutfit(selectTorso[i].value, 'Outfit sin nombre')
-                            respuestaPiernas = await Controlador.insertarOutfit(selectPiernas[i].value, 'Outfit sin nombre')
-                            respuestaPies = await Controlador.insertarOutfit(selectPies[i].value, 'Outfit sin nombre')
-                            if (!respuestaCabeza.success &amp;&amp; !respuestaTorso.success &amp;&amp; !respuestaPiernas.success &amp;&amp; !respuestaPies.success) {
-                                VistaOutfits.mostrarMensaje(respuestaCabeza.mensaje)
+                            respuestaPrendas = await Controlador.insertarPrendasOutfit([selectCabeza[i].value, selectTorso[i].value, selectPiernas[i].value, selectPies[i].value], 'Outfit sin nombre')
 
-                            } else if (!respuestaCabeza.success) {
-                                VistaOutfits.mostrarMensaje('No se pudo insertar su prenda de cabeza en el outfit')
+                            if (!respuestaPrendas.success){
+                                VistaOutfits.mostrarMensaje(respuestaPrendas.mensaje)
                                 panel.onclick = () => { VistaOutfits.ocultarMensaje() }
-                            } else if (!respuestaTorso.success) {
-                                VistaOutfits.mostrarMensaje('No se pudo insertar su prenda del torso en el outfit')
-                                panel.onclick = () => { VistaOutfits.ocultarMensaje() }
-                            } else if (!respuestaPiernas.success) {
-                                VistaOutfits.mostrarMensaje('No se pudo insertar su prenda de las piernas en el outfit')
-                                panel.onclick = () => { VistaOutfits.ocultarMensaje() }
-                            } else if (!respuestaPies.success) {
-                                VistaOutfits.mostrarMensaje('No se pudo insertar su prenda de los pies en el outfit')
-                                panel.onclick = () => { VistaOutfits.ocultarMensaje() }
-                            }
-                            location.reload()
+                            }else{
+                            location.reload()}
                         } catch (error) {
                             console.error(error);
                         }
                     } else {
                         try {
-                            respuestaCabeza = await Controlador.insertarOutfit(selectCabeza[i], nombreOufit[i].value)
-                            respuestaTorso = await Controlador.insertarOutfit(selectTorso[i].value, nombreOufit[i].value)
-                            respuestaPiernas = await Controlador.insertarOutfit(selectPiernas[i].value, nombreOufit[i].value)
-                            respuestaPies = await Controlador.insertarOutfit(selectPies[i].value, nombreOufit[i].value)
-                            if (!respuestaCabeza.success &amp;&amp; !respuestaTorso.success &amp;&amp; !respuestaPiernas.success &amp;&amp; !respuestaPies.success) {
-                                VistaOutfits.mostrarMensaje(respuestaCabeza.mensaje)
+                            respuestaPrendas = await Controlador.insertarPrendasOutfit([selectCabeza[i].value, selectTorso[i].value, selectPiernas[i].value, selectPies[i].value], nombreOufit[i].value)
 
-                            } else if (!respuestaCabeza.success) {
-                                VistaOutfits.mostrarMensaje('No se pudo insertar su prenda de cabeza en el outfit')
+                            if (!respuestaPrendas.success){
+                                VistaOutfits.mostrarMensaje(respuestaPrendas.mensaje)
                                 panel.onclick = () => { VistaOutfits.ocultarMensaje() }
-                            } else if (!respuestaTorso.success) {
-                                VistaOutfits.mostrarMensaje('No se pudo insertar su prenda del torso en el outfit')
-                                panel.onclick = () => { VistaOutfits.ocultarMensaje() }
-                            } else if (!respuestaPiernas.success) {
-                                VistaOutfits.mostrarMensaje('No se pudo insertar su prenda de las piernas en el outfit')
-                                panel.onclick = () => { VistaOutfits.ocultarMensaje() }
-                            } else if (!respuestaPies.success) {
-                                VistaOutfits.mostrarMensaje('No se pudo insertar su prenda de los pies en el outfit')
-                                panel.onclick = () => { VistaOutfits.ocultarMensaje() }
-                            }
-                            location.reload()
+                            }else{
+                            location.reload()}
                         } catch (error) {
                             console.error(error);
                         }
@@ -610,17 +530,19 @@ export class VistaOutfits {
     static detectarCambiosSelectYCargar() {
         let outfitsCargados = document.getElementsByClassName('outfitCargado')
         for (let i = 0; i &lt; outfitsCargados.length; i++) {
-            console.log('CAMBIAR EN ESTE METODO PARA AÑADIR IMAGENES')
             outfitsCargados[i].addEventListener('change', async () => {
-                await VistaOutfits.cargarNombreOutfit(outfitsCargados[i].value)
+                if (outfitsCargados[i].value != '') {
+                    await VistaOutfits.cargarNombreOutfit(outfitsCargados[i].value)
 
-                VistaOutfits.cargarImgPrendaCabeza(await VistaOutfits.cargarPrendasCabezaOutfit())
+                    VistaOutfits.cargarImgPrendaCabeza(await VistaOutfits.cargarPrendasCabezaOutfit())
 
-                VistaOutfits.cargarImgPrendaTorso(await VistaOutfits.cargarPrendasTorsoOutfit())
+                    VistaOutfits.cargarImgPrendaTorso(await VistaOutfits.cargarPrendasTorsoOutfit())
 
-                VistaOutfits.cargarImgPrendaPiernas(await VistaOutfits.cargarPrendasPiernasOutfit())
+                    VistaOutfits.cargarImgPrendaPiernas(await VistaOutfits.cargarPrendasPiernasOutfit())
 
-                VistaOutfits.cargarImgPrendaPies(await VistaOutfits.cargarPrendasPiesOutfit())
+                    VistaOutfits.cargarImgPrendaPies(await VistaOutfits.cargarPrendasPiesOutfit())
+                }
+
             }, true)
         }
         $('#panelOutfit select').formSelect()
@@ -653,8 +575,7 @@ export class VistaOutfits {
                 for (let j = 0; j &lt; selectCabeza.length; j++) {
                     selectCabeza[j].value = valor
                 }
-                VistaOutfits.cargarImgPrendaCabeza(selectCabeza[j].value)
-                console.log(valor);
+                VistaOutfits.cargarImgPrendaCabeza(valor)
 
             }
             selectTorso[i].onchange = () => {
@@ -662,7 +583,6 @@ export class VistaOutfits {
                 for (let j = 0; j &lt; selectTorso.length; j++) {
                     selectTorso[j].value = valor
                 }
-                console.log(valor);
                 VistaOutfits.cargarImgPrendaTorso(valor)
             }
             selectPiernas[i].onchange = () => {
@@ -670,7 +590,6 @@ export class VistaOutfits {
                 for (let j = 0; j &lt; selectPiernas.length; j++) {
                     selectPiernas[j].value = valor
                 }
-                console.log(valor);
                 VistaOutfits.cargarImgPrendaPiernas(valor)
             }
             selectPies[i].onchange = () => {
@@ -678,7 +597,6 @@ export class VistaOutfits {
                 for (let j = 0; j &lt; selectPies.length; j++) {
                     selectPies[j].value = valor
                 }
-                console.log(valor);
                 $('.prendaPiesOutfit').formSelect()
                 VistaOutfits.cargarImgPrendaPies(valor)
             }
@@ -841,13 +759,13 @@ export class VistaOutfits {
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Controlador.html">Controlador</a></li><li><a href="Controlador.exports.Controlador.html">exports.Controlador</a></li><li><a href="Outfits.html">Outfits</a></li><li><a href="Outfits.exports.Outfits.html">exports.Outfits</a></li><li><a href="Prendas.html">Prendas</a></li><li><a href="Prendas.exports.Prendas.html">exports.Prendas</a></li><li><a href="Subcategorias.html">Subcategorias</a></li><li><a href="Subcategorias.exports.Categorias.html">exports.Categorias</a></li><li><a href="Usuarios.html">Usuarios</a></li><li><a href="Usuarios.exports.Usuarios.html">exports.Usuarios</a></li><li><a href="VistaArmario.html">VistaArmario</a></li><li><a href="VistaArmario.exports.VistaArmario.html">exports.VistaArmario</a></li><li><a href="VistaCategorias.html">VistaCategorias</a></li><li><a href="VistaCategorias.exports.VistaCategorias.html">exports.VistaCategorias</a></li><li><a href="VistaGestionarPrendas.html">VistaGestionarPrendas</a></li><li><a href="VistaGestionarPrendas.exports.VistaGestionarPrendas.html">exports.VistaGestionarPrendas</a></li><li><a href="VistaLogin.html">VistaLogin</a></li><li><a href="VistaLogin.exports.VistaLogin.html">exports.VistaLogin</a></li><li><a href="VistaMenuPrincipal.html">VistaMenuPrincipal</a></li><li><a href="VistaMenuPrincipal.exports.VistaMenuPrincipal.html">exports.VistaMenuPrincipal</a></li><li><a href="VistaMisPrendas.html">VistaMisPrendas</a></li><li><a href="VistaMisPrendas.exports.VistaMisPrendas.html">exports.VistaMisPrendas</a></li><li><a href="VistaOutfits.html">VistaOutfits</a></li><li><a href="VistaOutfits.exports.VistaOutfits.html">exports.VistaOutfits</a></li><li><a href="VistaPerfilUsuario.html">VistaPerfilUsuario</a></li><li><a href="VistaPerfilUsuario.exports.VistaPerfilUsuario.html">exports.VistaPerfilUsuario</a></li><li><a href="VistaPrincipal.html">VistaPrincipal</a></li><li><a href="VistaPrincipal.exports.VistaPrincipal.html">exports.VistaPrincipal</a></li><li><a href="VistaRegistroUsuario.html">VistaRegistroUsuario</a></li><li><a href="VistaRegistroUsuario.exports.VistaRegistroUsuario.html">exports.VistaRegistroUsuario</a></li><li><a href="VistaSubirPrenda.html">VistaSubirPrenda</a></li><li><a href="VistaSubirPrenda.exports.VistaSubirPrenda.html">exports.VistaSubirPrenda</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Controlador.html">Controlador</a></li><li><a href="Controlador.Crea%2520una%2520instancia%2520de%2520la%2520clase%2520Controlador.html">Crea una instancia de la clase Controlador</a></li><li><a href="Outfits.html">Outfits</a></li><li><a href="Outfits.Crea%2520una%2520instancia%2520de%2520Outfits.html">Crea una instancia de Outfits</a></li><li><a href="Prendas.html">Prendas</a></li><li><a href="Prendas.Crea%2520una%2520instancia%2520de%2520Prendas.html">Crea una instancia de Prendas</a></li><li><a href="Subcategorias.html">Subcategorias</a></li><li><a href="Subcategorias.Crea%2520una%2520instancia%2520de%2520Subcategorias.html">Crea una instancia de Subcategorias</a></li><li><a href="Usuarios.html">Usuarios</a></li><li><a href="Usuarios.Crea%2520una%2520instancia%2520de%2520Usuarios.html">Crea una instancia de Usuarios</a></li><li><a href="VistaArmario.exports.VistaArmario.html">exports.VistaArmario</a></li><li><a href="VistaCategorias.exports.VistaCategorias.html">exports.VistaCategorias</a></li><li><a href="VistaLogin.html">VistaLogin</a></li><li><a href="VistaLogin.Crea%2520una%2520instancia%2520de%2520VistaLogin%2520y%2520ejecuta%2520el%2520m%25C3%25A9todo%2520iniciar.html">Crea una instancia de VistaLogin y ejecuta el método iniciar()</a></li><li><a href="VistaMenuPrincipal.Crea%2520una%2520instancia%2520de%2520VistaMenuPrincipal%2520y%2520ejecuta%2520el%2520m%25C3%25A9todo%2520iniciar.html">Crea una instancia de VistaMenuPrincipal y ejecuta el método iniciar()</a></li><li><a href="VistaPerfilUsuario.exports.VistaPerfilUsuario.html">exports.VistaPerfilUsuario</a></li><li><a href="VistaPrincipal.html">VistaPrincipal</a></li><li><a href="VistaPrincipal.Crea%2520una%2520instancia%2520de%2520VistaPrincipal%2520y%2520ejecuta%2520el%2520m%25C3%25A9todo%2520iniciar.html">Crea una instancia de VistaPrincipal y ejecuta el método iniciar()</a></li><li><a href="VistaRegistroUsuario.html">VistaRegistroUsuario</a></li><li><a href="VistaRegistroUsuario.Crea%2520una%2520instancia%2520de%2520VistaRegistroUsuario%2520y%2520ejecuta%2520el%2520m%25C3%25A9todo%2520iniciar.html">Crea una instancia de VistaRegistroUsuario y ejecuta el método iniciar()</a></li><li><a href="VistaSubirPrenda.exports.VistaSubirPrenda.html">exports.VistaSubirPrenda</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Mon Jun 13 2022 01:37:28 GMT+0200 (hora de verano de Europa central)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Mon Jun 13 2022 14:43:40 GMT+0200 (hora de verano de Europa central)
 </footer>
 
 <script> prettyPrint(); </script>

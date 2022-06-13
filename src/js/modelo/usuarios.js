@@ -252,7 +252,6 @@ export class Usuarios {
      */
     static async borrarUsuario() {
         let borrarUsuario = 'borrarUsuario'
-        console.log(sessionStorage.getItem('sesion'));
         let datos = await $.ajax(
             {
                 url: "https://05.2daw.esvirgua.com/myCloset/src/php/controlador/controladorBackend.php",
@@ -267,8 +266,6 @@ export class Usuarios {
                 },
             })
         let datosJson = JSON.parse(datos)
-
-        console.log(datosJson);
 
         return datosJson
     }

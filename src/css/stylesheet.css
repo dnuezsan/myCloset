@@ -517,7 +517,7 @@ body {
 
 #panelSubirPrenda #cuadroDialogoSubirPrenda{
     position: fixed;
-    left: 37.5%;
+    left: 0%;
     display: none;
     top: 30%;
     z-index: 1;

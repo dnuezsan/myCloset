@@ -65,11 +65,11 @@ class Metodos
 
         //Preparamos con preparae
         if (!$sentencia = $this->conexion->mysqli->prepare($consulta)) {
-           // echo "La consulta fallo en su preparacion";
+            // echo "La consulta fallo en su preparacion";
         }
         //Pasamos los parametros y el tipo de dato
         if (!$sentencia->bind_param("s", $correo)) {
-           // echo "Fallo en la vinculacion de parametros";
+            // echo "Fallo en la vinculacion de parametros";
         }
         //Ejecutamos con execute
         if (!$sentencia->execute()) {
@@ -1226,6 +1226,54 @@ class Metodos
     }
 
     /**
+     * @param $arrayIdPrendas
+     * @param $usuario
+     * @param $fechaCreacion
+     * @param $nombreOutfit
+     * Insertamos un outfit y sus prendas
+     * @return bool
+     */
+    function insertarPrendasOutfit($arrayIdPrendas, $usuario, $fechaCreacion, $nombreOutfit)
+    {
+        $consulta = "INSERT INTO `outfit`( `idUsuario`, `nombreOutfit`, `fechaCreacion`) VALUES (?,?,?)";
+        $consultaRelacion = "INSERT INTO `relprendaoutfit`(`idOutfit`, `idPrenda`) VALUES (?,?)";
+        $consultaUsurio = "SELECT idUsuario FROM usuario WHERE correo = '$usuario'";
+        $consultaUltimoOutfit = "SELECT MAX(idOutfit) AS id FROM outfit";
+        $resultadoUsuario = $this->conexion->consultas($consultaUsurio);
+        $fila = $this->conexion->extraerFila($resultadoUsuario);
+        $idUsuario = $fila["idUsuario"];
+
+        if (!$sentencia = $this->conexion->mysqli->prepare($consulta)) {
+            //echo "La consulta fallo en su preparacion";
+            //return false;
+
+        }
+        //Pasamos los parametros y el tipo de dato
+        if (!$sentencia->bind_param("iss", $idUsuario, $nombreOutfit, $fechaCreacion)) {
+            //echo "Fallo en la vinculacion de parametros";
+            //return false;
+
+        }
+        if (!$sentencia->execute()) {
+            //echo "Algo fallo en la ejecucion";
+            return false;
+
+        } else if($resultadoUltimoOutfit = $this->conexion->consultas($consultaUltimoOutfit)){
+            $fila = $this->conexion->extraerFila($resultadoUltimoOutfit);
+            $ultimo_id = $fila['id'];
+
+            if ($sentenciaRelacion = $this->conexion->mysqli->prepare($consultaRelacion)) {
+                for ($i=0; $i < count($arrayIdPrendas); $i++) {
+                    $sentenciaRelacion->bind_param("ii", $ultimo_id, $arrayIdPrendas[$i]);
+                    $sentenciaRelacion->execute();
+                }
+                return true;
+            }
+            return false;
+        }
+    }
+
+    /**
      * @param $idOutfit
      * Borramos el outfit que nos pasan de la BD
      * @return bool|void
@@ -1277,7 +1325,8 @@ class Metodos
      * Modifica los Outfit del usuario ya creados en la BD
      * @return bool|void
      */
-    function modificarOutfit($idPrenda, $idPrendaNueva, $idOutfit, $nombreOutfit){
+    function modificarOutfit($idPrenda, $idPrendaNueva, $idOutfit, $nombreOutfit)
+    {
 
         if ($idPrendaNueva == '') {
             $idPrendaNueva = "null";
@@ -1296,8 +1345,7 @@ class Metodos
                 if (!$this->conexion->consultas($consultaDelete)) {
                     return false;
                 }
-            }
-                elseif ($idPrendaNueva != 'null' && $idPrenda == 'null') {
+            } elseif ($idPrendaNueva != 'null' && $idPrenda == 'null') {
                 $consultaRelacion = "INSERT INTO `relprendaoutfit`(`idOutfit`, `idPrenda`) VALUES (?,?)";
                 if ($sentencia = $this->conexion->mysqli->prepare($consultaRelacion)) {
 
@@ -1323,6 +1371,4 @@ class Metodos
             }
         }
     }
-
-
 }

@@ -54,7 +54,7 @@ export class Prendas {
         } else if (subcategoria == '' || subcategoria == null) {
             error = {
                 success: false,
-                mensaje: 'Por favor selecciona una categoría'
+                mensaje: 'Por favor selecciona una categoría. Si no existe, crea una en "categorías"'
             }
             return error
         } else if (imagen == '') {

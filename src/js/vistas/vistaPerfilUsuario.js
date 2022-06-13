@@ -25,7 +25,6 @@ export class VistaPerfilUsuario {
      * @memberof VistaPerfilUsuario
      */
     iniciar() {
-        console.log('iniciar')
         //VistaPerfilUsuario.modificarUsuario()
         let botonModifiacarUsuario = document.querySelector("#panelPerfilUsuario .section button")
         botonModifiacarUsuario.addEventListener('click', VistaPerfilUsuario.modificarUsuario)
@@ -145,7 +144,6 @@ export class VistaPerfilUsuario {
         let botonCancelar = document.getElementById('botonCancelarBorrarUsuario')
         botonBorrarUsuario.onclick = async (evento) => {
             let respuesta = await Controlador.borrarUsuario()
-            console.log(respuesta);
             if (respuesta.success == true) {
                 sessionStorage.setItem('sesion', '')
                 if (location.reload) {
@@ -216,7 +214,6 @@ export class VistaPerfilUsuario {
         let botonBorrado = document.querySelectorAll('#panelPerfilUsuario #borrarUsuario')[0]
         botonBorrado.onclick = (evento) => {
             mensajeBorrado.style.display = 'inline-block'
-            console.log(mensajeBorrado);
             VistaPerfilUsuario.mostrarCuadroConfirmacion()
         }
     }

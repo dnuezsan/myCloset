@@ -151,6 +151,11 @@ Search.appendIndex(
             "summary": "",
             "url": "namespaces/default.html#function_modificarOutfit"
         },                {
+            "fqsen": "\\insertarPrendasOutfit\u0028\u0029",
+            "name": "insertarPrendasOutfit",
+            "summary": "",
+            "url": "namespaces/default.html#function_insertarPrendasOutfit"
+        },                {
             "fqsen": "\\Conexion",
             "name": "Conexion",
             "summary": "Clase\u0020que\u0020establece\u0020conexion\u0020y\u0020ejecuta\u0020consultas\u0020sobre\u0020la\u0020BD",
@@ -375,6 +380,11 @@ Search.appendIndex(
             "name": "insertamosOutfit",
             "summary": "",
             "url": "classes/Metodos.html#method_insertamosOutfit"
+        },                {
+            "fqsen": "\\Metodos\u003A\u003AinsertarPrendasOutfit\u0028\u0029",
+            "name": "insertarPrendasOutfit",
+            "summary": "",
+            "url": "classes/Metodos.html#method_insertarPrendasOutfit"
         },                {
             "fqsen": "\\Metodos\u003A\u003AborrarOutfit\u0028\u0029",
             "name": "borrarOutfit",

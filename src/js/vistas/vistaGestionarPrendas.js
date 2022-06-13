@@ -254,7 +254,6 @@ export class VistaGestionarPrendas {
                 inputFoto.value = ''
             } else {
                 let imagenUrl = URL.createObjectURL(archivos[0])
-                console.log(imagenUrl);
                 imagen.src = imagenUrl /*  = 'src/img/armario_vertical.jpg' */
                 cropper = new Cropper(imagen, {
                     aspectRatio: 1, //es como queremos que recorte
@@ -271,7 +270,6 @@ export class VistaGestionarPrendas {
 
                 modal.className = 'modal active'
                 modalContent.className = 'modal-content active'
-                console.log(cropper)
                 this.cerrarModal(cropper)
                 this.recortarFoto(cropper)
 
@@ -312,7 +310,6 @@ export class VistaGestionarPrendas {
 
         modal.className = 'modal active'
         modalContent.className = 'modal-content active'
-        console.log(cropper)
         this.cerrarModal(cropper)
         this.recortarFoto(cropper)
     }
@@ -371,10 +368,8 @@ export class VistaGestionarPrendas {
             }) */
             /* Insercion de la imagen en el div y el input */
             let imagenCanvas = canvas.toDataURL('imagen/png')
-            console.log(imagenCanvas)
             cropImagen.src = imagenCanvas
             inputText.value = imagenCanvas
-            console.log(inputText.value);
 
             let imagen = document.getElementById('img-cropper')
 
@@ -792,6 +787,8 @@ export class VistaGestionarPrendas {
                         console.log(respuesta.mensaje);
                         location.reload()
                     } else {
+                        let mensaje = document.getElementById('mensajeBorradoGestionPrendas')
+                        mensaje.textContent = 'No se pudo modificar su prenda'
                         console.log(respuesta.mensaje);
                     }
                 } else {

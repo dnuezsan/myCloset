@@ -381,4 +381,35 @@ export class Outfits {
         return datosJson
     }
 
+    /**
+     *Envía los datos al servidor para crear un outfit y devuelve la repuesta
+     *
+     * @static
+     * @param {Array} arrayIdPrendas
+     * @param {String} nombreOufit
+     * @return {*} 
+     * @memberof Outfits
+     */
+    static async insertarPrendasOutfit(arrayIdPrendas, nombreOufit){
+        let propiedad = "insertarPrendasOutfit"
+        let datos = await $.ajax(
+            {
+                //url:  "https://05.2daw.esvirgua.com/myCloset/src/php/controlador/controladorBackend.php",
+                url: "/DWEC/myCloset/src/php/controlador/controladorBackend.php",
+                //url: "https://myclosetss.000webhostapp.com/php/controlador/controladorBackend.php",
+                //url: "/myCloset/src/php/controlador/controladorBackend.php",
+                type: "POST",
+                data:
+                {
+                    propiedad: propiedad,
+                    correo: sessionStorage.sesion,
+                    arrayIdPrendas: arrayIdPrendas,
+                    nombreOutfit: nombreOufit
+
+                },
+            })
+        let datosJson = JSON.parse(datos)
+        return datosJson
+    }
+
 }

@@ -32,7 +32,6 @@ export class Controlador {
      */
     static async loginUsuario(u, p) {
         let datos = await Usuarios.loginUsuario(u, p);
-        console.log(datos);
         return datos
     }
 
@@ -68,9 +67,7 @@ export class Controlador {
      * @memberof Controlador
      */
     static async modificacionUsuario(nombre, correo, password, newpassword, rnewpassword) {
-        console.log('entro control')
         let datos = await Usuarios.modificacionUsuario(nombre, correo, password, newpassword, rnewpassword)
-        console.log(datos);
         return datos
     }
 
@@ -196,7 +193,6 @@ export class Controlador {
      * @memberof Controlador
      */
     static async modificarPrenda(descripcion, talla, idSubcategoria, nombrePrenda, idPrenda){
-        console.log(descripcion, talla, idSubcategoria, nombrePrenda, idPrenda);
         let respuesta = await Prendas.modificarPrenda(descripcion, talla, idSubcategoria, nombrePrenda, idPrenda)
         return respuesta
     }
@@ -410,7 +406,6 @@ export class Controlador {
      * @memberof Controlador
      */
     static async modificarOutfit(idPrenda, idPrendaNueva, idOutfit, nombreOutfit){
-        console.log(idPrenda);
         let respuesta = await Outfits.modificarOutfit(idPrenda, idPrendaNueva, idOutfit, nombreOutfit)
         return respuesta
     }
@@ -425,6 +420,21 @@ export class Controlador {
      */
     static async borrarOutfit(idOutfit){
         let respuesta = await Outfits.borrarOutfit(idOutfit)
+        return respuesta
+    }
+
+
+    /**
+     *Envía los datos al modelo para crear un outfit y devuelve la repuesta
+     *
+     * @static
+     * @param {Array} arrayIdPrendas
+     * @param {String} nombreOufit
+     * @return {JSON} 
+     * @memberof Controlador
+     */
+    static async insertarPrendasOutfit(arrayIdPrendas, nombreOufit){
+        let respuesta = Outfits.insertarPrendasOutfit(arrayIdPrendas, nombreOufit)
         return respuesta
     }
 
