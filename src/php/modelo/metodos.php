@@ -226,7 +226,7 @@ WHERE usuario.idUsuario = ?";
             echo "La consulta fallo en su preparacion";
         }
         //Pasamos los parametros y el tipo de dato
-        if (!$sentencia->bind_param("s", $idUsuario)) {
+        if (!$sentencia->bind_param("i", $idUsuario)) {
             echo "Fallo en la vinculacion de parametros";
         }
         //Ejecutamos con execute
