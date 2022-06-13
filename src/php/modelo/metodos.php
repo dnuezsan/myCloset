@@ -208,14 +208,25 @@ class Metodos
      */
     function borrarUsuario($correo)
     {
-        $consulta = "DELETE FROM usuario WHERE correo= ?";
+        $consultaUsurio = "SELECT idUsuario FROM usuario WHERE correo = '$correo'";
+        $resultadoUsuario = $this->conexion->consultas($consultaUsurio);
+        $fila = $this->conexion->extraerFila($resultadoUsuario);
+        $idUsuario = $fila['idUsuario'];
+        $consulta = "DELETE outfit, relprendaoutfit, prenda, subcategoria, relusuariosubcategoria, usuario  FROM `usuario` 
+LEFT JOIN prenda ON prenda.idUsuario = usuario.idUsuario
+LEFT JOIN relprendaoutfit ON relprendaoutfit.idPrenda = prenda.idPrenda
+LEFT JOIN outfit ON outfit.idUsuario = usuario.idUsuario
+LEFT JOIN relusuariosubcategoria ON relusuariosubcategoria.idUsuario = usuario.idUsuario
+LEFT JOIN subcategoria ON subcategoria.idSubcategoria = prenda.idSubcategoria
+
+WHERE usuario.idUsuario = ?";
 
         //Preparamos con preparae
         if (!$sentencia = $this->conexion->mysqli->prepare($consulta)) {
             echo "La consulta fallo en su preparacion";
         }
         //Pasamos los parametros y el tipo de dato
-        if (!$sentencia->bind_param("s", $correo)) {
+        if (!$sentencia->bind_param("s", $idUsuario)) {
             echo "Fallo en la vinculacion de parametros";
         }
         //Ejecutamos con execute
@@ -225,6 +236,7 @@ class Metodos
         } else {
             return true;
         }
+
     }
     /**
      *
