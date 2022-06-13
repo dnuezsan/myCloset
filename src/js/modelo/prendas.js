@@ -67,8 +67,8 @@ export class Prendas {
         //console.log(talla, descripcion, categoria, subcategoria, nombrePrenda);
         let datos = await $.ajax(
             {
-                //url: "https://05.2daw.esvirgua.com/myCloset/src/php/controlador/controladorBackend.php",
-                url: "/DWEC/myCloset/src/php/controlador/controladorBackend.php",
+                url: "https://05.2daw.esvirgua.com/myCloset/src/php/controlador/controladorBackend.php",
+                //url: "/DWEC/myCloset/src/php/controlador/controladorBackend.php",
                 //url: "https://myclosetss.000webhostapp.com/php/controlador/controladorBackend.php",
                 //url: "/myCloset/src/php/controlador/controladorBackend.php",
                 type: "POST",
@@ -103,8 +103,8 @@ export class Prendas {
         let cargarMisPrendas = 'cargarMisPrendas'
         let datos = await $.ajax(
             {
-                //url:  "https://05.2daw.esvirgua.com/myCloset/src/php/controlador/controladorBackend.php",
-                url: "/DWEC/myCloset/src/php/controlador/controladorBackend.php",
+                url:  "https://05.2daw.esvirgua.com/myCloset/src/php/controlador/controladorBackend.php",
+                //url: "/DWEC/myCloset/src/php/controlador/controladorBackend.php",
                 //url: "https://myclosetss.000webhostapp.com/php/controlador/controladorBackend.php",
                 //url: "/myCloset/src/php/controlador/controladorBackend.php",
                 type: "POST",
@@ -138,8 +138,8 @@ export class Prendas {
         let modificarPrenda = 'modificarPrenda'
         let datos = await $.ajax(
             {
-                //url:  "https://05.2daw.esvirgua.com/myCloset/src/php/controlador/controladorBackend.php",
-                url: "/DWEC/myCloset/src/php/controlador/controladorBackend.php",
+                url:  "https://05.2daw.esvirgua.com/myCloset/src/php/controlador/controladorBackend.php",
+                //url: "/DWEC/myCloset/src/php/controlador/controladorBackend.php",
                 //url: "https://myclosetss.000webhostapp.com/php/controlador/controladorBackend.php",
                 //url: "/myCloset/src/php/controlador/controladorBackend.php",
                 type: "POST",
@@ -174,8 +174,8 @@ export class Prendas {
         let borrarPrenda = 'borrarPrenda'
         let datos = await $.ajax(
             {
-                //url:  "https://05.2daw.esvirgua.com/myCloset/src/php/controlador/controladorBackend.php",
-                url: "/DWEC/myCloset/src/php/controlador/controladorBackend.php",
+                url:  "https://05.2daw.esvirgua.com/myCloset/src/php/controlador/controladorBackend.php",
+                //url: "/DWEC/myCloset/src/php/controlador/controladorBackend.php",
                 //url: "https://myclosetss.000webhostapp.com/php/controlador/controladorBackend.php",
                 //url: "/myCloset/src/php/controlador/controladorBackend.php",
                 type: "POST",
@@ -203,17 +203,17 @@ export class Prendas {
      * @memberof Prendas
      */
     static async cargarCategoriasMisPrendas() {
-        let cargarCategoria = 'cargarCategoriasMisPrendas'
+        let cargarCategoriaCategoria = 'cargarCategoriasMisPrendas'
         let datos = await $.ajax(
             {
-                //url:  "https://05.2daw.esvirgua.com/myCloset/src/php/controlador/controladorBackend.php",
-                url: "/DWEC/myCloset/src/php/controlador/controladorBackend.php",
+                url:  "https://05.2daw.esvirgua.com/myCloset/src/php/controlador/controladorBackend.php",
+                //url: "/DWEC/myCloset/src/php/controlador/controladorBackend.php",
                 //url: "https://myclosetss.000webhostapp.com/php/controlador/controladorBackend.php",
                 //url: "/myCloset/src/php/controlador/controladorBackend.php",
                 type: "POST",
                 data:
                 {
-                    propiedad: cargarCategoria,
+                    propiedad: cargarCategoriaCategoria,
                     correo: sessionStorage.sesion,
 
                 },
@@ -236,8 +236,8 @@ export class Prendas {
         let cargarCategoria = 'filtrarPrendasPorCategoria'
         let datos = await $.ajax(
             {
-                //url:  "https://05.2daw.esvirgua.com/myCloset/src/php/controlador/controladorBackend.php",
-                url: "/DWEC/myCloset/src/php/controlador/controladorBackend.php",
+                url:  "https://05.2daw.esvirgua.com/myCloset/src/php/controlador/controladorBackend.php",
+                //url: "/DWEC/myCloset/src/php/controlador/controladorBackend.php",
                 //url: "https://myclosetss.000webhostapp.com/php/controlador/controladorBackend.php",
                 //url: "/myCloset/src/php/controlador/controladorBackend.php",
                 type: "POST",
@@ -265,8 +265,8 @@ export class Prendas {
         let cargarCategoria = 'cargarNombresPrendas'
         let datos = await $.ajax(
             {
-                //url:  "https://05.2daw.esvirgua.com/myCloset/src/php/controlador/controladorBackend.php",
-                url: "/DWEC/myCloset/src/php/controlador/controladorBackend.php",
+                url:  "https://05.2daw.esvirgua.com/myCloset/src/php/controlador/controladorBackend.php",
+                //url: "/DWEC/myCloset/src/php/controlador/controladorBackend.php",
                 //url: "https://myclosetss.000webhostapp.com/php/controlador/controladorBackend.php",
                 //url: "/myCloset/src/php/controlador/controladorBackend.php",
                 type: "POST",

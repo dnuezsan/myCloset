@@ -34,8 +34,8 @@ export class Outfits {
         let insertarOutfit = "insertarOutfit"
         let datos = await $.ajax(
             {
-                //url:  "https://05.2daw.esvirgua.com/myCloset/src/php/controlador/controladorBackend.php",
-                url: "/DWEC/myCloset/src/php/controlador/controladorBackend.php",
+                url:  "https://05.2daw.esvirgua.com/myCloset/src/php/controlador/controladorBackend.php",
+                //url: "/DWEC/myCloset/src/php/controlador/controladorBackend.php",
                 //url: "https://myclosetss.000webhostapp.com/php/controlador/controladorBackend.php",
                 //url: "/myCloset/src/php/controlador/controladorBackend.php",
                 type: "POST",
@@ -67,8 +67,8 @@ export class Outfits {
         let modificarOutfit = "modificarOutfit";
         let datos = await $.ajax(
             {
-                //url:  "https://05.2daw.esvirgua.com/myCloset/src/php/controlador/controladorBackend.php",
-                url: "/DWEC/myCloset/src/php/controlador/controladorBackend.php",
+                url:  "https://05.2daw.esvirgua.com/myCloset/src/php/controlador/controladorBackend.php",
+                //url: "/DWEC/myCloset/src/php/controlador/controladorBackend.php",
                 //url: "https://myclosetss.000webhostapp.com/php/controlador/controladorBackend.php",
                 //url: "/myCloset/src/php/controlador/controladorBackend.php",
                 type: "POST",
@@ -100,8 +100,8 @@ export class Outfits {
         let propiedad = "borrarOutfit"
         let datos = await $.ajax(
             {
-                //url:  "https://05.2daw.esvirgua.com/myCloset/src/php/controlador/controladorBackend.php",
-                url: "/DWEC/myCloset/src/php/controlador/controladorBackend.php",
+                url:  "https://05.2daw.esvirgua.com/myCloset/src/php/controlador/controladorBackend.php",
+                //url: "/DWEC/myCloset/src/php/controlador/controladorBackend.php",
                 //url: "https://myclosetss.000webhostapp.com/php/controlador/controladorBackend.php",
                 //url: "/myCloset/src/php/controlador/controladorBackend.php",
                 type: "POST",
@@ -129,8 +129,8 @@ export class Outfits {
         let propiedad = "cargarOutfits"
         let datos = await $.ajax(
             {
-                //url:  "https://05.2daw.esvirgua.com/myCloset/src/php/controlador/controladorBackend.php",
-                url: "/DWEC/myCloset/src/php/controlador/controladorBackend.php",
+                url:  "https://05.2daw.esvirgua.com/myCloset/src/php/controlador/controladorBackend.php",
+                //url: "/DWEC/myCloset/src/php/controlador/controladorBackend.php",
                 //url: "https://myclosetss.000webhostapp.com/php/controlador/controladorBackend.php",
                 //url: "/myCloset/src/php/controlador/controladorBackend.php",
                 type: "POST",
@@ -156,8 +156,8 @@ export class Outfits {
         let propiedad = "cargarPrendasCabeza"
         let datos = await $.ajax(
             {
-                //url:  "https://05.2daw.esvirgua.com/myCloset/src/php/controlador/controladorBackend.php",
-                url: "/DWEC/myCloset/src/php/controlador/controladorBackend.php",
+                url:  "https://05.2daw.esvirgua.com/myCloset/src/php/controlador/controladorBackend.php",
+                //url: "/DWEC/myCloset/src/php/controlador/controladorBackend.php",
                 //url: "https://myclosetss.000webhostapp.com/php/controlador/controladorBackend.php",
                 //url: "/myCloset/src/php/controlador/controladorBackend.php",
                 type: "POST",
@@ -185,8 +185,8 @@ export class Outfits {
         let propiedad = "cargarPrendasTorso"
         let datos = await $.ajax(
             {
-                //url:  "https://05.2daw.esvirgua.com/myCloset/src/php/controlador/controladorBackend.php",
-                url: "/DWEC/myCloset/src/php/controlador/controladorBackend.php",
+                url:  "https://05.2daw.esvirgua.com/myCloset/src/php/controlador/controladorBackend.php",
+                //url: "/DWEC/myCloset/src/php/controlador/controladorBackend.php",
                 //url: "https://myclosetss.000webhostapp.com/php/controlador/controladorBackend.php",
                 //url: "/myCloset/src/php/controlador/controladorBackend.php",
                 type: "POST",
@@ -214,8 +214,8 @@ export class Outfits {
         let propiedad = "cargarPrendasPiernas"
         let datos = await $.ajax(
             {
-                //url:  "https://05.2daw.esvirgua.com/myCloset/src/php/controlador/controladorBackend.php",
-                url: "/DWEC/myCloset/src/php/controlador/controladorBackend.php",
+                url:  "https://05.2daw.esvirgua.com/myCloset/src/php/controlador/controladorBackend.php",
+                //url: "/DWEC/myCloset/src/php/controlador/controladorBackend.php",
                 //url: "https://myclosetss.000webhostapp.com/php/controlador/controladorBackend.php",
                 //url: "/myCloset/src/php/controlador/controladorBackend.php",
                 type: "POST",
@@ -243,8 +243,8 @@ export class Outfits {
         let propiedad = "cargarPrendasPies"
         let datos = await $.ajax(
             {
-                //url:  "https://05.2daw.esvirgua.com/myCloset/src/php/controlador/controladorBackend.php",
-                url: "/DWEC/myCloset/src/php/controlador/controladorBackend.php",
+                url:  "https://05.2daw.esvirgua.com/myCloset/src/php/controlador/controladorBackend.php",
+                //url: "/DWEC/myCloset/src/php/controlador/controladorBackend.php",
                 //url: "https://myclosetss.000webhostapp.com/php/controlador/controladorBackend.php",
                 //url: "/myCloset/src/php/controlador/controladorBackend.php",
                 type: "POST",
@@ -273,8 +273,8 @@ export class Outfits {
         let propiedad = "cargarPrendasCabezaOufit"
         let datos = await $.ajax(
             {
-                //url:  "https://05.2daw.esvirgua.com/myCloset/src/php/controlador/controladorBackend.php",
-                url: "/DWEC/myCloset/src/php/controlador/controladorBackend.php",
+                url:  "https://05.2daw.esvirgua.com/myCloset/src/php/controlador/controladorBackend.php",
+                //url: "/DWEC/myCloset/src/php/controlador/controladorBackend.php",
                 //url: "https://myclosetss.000webhostapp.com/php/controlador/controladorBackend.php",
                 //url: "/myCloset/src/php/controlador/controladorBackend.php",
                 type: "POST",
@@ -303,8 +303,8 @@ export class Outfits {
         let propiedad = "cargarPrendasTorsoOufit"
         let datos = await $.ajax(
             {
-                //url:  "https://05.2daw.esvirgua.com/myCloset/src/php/controlador/controladorBackend.php",
-                url: "/DWEC/myCloset/src/php/controlador/controladorBackend.php",
+                url:  "https://05.2daw.esvirgua.com/myCloset/src/php/controlador/controladorBackend.php",
+                //url: "/DWEC/myCloset/src/php/controlador/controladorBackend.php",
                 //url: "https://myclosetss.000webhostapp.com/php/controlador/controladorBackend.php",
                 //url: "/myCloset/src/php/controlador/controladorBackend.php",
                 type: "POST",
@@ -333,8 +333,8 @@ export class Outfits {
         let propiedad = "cargarPrendasPiernasOufit"
         let datos = await $.ajax(
             {
-                //url:  "https://05.2daw.esvirgua.com/myCloset/src/php/controlador/controladorBackend.php",
-                url: "/DWEC/myCloset/src/php/controlador/controladorBackend.php",
+                url:  "https://05.2daw.esvirgua.com/myCloset/src/php/controlador/controladorBackend.php",
+                //url: "/DWEC/myCloset/src/php/controlador/controladorBackend.php",
                 //url: "https://myclosetss.000webhostapp.com/php/controlador/controladorBackend.php",
                 //url: "/myCloset/src/php/controlador/controladorBackend.php",
                 type: "POST",
@@ -363,8 +363,8 @@ export class Outfits {
         let propiedad = "cargarPrendasPiesOufit"
         let datos = await $.ajax(
             {
-                //url:  "https://05.2daw.esvirgua.com/myCloset/src/php/controlador/controladorBackend.php",
-                url: "/DWEC/myCloset/src/php/controlador/controladorBackend.php",
+                url:  "https://05.2daw.esvirgua.com/myCloset/src/php/controlador/controladorBackend.php",
+                //url: "/DWEC/myCloset/src/php/controlador/controladorBackend.php",
                 //url: "https://myclosetss.000webhostapp.com/php/controlador/controladorBackend.php",
                 //url: "/myCloset/src/php/controlador/controladorBackend.php",
                 type: "POST",
@@ -394,8 +394,8 @@ export class Outfits {
         let propiedad = "insertarPrendasOutfit"
         let datos = await $.ajax(
             {
-                //url:  "https://05.2daw.esvirgua.com/myCloset/src/php/controlador/controladorBackend.php",
-                url: "/DWEC/myCloset/src/php/controlador/controladorBackend.php",
+                url:  "https://05.2daw.esvirgua.com/myCloset/src/php/controlador/controladorBackend.php",
+                //url: "/DWEC/myCloset/src/php/controlador/controladorBackend.php",
                 //url: "https://myclosetss.000webhostapp.com/php/controlador/controladorBackend.php",
                 //url: "/myCloset/src/php/controlador/controladorBackend.php",
                 type: "POST",
