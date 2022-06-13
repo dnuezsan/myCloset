@@ -104,7 +104,6 @@ export class VistaOutfits {
         let outfits = await Controlador.cargaOutfits()
 
         for (let i = 0; i < outfits.length; i++) {
-            console.log(outfits)
             VistaOutfits.generarOptionOutfit(outfits[i], selectOutfits[0])
             VistaOutfits.generarOptionOutfit(outfits[i], selectOutfits[1])
 
