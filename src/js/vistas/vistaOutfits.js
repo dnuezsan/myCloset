@@ -407,11 +407,12 @@ export class VistaOutfits {
                         try {
                             respuestaPrendas = await Controlador.insertarPrendasOutfit([selectCabeza[i].value, selectTorso[i].value, selectPiernas[i].value, selectPies[i].value], 'Outfit sin nombre')
 
-                            if (!respuestaPrendas.success){
+                            if (!respuestaPrendas.success) {
                                 VistaOutfits.mostrarMensaje(respuestaPrendas.mensaje)
                                 panel.onclick = () => { VistaOutfits.ocultarMensaje() }
-                            }else{
-                            location.reload()}
+                            } else {
+                                location.reload()
+                            }
                         } catch (error) {
                             console.error(error);
                         }
@@ -419,11 +420,12 @@ export class VistaOutfits {
                         try {
                             respuestaPrendas = await Controlador.insertarPrendasOutfit([selectCabeza[i].value, selectTorso[i].value, selectPiernas[i].value, selectPies[i].value], nombreOufit[i].value)
 
-                            if (!respuestaPrendas.success){
+                            if (!respuestaPrendas.success) {
                                 VistaOutfits.mostrarMensaje(respuestaPrendas.mensaje)
                                 panel.onclick = () => { VistaOutfits.ocultarMensaje() }
-                            }else{
-                            location.reload()}
+                            } else {
+                                location.reload()
+                            }
                         } catch (error) {
                             console.error(error);
                         }
@@ -444,7 +446,8 @@ export class VistaOutfits {
                             respuestaPies = await Controlador.modificarOutfit(prendaPiesOutfit[0].idPrenda, selectPies[i].value, outfitsCargados[i].value, 'Outfit sin nombre')
                             location.reload()
                         } catch (error) {
-                            console.log(error);
+                            VistaOutfits.mostrarMensaje(respuestaPrendas.mensaje)
+                            panel.onclick = () => { VistaOutfits.ocultarMensaje() }
                         }
                     }
                     else {
@@ -455,7 +458,8 @@ export class VistaOutfits {
                             respuestaPies = await Controlador.modificarOutfit(prendaPiesOutfit[0].idPrenda, selectPies[i].value, outfitsCargados[i].value, nombreOufit[i].value)
                             location.reload()
                         } catch (error) {
-                            console.log(error);
+                            VistaOutfits.mostrarMensaje(respuestaPrendas.mensaje)
+                            panel.onclick = () => { VistaOutfits.ocultarMensaje() }
                         }
                     }
                 }

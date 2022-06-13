@@ -412,7 +412,9 @@ export class VistaSubirPrenda {
             let categoria = document.getElementById("categoriaSubirPrendas").value
             let subCategoria = document.getElementById("subCategoriaSubirPrendas").value
             let nombrePrenda = document.getElementById("nombreSubirPrenda").value
-
+            if (nombrePrenda == '') {
+                nombrePrenda = 'prenda sin nombre'
+            }
             //console.log(tallaSubirPrenda, descripcionSubirPrenda, categoria, subCategoria, nombrePrenda, base64SubirPrenda);
             let datos = await Controlador.subidaDePrenda(tallaSubirPrenda, descripcionSubirPrenda, categoria, subCategoria, nombrePrenda, base64SubirPrenda)
             if (datos.success == true) {

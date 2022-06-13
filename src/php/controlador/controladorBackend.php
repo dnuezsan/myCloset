@@ -528,7 +528,7 @@ switch ($_POST['propiedad']) {
             //echo $imagen;
         } else {
             $response['success'] = false;
-            $response['mensaje'] = "No se ha borrado su categoría correctamente";
+            $response['mensaje'] = "No se ha podido borrar su categoría. Comprueba que no haya prendas que tengan esa categoría asignada";
         }
         echo json_encode($response);
     }
