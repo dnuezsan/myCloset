@@ -761,7 +761,7 @@ class Metodos
     function cargarOutfits($usuario)
     {
 
-        $consulta = "SELECT idUsuario FROM usuario WHERE nombre = '$usuario'";
+        $consulta = "SELECT idUsuario FROM usuario WHERE correo = '$usuario'";
 
         if (!$resultado = $this->conexion->consultas($consulta)) {
 
@@ -798,7 +798,7 @@ class Metodos
      */
     function cargarPrendasCabeza($usuario)
     {
-        $consulta = "SELECT idUsuario FROM usuario WHERE nombre = '$usuario'";
+        $consulta = "SELECT idUsuario FROM usuario WHERE correo = '$usuario'";
 
         if (!$resultado = $this->conexion->consultas($consulta)) {
 
@@ -841,7 +841,7 @@ class Metodos
      */
     function cargarPrendasTorso($usuario)
     {
-        $consulta = "SELECT idUsuario FROM usuario WHERE nombre = '$usuario'";
+        $consulta = "SELECT idUsuario FROM usuario WHERE correo = '$usuario'";
         
         if (!$resultado = $this->conexion->consultas($consulta)) {
 
@@ -855,7 +855,6 @@ class Metodos
 
         $idUsuario = $fila['idUsuario'];
 
-        echo $idUsuario;
         $consulta2 = "SELECT prenda.idPrenda, prenda.nombrePrenda, subcategoria.nombreSubcategoria  FROM prenda 
         LEFT JOIN relprendaoutfit ON relprendaoutfit.idPrenda = prenda.idPrenda
         LEFT JOIN subcategoria ON subcategoria.idSubcategoria = prenda.idSubcategoria
@@ -885,7 +884,7 @@ class Metodos
      */
     function cargarPrendasPiernas($usuario)
     {
-        $consulta = "SELECT idUsuario FROM usuario WHERE nombre = '$usuario'";
+        $consulta = "SELECT idUsuario FROM usuario WHERE correo = '$usuario'";
 
         if (!$resultado = $this->conexion->consultas($consulta)) {
 
@@ -928,7 +927,7 @@ class Metodos
      */
     function cargarPrendasPies($usuario)
     {
-        $consulta = "SELECT idUsuario FROM usuario WHERE nombre = '$usuario'";
+        $consulta = "SELECT idUsuario FROM usuario WHERE correo = '$usuario'";
 
         if (!$resultado = $this->conexion->consultas($consulta)) {
 
@@ -972,7 +971,7 @@ class Metodos
      */
     function cargarPrendasCabezaOutfit($usuario, $idOutfit)
     {
-        $consulta = "SELECT idUsuario FROM usuario WHERE nombre = '$usuario'";
+        $consulta = "SELECT idUsuario FROM usuario WHERE correo = '$usuario'";
 
         if (!$resultado = $this->conexion->consultas($consulta)) {
 
@@ -1029,7 +1028,7 @@ class Metodos
      */
     function cargarPrendasTorsoOutfit($usuario, $idOutfit)
     {
-        $consulta = "SELECT idUsuario FROM usuario WHERE nombre = '$usuario'";
+        $consulta = "SELECT idUsuario FROM usuario WHERE correo = '$usuario'";
 
         if (!$resultado = $this->conexion->consultas($consulta)) {
 
@@ -1086,7 +1085,7 @@ class Metodos
      */
     function cargarPrendasPiernasOutfit($usuario, $idOutfit)
     {
-        $consulta = "SELECT idUsuario FROM usuario WHERE nombre = '$usuario'";
+        $consulta = "SELECT idUsuario FROM usuario WHERE correo = '$usuario'";
 
         if (!$resultado = $this->conexion->consultas($consulta)) {
 
@@ -1143,7 +1142,7 @@ class Metodos
      */
     function cargarPrendasPiesOutfit($usuario, $idOutfit)
     {
-        $consulta = "SELECT idUsuario FROM usuario WHERE nombre = '$usuario'";
+        $consulta = "SELECT idUsuario FROM usuario WHERE correo = '$usuario'";
 
         if (!$resultado = $this->conexion->consultas($consulta)) {
 

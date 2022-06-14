@@ -430,6 +430,7 @@ export class VistaMisPrendas {
         let nombrePrenda = null
         let descripcionPrenda = null
         let item = document.getElementsByClassName('itemMisPrendas')
+        let itemMovil = document.getElementsByClassName('itemMisPrendasMovil')
         let contenedorItem = document.getElementsByClassName('contenedorItemMisPrendas')
 
         for (let i = 0; i < item.length; i++) {
@@ -453,6 +454,25 @@ export class VistaMisPrendas {
                     nombreSubcategoria)
             }
 
+            itemMovil[i].children[2].children[0].onclick = () => {
+                idPrenda = contenedorItem[i].prenda.idPrenda
+                nombrePrenda = contenedorItem[i].prenda.nombrePrenda
+                idCategoria = contenedorItem[i].prenda.idCategoria
+                nombreCategoria = contenedorItem[i].prenda.nombreCategoria
+                idSubcategoria = contenedorItem[i].prenda.idSubcategoria
+                nombreSubcategoria = contenedorItem[i].prenda.nombreSubcategoria
+                tallaPrenda = contenedorItem[i].prenda.talla
+                descripcionPrenda = contenedorItem[i].prenda.descripcion
+                VistaMisPrendas.actualizarPrenda(
+                    idPrenda,
+                    nombrePrenda,
+                    tallaPrenda,
+                    descripcionPrenda,
+                    idCategoria,
+                    nombreCategoria,
+                    idSubcategoria,
+                    nombreSubcategoria)
+            }
         }
 
     }
@@ -489,10 +509,17 @@ export class VistaMisPrendas {
         let idPrenda = null
         let nombrePrenda = null
         let item = document.getElementsByClassName('itemMisPrendas')
+        let itemMovil = document.getElementsByClassName('itemMisPrendasMovil')
         let contenedorItem = document.getElementsByClassName('contenedorItemMisPrendas')
 
         for (let i = 0; i < item.length; i++) {
             item[i].children[0].children[2].onclick = () => {
+                idPrenda = contenedorItem[i].prenda.idPrenda
+                nombrePrenda = contenedorItem[i].prenda.nombrePrenda
+                VistaMisPrendas.cuadroDialogo(idPrenda, nombrePrenda)
+            }
+
+            itemMovil[i].children[2].children[1].onclick = () => {
                 idPrenda = contenedorItem[i].prenda.idPrenda
                 nombrePrenda = contenedorItem[i].prenda.nombrePrenda
                 VistaMisPrendas.cuadroDialogo(idPrenda, nombrePrenda)
