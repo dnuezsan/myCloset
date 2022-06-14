@@ -3,13 +3,19 @@ import { Controlador } from "../controlador/controlador.js";
 import { VistaLogin } from "./vistaLogin.js";
 import { VistaMenuPrincipal } from "./vistaMenuPrincipal.js";
 
+/**
+ *Clase que gestiona el panel del perfil de usuario de la aplicación
+ *
+ * @export
+ * @class VistaPerfilUsuario
+ */
 export class VistaPerfilUsuario {
 
 
     /**
-     * Crea una instancia de VistaPerfilUsuario.
-     * @param {string} controlador
-     * @param {string} base
+     * 
+     * @param {Object} controlador
+     * @param {Node} base
      * @memberof VistaPerfilUsuario
      */
     constructor(controlador, base) {

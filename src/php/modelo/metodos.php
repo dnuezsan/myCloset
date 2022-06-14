@@ -213,13 +213,12 @@ class Metodos
         $fila = $this->conexion->extraerFila($resultadoUsuario);
         $idUsuario = $fila['idUsuario'];
         $consulta = "DELETE outfit, relprendaoutfit, prenda, subcategoria, relusuariosubcategoria, usuario  FROM `usuario` 
-LEFT JOIN prenda ON prenda.idUsuario = usuario.idUsuario
-LEFT JOIN relprendaoutfit ON relprendaoutfit.idPrenda = prenda.idPrenda
-LEFT JOIN outfit ON outfit.idUsuario = usuario.idUsuario
-LEFT JOIN relusuariosubcategoria ON relusuariosubcategoria.idUsuario = usuario.idUsuario
-LEFT JOIN subcategoria ON subcategoria.idSubcategoria = prenda.idSubcategoria
-
-WHERE usuario.idUsuario = ?";
+        LEFT JOIN prenda ON prenda.idUsuario = usuario.idUsuario
+        LEFT JOIN relprendaoutfit ON relprendaoutfit.idPrenda = prenda.idPrenda
+        LEFT JOIN outfit ON outfit.idUsuario = usuario.idUsuario
+        LEFT JOIN relusuariosubcategoria ON relusuariosubcategoria.idUsuario = usuario.idUsuario
+        LEFT JOIN subcategoria ON subcategoria.idSubcategoria = prenda.idSubcategoria
+        WHERE usuario.idUsuario = ?";
 
         //Preparamos con preparae
         if (!$sentencia = $this->conexion->mysqli->prepare($consulta)) {
@@ -236,7 +235,6 @@ WHERE usuario.idUsuario = ?";
         } else {
             return true;
         }
-
     }
     /**
      *
@@ -706,11 +704,11 @@ WHERE usuario.idUsuario = ?";
         $consultaSubcategoriaEnPrenda = "SELECT COUNT(idSubcategoria) AS num FROM prenda WHERE idSubcategoria = $idSubCategoria";
 
         if ($comprobacion = $this->conexion->consultas($consultaSubcategoriaEnPrenda)) {
-            
+
             $numeroFilas = $this->conexion->extraerFila($comprobacion);
             $numeroFilas = $numeroFilas['num'];
 
-            if ( $numeroFilas == 0) {
+            if ($numeroFilas == 0) {
                 /* echo var_dump($comprobacion);
                 echo $numeroFilas; */
                 if (!$sentencia = $this->conexion->mysqli->prepare($consultaRelacion)) {
@@ -844,7 +842,7 @@ WHERE usuario.idUsuario = ?";
     function cargarPrendasTorso($usuario)
     {
         $consulta = "SELECT idUsuario FROM usuario WHERE nombre = '$usuario'";
-
+        
         if (!$resultado = $this->conexion->consultas($consulta)) {
 
             return false;
@@ -857,6 +855,7 @@ WHERE usuario.idUsuario = ?";
 
         $idUsuario = $fila['idUsuario'];
 
+        echo $idUsuario;
         $consulta2 = "SELECT prenda.idPrenda, prenda.nombrePrenda, subcategoria.nombreSubcategoria  FROM prenda 
         LEFT JOIN relprendaoutfit ON relprendaoutfit.idPrenda = prenda.idPrenda
         LEFT JOIN subcategoria ON subcategoria.idSubcategoria = prenda.idSubcategoria

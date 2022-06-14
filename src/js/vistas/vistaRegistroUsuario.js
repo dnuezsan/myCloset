@@ -15,9 +15,9 @@ export class VistaRegistroUsuario {
 
     /**
      * @constructor
-     *Crea una instancia de VistaRegistroUsuario y ejecuta el método iniciar()
-     * @param {String} controlador
-     * @param {String} base
+     *
+     * @param {Object} controlador
+     * @param {Node} base
      * @memberof VistaRegistroUsuario
      */
     constructor(controlador, base) {

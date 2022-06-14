@@ -6,7 +6,7 @@ import { VistaArmario } from "./vistaArmario.js"
 import { VistaMenuPrincipal } from "./vistaMenuPrincipal.js"
 
 /**
- *Clase que contiene el panel delogin de la aplicación
+ *Clase que gestiona el panel del login de la aplicación
  *
  * @export
  * @class VistaLogin
@@ -16,9 +16,9 @@ export class VistaLogin {
 
     /**
      * @constructor
-     *Crea una instancia de VistaLogin y ejecuta el método iniciar()
-     * @param {String} controlador
-     * @param {String} base
+     *
+     * @param {Object} controlador
+     * @param {Node} base
      * @memberof VistaLogin
      */
     constructor(controlador, base) {

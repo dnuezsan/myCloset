@@ -3,13 +3,19 @@ import { VistaGestionarPrendas } from "./vistaGestionarPrendas.js"
 import { VistaMenuPrincipal } from "./vistaMenuPrincipal.js"
 import { VistaSubirPrenda } from "./vistaSubirPrenda.js"
 
+/**
+ *Clase que gestiona el panel que contienelas acciones sobre la prendas de la aplicación
+ *
+ * @export
+ * @class VistaPrendas
+ */
 export class VistaPrendas{
 
 
     /**
-     * Crea una instancia de VistaPrendas.
-     * @param {string} controlador
-     * @param {string} base
+     * 
+     * @param {Object} controlador
+     * @param {Node} base
      * @memberof VistaPrendas
      */
     constructor(controlador, base){

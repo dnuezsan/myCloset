@@ -2,8 +2,20 @@
 
 import { Controlador } from "../controlador/controlador.js"
 
+/**
+ *Clase que gestiona el panel de los outfits de la aplicación
+ *
+ * @export
+ * @class VistaOutfits
+ */
 export class VistaOutfits {
 
+    /**
+     *
+     * @param {Object} controlador
+     * @param {Node} base
+     * @memberof VistaOutfits
+     */
     constructor(controlador, base) {
         this.controlador = controlador
         this.base = base
@@ -104,7 +116,6 @@ export class VistaOutfits {
         let outfits = await Controlador.cargaOutfits()
 
         for (let i = 0; i < outfits.length; i++) {
-            console.log(outfits)
             VistaOutfits.generarOptionOutfit(outfits[i], selectOutfits[0])
             VistaOutfits.generarOptionOutfit(outfits[i], selectOutfits[1])
 

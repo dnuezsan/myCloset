@@ -1,12 +1,19 @@
 'use strict'
 import { Controlador } from "../controlador/controlador.js";
+
+/**
+ *Clase que gestiona el panel de inserción de prendas de la aplicación
+ *
+ * @export
+ * @class VistaSubirPrenda
+ */
 export class VistaSubirPrenda {
 
 
     /**
      * Crea una instancia de VistaSubirPrenda.
-     * @param {*} controlador
-     * @param {*} base
+     * @param {Object} controlador
+     * @param {Node} base
      * @memberof VistaSubirPrenda
      */
     constructor(controlador, base) {

@@ -5,8 +5,20 @@ import { VistaGestionarPrendas } from "./vistaGestionarPrendas.js"
 import { VistaMenuPrincipal } from "./vistaMenuPrincipal.js"
 
 
+/**
+ *Clase que gestiona el panel del listado de prendas de la aplicación
+ *
+ * @export
+ * @class VistaMisPrendas
+ */
 export class VistaMisPrendas {
 
+    /**
+     * 
+     * @param {Object} controlador
+     * @param {Node} base
+     * @memberof VistaMisPrendas
+     */
     constructor(controlador, base) {
         this.controlador = controlador
         this.base = base

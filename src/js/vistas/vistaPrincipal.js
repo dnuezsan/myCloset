@@ -12,8 +12,8 @@ import { VistaSubirPrenda } from "./vistaSubirPrenda.js";
 import { VistaGestionarPrendas } from "./vistaGestionarPrendas.js";
 import { VistaOutfits } from "./vistaOutfits.js";
 /**
- *Vista principal de la aplicación
- *Muestra los componentes de la aplicación
+ * Vista principal de la aplicación
+ * 
  * @export
  * @class VistaPrincipal
  */
@@ -21,9 +21,9 @@ export class VistaPrincipal {
 
     /**
      * @constructor
-     * Crea una instancia de VistaPrincipal y ejecuta el método iniciar()
-     * @param {String} controlador controlador de la vista principal
-     * @param {String} base base del DOM para la vista principal
+     * 
+     * @param {Object} controlador controlador de la vista principal
+     * @param {Node} base base del DOM para la vista principal
      * @memberof VistaPrincipal
      */
     constructor(controlador, base) {

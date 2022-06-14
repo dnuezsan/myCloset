@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: vistaPrendas.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: vistaPrendas.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>'use strict'
+import { VistaGestionarPrendas } from "./vistaGestionarPrendas.js"
+import { VistaMenuPrincipal } from "./vistaMenuPrincipal.js"
+import { VistaSubirPrenda } from "./vistaSubirPrenda.js"
+
+/**
+ *Clase que gestiona el panel que contienelas acciones sobre la prendas de la aplicación
+ *
+ * @export
+ * @class VistaPrendas
+ */
+export class VistaPrendas{
+
+
+    /**
+     * 
+     * @param {Object} controlador
+     * @param {Node} base
+     * @memberof VistaPrendas
+     */
+    constructor(controlador, base){
+        this.controlador = controlador
+        this.base = base
+        this.iniciar()
+    }
+
+    /**
+     *Inicializa los métodos de la clase
+     *
+     * @memberof VistaPrendas
+     */
+    iniciar(){
+        VistaPrendas.mostrarSubirPrenda()
+        VistaPrendas.mostrarGestionarPrendas()
+    }
+
+
+    /**
+     *Muestra la vista panelPrendas y setea la variable "vista" de localStore en vistaPrendas
+     *
+     * @static
+     * @memberof VistaPrendas
+     */
+    static mostrarPrendas(){
+        let panel = document.getElementById('panelPrendas')
+        panel.style.display = 'flex'
+        localStorage.setItem('vista', 'vistaPrendas')
+    }
+
+    /**
+     *Oculta la vista panelPrendas
+     *
+     * @static
+     * @memberof VistaPrendas
+     */
+    static ocultarPrendas(){
+        let panel = document.getElementById('panelPrendas')
+        panel.style.display = 'none'
+    }
+
+    
+    /**
+     *Oculta los paneles y muestra panelSubirPrenda
+     *
+     * @static
+     * @memberof VistaPrendas
+     */
+    static mostrarSubirPrenda(){
+        let panel = document.querySelectorAll('#panelPrendas .cajaPrendas')
+        panel[0].onclick = (evento)=>{
+            VistaMenuPrincipal.ocultarPaneles()
+            VistaSubirPrenda.mostrarSubirPrenda()
+        }
+    }
+
+
+    /**
+     *Oculta los paneles y muestra panelGestionPrendas
+     *
+     * @static
+     * @memberof VistaPrendas
+     */
+    static mostrarGestionarPrendas(){
+        let panel = document.querySelectorAll('#panelPrendas .cajaPrendas')
+        panel[1].onclick = (evento)=>{
+            VistaMenuPrincipal.ocultarPaneles()
+            VistaGestionarPrendas.mostrarGestionarPrendas()
+        }
+    }
+
+    /**
+     *Oculta la vista panelGestionPrendas
+     *
+     * @static
+     * @memberof VistaPrendas
+     */
+    static ocultarGestionarPrendas(){
+        VistaGestionarPrendas.ocultarGestionarPrendas()
+    }
+
+}</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Controlador.html">Controlador</a></li><li><a href="Controlador.exports.Controlador.html">exports.Controlador</a></li><li><a href="Outfits.html">Outfits</a></li><li><a href="Outfits.exports.Outfits.html">exports.Outfits</a></li><li><a href="Prendas.html">Prendas</a></li><li><a href="Prendas.exports.Prendas.html">exports.Prendas</a></li><li><a href="Subcategorias.html">Subcategorias</a></li><li><a href="Subcategorias.exports.Categorias.html">exports.Categorias</a></li><li><a href="Usuarios.html">Usuarios</a></li><li><a href="Usuarios.exports.Usuarios.html">exports.Usuarios</a></li><li><a href="VistaArmario.html">VistaArmario</a></li><li><a href="VistaArmario.exports.VistaArmario.html">exports.VistaArmario</a></li><li><a href="VistaCategorias.exports.VistaCategorias.html">exports.VistaCategorias</a></li><li><a href="VistaGestionarPrendas.html">VistaGestionarPrendas</a></li><li><a href="VistaGestionarPrendas.exports.VistaGestionarPrendas.html">exports.VistaGestionarPrendas</a></li><li><a href="VistaLogin.html">VistaLogin</a></li><li><a href="VistaLogin.exports.VistaLogin.html">exports.VistaLogin</a></li><li><a href="VistaMenuPrincipal.html">VistaMenuPrincipal</a></li><li><a href="VistaMenuPrincipal.exports.VistaMenuPrincipal.html">exports.VistaMenuPrincipal</a></li><li><a href="VistaMisPrendas.html">VistaMisPrendas</a></li><li><a href="VistaMisPrendas.exports.VistaMisPrendas.html">exports.VistaMisPrendas</a></li><li><a href="VistaOutfits.html">VistaOutfits</a></li><li><a href="VistaOutfits.exports.VistaOutfits.html">exports.VistaOutfits</a></li><li><a href="VistaPerfilUsuario.html">VistaPerfilUsuario</a></li><li><a href="VistaPerfilUsuario.exports.VistaPerfilUsuario.html">exports.VistaPerfilUsuario</a></li><li><a href="VistaPrendas.html">VistaPrendas</a></li><li><a href="VistaPrendas.exports.VistaPrendas.html">exports.VistaPrendas</a></li><li><a href="VistaPrincipal.html">VistaPrincipal</a></li><li><a href="VistaPrincipal.exports.VistaPrincipal.html">exports.VistaPrincipal</a></li><li><a href="VistaRegistroUsuario.html">VistaRegistroUsuario</a></li><li><a href="VistaRegistroUsuario.exports.VistaRegistroUsuario.html">exports.VistaRegistroUsuario</a></li><li><a href="VistaSubirPrenda.html">VistaSubirPrenda</a></li><li><a href="VistaSubirPrenda.exports.VistaSubirPrenda.html">exports.VistaSubirPrenda</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Tue Jun 14 2022 12:26:58 GMT+0200 (hora de verano de Europa central)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

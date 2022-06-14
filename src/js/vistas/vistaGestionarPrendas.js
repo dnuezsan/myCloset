@@ -2,8 +2,20 @@
 
 import { Controlador } from "../controlador/controlador.js"
 
+/**
+ *Clase que gestiona el panel de gestion de prendas de la aplicación
+ *
+ * @export
+ * @class VistaGestionarPrendas
+ */
 export class VistaGestionarPrendas {
 
+    /**
+     *
+     * @param {Object} controlador
+     * @param {Node} base
+     * @memberof VistaGestionarPrendas
+     */
     constructor(controlador, base) {
         this.controlador = controlador
         this.base = base

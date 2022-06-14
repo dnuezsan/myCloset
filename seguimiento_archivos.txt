@@ -1,5 +1,0 @@
-servicios->rest.js
-Falta terminar metodos. Principalmente envio.
-
-Modelo->modelo.js
-definir nombre de clase y metodos

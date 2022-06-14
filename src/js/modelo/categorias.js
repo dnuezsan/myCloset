@@ -10,7 +10,7 @@ export class Categorias {
 
     /**
      * @constructor
-     *Crea una instancia de Subcategorias
+     *
      * @param {String} titulo
      * @param {String} descripcion
      * @memberof Subcategorias

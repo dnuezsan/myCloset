@@ -10,7 +10,7 @@ export class Outfits {
 
     /**
      * @constructor
-     *Crea una instancia de Outfits
+     *
      * @param {String} titulo
      * @param {String} descripcion
      * @memberof Outfits

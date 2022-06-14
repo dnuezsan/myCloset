@@ -5,12 +5,18 @@ import { VistaCategorias } from "./vistaCategorias.js"
 import { VistaPrendas } from "./vistaPrendas.js"
 import { VistaSubirPrenda } from "./vistaSubirPrenda.js"
 
+/**
+ *Clase que gestiona el panel de "mi armario" de la aplicación
+ *
+ * @export
+ * @class VistaArmario
+ */
 export class VistaArmario {
 
     /**
-     * Crea una instancia de VistaArmario
-     * @param {string} controlador
-     * @param {string} base
+     * 
+     * @param {Object} controlador
+     * @param {Node} base
      * @memberof VistaArmario
      */
     constructor(controlador, base) {

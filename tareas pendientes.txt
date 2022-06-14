@@ -1,5 +1,0 @@
-Hacer foreach en carga de subcategorias para conciliar id correctamente (bucle for no puede) Solucinado
-
-Sacar bucle de borrado fuera de metodo auxiliar de subcategorias
-
-Añadir "Prenda nº" a generación en Mis prendas

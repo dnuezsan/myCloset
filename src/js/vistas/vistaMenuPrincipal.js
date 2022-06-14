@@ -12,14 +12,20 @@ import { VistaSubirPrenda } from "./vistaSubirPrenda.js"
 import { VistaGestionarPrendas } from "./vistaGestionarPrendas.js"
 import { VistaOutfits } from "./vistaOutfits.js"
 
+/**
+ *Clase que gestiona el panel del menu principal de la aplicación
+ *
+ * @export
+ * @class VistaMenuPrincipal
+ */
 export class VistaMenuPrincipal {
 
 
     /**
      * @constructor
-     *Crea una instancia de VistaMenuPrincipal y ejecuta el método iniciar()
-     * @param {String} controlador
-     * @param {String} base
+     *
+     * @param {Object} controlador
+     * @param {Node} base
      * @memberof VistaMenuPrincipal
      */
     constructor(controlador, base) {

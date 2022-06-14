@@ -12,7 +12,7 @@ export class Prendas {
 
     /**
      * @constructor
-     *Crea una instancia de Prendas
+     *
      * @param {String} titulo
      * @param {String} descripcion
      * @memberof Prendas

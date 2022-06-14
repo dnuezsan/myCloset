@@ -14,7 +14,7 @@ export class Controlador {
 
     /**
      * @constructor
-     *Crea una instancia de la clase Controlador
+     *
      * @memberof Controlador
      */
     constructor() {
