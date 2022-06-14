@@ -189,36 +189,21 @@ export class VistaCategorias {
         //Borrado
         let selectCategoria = document.getElementById('borrarCategoria')
         let selectSubcategoria = document.getElementById('borrarSubcategoria')
+        let boton = document.getElementById('envioDatosCategoria')
 
         //Insercion
-        nombreSubcategoria.onchange = () => {
+        boton.addEventListener('click', () => {
             VistaCategorias.insertarSubcategoria()
-        }
-        categoria.onchange = () => {
-            VistaCategorias.insertarSubcategoria()
-        }
 
-        //Modificación
-        categoriaInicial.onchange = () => {
+            //Modificación
             VistaCategorias.modificarSubcategoria()
-        }
-        nombreSubcategoriaModificable.onchange = () => {
-            VistaCategorias.modificarSubcategoria()
-        }
-        idSubcategoria.onchange = () => {
-            VistaCategorias.modificarSubcategoria()
-        }
-        idNuevacategoria.onchange = () => {
-            VistaCategorias.modificarSubcategoria()
-        }
 
-        //borrado
-        selectCategoria.onchange = () => {
+            //borrado
+
             VistaCategorias.borrarSubcategoria()
-        }
-        selectSubcategoria.onchange = () => {
-            VistaCategorias.borrarSubcategoria()
-        }
+
+
+        }, true)
 
     }
 
@@ -229,26 +214,22 @@ export class VistaCategorias {
      * @static
      * @memberof VistaCategorias
      */
-    static insertarSubcategoria() {
+    static async insertarSubcategoria() {
         let nombreSubcategoria = document.getElementById('nombreCategoria')
         let categoria = document.getElementById('categoriaCrearCategoria')
         let panel = document.getElementById('panelCategorias')
-        let boton = document.getElementById('envioDatosCategoria')
 
-        boton.onclick = async () => {
+        if (nombreSubcategoria.value != '' && categoria.value != '') {
+            let respuesta = await Controlador.insertarSubcategoria(nombreSubcategoria.value, categoria.value)
 
-            if (nombreSubcategoria.value != '' && categoria.value != '') {
-                let respuesta = await Controlador.insertarSubcategoria(nombreSubcategoria.value, categoria.value)
-
-                if (!respuesta.success) {
-                    VistaCategorias.mostrarMensajeInserción(respuesta.mensaje)
-                    VistaCategorias.mostrarCuadroDialogo()
-                    panel.onclick = () => {
-                        VistaCategorias.ocultarCuadroDialogo()
-                    }
-                } else {
-                    location.reload()
+            if (!respuesta.success) {
+                VistaCategorias.mostrarMensajeInserción(respuesta.mensaje)
+                VistaCategorias.mostrarCuadroDialogo()
+                panel.onclick = () => {
+                    VistaCategorias.ocultarCuadroDialogo()
                 }
+            } else {
+                location.reload()
             }
         }
     }
@@ -268,7 +249,6 @@ export class VistaCategorias {
         let panel = document.getElementById('panelCategorias')
         let boton = document.getElementById('envioDatosCategoria')
 
-        boton.onclick = async () => {
             if (nombreSubcategoria.value != '' && idNuevacategoria.value != '') {
                 let respuesta = await Controlador.modificarSubcategoria(nombreSubcategoria.value, idSubcategoria.value, idNuevacategoria.value)
 
@@ -306,8 +286,6 @@ export class VistaCategorias {
                 } else {
                     location.reload()
                 }
-            }
-
         }
 
     }
@@ -324,14 +302,10 @@ export class VistaCategorias {
         let selectSubcategoria = document.getElementById('borrarSubcategoria')
         let panel = document.getElementById('panelCategorias')
         let boton = document.getElementById('envioDatosCategoria')
-
-        boton.onclick = () => {
+        
             if (selectSubcategoria.value != '') {
                 VistaCategorias.mostrarMensajeConfirmacion(selectSubcategoria.value)
-
             }
-        }
-
 
     }
 
@@ -428,9 +402,9 @@ export class VistaCategorias {
         let botonCancelarBorrado = document.getElementById('botonCancelarBorrarSubcategoria')
 
         botonConfirmarBorrado.onclick = async () => {
-            
+
             let respuesta = await Controlador.borrarSubcategoria(idSubcategoria)
-            
+
             if (!respuesta.success) {
                 VistaCategorias.mostrarMensajeBorrado(respuesta.mensaje)
                 VistaCategorias.mostrarCuadroDialogo()
