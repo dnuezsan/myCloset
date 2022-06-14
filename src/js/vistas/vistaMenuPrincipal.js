@@ -11,6 +11,7 @@ import { VistaPrendas } from "./vistaPrendas.js"
 import { VistaSubirPrenda } from "./vistaSubirPrenda.js"
 import { VistaGestionarPrendas } from "./vistaGestionarPrendas.js"
 import { VistaOutfits } from "./vistaOutfits.js"
+import { Controlador } from "../controlador/controlador.js"
 
 /**
  *Clase que gestiona el panel del menu principal de la aplicación
@@ -83,6 +84,7 @@ export class VistaMenuPrincipal {
                 VistaMenuPrincipal.mostrarLogin()
                 sessionStorage.setItem('sesion', '')
                 localStorage.setItem('vista', 'vistaLogin')
+                Controlador.cerrarSesion()
             }
 
         }

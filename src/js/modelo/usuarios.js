@@ -269,6 +269,14 @@ export class Usuarios {
 
         return datosJson
     }
+
+    /**
+     *Cierra la sesión cuando el usuario sale de la aplicación
+     *
+     * @static
+     * @return {void} 
+     * @memberof Usuarios
+     */
     static async cerrarSesion() {
         let cerrarSesion = 'cerrarSesion'
         let datos = await $.ajax(

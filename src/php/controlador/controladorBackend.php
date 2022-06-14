@@ -16,7 +16,7 @@ switch ($_POST['propiedad']) {
         break;
     case "registrarse":
         $nombre = $_POST['nombre'];
-        $correo = $_POST['correo'];
+        $correo = $_SESSION['usuario'];
         $password = $_POST['password'];
         $rpassword = $_POST['rpassword'];
         registrar($nombre, $correo, $password, $rpassword);
@@ -54,11 +54,11 @@ switch ($_POST['propiedad']) {
         break;
     case "cargarSubCategoria":
         $categoria = $_POST['categoria'];
-        $usuario = $_POST['correo'];
+        $usuario = $_SESSION['usuario'];
         cargarSubCategoria($categoria, $usuario);
         break;
     case "cargarMisPrendas":
-        $usuario = $_POST['correo'];
+        $usuario = $_SESSION['usuario'];
         cargarMisPrenda($usuario);
         break;
     case "modificarPrenda":
@@ -78,17 +78,17 @@ switch ($_POST['propiedad']) {
         cargarCategoriaMisPrendas();
         break;
     case "filtrarPrendasPorCategoria":
-        $usuario = $_POST["correo"];
+        $usuario = $_SESSION['usuario'];
         $categoria = $_POST["categoria"];
         filtrarPrendasPorCategoria($usuario, $categoria);
         break;
     case "cargarNombresPrendas":
-        $usuario = $_POST["correo"];
+        $usuario = $_SESSION['usuario'];
         $subcategoria = $_POST["subcategoria"];
         cargarNombresPrendas($usuario, $subcategoria);
         break;
     case "insertarSubCategoria":
-        $usuario = $_POST["correo"];
+        $usuario = $_SESSION['usuario'];
         $idSubCategoria = $_POST['idCategoria'];
         $nombreSubCategoria = $_POST['nombreSubcategoria'];
         insertarSubcategoria($nombreSubCategoria, $idSubCategoria, $usuario);
@@ -109,47 +109,47 @@ switch ($_POST['propiedad']) {
         borrarSubCategoria($idSubCategoria);
         break;
     case "cargarOutfits":
-        $usuario = $_POST['correo'];
+        $usuario = $_SESSION['usuario'];
         cargarOutfits($usuario);
         break;
     case "cargarPrendasCabeza":
-        $usuario = $_POST['correo'];
+        $usuario = $_SESSION['usuario'];
         cargarPrendasCabeza($usuario);
         break;
     case "cargarPrendasCabezaOufit":
-        $usuario = $_POST['correo'];
+        $usuario = $_SESSION['usuario'];
         $idOutfit = $_POST['idOutfit'];
         cargarPrendasCabezaOutfit($usuario, $idOutfit);
         break;
     case "cargarPrendasTorsoOufit":
-        $usuario = $_POST['correo'];
+        $usuario = $_SESSION['usuario'];
         $idOutfit = $_POST['idOutfit'];
         cargarPrendasTorsoOutfit($usuario, $idOutfit);
         break;
     case "cargarPrendasPiernasOufit":
-        $usuario = $_POST['correo'];
+        $usuario = $_SESSION['usuario'];
         $idOutfit = $_POST['idOutfit'];
         cargarPrendasPiernasOutfit($usuario, $idOutfit);
         break;
     case "cargarPrendasPiesOufit":
-        $usuario = $_POST['correo'];
+        $usuario = $_SESSION['usuario'];
         $idOutfit = $_POST['idOutfit'];
         cargarPrendasPiesOutfit($usuario, $idOutfit);
         break;
     case "cargarPrendasTorso":
-        $usuario = $_POST['correo'];
+        $usuario = $_SESSION['usuario'];
         cargarPrendasTorso($usuario);
         break;
     case "cargarPrendasPiernas":
-        $usuario = $_POST['correo'];
+        $usuario = $_SESSION['usuario'];
         cargarPrendasPiernas($usuario);
         break;
     case "cargarPrendasPies":
-        $usuario = $_POST['correo'];
+        $usuario = $_SESSION['usuario'];
         cargarPrendasPies($usuario);
         break;
     case "insertarOutfit":
-        $usuario = $_POST['correo'];
+        $usuario = $_SESSION['usuario'];
         $nombreOutfit = $_POST['nombreOutfit'];
         //$fechaCreacion = $_POST['fechaCreacion'];
         $fechaCreacion = "CURDATE()";
@@ -169,7 +169,7 @@ switch ($_POST['propiedad']) {
         break;
     case "insertarPrendasOutfit":
         $arrayIdPrendas = $_POST['arrayIdPrendas'];
-        $usuario = $_POST['correo'];
+        $usuario = $_SESSION['usuario'];
         $fechaCreacion = "CURDATE()";
         $nombreOutfit = $_POST["nombreOutfit"];
         insertarPrendasOutfit($arrayIdPrendas, $usuario, $fechaCreacion, $nombreOutfit);

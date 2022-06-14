@@ -105,6 +105,16 @@ export class Controlador {
     }
 
     /**
+     *Envía una petición al servidor para destruir la sesion
+     *
+     * @static
+     * @memberof Controlador
+     */
+    static cerrarSesion(){
+        Usuarios.cerrarSesion()
+    }
+
+    /**
      *
      *Devuelve el conjunto de prendas pertenecientes a un usuario junto con los datos de las mismas
      * @static 
