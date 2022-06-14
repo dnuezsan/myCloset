@@ -174,6 +174,9 @@ switch ($_POST['propiedad']) {
         $nombreOutfit = $_POST["nombreOutfit"];
         insertarPrendasOutfit($arrayIdPrendas, $usuario, $fechaCreacion, $nombreOutfit);
         break;
+    case "cerrarSesion":
+        session_destroy();
+        break;
 }
 
 
