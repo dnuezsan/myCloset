@@ -167,12 +167,16 @@ switch ($_POST['propiedad']) {
         $nombreOutfit= $_POST['nombreOutfit'];
         modificarOutfit($idPrenda, $idPrendaNueva, $idOutfit, $nombreOutfit);
         break;
-        case "insertarPrendasOutfit":
+    case "insertarPrendasOutfit":
         $arrayIdPrendas = $_POST['arrayIdPrendas'];
         $usuario = $_POST['correo'];
         $fechaCreacion = "CURDATE()";
         $nombreOutfit = $_POST["nombreOutfit"];
         insertarPrendasOutfit($arrayIdPrendas, $usuario, $fechaCreacion, $nombreOutfit);
+        break;
+    case "cerrarSesion":
+        session_destroy();
+        break;
 }
 
 

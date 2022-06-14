@@ -269,6 +269,25 @@ export class Usuarios {
 
         return datosJson
     }
+    static async cerrarSesion() {
+        let cerrarSesion = 'cerrarSesion'
+        let datos = await $.ajax(
+            {
+                url: "https://05.2daw.esvirgua.com/myCloset/src/php/controlador/controladorBackend.php",
+                //url: "/DWEC/myCloset/src/php/controlador/controladorBackend.php",
+                //url: "https://myclosetss.000webhostapp.com/php/controlador/controladorBackend.php",
+                //url: "/myCloset/src/php/controlador/controladorBackend.php",
+                type: "POST",
+                data:
+                    {
+                        propiedad: cerrarSesion,
+                        correo: sessionStorage.getItem('sesion')
+                    },
+            })
+        let datosJson = JSON.parse(datos)
+
+        return datosJson
+    }
 
 
 
