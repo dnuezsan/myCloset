@@ -842,7 +842,7 @@ class Metodos
     function cargarPrendasTorso($usuario)
     {
         $consulta = "SELECT idUsuario FROM usuario WHERE nombre = '$usuario'";
-
+        
         if (!$resultado = $this->conexion->consultas($consulta)) {
 
             return false;
@@ -855,6 +855,7 @@ class Metodos
 
         $idUsuario = $fila['idUsuario'];
 
+        echo $idUsuario;
         $consulta2 = "SELECT prenda.idPrenda, prenda.nombrePrenda, subcategoria.nombreSubcategoria  FROM prenda 
         LEFT JOIN relprendaoutfit ON relprendaoutfit.idPrenda = prenda.idPrenda
         LEFT JOIN subcategoria ON subcategoria.idSubcategoria = prenda.idSubcategoria

@@ -10,7 +10,7 @@ class App {
 
     /**
      * @constructor
-     *Crea una instancia de la clase App y ejecuta el método iniciar()
+     *
      * @memberof App
      */
     constructor() {

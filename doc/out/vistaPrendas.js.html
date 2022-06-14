@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: exports.VistaCategorias</title>
+    <title>JSDoc: Source: vistaPrendas.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,209 +17,118 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: exports.VistaCategorias</h1>
+    <h1 class="page-title">Source: vistaPrendas.js</h1>
 
     
 
 
 
-
-<section>
-
-<header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>exports.VistaCategorias<span class="signature">(controlador, base)</span><span class="type-signature"></span></h2>
-        
-    
-</header>
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>'use strict'
+import { VistaGestionarPrendas } from "./vistaGestionarPrendas.js"
+import { VistaMenuPrincipal } from "./vistaMenuPrincipal.js"
+import { VistaSubirPrenda } from "./vistaSubirPrenda.js"
 
-<article>
-    <div class="container-overview">
-    
-        
-
-    
-
-    
-    <h4 class="name" id="exports.VistaCategorias"><span class="type-signature"></span>new exports.VistaCategorias<span class="signature">(controlador, base)</span><span class="type-signature"></span></h4>
-    
-
-    
+/**
+ *Clase que gestiona el panel que contienelas acciones sobre la prendas de la aplicación
+ *
+ * @export
+ * @class VistaPrendas
+ */
+export class VistaPrendas{
 
 
+    /**
+     * 
+     * @param {Object} controlador
+     * @param {Node} base
+     * @memberof VistaPrendas
+     */
+    constructor(controlador, base){
+        this.controlador = controlador
+        this.base = base
+        this.iniciar()
+    }
 
-<div class="description">
-    Crea una instancia de vistaCategorias.
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>controlador</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
+    /**
+     *Inicializa los métodos de la clase
+     *
+     * @memberof VistaPrendas
+     */
+    iniciar(){
+        VistaPrendas.mostrarSubirPrenda()
+        VistaPrendas.mostrarGestionarPrendas()
+    }
 
 
-            
-            </td>
+    /**
+     *Muestra la vista panelPrendas y setea la variable "vista" de localStore en vistaPrendas
+     *
+     * @static
+     * @memberof VistaPrendas
+     */
+    static mostrarPrendas(){
+        let panel = document.getElementById('panelPrendas')
+        panel.style.display = 'flex'
+        localStorage.setItem('vista', 'vistaPrendas')
+    }
 
-            
-
-            
-
-            <td class="description last"></td>
-        </tr>
+    /**
+     *Oculta la vista panelPrendas
+     *
+     * @static
+     * @memberof VistaPrendas
+     */
+    static ocultarPrendas(){
+        let panel = document.getElementById('panelPrendas')
+        panel.style.display = 'none'
+    }
 
     
-
-        <tr>
-            
-                <td class="name"><code>base</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Node</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"></td>
-        </tr>
-
-    
-    </tbody>
-</table>
+    /**
+     *Oculta los paneles y muestra panelSubirPrenda
+     *
+     * @static
+     * @memberof VistaPrendas
+     */
+    static mostrarSubirPrenda(){
+        let panel = document.querySelectorAll('#panelPrendas .cajaPrendas')
+        panel[0].onclick = (evento)=>{
+            VistaMenuPrincipal.ocultarPaneles()
+            VistaSubirPrenda.mostrarSubirPrenda()
+        }
+    }
 
 
+    /**
+     *Oculta los paneles y muestra panelGestionPrendas
+     *
+     * @static
+     * @memberof VistaPrendas
+     */
+    static mostrarGestionarPrendas(){
+        let panel = document.querySelectorAll('#panelPrendas .cajaPrendas')
+        panel[1].onclick = (evento)=>{
+            VistaMenuPrincipal.ocultarPaneles()
+            VistaGestionarPrendas.mostrarGestionarPrendas()
+        }
+    }
 
+    /**
+     *Oculta la vista panelGestionPrendas
+     *
+     * @static
+     * @memberof VistaPrendas
+     */
+    static ocultarGestionarPrendas(){
+        VistaGestionarPrendas.ocultarGestionarPrendas()
+    }
 
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="vistaCategorias.js.html">vistaCategorias.js</a>, <a href="vistaCategorias.js.html#line15">line 15</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-    </div>
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</article>
-
-</section>
+}</code></pre>
+        </article>
+    </section>
 
 
 
